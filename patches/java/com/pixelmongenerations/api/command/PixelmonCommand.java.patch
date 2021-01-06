@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/api/command/PixelmonCommand.java
++++ b/com/pixelmongenerations/api/command/PixelmonCommand.java
+@@ -135,7 +135,7 @@
+ 
+     @Nullable
+     public PlayerStorage getPlayerStorage(EntityPlayerMP player) {
+-        return (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
++        return (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
+     }
+ 
+     @Nullable

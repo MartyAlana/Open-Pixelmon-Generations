@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/battle/attacks/specialAttacks/basic/TerrainExamine.java
++++ b/com/pixelmongenerations/common/battle/attacks/specialAttacks/basic/TerrainExamine.java
+@@ -45,7 +45,7 @@
+                     ++numBelow;
+                 } while(numBelow < 5);
+ 
+-                String blockName = block.getTranslationKey();
++                String blockName = block.getUnlocalizedName();
+                 if (blockMaterial == Material.WATER && biome instanceof BiomeSwamp) {
+                     return TerrainExamine.TerrainType.Swamp;
+                 } else if (blockMaterial != Material.GRASS && blockMaterial != Material.WOOD && blockMaterial != Material.LEAVES && blockMaterial != Material.PLANTS && blockMaterial != Material.VINE && blockMaterial != Material.CACTUS && blockMaterial != Material.GOURD) {

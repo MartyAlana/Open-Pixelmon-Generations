@@ -1,0 +1,13 @@
+--- a/com/pixelmongenerations/common/block/spawning/BlockPixelmonDoubleGrass.java
++++ b/com/pixelmongenerations/common/block/spawning/BlockPixelmonDoubleGrass.java
+@@ -49,8 +49,8 @@
+         this.setHardness(3.0F);
+     }
+ 
+-    public String getTranslationKey() {
+-        return super.getTranslationKey().substring(5);
++    public String getUnlocalizedName() {
++        return super.getUnlocalizedName().substring(5);
+     }
+ 
+     public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {

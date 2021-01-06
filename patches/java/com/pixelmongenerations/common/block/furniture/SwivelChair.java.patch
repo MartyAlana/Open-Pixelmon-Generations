@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/SwivelChair.java
++++ b/com/pixelmongenerations/common/block/furniture/SwivelChair.java
+@@ -27,7 +27,7 @@
+         this.color = color;
+         this.setHardness(0.5F);
+         this.setSoundType(SoundType.CLOTH);
+-        this.setTranslationKey(color + "SwivelChair");
++        this.setUnlocalizedName(color + "SwivelChair");
+     }
+ 
+     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

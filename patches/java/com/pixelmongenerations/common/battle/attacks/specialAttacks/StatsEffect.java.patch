@@ -1,0 +1,60 @@
+--- a/com/pixelmongenerations/common/battle/attacks/specialAttacks/StatsEffect.java
++++ b/com/pixelmongenerations/common/battle/attacks/specialAttacks/StatsEffect.java
+@@ -128,7 +128,7 @@
+                     var42 = opponents.iterator();
+ 
+                     while(var42.hasNext()) {
+-                        PixelmonWrapper opponent = (PixelmonWrapper)var42.next();
++                        opponent = (PixelmonWrapper)var42.next();
+                         if (pw.bc.getFirstMover(pw, opponent) == opponent) {
+                             ++numOutspeedingOpponentsBefore;
+                         }
+@@ -180,8 +180,8 @@
+                         var32 = false;
+                     } finally {
+                         if (var32) {
+-                            for(int i = 0; i < originalStats.length; ++i) {
+-                                originalStats[i].copyStats(saveStats[i]);
++                            for(int j = 0; j < originalStats.length; ++j) {
++                                originalStats[j].copyStats(saveStats[j]);
+                             }
+ 
+                         }
+@@ -272,7 +272,7 @@
+                                 break label1860;
+                             }
+ 
+-                            PixelmonWrapper opponent = (PixelmonWrapper)var46.next();
++                            opponent = (PixelmonWrapper)var46.next();
+                             opponentAbility = opponent.getBattleAbility();
+                         } while(!(opponentAbility instanceof Unaware) && (this.isUser || !(opponentAbility instanceof Contrary)));
+ 
+@@ -319,8 +319,8 @@
+                         if (var28) {
+                             pw.bc.simulateMode = false;
+ 
+-                            for(int i = 0; i < originalStats.length; ++i) {
+-                                originalStats[i].copyStats(saveStats[i]);
++                            for(int j = 0; j < originalStats.length; ++j) {
++                                originalStats[j].copyStats(saveStats[j]);
+                             }
+ 
+                         }
+@@ -348,8 +348,6 @@
+                     bestChoicesAfter = new ArrayList(opponents.size());
+                     pw.bc.simulateMode = false;
+                     saveStats = new BattleStats[userChoice.targets.size()];
+-                    BattleStats[] saveStats = new BattleStats[userChoice.targets.size()];
+-                    int i;
+                     if (this.isUser) {
+                         saveStats[0] = pw.getBattleStats();
+                         saveStats[0] = new BattleStats(saveStats[0]);
+@@ -383,7 +381,7 @@
+                                 break;
+                             }
+ 
+-                            PixelmonWrapper opponent = (PixelmonWrapper)var49.next();
++                            opponent = (PixelmonWrapper)var49.next();
+                             ArrayList<MoveChoice> after = pw.getBattleAI().getBestAttackChoices(opponent);
+                             bestChoicesAfter.add(after);
+                         }

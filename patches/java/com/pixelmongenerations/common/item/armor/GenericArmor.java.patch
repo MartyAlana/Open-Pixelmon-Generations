@@ -1,0 +1,28 @@
+--- a/com/pixelmongenerations/common/item/armor/GenericArmor.java
++++ b/com/pixelmongenerations/common/item/armor/GenericArmor.java
+@@ -29,7 +29,7 @@
+     public GenericArmor(String itemName, ArmorMaterial material, EntityEquipmentSlot armorType) {
+         super(material, 0, armorType);
+         this.material = material;
+-        this.setTranslationKey(itemName);
++        this.setUnlocalizedName(itemName);
+         this.setRegistryName(itemName);
+     }
+ 
+@@ -59,13 +59,13 @@
+ 
+     }
+ 
+-    public String getTranslationKey() {
+-        return super.getTranslationKey().substring(5);
++    public String getUnlocalizedName() {
++        return super.getUnlocalizedName().substring(5);
+     }
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getTranslationKey());
++        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getUnlocalizedName());
+         if (!this.hasHideFlag(stack) && !info.startsWith("gui.shopkeeper.")) {
+             tooltip.add(GuiScreen.isShiftKeyDown() ? info : I18n.translateToLocal("pixelmon.item.tooltip"));
+         }

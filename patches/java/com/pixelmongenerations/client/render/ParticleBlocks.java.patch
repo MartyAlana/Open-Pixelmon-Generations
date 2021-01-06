@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/render/ParticleBlocks.java
++++ b/com/pixelmongenerations/client/render/ParticleBlocks.java
+@@ -24,7 +24,7 @@
+             TextureAtlasSprite atlasSprite = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(item);
+             this.setParticleTexture(atlasSprite);
+         } else {
+-            Pixelmon.LOGGER.warn("Cannot find dropped item for " + state.getBlock().getTranslationKey());
++            Pixelmon.LOGGER.warn("Cannot find dropped item for " + state.getBlock().getUnlocalizedName());
+         }
+ 
+         this.particleGravity = state.getBlock().blockParticleGravity;

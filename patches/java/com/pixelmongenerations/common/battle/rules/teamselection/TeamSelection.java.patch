@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/battle/rules/teamselection/TeamSelection.java
++++ b/com/pixelmongenerations/common/battle/rules/teamselection/TeamSelection.java
+@@ -146,7 +146,7 @@
+                 int var9 = teamIndices.length;
+ 
+                 for(index = 0; index < var9; ++index) {
+-                    int index = var8[index];
++                    index = var8[index];
+                     p.addTeamMember(index);
+                     if (this.rules.validateTeam(p.team) != null) {
+                         p.removeTeamMember();

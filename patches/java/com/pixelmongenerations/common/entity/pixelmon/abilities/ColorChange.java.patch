@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/abilities/ColorChange.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/abilities/ColorChange.java
+@@ -16,7 +16,7 @@
+             }
+ 
+             newType.add(changeType);
+-            newType.add((Object)null);
++            newType.add(null);
+             if (!target.type.equals(newType)) {
+                 target.bc.sendToAll("pixelmon.abilities.colourchange", target.getNickname(), a.getAttackBase().attackType);
+                 target.setTempType((List)newType);

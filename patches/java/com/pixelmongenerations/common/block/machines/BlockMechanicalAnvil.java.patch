@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockMechanicalAnvil.java
++++ b/com/pixelmongenerations/common/block/machines/BlockMechanicalAnvil.java
+@@ -26,7 +26,7 @@
+     public BlockMechanicalAnvil() {
+         super(Material.IRON, 1, 2.0D, 1);
+         this.setHardness(2.5F);
+-        this.setTranslationKey("mechanicalanvil");
++        this.setUnlocalizedName("mechanicalanvil");
+     }
+ 
+     public boolean isOpaqueCube(IBlockState state) {

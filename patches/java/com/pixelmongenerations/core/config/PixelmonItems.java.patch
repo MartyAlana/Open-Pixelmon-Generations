@@ -1,0 +1,34 @@
+--- a/com/pixelmongenerations/core/config/PixelmonItems.java
++++ b/com/pixelmongenerations/core/config/PixelmonItems.java
+@@ -993,7 +993,7 @@
+             Field item = var1[var3];
+ 
+             try {
+-                Object object = item.get((Object)null);
++                Object object = item.get(null);
+                 populateItemMap(object);
+             } catch (Exception var6) {
+             }
+@@ -1011,7 +1011,7 @@
+ 
+         if (item != null) {
+             ItemStack itemStack = new ItemStack(item);
+-            allItemMap.put(itemStack.getTranslationKey().toLowerCase(), item);
++            allItemMap.put(itemStack.getUnlocalizedName().toLowerCase(), item);
+             allItemMap.put(itemStack.getDisplayName().toLowerCase(), item);
+             allItemList.add(item);
+         }
+@@ -1034,10 +1034,10 @@
+ 
+             for(int var2 = 0; var2 < var1; ++var2) {
+                 Field field = var0[var2];
+-                if (field.get((Object)null) instanceof Item) {
+-                    Item item = (Item)field.get((Object)null);
++                if (field.get(null) instanceof Item) {
++                    Item item = (Item)field.get(null);
+                     if (item.getRegistryName() == null) {
+-                        System.out.println(item.getTranslationKey() + " missing registery name!");
++                        System.out.println(item.getUnlocalizedName() + " missing registery name!");
+                     }
+ 
+                     ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));

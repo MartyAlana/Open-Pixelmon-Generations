@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/cosmetic/Cosmetic.java
++++ b/com/pixelmongenerations/common/cosmetic/Cosmetic.java
+@@ -20,7 +20,7 @@
+     }
+ 
+     public DynamicArmorModel getModel() {
+-        return (DynamicArmorModel)ClientProxy.MODEL_STORE.getObject(this.modelName).orElse((Object)null);
++        return (DynamicArmorModel)ClientProxy.MODEL_STORE.getObject(this.modelName).orElse(null);
+     }
+ 
+     public String getTextureName() {

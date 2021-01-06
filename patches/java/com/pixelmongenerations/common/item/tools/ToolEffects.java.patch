@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/tools/ToolEffects.java
++++ b/com/pixelmongenerations/common/item/tools/ToolEffects.java
+@@ -17,7 +17,7 @@
+ 
+ public class ToolEffects {
+     public static boolean processEffect(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {
+-        String toolName = stack.getTranslationKey().toLowerCase();
++        String toolName = stack.getUnlocalizedName().toLowerCase();
+         Block blockAtPosition = world.getBlockState(pos).getBlock();
+         if (toolName.contains("fire")) {
+             if (blockAtPosition.equals(Blocks.WATER)) {

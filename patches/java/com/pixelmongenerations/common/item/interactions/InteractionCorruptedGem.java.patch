@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/item/interactions/InteractionCorruptedGem.java
++++ b/com/pixelmongenerations/common/item/interactions/InteractionCorruptedGem.java
+@@ -50,6 +50,6 @@
+ 
+     @Nullable
+     public PlayerStorage getPlayerStorage(EntityPlayerMP player) {
+-        return (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
++        return (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
+     }
+ }

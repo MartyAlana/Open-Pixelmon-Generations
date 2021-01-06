@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/ClockBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/ClockBlock.java
+@@ -26,7 +26,7 @@
+         this.color = color;
+         this.setHardness(0.5F);
+         this.setSoundType(SoundType.METAL);
+-        this.setTranslationKey(color + "Clock");
++        this.setUnlocalizedName(color + "Clock");
+     }
+ 
+     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

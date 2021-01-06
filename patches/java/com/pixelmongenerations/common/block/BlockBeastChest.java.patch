@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/block/BlockBeastChest.java
++++ b/com/pixelmongenerations/common/block/BlockBeastChest.java
+@@ -7,6 +7,6 @@
+     public BlockBeastChest() {
+         super(TileEntityPokeChest.class);
+         this.TYPE = EnumPokeChestType.BEASTBALL;
+-        this.setTranslationKey("beastchest");
++        this.setUnlocalizedName("beastchest");
+     }
+ }

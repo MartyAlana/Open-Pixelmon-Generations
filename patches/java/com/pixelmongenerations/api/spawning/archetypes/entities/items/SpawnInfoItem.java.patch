@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/api/spawning/archetypes/entities/items/SpawnInfoItem.java
++++ b/com/pixelmongenerations/api/spawning/archetypes/entities/items/SpawnInfoItem.java
+@@ -40,7 +40,7 @@
+         } else {
+             ArrayList matchingItems = new ArrayList();
+             Item.REGISTRY.forEach((testItem) -> {
+-                if (testItem.getRegistryName().getPath().equalsIgnoreCase(this.itemID)) {
++                if (testItem.getRegistryName().getResourcePath().equalsIgnoreCase(this.itemID)) {
+                     matchingItems.add(testItem);
+                 }
+ 

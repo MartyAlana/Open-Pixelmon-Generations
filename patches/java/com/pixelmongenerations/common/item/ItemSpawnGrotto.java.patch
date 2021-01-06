@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemSpawnGrotto.java
++++ b/com/pixelmongenerations/common/item/ItemSpawnGrotto.java
+@@ -21,7 +21,7 @@
+ 
+     public ItemSpawnGrotto() {
+         this.setCreativeTab(PixelmonCreativeTabs.tabPokeLoot);
+-        this.setTranslationKey("grotto_spawner");
++        this.setUnlocalizedName("grotto_spawner");
+         this.setRegistryName("grotto_spawner");
+         this.setMaxStackSize(1);
+     }

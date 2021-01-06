@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/item/interactions/InteractionChangeForm.java
++++ b/com/pixelmongenerations/common/item/interactions/InteractionChangeForm.java
+@@ -165,6 +165,6 @@
+ 
+     @Nullable
+     public PlayerStorage getPlayerStorage(EntityPlayerMP player) {
+-        return (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
++        return (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
+     }
+ }

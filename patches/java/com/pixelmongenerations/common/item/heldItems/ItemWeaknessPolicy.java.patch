@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/heldItems/ItemWeaknessPolicy.java
++++ b/com/pixelmongenerations/common/item/heldItems/ItemWeaknessPolicy.java
+@@ -14,7 +14,7 @@
+     public void postProcessAttackTarget(PixelmonWrapper attacker, PixelmonWrapper target, Attack attack, float damage) {
+         if (damage > 0.0F && attack.getTypeEffectiveness(attacker, target) >= 2.0D) {
+             target.bc.sendToAll("pixelmon.abilities.activated", target.getNickname(), target.getHeldItem().getLocalizedName());
+-            target.getBattleStats().modifyStat(2, (StatsType[])(StatsType.Attack, StatsType.SpecialAttack));
++            target.getBattleStats().modifyStat(2, StatsType.Attack, StatsType.SpecialAttack);
+             target.consumeItem();
+         }
+ 

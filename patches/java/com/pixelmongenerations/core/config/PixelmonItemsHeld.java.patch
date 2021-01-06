@@ -1,0 +1,13 @@
+--- a/com/pixelmongenerations/core/config/PixelmonItemsHeld.java
++++ b/com/pixelmongenerations/core/config/PixelmonItemsHeld.java
+@@ -870,8 +870,8 @@
+ 
+                 for(int var3 = 0; var3 < var2; ++var3) {
+                     Field field = var1[var3];
+-                    if (field.get((Object)null) instanceof Item) {
+-                        Item item = (Item)field.get((Object)null);
++                    if (field.get(null) instanceof Item) {
++                        Item item = (Item)field.get(null);
+                         heldItemList.add(item);
+                     }
+                 }

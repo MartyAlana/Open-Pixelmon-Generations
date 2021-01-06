@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/api/spawning/util/SetLoader.java
++++ b/com/pixelmongenerations/api/spawning/util/SetLoader.java
+@@ -258,7 +258,7 @@
+ 
+                     while(var12.hasNext()) {
+                         Biome biome = (Biome)var12.next();
+-                        if (biome.getRegistryName().getPath().toLowerCase().replaceAll(" ", "").replaceAll("_", "").equals(biomeInfos[biomeID].biomeName.toLowerCase().replaceAll(" ", "").replaceAll("_", ""))) {
++                        if (biome.getRegistryName().getResourcePath().toLowerCase().replaceAll(" ", "").replaceAll("_", "").equals(biomeInfos[biomeID].biomeName.toLowerCase().replaceAll(" ", "").replaceAll("_", ""))) {
+                             biomes.add(biome);
+                         }
+                     }

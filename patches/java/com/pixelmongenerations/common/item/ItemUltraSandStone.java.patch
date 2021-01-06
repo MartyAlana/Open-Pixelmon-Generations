@@ -1,0 +1,12 @@
+--- a/com/pixelmongenerations/common/item/ItemUltraSandStone.java
++++ b/com/pixelmongenerations/common/item/ItemUltraSandStone.java
+@@ -16,7 +16,7 @@
+         return damage;
+     }
+ 
+-    public String getTranslationKey(ItemStack stack) {
+-        return super.getTranslationKey() + "_" + BlockUltraSandStone.EnumType.byMetadata(this.getDamage(stack)).getName();
++    public String getUnlocalizedName(ItemStack stack) {
++        return super.getUnlocalizedName() + "_" + BlockUltraSandStone.EnumType.byMetadata(this.getDamage(stack)).getName();
+     }
+ }

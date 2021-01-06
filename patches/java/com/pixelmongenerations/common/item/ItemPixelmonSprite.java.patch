@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemPixelmonSprite.java
++++ b/com/pixelmongenerations/common/item/ItemPixelmonSprite.java
+@@ -43,7 +43,7 @@
+                 filePath = filePath + "shiny";
+             }
+ 
+-            displayName = displayName + " " + I18n.translateToLocal(PixelmonItems.itemPixelmonSprite.getTranslationKey() + ".name");
++            displayName = displayName + " " + I18n.translateToLocal(PixelmonItems.itemPixelmonSprite.getUnlocalizedName() + ".name");
+             filePath = filePath + "pokemon/" + String.format("%03d", ((BaseStats)stats.get()).nationalPokedexNumber) + SpriteHelper.getSpriteExtra(pixelmon.getBaseStats().pixelmonName, pixelmon.getForm(), pixelmon.getGender(), specialTexture, (String)null);
+             tagCompound.setString("SpriteName", filePath);
+             itemStack.setTagCompound(tagCompound);

@@ -1,0 +1,36 @@
+--- a/com/pixelmongenerations/api/spawning/conditions/SpawnCondition.java
++++ b/com/pixelmongenerations/api/spawning/conditions/SpawnCondition.java
+@@ -44,12 +44,12 @@
+         this.stringBiomes = new ArrayList();
+ 
+         Biome biome;
+-        for(Iterator var1 = this.biomes.iterator(); var1.hasNext(); this.stringBiomes.add(biome.getRegistryName().getPath())) {
++        for(Iterator var1 = this.biomes.iterator(); var1.hasNext(); this.stringBiomes.add(biome.getRegistryName().getResourcePath())) {
+             biome = (Biome)var1.next();
+-            if (biome == null || biome.getRegistryName() == null || biome.getRegistryName().getPath() == null) {
++            if (biome == null || biome.getRegistryName() == null || biome.getRegistryName().getResourcePath() == null) {
+                 System.out.println(biome);
+                 System.out.println(biome.getRegistryName());
+-                System.out.println(biome.getRegistryName().getPath());
++                System.out.println(biome.getRegistryName().getResourcePath());
+             }
+         }
+ 
+@@ -87,7 +87,7 @@
+                                 if (((ResourceLocation)biomeEntry.getKey()).toString().equalsIgnoreCase(categoryBiome) && !this.biomes.contains(biomeEntry.getValue())) {
+                                     this.biomes.add(biomeEntry.getValue());
+                                 }
+-                            } else if (((ResourceLocation)biomeEntry.getKey()).getPath().equalsIgnoreCase(categoryBiome) && !this.biomes.contains(biomeEntry.getValue())) {
++                            } else if (((ResourceLocation)biomeEntry.getKey()).getResourcePath().equalsIgnoreCase(categoryBiome) && !this.biomes.contains(biomeEntry.getValue())) {
+                                 this.biomes.add(biomeEntry.getValue());
+                             }
+                         }
+@@ -102,7 +102,7 @@
+                             if (((ResourceLocation)biomeEntry.getKey()).toString().equalsIgnoreCase(stringBiome) && !this.biomes.contains(biomeEntry.getValue())) {
+                                 this.biomes.add(biomeEntry.getValue());
+                             }
+-                        } else if (((ResourceLocation)biomeEntry.getKey()).getPath().equalsIgnoreCase(stringBiome) && !this.biomes.contains(biomeEntry.getValue())) {
++                        } else if (((ResourceLocation)biomeEntry.getKey()).getResourcePath().equalsIgnoreCase(stringBiome) && !this.biomes.contains(biomeEntry.getValue())) {
+                             this.biomes.add(biomeEntry.getValue());
+                         }
+                     }

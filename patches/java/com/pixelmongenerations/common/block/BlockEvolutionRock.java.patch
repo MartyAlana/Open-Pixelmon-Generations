@@ -1,0 +1,14 @@
+--- a/com/pixelmongenerations/common/block/BlockEvolutionRock.java
++++ b/com/pixelmongenerations/common/block/BlockEvolutionRock.java
+@@ -32,9 +32,9 @@
+         super(par2Material, 3, 2.0D, 3);
+         this.rockType = rockType;
+         if (this.rockType == EnumEvolutionRock.MossyRock) {
+-            this.setTranslationKey("mossyrock");
++            this.setUnlocalizedName("mossyrock");
+         } else {
+-            this.setTranslationKey("icyrock");
++            this.setUnlocalizedName("icyrock");
+         }
+ 
+     }

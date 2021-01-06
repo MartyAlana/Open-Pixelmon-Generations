@@ -1,0 +1,61 @@
+--- a/com/pixelmongenerations/client/render/tileEntities/RenderTileEntityBerryTree.java
++++ b/com/pixelmongenerations/client/render/tileEntities/RenderTileEntityBerryTree.java
+@@ -15,17 +15,18 @@
+ import net.minecraft.util.EnumFacing;
+ import net.minecraft.util.ResourceLocation;
+ import net.minecraft.world.biome.BiomeColorHelper;
++import org.jetbrains.annotations.NotNull;
+ 
+ public class RenderTileEntityBerryTree extends TileEntitySpecialRenderer<TileEntityBerryTree> {
+-    private static ResourceLocation weeds;
++    private static final ResourceLocation weeds;
+ 
+-    public void render(TileEntityBerryTree te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
++    public void render(@NotNull TileEntityBerryTree te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+         try {
+             EnumBerry berry = te.getBerry();
+             if (berry.models[te.getStage() - 1].getModel() != null) {
+                 this.renderWeeds(te, x, y, z);
+                 IBlockState state = te.getWorld().getBlockState(te.getPos());
+-                EnumFacing facing = (EnumFacing)state.getValue(GenericRotatableModelBlock.FACING);
++                EnumFacing facing = state.getValue(GenericRotatableModelBlock.FACING);
+                 int rotateDegrees = facing == EnumFacing.EAST ? 0 : (facing == EnumFacing.NORTH ? 90 : (facing == EnumFacing.WEST ? 180 : (facing == EnumFacing.SOUTH ? 270 : 0)));
+                 GlStateManager.pushMatrix();
+                 GlStateManager.translate((float)x + 0.5F, (float)y + 0.5F, (float)z + 0.5F);
+@@ -49,9 +50,8 @@
+                 GlStateManager.popMatrix();
+                 GlStateManager.color(1.0F, 1.0F, 1.0F);
+             }
+-        } catch (Exception var16) {
++        } catch (Exception ignored) {
+         }
+-
+     }
+ 
+     private void renderWeeds(TileEntityBerryTree te, double x, double y, double z) {
+@@ -65,20 +65,18 @@
+             GlStateManager.pushMatrix();
+             GlStateManager.translate(x + 0.5D, y + 0.5D, z + 0.5D);
+             EnumFacing[] var12 = EnumFacing.HORIZONTALS;
+-            int var13 = var12.length;
+ 
+-            for(int var14 = 0; var14 < var13; ++var14) {
+-                EnumFacing f = var12[var14];
++            for (EnumFacing f : var12) {
+                 GlStateManager.pushMatrix();
+                 GlStateManager.rotate(f.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
+                 GlStateManager.pushMatrix();
+                 GlStateManager.translate(-0.5D, -0.5D, -0.5D);
+                 BufferBuilder builder = Tessellator.getInstance().getBuffer();
+                 builder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
+-                builder.pos(0.0D, 0.0D, 0.0D).tex(1.0D, 1.0D).color(r, g, b, 1.0F).normal((float)f.getXOffset(), (float)f.getYOffset(), (float)f.getZOffset()).endVertex();
+-                builder.pos(0.0D, 1.0D, 0.0D).tex(1.0D, 0.0D).color(r, g, b, 1.0F).normal((float)f.getXOffset(), (float)f.getYOffset(), (float)f.getZOffset()).endVertex();
+-                builder.pos(1.0D, 1.0D, 0.0D).tex(0.0D, 0.0D).color(r, g, b, 1.0F).normal((float)f.getXOffset(), (float)f.getYOffset(), (float)f.getZOffset()).endVertex();
+-                builder.pos(1.0D, 0.0D, 0.0D).tex(0.0D, 1.0D).color(r, g, b, 1.0F).normal((float)f.getXOffset(), (float)f.getYOffset(), (float)f.getZOffset()).endVertex();
++                builder.pos(0.0D, 0.0D, 0.0D).tex(1.0D, 1.0D).color(r, g, b, 1.0F).normal((float) f.getFrontOffsetX(), (float) f.getFrontOffsetY(), (float) f.getFrontOffsetZ()).endVertex();
++                builder.pos(0.0D, 1.0D, 0.0D).tex(1.0D, 0.0D).color(r, g, b, 1.0F).normal((float) f.getFrontOffsetX(), (float) f.getFrontOffsetY(), (float) f.getFrontOffsetZ()).endVertex();
++                builder.pos(1.0D, 1.0D, 0.0D).tex(0.0D, 0.0D).color(r, g, b, 1.0F).normal((float) f.getFrontOffsetX(), (float) f.getFrontOffsetY(), (float) f.getFrontOffsetZ()).endVertex();
++                builder.pos(1.0D, 0.0D, 0.0D).tex(0.0D, 1.0D).color(r, g, b, 1.0F).normal((float) f.getFrontOffsetX(), (float) f.getFrontOffsetY(), (float) f.getFrontOffsetZ()).endVertex();
+                 Tessellator.getInstance().draw();
+                 GlStateManager.popMatrix();
+                 GlStateManager.popMatrix();

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/decorative/ItemBlockBraille.java
++++ b/com/pixelmongenerations/common/block/decorative/ItemBlockBraille.java
+@@ -19,7 +19,7 @@
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.translateToLocal("gui.shopkeeper." + this.getTranslationKey());
++        String info = I18n.translateToLocal("gui.shopkeeper." + this.getUnlocalizedName());
+         if (!this.hasHideFlag(stack) && !info.startsWith("gui.shopkeeper.")) {
+             tooltip.add(GuiScreen.isShiftKeyDown() ? info : "Hold shift for more info.");
+         }

@@ -11,3 +11,12 @@
  import java.io.IOException;
  import java.util.ArrayList;
  import java.util.Arrays;
+@@ -198,7 +198,7 @@
+                     this.configNode.setValue(Lists.newArrayList((Object[])Arrays.copyOf(aVal, aVal.length, Integer[].class)));
+                 }
+             } else {
+-                this.configNode.setValue((Object)null);
++                this.configNode.setValue(null);
+             }
+         } catch (Exception var4) {
+             var4.printStackTrace();

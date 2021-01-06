@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/decorative/BlockBoulder.java
++++ b/com/pixelmongenerations/common/block/decorative/BlockBoulder.java
+@@ -20,7 +20,7 @@
+         super(Material.ROCK);
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.GROUND);
+-        this.setTranslationKey("Bolder");
++        this.setUnlocalizedName("Bolder");
+     }
+ 
+     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {

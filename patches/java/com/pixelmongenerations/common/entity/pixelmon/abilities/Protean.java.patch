@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/abilities/Protean.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/abilities/Protean.java
+@@ -19,7 +19,7 @@
+         }
+ 
+         newType.add(changeType);
+-        newType.add((Object)null);
++        newType.add(null);
+         if (!newType.equals(user.type)) {
+             user.bc.sendToAll("pixelmon.abilities.protean", user.getNickname(), changeType.getLocalizedName());
+             user.setTempType((List)newType);

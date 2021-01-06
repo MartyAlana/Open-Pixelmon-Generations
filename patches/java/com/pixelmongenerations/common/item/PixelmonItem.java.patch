@@ -1,0 +1,37 @@
+--- a/com/pixelmongenerations/common/item/PixelmonItem.java
++++ b/com/pixelmongenerations/common/item/PixelmonItem.java
+@@ -20,14 +20,14 @@
+ 
+     public PixelmonItem(String name) {
+         this.setCreativeTab(CreativeTabs.MISC);
+-        this.setTranslationKey(name);
++        this.setUnlocalizedName(name);
+         this.setRegistryName(name);
+         this.hasEffect = false;
+     }
+ 
+     public PixelmonItem(String name, boolean hasEffect) {
+         this.setCreativeTab(CreativeTabs.MISC);
+-        this.setTranslationKey(name);
++        this.setUnlocalizedName(name);
+         this.setRegistryName(name);
+         this.hasEffect = hasEffect;
+     }
+@@ -46,7 +46,7 @@
+     }
+ 
+     public String getLocalizedName() {
+-        return I18n.translateToLocal(this.getTranslationKey() + ".name");
++        return I18n.translateToLocal(this.getUnlocalizedName() + ".name");
+     }
+ 
+     public void consumeItem(EntityPlayer player, ItemStack itemstack) {
+@@ -62,7 +62,7 @@
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.translateToLocal("gui.shopkeeper." + this.getTranslationKey());
++        String info = I18n.translateToLocal("gui.shopkeeper." + this.getUnlocalizedName());
+         if (!this.hasHideFlag(stack) && !info.startsWith("gui.shopkeeper.")) {
+             tooltip.add(GuiScreen.isShiftKeyDown() ? info : "Hold shift for more info.");
+         }

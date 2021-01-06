@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/common/battle/controller/GlobalStatusController.java
++++ b/com/pixelmongenerations/common/battle/controller/GlobalStatusController.java
+@@ -37,7 +37,7 @@
+         Weather.class.getClass();
+         var10000 = var10000.filter(Weather.class::isInstance);
+         Weather.class.getClass();
+-        return (Weather)var10000.map(Weather.class::cast).findFirst().orElse((Object)null);
++        return (Weather)var10000.map(Weather.class::cast).findFirst().orElse(null);
+     }
+ 
+     public Terrain getTerrain() {
+@@ -97,7 +97,7 @@
+     public GlobalStatusBase getGlobalStatus(StatusType type) {
+         return (GlobalStatusBase)this.globalStatuses.stream().filter((g) -> {
+             return g.type == type;
+-        }).findFirst().orElse((Object)null);
++        }).findFirst().orElse(null);
+     }
+ 
+     public int getGlobalStatusSize() {

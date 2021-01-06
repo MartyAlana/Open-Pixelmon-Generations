@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/models/smd/ValveStudioModelLoader.java
++++ b/com/pixelmongenerations/client/models/smd/ValveStudioModelLoader.java
+@@ -17,7 +17,7 @@
+     }
+ 
+     public boolean accepts(ResourceLocation modelLocation) {
+-        return modelLocation.getPath().endsWith(".pqc");
++        return modelLocation.getResourcePath().endsWith(".pqc");
+     }
+ 
+     public IModel loadModel(ResourceLocation modelLocation, boolean overrideSmoothShading) {

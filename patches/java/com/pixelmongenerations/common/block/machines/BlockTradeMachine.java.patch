@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockTradeMachine.java
++++ b/com/pixelmongenerations/common/block/machines/BlockTradeMachine.java
+@@ -37,7 +37,7 @@
+         super(Material.ROCK, 3, 2.0D, 1);
+         this.setHardness(3.5F);
+         this.setSoundType(SoundType.STONE);
+-        this.setTranslationKey("trade_machine");
++        this.setUnlocalizedName("trade_machine");
+     }
+ 
+     public Item getItemDropped(IBlockState state, Random rand, int fortune) {

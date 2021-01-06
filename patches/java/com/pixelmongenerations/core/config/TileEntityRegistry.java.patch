@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/config/TileEntityRegistry.java
++++ b/com/pixelmongenerations/core/config/TileEntityRegistry.java
+@@ -286,7 +286,7 @@
+     }
+ 
+     private static void remap() {
+-        Map remap = (Map)ObfuscationReflectionHelper.getPrivateValue(TileEntityId.class, (Object)null, 0);
++        Map remap = (Map)ObfuscationReflectionHelper.getPrivateValue(TileEntityId.class, null, 0);
+         remap.put("Pokemon PC", "pixelmon:pc");
+         remap.put("Anvil", "pixelmon:anvil");
+         remap.put("Ranch Block", "pixelmon:ranch_block");

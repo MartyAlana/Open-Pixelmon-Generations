@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/FloorCushionBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/FloorCushionBlock.java
+@@ -26,7 +26,7 @@
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.METAL);
+         this.cushion = color;
+-        this.setTranslationKey(color + "_floorcushion");
++        this.setUnlocalizedName(color + "_floorcushion");
+     }
+ 
+     public boolean isOpaqueCube(IBlockState state) {

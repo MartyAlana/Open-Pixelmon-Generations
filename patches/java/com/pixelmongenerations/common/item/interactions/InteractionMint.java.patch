@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/interactions/InteractionMint.java
++++ b/com/pixelmongenerations/common/item/interactions/InteractionMint.java
+@@ -35,7 +35,7 @@
+ 
+     @Nullable
+     public PlayerStorage getPlayerStorage(EntityPlayerMP player) {
+-        return (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
++        return (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
+     }
+ 
+     public static void updatePartyPokemon(PlayerStorage storage, EntityPixelmon pixelmon) {

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/UmbrellaBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/UmbrellaBlock.java
+@@ -23,7 +23,7 @@
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.METAL);
+         this.color = color;
+-        this.setTranslationKey(color + "_umbrella");
++        this.setUnlocalizedName(color + "_umbrella");
+     }
+ 
+     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

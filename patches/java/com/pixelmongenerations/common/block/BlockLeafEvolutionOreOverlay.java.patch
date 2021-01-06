@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockLeafEvolutionOreOverlay.java
++++ b/com/pixelmongenerations/common/block/BlockLeafEvolutionOreOverlay.java
+@@ -13,7 +13,7 @@
+         this.setHardness(-1.0F);
+         this.setSoundType(SoundType.GROUND);
+         this.setCreativeTab((CreativeTabs)null);
+-        this.setTranslationKey(itemName);
++        this.setUnlocalizedName(itemName);
+     }
+ 
+     public boolean isOpaqueCube(IBlockState state) {

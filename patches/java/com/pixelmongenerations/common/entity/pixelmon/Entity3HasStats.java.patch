@@ -1,0 +1,39 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/Entity3HasStats.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/Entity3HasStats.java
+@@ -91,7 +91,7 @@
+                 Pixelmon.LOGGER.error("Cannot find base stats for " + name + " with form " + this.getForm());
+             }
+ 
+-            this.baseStats = (BaseStats)optBs.orElse((Object)null);
++            this.baseStats = (BaseStats)optBs.orElse(null);
+         }
+ 
+         if (this.baseStats == null && !this.world.isRemote) {
+@@ -478,13 +478,13 @@
+     public BaseStats initializeBaseStatsIfNull() {
+         if (this.baseStats == null) {
+             String name = this.getName();
+-            this.baseStats = (BaseStats)getBaseStats(name, this.getForm()).orElse((Object)null);
++            this.baseStats = (BaseStats)getBaseStats(name, this.getForm()).orElse(null);
+             if (this.baseStats == null) {
+-                this.baseStats = (BaseStats)getBaseStats(name).orElse((Object)null);
++                this.baseStats = (BaseStats)getBaseStats(name).orElse(null);
+             }
+ 
+             if (this.baseStats == null) {
+-                this.baseStats = (BaseStats)getBaseStats(EnumSpecies.Bulbasaur).orElse((Object)null);
++                this.baseStats = (BaseStats)getBaseStats(EnumSpecies.Bulbasaur).orElse(null);
+             }
+         }
+ 
+@@ -702,8 +702,8 @@
+     public static BaseStats getBaseStats(int index) {
+         Optional<EnumSpecies> pokemon = EnumSpecies.getFromDex(index);
+         return (BaseStats)pokemon.map((enumPokemon) -> {
+-            return (BaseStats)getBaseStats(enumPokemon).orElse((Object)null);
+-        }).orElse((Object)null);
++            return (BaseStats)getBaseStats(enumPokemon).orElse(null);
++        }).orElse(null);
+     }
+ 
+     public static Optional<BaseStats> getBaseStats(String name) {

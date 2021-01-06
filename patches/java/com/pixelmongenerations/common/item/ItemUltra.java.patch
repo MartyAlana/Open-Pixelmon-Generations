@@ -1,0 +1,12 @@
+--- a/com/pixelmongenerations/common/item/ItemUltra.java
++++ b/com/pixelmongenerations/common/item/ItemUltra.java
+@@ -16,7 +16,7 @@
+         return damage;
+     }
+ 
+-    public String getTranslationKey(ItemStack stack) {
+-        return super.getTranslationKey() + "_" + EnumDyeColor.byMetadata(this.getDamage(stack));
++    public String getUnlocalizedName(ItemStack stack) {
++        return super.getUnlocalizedName() + "_" + EnumDyeColor.byMetadata(this.getDamage(stack));
+     }
+ }

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/decorative/BlockFancyPillar.java
++++ b/com/pixelmongenerations/common/block/decorative/BlockFancyPillar.java
+@@ -22,7 +22,7 @@
+ 
+     public BlockFancyPillar(Material mat) {
+         super(mat);
+-        this.setTranslationKey("temple_pillar");
++        this.setUnlocalizedName("temple_pillar");
+     }
+ 
+     public IBlockState getStateFromMeta(int meta) {

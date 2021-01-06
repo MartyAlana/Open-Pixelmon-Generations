@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/abilities/Libero.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/abilities/Libero.java
+@@ -19,7 +19,7 @@
+         }
+ 
+         newType.add(changeType);
+-        newType.add((Object)null);
++        newType.add(null);
+         if (!newType.equals(user.type)) {
+             user.bc.sendToAll("pixelmon.abilities.libero", user.getNickname(), changeType.getLocalizedName());
+             user.setTempType((List)newType);

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/ChairBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/ChairBlock.java
+@@ -21,7 +21,7 @@
+     public ChairBlock() {
+         super(Material.WOOD);
+         this.setSoundType(SoundType.WOOD);
+-        this.setTranslationKey("chair");
++        this.setUnlocalizedName("chair");
+     }
+ 
+     public TileEntity createNewTileEntity(World worldIn, int meta) {

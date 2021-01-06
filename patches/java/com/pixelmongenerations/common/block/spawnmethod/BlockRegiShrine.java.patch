@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/spawnmethod/BlockRegiShrine.java
++++ b/com/pixelmongenerations/common/block/spawnmethod/BlockRegiShrine.java
+@@ -45,7 +45,7 @@
+             return (String)substring.apply(cipher, a);
+         }).collect(Collectors.toList());
+         this.species = species;
+-        this.setTranslationKey(species.name.toLowerCase() + "_shrine");
++        this.setUnlocalizedName(species.name.toLowerCase() + "_shrine");
+     }
+ 
+     public TileEntityShrine createTileEntity() {

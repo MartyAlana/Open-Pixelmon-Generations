@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/decorative/BlockDisplayball.java
++++ b/com/pixelmongenerations/common/block/decorative/BlockDisplayball.java
+@@ -20,7 +20,7 @@
+     public BlockDisplayball(String name, String modelName) {
+         super(Material.ROCK);
+         this.setSoundType(SoundType.STONE);
+-        this.setTranslationKey("displayball_" + name);
++        this.setUnlocalizedName("displayball_" + name);
+         this.setHardness(1.0F);
+         this.setCreativeTab(PixelmonCreativeTabs.decoration);
+         this.name = name;

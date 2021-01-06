@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/command/Struc.java
++++ b/com/pixelmongenerations/core/command/Struc.java
+@@ -37,7 +37,7 @@
+         if (args.length == 0) {
+             structure = StructureRegistry.getScatteredStructureFromBiome(random, world.getBiome(cc));
+             if (structure == null) {
+-                sender.sendMessage(new TextComponentTranslation("pixelmon.command.struc.nostruc", new Object[]{world.getBiome(cc).getRegistryName().getPath()}));
++                sender.sendMessage(new TextComponentTranslation("pixelmon.command.struc.nostruc", new Object[]{world.getBiome(cc).getRegistryName().getResourcePath()}));
+                 return;
+             }
+         } else {

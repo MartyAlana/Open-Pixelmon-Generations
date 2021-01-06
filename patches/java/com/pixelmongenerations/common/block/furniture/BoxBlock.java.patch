@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/BoxBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/BoxBlock.java
+@@ -24,7 +24,7 @@
+         super(Material.ROCK);
+         this.setHardness(0.5F);
+         this.setSoundType(SoundType.WOOD);
+-        this.setTranslationKey("Box");
++        this.setUnlocalizedName("Box");
+     }
+ 
+     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

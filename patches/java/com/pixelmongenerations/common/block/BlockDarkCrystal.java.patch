@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockDarkCrystal.java
++++ b/com/pixelmongenerations/common/block/BlockDarkCrystal.java
+@@ -20,7 +20,7 @@
+     public BlockDarkCrystal() {
+         super(Material.ROCK);
+         this.setHardness(2.5F);
+-        this.setTranslationKey("dark_crystal");
++        this.setUnlocalizedName("dark_crystal");
+         this.setCreativeTab(PixelmonCreativeTabs.shrines);
+     }
+ 

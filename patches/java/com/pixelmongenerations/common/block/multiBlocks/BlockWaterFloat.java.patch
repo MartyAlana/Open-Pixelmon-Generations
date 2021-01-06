@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/multiBlocks/BlockWaterFloat.java
++++ b/com/pixelmongenerations/common/block/multiBlocks/BlockWaterFloat.java
+@@ -31,7 +31,7 @@
+         this.color = color;
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.CLOTH);
+-        this.setTranslationKey(color.toString().toLowerCase() + "_water_float");
++        this.setUnlocalizedName(color.toString().toLowerCase() + "_water_float");
+     }
+ 
+     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

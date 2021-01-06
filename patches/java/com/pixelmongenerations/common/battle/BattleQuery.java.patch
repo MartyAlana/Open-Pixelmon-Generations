@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/battle/BattleQuery.java
++++ b/com/pixelmongenerations/common/battle/BattleQuery.java
+@@ -150,7 +150,6 @@
+                     BattleQueryPlayer player = this.players[j];
+ 
+                     for(int i2 = 0; i2 < 6; ++i2) {
+-                        int[] pixId = null;
+                         int[] pixId = storage.getIDFromPosition(i2);
+                         if (!PixelmonMethods.isIDSame(player.pokemon.getPokemonId(), pixId) && !storage.isFainted(pixId) && !storage.isEgg(pixId)) {
+                             secondPokemon[j] = storage.sendOut(pixId, player.player.world);

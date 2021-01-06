@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockTimespaceAltar.java
++++ b/com/pixelmongenerations/common/block/machines/BlockTimespaceAltar.java
+@@ -28,7 +28,7 @@
+         this.setTickRandomly(true);
+         this.setBlockUnbreakable();
+         this.setResistance(6000000.0F);
+-        this.setTranslationKey("timespace_altar");
++        this.setUnlocalizedName("timespace_altar");
+         this.setDefaultState(this.blockState.getBaseState());
+         this.setCreativeTab(PixelmonCreativeTabs.decoration);
+     }

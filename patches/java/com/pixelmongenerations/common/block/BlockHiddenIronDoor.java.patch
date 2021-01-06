@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockHiddenIronDoor.java
++++ b/com/pixelmongenerations/common/block/BlockHiddenIronDoor.java
+@@ -18,7 +18,7 @@
+         super(Material.IRON);
+         this.setHardness(2.0F);
+         this.setBlockUnbreakable();
+-        this.setTranslationKey("hidden_iron_door");
++        this.setUnlocalizedName("hidden_iron_door");
+     }
+ 
+     @Nullable

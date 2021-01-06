@@ -1,0 +1,58 @@
+--- a/com/pixelmongenerations/common/battle/attacks/AttackBase.java
++++ b/com/pixelmongenerations/common/battle/attacks/AttackBase.java
+@@ -126,7 +126,7 @@
+     }
+ 
+     public int getPriority() {
+-        Stream var10000 = this.effects.stream();
++        Stream<EffectBase> var10000 = this.effects.stream();
+         Priority.class.getClass();
+         var10000 = var10000.filter(Priority.class::isInstance);
+         Priority.class.getClass();
+@@ -154,39 +154,18 @@
+             if (etmp != null) {
+                 effects.add(etmp);
+             } else {
+-                byte var8 = -1;
+-                switch(e.hashCode()) {
+-                case -1914982354:
+-                    if (e.equals("PartialTrap")) {
+-                        var8 = 0;
+-                    }
++                switch(e) {
++                case "PartialTrap":
++                    effects.add(new PartialTrap());
+                     break;
+-                case -918009820:
+-                    if (e.equals("MeanLook")) {
+-                        var8 = 2;
+-                    }
++                case "MeanLook":
++                    effects.add(new MeanLook());
+                     break;
+-                case 1905330576:
+-                    if (e.equals("WaterPledge")) {
+-                        var8 = 1;
++                case "WaterPledge":
++                    effects.add(new Pledge());
+                     }
+                 }
+-
+-                switch(var8) {
+-                case 0:
+-                    EffectBase base = new PartialTrap();
+-                    effects.add(base);
+-                    break;
+-                case 1:
+-                    EffectBase base = new Pledge();
+-                    effects.add(base);
+-                    break;
+-                case 2:
+-                    EffectBase base = new MeanLook();
+-                    effects.add(base);
+                 }
+-            }
+-        }
+ 
+         return effects;
+     }

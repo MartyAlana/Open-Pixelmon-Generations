@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemGift.java
++++ b/com/pixelmongenerations/common/item/ItemGift.java
+@@ -46,7 +46,7 @@
+                     boolean boolAddedToInventory = player.inventory.addItemStackToInventory(stack);
+                     if (!boolAddedToInventory && stack.getItemDamage() == 0) {
+                         player.dropItem(stack.getItem(), 1);
+-                        String itemName = stack.getTranslationKey();
++                        String itemName = stack.getUnlocalizedName();
+                         ChatHandler.sendFormattedChat(player, TextFormatting.RED, "pixelmon.drops.fullinventory", I18n.translateToLocal(itemName + ".name"));
+                     }
+                 }

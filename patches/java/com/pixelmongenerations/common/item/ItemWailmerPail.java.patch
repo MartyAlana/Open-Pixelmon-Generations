@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemWailmerPail.java
++++ b/com/pixelmongenerations/common/item/ItemWailmerPail.java
+@@ -26,7 +26,7 @@
+         this.setMaxStackSize(1);
+         this.setMaxDamage(32);
+         this.canRepair = false;
+-        this.setTranslationKey(itemName);
++        this.setUnlocalizedName(itemName);
+         this.setRegistryName(itemName);
+     }
+ 

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemHiddenDoor.java
++++ b/com/pixelmongenerations/common/item/ItemHiddenDoor.java
+@@ -9,7 +9,7 @@
+         super(doorBlock);
+         this.setCreativeTab(CreativeTabs.REDSTONE);
+         this.setMaxStackSize(16);
+-        this.setTranslationKey(itemName);
++        this.setUnlocalizedName(itemName);
+         this.setRegistryName(itemName);
+     }
+ }

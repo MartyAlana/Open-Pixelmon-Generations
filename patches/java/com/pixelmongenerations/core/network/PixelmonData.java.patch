@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/network/PixelmonData.java
++++ b/com/pixelmongenerations/core/network/PixelmonData.java
+@@ -787,7 +787,7 @@
+     }
+ 
+     public BaseStats getBaseStats() {
+-        return (BaseStats)Entity3HasStats.getBaseStats((String)this.name, this.form).orElse((Object)null);
++        return (BaseStats)Entity3HasStats.getBaseStats((String)this.name, this.form).orElse(null);
+     }
+ 
+     public ExternalMoveData[] getExternalMoves() {

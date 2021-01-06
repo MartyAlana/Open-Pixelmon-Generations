@@ -1,0 +1,12 @@
+--- a/com/pixelmongenerations/common/battle/status/Protect.java
++++ b/com/pixelmongenerations/common/battle/status/Protect.java
+@@ -101,8 +101,7 @@
+         EnumHeldItems heldItem = pw.getUsableHeldItem().getHeldItemType();
+         Weather weather = pw.bc.globalStatusController.getWeather();
+         boolean fullHealth = pw.hasFullHealth();
+-        int numResidual = 0;
+-        int numResidual = numResidual + pw.countStatuses(StatusType.FutureSight, StatusType.LightScreen, StatusType.LuckyChant, StatusType.MagnetRise, StatusType.MultiTurn, StatusType.Mist, StatusType.Nightmare, StatusType.Perish, StatusType.Reflect, StatusType.SafeGuard, StatusType.Tailwind, StatusType.UnderGround, StatusType.Yawn);
++        int numResidual = pw.countStatuses(StatusType.FutureSight, StatusType.LightScreen, StatusType.LuckyChant, StatusType.MagnetRise, StatusType.MultiTurn, StatusType.Mist, StatusType.Nightmare, StatusType.Perish, StatusType.Reflect, StatusType.SafeGuard, StatusType.Tailwind, StatusType.UnderGround, StatusType.Yawn);
+         numResidual -= pw.countStatuses(StatusType.AquaRing, StatusType.Disable, StatusType.Embargo, StatusType.Encore, StatusType.Freeze, StatusType.GrassPledge, StatusType.HealBlock, StatusType.Ingrain, StatusType.Sleep, StatusType.Taunt, StatusType.Telekinesis, StatusType.WaterPledge, StatusType.Wish);
+         if (!hasMagicGuard) {
+             numResidual += pw.countStatuses(StatusType.Burn, StatusType.Cursed, StatusType.FirePledge, StatusType.Leech, StatusType.PartialTrap);

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/TrashcanBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/TrashcanBlock.java
+@@ -27,7 +27,7 @@
+         super(Material.IRON);
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.METAL);
+-        this.setTranslationKey("Trashcan");
++        this.setUnlocalizedName("Trashcan");
+     }
+ 
+     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

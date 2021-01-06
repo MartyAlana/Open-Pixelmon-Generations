@@ -1,0 +1,152 @@
+--- a/com/pixelmongenerations/core/config/PixelmonCreativeTabs.java
++++ b/com/pixelmongenerations/core/config/PixelmonCreativeTabs.java
+@@ -10,47 +10,47 @@
+ public class PixelmonCreativeTabs {
+     public static final CreativeTabs pokeball = new CreativeTabs("Pokeballs") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(PixelmonItemsPokeballs.pokeBall);
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.Pokeballs");
+         }
+     };
+     public static final CreativeTabs restoration = new CreativeTabs("Restoration") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(PixelmonItems.potion);
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.Restoration");
+         }
+     };
+     public static final CreativeTabs natural = new CreativeTabs("Natural") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(PixelmonItemsApricorns.apricornRed);
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.Natural");
+         }
+     };
+     public static final CreativeTabs held = new CreativeTabs("Held Items") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(PixelmonItemsHeld.expShare);
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.Held Items");
+         }
+     };
+     public static final CreativeTabs tms = new CreativeTabs("TMs/TRs") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             if (!PixelmonItemsTMs.TMs.isEmpty()) {
+                 return new ItemStack((Item)PixelmonItemsTMs.TMs.get(0));
+             } else {
+@@ -60,77 +60,77 @@
+     };
+     public static final CreativeTabs utilityBlocks = new CreativeTabs("Utility Blocks") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(Item.getItemFromBlock(PixelmonBlocks.warpPlate));
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.utilityBlocks");
+         }
+     };
+     public static final CreativeTabs badges = new CreativeTabs("Badges") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(PixelmonItemsBadges.marshBadge);
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.Badges");
+         }
+     };
+     public static CreativeTabs curryIngredients = new CreativeTabs("curryIngredients") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(PixelmonItemsCurryIngredients.bobsFoodTin);
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.curryIngredient");
+         }
+     };
+     public static final CreativeTabs tabPokeLoot = new CreativeTabs("tabPokeLoot") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(PixelmonBlocks.pokeChest);
+         }
+     };
+     public static final CreativeTabs buildingBlocks = new CreativeTabs("tabBuildingBlocks") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(Item.getItemFromBlock(PixelmonBlocks.templeBrick));
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.BuildingBlocks");
+         }
+     };
+     public static final CreativeTabs decoration = new CreativeTabs("Decoration") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(Item.getItemFromBlock(PixelmonBlocks.hdtvBlock));
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.Decoration");
+         }
+     };
+     public static final CreativeTabs pokedolls = new CreativeTabs("tabPokedolls") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(Item.getItemFromBlock(PixelmonBlocks.krabbyPokedoll));
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.Pokedolls");
+         }
+     };
+     public static final CreativeTabs shrines = new CreativeTabs("tabShrines") {
+         @SideOnly(Side.CLIENT)
+-        public ItemStack createIcon() {
++        public ItemStack getTabIconItem() {
+             return new ItemStack(Item.getItemFromBlock(PixelmonBlocks.timespaceAltar));
+         }
+ 
+-        public String getTranslationKey() {
++        public String getUnlocalizedName() {
+             return I18n.translateToLocal("itemGroup.Shrines");
+         }
+     };

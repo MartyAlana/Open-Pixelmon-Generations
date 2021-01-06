@@ -1,0 +1,24 @@
+--- a/com/pixelmongenerations/common/battle/controller/participants/PixelmonWrapper.java
++++ b/com/pixelmongenerations/common/battle/controller/participants/PixelmonWrapper.java
+@@ -1235,7 +1235,6 @@
+                     this.baseStats = stats;
+                     return true;
+                 } else {
+-                    BaseStats stats;
+                     if (this.baseStats.pokemon == EnumSpecies.Groudon) {
+                         this.pokemon.isMega = true;
+                         this.isMega = true;
+@@ -1270,11 +1269,11 @@
+                             this.tempAbility = null;
+                             this.setForm(megaStone.form);
+                             if (this.participant.getType() == ParticipantType.Player) {
+-                                PlayerParticipant player = (PlayerParticipant)this.participant;
++                                player = (PlayerParticipant)this.participant;
+                                 Pixelmon.NETWORK.sendTo(new MegaEvolve(this.getPokemonID()), player.player);
+                             }
+ 
+-                            BaseStats stats = (BaseStats)Entity3HasStats.getBaseStats(this.pokemon.getSpecies().name(), megaStone.form).get();
++                            stats = (BaseStats)Entity3HasStats.getBaseStats(this.pokemon.getSpecies().name(), megaStone.form).get();
+                             this.pokemon.baseStats = stats;
+                             this.baseStats = stats;
+                             return true;

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/multiBlocks/BlockClothedTable.java
++++ b/com/pixelmongenerations/common/block/multiBlocks/BlockClothedTable.java
+@@ -29,7 +29,7 @@
+     public BlockClothedTable() {
+         super(Material.WOOD, 2, 1.0D, 2);
+         this.setHardness(0.5F);
+-        this.setTranslationKey("clothed_table");
++        this.setUnlocalizedName("clothed_table");
+         this.setSoundType(SoundType.WOOD);
+     }
+ 

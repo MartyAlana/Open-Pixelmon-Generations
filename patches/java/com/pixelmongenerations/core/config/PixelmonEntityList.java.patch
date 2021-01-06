@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/config/PixelmonEntityList.java
++++ b/com/pixelmongenerations/core/config/PixelmonEntityList.java
+@@ -184,7 +184,7 @@
+     }
+ 
+     private static void remap() {
+-        Map remap = (Map)ObfuscationReflectionHelper.getPrivateValue(EntityId.class, (Object)null, 0);
++        Map remap = (Map)ObfuscationReflectionHelper.getPrivateValue(EntityId.class, null, 0);
+         remap.put("pixelmon.Trainer", "pixelmon:npc_trainer");
+         remap.put("pixelmon.Hallwoeen", "pixelmon:halloween");
+         remap.put("pixelmon.Trader", "pixelmon:npc_trader");

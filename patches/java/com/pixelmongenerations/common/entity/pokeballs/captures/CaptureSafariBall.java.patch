@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/entity/pokeballs/captures/CaptureSafariBall.java
++++ b/com/pixelmongenerations/common/entity/pokeballs/captures/CaptureSafariBall.java
+@@ -15,6 +15,6 @@
+ 
+     public double getBallBonus(EnumPokeball type, EntityPlayer thrower, PokemonLink px, EnumPokeBallMode mode) {
+         Biome biome = thrower.world.getBiome(new BlockPos(MathHelper.floor(thrower.posX), 0, MathHelper.floor(thrower.posZ)));
+-        return !biome.getRegistryName().getPath().equals("plains") && !biome.getRegistryName().getPath().equalsIgnoreCase("savanna") ? 1.0D : 1.5D;
++        return !biome.getRegistryName().getResourcePath().equals("plains") && !biome.getRegistryName().getResourcePath().equalsIgnoreCase("savanna") ? 1.0D : 1.5D;
+     }
+ }

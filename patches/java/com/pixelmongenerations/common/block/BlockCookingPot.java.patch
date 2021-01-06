@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockCookingPot.java
++++ b/com/pixelmongenerations/common/block/BlockCookingPot.java
+@@ -39,7 +39,7 @@
+     public BlockCookingPot() {
+         super(Material.ROCK);
+         this.setHardness(2.5F);
+-        this.setTranslationKey("cookingblock");
++        this.setUnlocalizedName("cookingblock");
+         this.setTickRandomly(true);
+     }
+ 

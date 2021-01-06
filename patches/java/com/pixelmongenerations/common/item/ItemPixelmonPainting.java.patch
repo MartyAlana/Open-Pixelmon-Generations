@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemPixelmonPainting.java
++++ b/com/pixelmongenerations/common/item/ItemPixelmonPainting.java
+@@ -14,7 +14,7 @@
+     public ItemPixelmonPainting(String itemName) {
+         super(itemName);
+         this.setCreativeTab(PixelmonCreativeTabs.decoration);
+-        this.setTranslationKey("pixelmon_painting");
++        this.setUnlocalizedName("pixelmon_painting");
+     }
+ 
+     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {

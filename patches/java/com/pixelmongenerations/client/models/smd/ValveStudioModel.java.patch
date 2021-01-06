@@ -1,0 +1,22 @@
+--- a/com/pixelmongenerations/client/models/smd/ValveStudioModel.java
++++ b/com/pixelmongenerations/client/models/smd/ValveStudioModel.java
+@@ -222,8 +222,8 @@
+ 
+                 if (this.scale == -1.0F) {
+                     this.scale = 1.0F;
+-                    if (this.resource.getPath().startsWith("models/pokemon")) {
+-                        Pixelmon.LOGGER.error("Model " + resource.getPath() + " did not have a scale specified!");
++                    if (this.resource.getResourcePath().startsWith("models/pokemon")) {
++                        Pixelmon.LOGGER.error("Model " + resource.getResourcePath() + " did not have a scale specified!");
+                     }
+                 }
+ 
+@@ -266,7 +266,7 @@
+     }
+ 
+     public ResourceLocation getResource(String fileName) {
+-        String urlAsString = this.resource.getPath();
++        String urlAsString = this.resource.getResourcePath();
+         int lastIndex = urlAsString.lastIndexOf(47);
+         String startString = urlAsString.substring(0, lastIndex);
+         return new ResourceLocation("pixelmon", startString + "/" + fileName);

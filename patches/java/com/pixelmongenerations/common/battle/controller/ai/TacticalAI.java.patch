@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/battle/controller/ai/TacticalAI.java
++++ b/com/pixelmongenerations/common/battle/controller/ai/TacticalAI.java
+@@ -123,7 +123,6 @@
+             float counter = 0.0F;
+             Iterator var6 = bestChoices.iterator();
+ 
+-            MoveChoice choice;
+             do {
+                 if (!var6.hasNext()) {
+                     return (MoveChoice)bestChoices.get(bestChoices.size() - 1);

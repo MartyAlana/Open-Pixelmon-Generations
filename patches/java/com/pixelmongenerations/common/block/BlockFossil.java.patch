@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockFossil.java
++++ b/com/pixelmongenerations/common/block/BlockFossil.java
+@@ -19,7 +19,7 @@
+         super(Material.ROCK);
+         this.setSoundType(SoundType.STONE);
+         this.setCreativeTab(PixelmonCreativeTabs.natural);
+-        this.setTranslationKey("fossil");
++        this.setUnlocalizedName("fossil");
+     }
+ 
+     public EnumBlockRenderType getRenderType(IBlockState state) {

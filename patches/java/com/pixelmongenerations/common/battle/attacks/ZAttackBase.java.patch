@@ -1,0 +1,90 @@
+--- a/com/pixelmongenerations/common/battle/attacks/ZAttackBase.java
++++ b/com/pixelmongenerations/common/battle/attacks/ZAttackBase.java
+@@ -197,7 +197,7 @@
+             zAttackBase.animations = base.animations;
+             zAttackBase.targetingInfo = base.targetingInfo;
+             zAttackBase.effects = base.effects;
+-            zAttackBase.zeffect = (ZEffect)statusEffects.getOrDefault(base.getUnlocalizedName(), (Object)null);
++            zAttackBase.zeffect = (ZEffect)statusEffects.getOrDefault(base.getUnlocalizedName(), null);
+             mapBuilder.put(base.attackType.name(), zAttackBase);
+         }
+ 
+@@ -305,12 +305,13 @@
+             key = RandomHelper.rand.nextBoolean() ? "Pikachu" : "Raichu";
+         }
+ 
+-        Optional var10000 = Optional.of(attack.getAttackBase());
++        Optional<AttackBase> var10000 = Optional.of(attack.getAttackBase());
+         RegularAttackBase.class.getClass();
+         var10000 = var10000.filter(RegularAttackBase.class::isInstance);
+         RegularAttackBase.class.getClass();
++        String finalKey = key;
+         return (Attack)var10000.map(RegularAttackBase.class::cast).flatMap((a) -> {
+-            return a.getZAttackBase(key);
++            return a.getZAttackBase(finalKey);
+         }).map((a) -> {
+             if (isMetronome) {
+                 a.zeffect = null;
+@@ -321,7 +322,7 @@
+     }
+ 
+     static {
+-        BiFunction<EnumType, String, Function<AttackBase, ZAttackBase>> attack = ((type, name) -> {
++        BiFunction<EnumType, String, Function<AttackBase, ZAttackBase>> attack = ((BiFunction<EnumType, String, ZAttackBase>)(type, name) -> {
+             ZAttackBase base = new ZAttackBase();
+             base.effects = new ArrayList();
+             base.animations = new ArrayList();
+@@ -373,7 +374,7 @@
+         statusEffects.put("Aqua Ring", new RaiseStats(1, new StatsType[]{StatsType.Defence}));
+         statusEffects.put("Aromatherapy", new CompleteHeal());
+         statusEffects.put("Aromatic Mist", new RaiseStats(2, new StatsType[]{StatsType.SpecialDefence}));
+-        statusEffects.put("Assist", (Object)null);
++        statusEffects.put("Assist", null);
+         statusEffects.put("Attract", new ResetStats());
+         statusEffects.put("Aurora Veil", new RaiseStats(1, new StatsType[]{StatsType.Speed}));
+         statusEffects.put("Autotomize", new ResetStats());
+@@ -449,7 +450,7 @@
+         statusEffects.put("Heal Block", new RaiseStats(2, new StatsType[]{StatsType.SpecialAttack}));
+         statusEffects.put("Heal Order", new ResetStats());
+         statusEffects.put("Heal Pulse", new ResetStats());
+-        statusEffects.put("Healing Wish", (Object)null);
++        statusEffects.put("Healing Wish", null);
+         statusEffects.put("Heart Swap", new CriticalHitRaise());
+         statusEffects.put("Helping Hand", new ResetStats());
+         statusEffects.put("Hold Hands", new RaiseStats(1, new StatsType[]{StatsType.Attack, StatsType.Defence, StatsType.SpecialAttack, StatsType.SpecialDefence, StatsType.Speed}));
+@@ -469,7 +470,7 @@
+         statusEffects.put("Lock-On", new RaiseStats(1, new StatsType[]{StatsType.Speed}));
+         statusEffects.put("Lovely Kiss", new RaiseStats(1, new StatsType[]{StatsType.Speed}));
+         statusEffects.put("Lucky Chant", new RaiseStats(1, new StatsType[]{StatsType.Evasion}));
+-        statusEffects.put("Lunar Dance", (Object)null);
++        statusEffects.put("Lunar Dance", null);
+         statusEffects.put("Magic Coat", new RaiseStats(2, new StatsType[]{StatsType.SpecialDefence}));
+         statusEffects.put("Magic Room", new RaiseStats(1, new StatsType[]{StatsType.SpecialDefence}));
+         statusEffects.put("Magnet Rise", new RaiseStats(1, new StatsType[]{StatsType.Evasion}));
+@@ -478,9 +479,9 @@
+         statusEffects.put("Mean Look", new RaiseStats(1, new StatsType[]{StatsType.SpecialDefence}));
+         statusEffects.put("Meditate", new RaiseStats(1, new StatsType[]{StatsType.Attack}));
+         statusEffects.put("Me First", new RaiseStats(2, new StatsType[]{StatsType.Speed}));
+-        statusEffects.put("Memento", (Object)null);
++        statusEffects.put("Memento", null);
+         statusEffects.put("Metal Sound", new RaiseStats(1, new StatsType[]{StatsType.SpecialAttack}));
+-        statusEffects.put("Metronome", (Object)null);
++        statusEffects.put("Metronome", null);
+         statusEffects.put("Milk Drink", new ResetStats());
+         statusEffects.put("Mimic", new RaiseStats(1, new StatsType[]{StatsType.Accuracy}));
+         statusEffects.put("Mind Reader", new RaiseStats(1, new StatsType[]{StatsType.SpecialAttack}));
+@@ -493,12 +494,12 @@
+         statusEffects.put("Morning Sun", new ResetStats());
+         statusEffects.put("Mud Sport", new RaiseStats(1, new StatsType[]{StatsType.SpecialDefence}));
+         statusEffects.put("Nasty Plot", new ResetStats());
+-        statusEffects.put("Nature Power", (Object)null);
++        statusEffects.put("Nature Power", null);
+         statusEffects.put("Nightmare", new RaiseStats(1, new StatsType[]{StatsType.SpecialAttack}));
+         statusEffects.put("Noble Roar", new RaiseStats(1, new StatsType[]{StatsType.Defence}));
+         statusEffects.put("Odor Sleuth", new RaiseStats(1, new StatsType[]{StatsType.Attack}));
+         statusEffects.put("Pain Split", new RaiseStats(1, new StatsType[]{StatsType.Defence}));
+-        statusEffects.put("Parting Shot", (Object)null);
++        statusEffects.put("Parting Shot", null);
+         statusEffects.put("Perish Song", new ResetStats());
+         statusEffects.put("Play Nice", new RaiseStats(1, new StatsType[]{StatsType.Defence}));
+         statusEffects.put("Poison Gas", new RaiseStats(1, new StatsType[]{StatsType.Defence}));

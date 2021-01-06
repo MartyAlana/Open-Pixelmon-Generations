@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemRotomCatalog.java
++++ b/com/pixelmongenerations/common/item/ItemRotomCatalog.java
+@@ -12,7 +12,7 @@
+         this.setMaxStackSize(1);
+         this.setMaxDamage(full);
+         this.setDamage(new ItemStack(this), 0);
+-        this.setTranslationKey("rotom_catalog");
++        this.setUnlocalizedName("rotom_catalog");
+         this.setRegistryName("rotom_catalog");
+     }
+ }

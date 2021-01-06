@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/event/ForgeListener.java
++++ b/com/pixelmongenerations/core/event/ForgeListener.java
+@@ -301,7 +301,7 @@
+         TileEntity tileEntity = world.getTileEntity(blockPos);
+         if (!world.isRemote && !itemStack.isEmpty() && block instanceof BlockShrine) {
+             Item usedItem = itemStack.getItem();
+-            String registryId = usedItem.getRegistryName().getPath();
++            String registryId = usedItem.getRegistryName().getResourcePath();
+             if (block == PixelmonBlocks.regiceShrine && registryId.startsWith("shattered_ice_key")) {
+                 ChatHandler.sendChat(player, "pixelmon.shattered_ice_key_1.right_click");
+             }

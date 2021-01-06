@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/battle/rules/clauses/AbilityClause.java
++++ b/com/pixelmongenerations/common/battle/rules/clauses/AbilityClause.java
+@@ -27,7 +27,7 @@
+             ItemMegaStone megaStone = (ItemMegaStone)heldItem;
+             Optional<BaseStats> megaStats = Entity3HasStats.getBaseStats(species, megaStone.form);
+             if (megaStats.isPresent()) {
+-                AbilityBase megaAbility = (AbilityBase)AbilityBase.getAbility(((BaseStats)megaStats.get()).abilities[0]).orElse((Object)null);
++                AbilityBase megaAbility = (AbilityBase)AbilityBase.getAbility(((BaseStats)megaStats.get()).abilities[0]).orElse(null);
+                 Class<?> megaAbilityClass = megaAbility == null ? null : megaAbility.getClass();
+                 if (ArrayHelper.contains(this.abilities, megaAbilityClass)) {
+                     return false;

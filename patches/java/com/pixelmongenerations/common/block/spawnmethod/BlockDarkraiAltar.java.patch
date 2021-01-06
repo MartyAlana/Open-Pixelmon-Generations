@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/spawnmethod/BlockDarkraiAltar.java
++++ b/com/pixelmongenerations/common/block/spawnmethod/BlockDarkraiAltar.java
+@@ -11,7 +11,7 @@
+ 
+ public class BlockDarkraiAltar extends BlockShrine {
+     public BlockDarkraiAltar() {
+-        this.setTranslationKey("darkrai_altar");
++        this.setUnlocalizedName("darkrai_altar");
+         this.setBlockUnbreakable();
+     }
+ 

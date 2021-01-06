@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/event/LootTableInjector.java
++++ b/com/pixelmongenerations/core/event/LootTableInjector.java
+@@ -27,7 +27,7 @@
+     @SubscribeEvent
+     public void lootTableLoaded(LootTableLoadEvent event) {
+         ResourceLocation poolName = event.getName();
+-        String injectTablePath = "inject/" + poolName.getNamespace() + "/" + poolName.getPath();
++        String injectTablePath = "inject/" + poolName.getNamespace() + "/" + poolName.getResourcePath();
+         if (LOOT_TABLES.contains(injectTablePath)) {
+             LootTable injectTable = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation("pixelmon", injectTablePath));
+             LootPool pool = injectTable.getPool("inject");

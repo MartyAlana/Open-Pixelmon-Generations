@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/block/BlockUltraChest.java
++++ b/com/pixelmongenerations/common/block/BlockUltraChest.java
+@@ -7,6 +7,6 @@
+     public BlockUltraChest() {
+         super(TileEntityPokeChest.class);
+         this.TYPE = EnumPokeChestType.ULTRABALL;
+-        this.setTranslationKey("ultrachest");
++        this.setUnlocalizedName("ultrachest");
+     }
+ }

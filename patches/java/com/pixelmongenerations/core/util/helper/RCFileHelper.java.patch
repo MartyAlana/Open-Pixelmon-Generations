@@ -1,0 +1,24 @@
+--- a/com/pixelmongenerations/core/util/helper/RCFileHelper.java
++++ b/com/pixelmongenerations/core/util/helper/RCFileHelper.java
+@@ -44,18 +44,18 @@
+             try {
+                 fs22 = FileSystems.getFileSystem(fileURI);
+                 if (fs22.isOpen()) {
+-                    return fs22.getPath(entryName);
++                    return fs22.getResourcePath(entryName);
+                 }
+             } catch (FileSystemNotFoundException var9) {
+             }
+ 
+             fs22 = FileSystems.newFileSystem(fileURI, Collections.emptyMap());
+-            return fs22.getPath(entryName);
++            return fs22.getResourcePath(entryName);
+         }
+     }
+ 
+     public static Path pathFromResourceLocation(ResourceLocation resourceLocation) throws URISyntaxException, IOException {
+-        URL resource = RCFileHelper.class.getResource(String.format("/assets/%s/%s", resourceLocation.getNamespace(), resourceLocation.getPath()));
++        URL resource = RCFileHelper.class.getResource(String.format("/assets/%s/%s", resourceLocation.getNamespace(), resourceLocation.getResourcePath()));
+         return resource != null ? resourceToPath(resource.toURI().toURL()) : null;
+     }
+ 

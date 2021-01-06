@@ -1,0 +1,16 @@
+--- a/com/pixelmongenerations/core/proxy/CommonProxy.java
++++ b/com/pixelmongenerations/core/proxy/CommonProxy.java
+@@ -314,11 +314,11 @@
+     }
+ 
+     public boolean resourceLocationExists(ResourceLocation resourceLocation) {
+-        return Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getPath()) != null;
++        return Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getResourcePath()) != null;
+     }
+ 
+     public BufferedInputStream getStreamForResourceLocation(ResourceLocation resourceLocation) {
+-        return new BufferedInputStream(Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getPath()));
++        return new BufferedInputStream(Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getResourcePath()));
+     }
+ 
+     public void fixModelDefs() {

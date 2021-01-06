@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/GymSignBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/GymSignBlock.java
+@@ -30,7 +30,7 @@
+         super(Material.IRON);
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.METAL);
+-        this.setTranslationKey("GymSign");
++        this.setUnlocalizedName("GymSign");
+     }
+ 
+     public TileEntity createNewTileEntity(World worldIn, int meta) {

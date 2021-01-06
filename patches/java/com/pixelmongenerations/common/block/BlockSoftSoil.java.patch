@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockSoftSoil.java
++++ b/com/pixelmongenerations/common/block/BlockSoftSoil.java
+@@ -21,7 +21,7 @@
+ 
+     public BlockSoftSoil(String name) {
+         super(Material.GROUND);
+-        this.setTranslationKey(name);
++        this.setUnlocalizedName(name);
+         this.setSound(SoundType.GROUND);
+         this.setCreativeTab(PixelmonCreativeTabs.buildingBlocks);
+     }

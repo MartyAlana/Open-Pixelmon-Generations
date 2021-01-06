@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockCelestialAltar.java
++++ b/com/pixelmongenerations/common/block/machines/BlockCelestialAltar.java
+@@ -31,7 +31,7 @@
+         this.setTickRandomly(true);
+         this.setBlockUnbreakable();
+         this.setResistance(6000000.0F);
+-        this.setTranslationKey("celestial_altar");
++        this.setUnlocalizedName("celestial_altar");
+         this.setDefaultState(this.blockState.getBaseState());
+         this.setCreativeTab(PixelmonCreativeTabs.shrines);
+     }

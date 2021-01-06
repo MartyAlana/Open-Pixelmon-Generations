@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/externalMoves/MegaEvolution.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/externalMoves/MegaEvolution.java
+@@ -23,7 +23,7 @@
+ 
+     public boolean execute(EntityPixelmon user, RayTraceResult target, int moveIndex) {
+         if (user.getOwner() != null && !user.isMega && !user.isPrimal && !user.isUltra && !user.isAsh) {
+-            PlayerStorage storage = (PlayerStorage)user.getStorage().orElse((Object)null);
++            PlayerStorage storage = (PlayerStorage)user.getStorage().orElse(null);
+             if (storage == null) {
+                 return false;
+             }

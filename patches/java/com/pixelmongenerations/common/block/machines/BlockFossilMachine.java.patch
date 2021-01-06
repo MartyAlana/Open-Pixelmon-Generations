@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockFossilMachine.java
++++ b/com/pixelmongenerations/common/block/machines/BlockFossilMachine.java
+@@ -42,7 +42,7 @@
+     public BlockFossilMachine() {
+         super(Material.IRON, 1, 2.0D, 1);
+         this.setHardness(1.0F);
+-        this.setTranslationKey("fossilmachine");
++        this.setUnlocalizedName("fossilmachine");
+     }
+ 
+     public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {

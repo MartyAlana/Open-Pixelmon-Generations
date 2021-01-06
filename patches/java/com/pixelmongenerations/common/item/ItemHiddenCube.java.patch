@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemHiddenCube.java
++++ b/com/pixelmongenerations/common/item/ItemHiddenCube.java
+@@ -7,7 +7,7 @@
+ public class ItemHiddenCube extends ItemBlock {
+     public ItemHiddenCube() {
+         super(PixelmonBlocks.hiddenCube);
+-        this.setTranslationKey("hidden_cube");
++        this.setUnlocalizedName("hidden_cube");
+         this.setMaxStackSize(16);
+         this.setCreativeTab(PixelmonCreativeTabs.utilityBlocks);
+     }

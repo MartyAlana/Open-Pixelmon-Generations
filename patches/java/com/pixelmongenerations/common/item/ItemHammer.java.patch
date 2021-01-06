@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/common/item/ItemHammer.java
++++ b/com/pixelmongenerations/common/item/ItemHammer.java
+@@ -31,7 +31,7 @@
+ 
+     public ItemHammer(ToolMaterial material, String itemName) {
+         super(2.0F, 1.0F, material, effectiveBlocks);
+-        this.setTranslationKey(itemName);
++        this.setUnlocalizedName(itemName);
+         this.setRegistryName(itemName);
+     }
+ 
+@@ -96,7 +96,7 @@
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getTranslationKey());
++        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getUnlocalizedName());
+         if (!info.startsWith("gui.shopkeeper.")) {
+             if (GuiScreen.isShiftKeyDown()) {
+                 tooltip.add(info);

@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/core/command/PokeParticleTint.java
++++ b/com/pixelmongenerations/core/command/PokeParticleTint.java
+@@ -105,7 +105,7 @@
+             if (tagCompound != null) {
+                 int[] id = PixelmonMethods.getID(tagCompound);
+                 if (storage.isEgg(id)) {
+-                    return Optional.ofNullable((Object)null);
++                    return Optional.ofNullable(null);
+                 }
+ 
+                 EntityPixelmon entity = (EntityPixelmon)PixelmonEntityList.createEntityFromNBT(tagCompound, world);
+@@ -113,7 +113,7 @@
+             }
+         }
+ 
+-        return Optional.ofNullable((Object)null);
++        return Optional.ofNullable(null);
+     }
+ 
+     public static void updatePartyPokemon(PlayerStorage storage, EntityPixelmon pixelmon) {

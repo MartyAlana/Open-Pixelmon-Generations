@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockHealer.java
++++ b/com/pixelmongenerations/common/block/machines/BlockHealer.java
+@@ -35,7 +35,7 @@
+         super(Material.ROCK);
+         this.setHardness(3.5F);
+         this.setSoundType(SoundType.STONE);
+-        this.setTranslationKey("healer");
++        this.setUnlocalizedName("healer");
+         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.EAST));
+     }
+ 

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockZygardeMachine.java
++++ b/com/pixelmongenerations/common/block/BlockZygardeMachine.java
+@@ -18,7 +18,7 @@
+     public BlockZygardeMachine() {
+         super(Material.ROCK);
+         this.setHardness(2.5F);
+-        this.setTranslationKey("zygardemachine");
++        this.setUnlocalizedName("zygardemachine");
+     }
+ 
+     public boolean isOpaqueCube(IBlockState state) {

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/network/packetHandlers/ReplaceMove.java
++++ b/com/pixelmongenerations/core/network/packetHandlers/ReplaceMove.java
+@@ -79,7 +79,7 @@
+                     Optional optstorage;
+                     if (pokemon == null && (optstorage = PixelmonStorage.pokeBallManager.getPlayerStorage(player)).isPresent()) {
+                         PlayerStorage storage = (PlayerStorage)optstorage.get();
+-                        EntityPixelmon p = (EntityPixelmon)storage.getAlreadyExists(message.pokemonId, player.world).orElse((Object)null);
++                        EntityPixelmon p = (EntityPixelmon)storage.getAlreadyExists(message.pokemonId, player.world).orElse(null);
+                         if (p == null) {
+                             nbt = storage.getNBT(message.pokemonId);
+                             if (nbt == null) {

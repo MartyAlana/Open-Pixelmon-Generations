@@ -1,0 +1,14 @@
+--- a/com/pixelmongenerations/common/battle/rules/teamselection/ParticipantSelection.java
++++ b/com/pixelmongenerations/common/battle/rules/teamselection/ParticipantSelection.java
+@@ -30,9 +30,9 @@
+         int s = selection.length;
+ 
+         for(int var5 = 0; var5 < s; ++var5) {
+-            int s = var3[var5];
++            s = var3[var5];
+             if (s > -1) {
+-                team.add((Object)null);
++                team.add(null);
+             }
+         }
+ 

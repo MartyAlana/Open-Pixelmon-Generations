@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/ai/AIWander.java
++++ b/com/pixelmongenerations/common/entity/ai/AIWander.java
+@@ -109,7 +109,7 @@
+         if (this.entity instanceof EntityPixelmon) {
+             EntityPixelmon p = (EntityPixelmon)this.entity;
+             if (p.blockOwner != null && this.shouldContinueExecuting()) {
+-                Path path = p.getNavigator().getPath();
++                Path path = p.getNavigator().getResourcePath();
+                 int length = path.getCurrentPathLength();
+ 
+                 for(int i = 0; i < length; ++i) {

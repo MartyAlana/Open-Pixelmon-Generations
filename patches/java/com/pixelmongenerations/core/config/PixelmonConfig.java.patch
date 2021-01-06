@@ -15,3 +15,45 @@
  import java.io.File;
  import java.io.IOException;
  import java.lang.reflect.Field;
+@@ -939,28 +939,28 @@
+         try {
+             Class<?> type = field.getType();
+             if (type == Boolean.TYPE) {
+-                boolean value = configNode.getBoolean(field.getBoolean((Object)null));
+-                field.setBoolean((Object)null, value);
++                boolean value = configNode.getBoolean(field.getBoolean(null));
++                field.setBoolean(null, value);
+             } else if (type == Integer.TYPE) {
+-                int value = configNode.getInt(field.getInt((Object)null));
++                int value = configNode.getInt(field.getInt(null));
+                 value = (double)value < node.minValue() ? (int)node.minValue() : ((double)value > node.maxValue() ? (int)node.maxValue() : value);
+-                field.setInt((Object)null, value);
++                field.setInt(null, value);
+             } else if (type == Float.TYPE) {
+-                float value = configNode.getFloat(field.getFloat((Object)null));
++                float value = configNode.getFloat(field.getFloat(null));
+                 value = (double)value < node.minValue() ? (float)node.minValue() : ((double)value > node.maxValue() ? (float)node.maxValue() : value);
+-                field.setFloat((Object)null, value);
++                field.setFloat(null, value);
+             } else if (type == Double.TYPE) {
+-                double value = configNode.getDouble(field.getDouble((Object)null));
++                double value = configNode.getDouble(field.getDouble(null));
+                 value = value < node.minValue() ? node.minValue() : (value > node.maxValue() ? node.maxValue() : value);
+-                field.setDouble((Object)null, value);
++                field.setDouble(null, value);
+             } else if (type == String.class) {
+-                String value = configNode.getString((String)field.get((Object)null));
+-                field.set((Object)null, value);
++                String value = configNode.getString((String)field.get(null));
++                field.set(null, value);
+             } else if (type == List.class) {
+-                List value = configNode.getList(TypeToken.of(node.type()), (List)field.get((Object)null));
+-                field.set((Object)null, value);
++                List value = configNode.getList(TypeToken.of(node.type()), (List)field.get(null));
++                field.set(null, value);
+             } else if (Enum.class.isAssignableFrom(type)) {
+-                field.set((Object)null, type.getEnumConstants()[configNode.getInt(((Enum)field.get((Object)null)).ordinal())]);
++                field.set(null, type.getEnumConstants()[configNode.getInt(((Enum)field.get(null)).ordinal())]);
+             } else {
+                 Pixelmon.LOGGER.error("Cannot read config value " + configNode.getKey());
+             }

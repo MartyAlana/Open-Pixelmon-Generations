@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/spawnmethod/BlockBirdShrine.java
++++ b/com/pixelmongenerations/common/block/spawnmethod/BlockBirdShrine.java
+@@ -25,7 +25,7 @@
+     private EnumSpecies species;
+ 
+     public BlockBirdShrine(String name, EnumSpecies species) {
+-        this.setTranslationKey(name);
++        this.setUnlocalizedName(name);
+         this.species = species;
+         this.setDefaultState(this.getBlockState().getBaseState().withProperty(USED, EnumUsed.NO));
+     }

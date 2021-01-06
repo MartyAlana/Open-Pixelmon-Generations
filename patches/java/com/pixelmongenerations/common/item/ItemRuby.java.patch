@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemRuby.java
++++ b/com/pixelmongenerations/common/item/ItemRuby.java
+@@ -71,7 +71,7 @@
+         return false;
+     }
+ 
+-    public String getTranslationKey(ItemStack stack) {
++    public String getUnlocalizedName(ItemStack stack) {
+         if (stack.getItemDamage() == 1) {
+             return "item.ruby_uxie";
+         } else if (stack.getItemDamage() == 2) {

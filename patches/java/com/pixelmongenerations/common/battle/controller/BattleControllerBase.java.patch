@@ -1,0 +1,94 @@
+--- a/com/pixelmongenerations/common/battle/controller/BattleControllerBase.java
++++ b/com/pixelmongenerations/common/battle/controller/BattleControllerBase.java
+@@ -155,9 +155,8 @@
+             this.participants.add(p);
+         }
+ 
+-        Iterator var8 = this.participants.iterator();
++        Iterator<BattleParticipant> var8 = this.participants.iterator();
+ 
+-        BattleParticipant p;
+         PlayerStorage storage;
+         do {
+             if (!var8.hasNext()) {
+@@ -214,14 +213,13 @@
+ 
+                         var7 = this.participants.iterator();
+ 
+-                        BattleParticipant p;
+                         while(var7.hasNext()) {
+                             p = (BattleParticipant)var7.next();
+                             p.updateOtherPokemon();
+                             Iterator var11 = p.controlledPokemon.iterator();
+ 
+                             while(var11.hasNext()) {
+-                                PixelmonWrapper pw = (PixelmonWrapper)var11.next();
++                                pw = (PixelmonWrapper)var11.next();
+                                 pw.addAttackers();
+                             }
+                         }
+@@ -273,16 +271,18 @@
+                         pokemon.getEntityData().removeTag("SynchronizedNature");
+                     }
+ 
++                    EntityPixelmon finalPokemon = pokemon;
++                    BattleParticipant finalP = p;
+                     this.participants.stream().filter((part) -> {
+-                        return part != p && part instanceof PlayerParticipant;
++                        return part != finalP && part instanceof PlayerParticipant;
+                     }).forEach((part) -> {
+                         if (part.controlledPokemon.get(0) != null) {
+                             PixelmonWrapper leadingPokemon = (PixelmonWrapper)part.controlledPokemon.get(0);
+                             if (leadingPokemon.getBattleAbility() instanceof Synchronize) {
+-                                pokemon.getEntityData().setInteger("SynchronizedNature", leadingPokemon.getNature().index);
+-                                pokemon.setNature(leadingPokemon.getNature());
+-                                pokemon.setPseudoNature(leadingPokemon.getNature());
+-                                this.sendToAll("pixelmon.abilities.syncrhonize", pokemon.getNickname(), leadingPokemon.getNickname());
++                                finalPokemon.getEntityData().setInteger("SynchronizedNature", leadingPokemon.getNature().index);
++                                finalPokemon.setNature(leadingPokemon.getNature());
++                                finalPokemon.setPseudoNature(leadingPokemon.getNature());
++                                this.sendToAll("pixelmon.abilities.syncrhonize", finalPokemon.getNickname(), leadingPokemon.getNickname());
+                             }
+                         }
+ 
+@@ -417,7 +417,7 @@
+ 
+                                     label155:
+                                     while(var15.hasNext()) {
+-                                        BattleParticipant p = (BattleParticipant)var15.next();
++                                        p = (BattleParticipant)var15.next();
+                                         var6 = p.controlledPokemon.iterator();
+ 
+                                         while(true) {
+@@ -719,7 +719,6 @@
+                 }
+             }
+ 
+-            int oldPosition = false;
+             int newPosition = 0;
+ 
+             do {
+@@ -939,7 +938,6 @@
+                     int opponentParticipants = 0;
+ 
+                     Iterator var13;
+-                    BattleParticipant enemyp;
+                     for(var13 = this.getTeam(p).iterator(); var13.hasNext(); ++allyParticipants) {
+                         enemyp = (BattleParticipant)var13.next();
+                         allyPercent += enemyp.countHealthPercent();
+@@ -1276,11 +1274,12 @@
+                         Experience.awardExp(this.participants, p, poke);
+                         poke.hasAwardedExp = true;
+                         if (p instanceof WildPixelmonParticipant && this.participants.size() == 2) {
++                            BattleParticipant finalP = p;
+                             this.participants.stream().filter((part) -> {
+-                                return part != p && part instanceof PlayerParticipant;
++                                return part != finalP && part instanceof PlayerParticipant;
+                             }).forEach((part) -> {
+-                                MinecraftForge.EVENT_BUS.post(new BeatWildPixelmonEvent(((PlayerParticipant)part).player, (WildPixelmonParticipant)p));
+-                                ((PlayerParticipant)part).checkPlayerItems(p.allPokemon[0]);
++                                MinecraftForge.EVENT_BUS.post(new BeatWildPixelmonEvent(((PlayerParticipant)part).player, (WildPixelmonParticipant)finalP));
++                                ((PlayerParticipant)part).checkPlayerItems(finalP.allPokemon[0]);
+                             });
+                         }
+                     }

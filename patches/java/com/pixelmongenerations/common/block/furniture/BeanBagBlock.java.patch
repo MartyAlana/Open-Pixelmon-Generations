@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/BeanBagBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/BeanBagBlock.java
+@@ -21,7 +21,7 @@
+     public BeanBagBlock() {
+         super(Material.WOOD);
+         this.setSoundType(SoundType.WOOD);
+-        this.setTranslationKey("bean_bag");
++        this.setUnlocalizedName("bean_bag");
+     }
+ 
+     public TileEntity createNewTileEntity(World worldIn, int meta) {

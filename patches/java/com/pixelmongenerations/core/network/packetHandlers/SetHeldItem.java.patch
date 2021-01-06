@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/network/packetHandlers/SetHeldItem.java
++++ b/com/pixelmongenerations/core/network/packetHandlers/SetHeldItem.java
+@@ -147,7 +147,7 @@
+         }
+ 
+         public boolean isCorrectMegaItem(EntityPixelmon user, ItemHeld heldItem) {
+-            PlayerStorage storage = (PlayerStorage)user.getStorage().orElse((Object)null);
++            PlayerStorage storage = (PlayerStorage)user.getStorage().orElse(null);
+             if (storage == null) {
+                 return false;
+             } else {

@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/battle/status/StatusPersist.java
++++ b/com/pixelmongenerations/common/battle/status/StatusPersist.java
+@@ -20,7 +20,6 @@
+ 
+     public static StatusPersist readStatusFromNBT(NBTTagCompound nbt) {
+         StatusPersist status = NoStatus.noStatus;
+-        int statusCount = false;
+         if (!nbt.hasKey("Status")) {
+             if (nbt.hasKey("StatusCount")) {
+                 int statusCount = nbt.getShort("StatusCount");

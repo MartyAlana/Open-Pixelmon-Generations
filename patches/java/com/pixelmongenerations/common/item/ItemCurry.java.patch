@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/ItemCurry.java
++++ b/com/pixelmongenerations/common/item/ItemCurry.java
+@@ -40,7 +40,7 @@
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.format("gui.shopkeeper." + this.getTranslationKey(), new Object[0]);
++        String info = I18n.format("gui.shopkeeper." + this.getUnlocalizedName(), new Object[0]);
+         if (!this.hasHideFlag(stack) && !info.startsWith("gui.shopkeeper.")) {
+             if (GuiScreen.isShiftKeyDown()) {
+                 tooltip.add(info);

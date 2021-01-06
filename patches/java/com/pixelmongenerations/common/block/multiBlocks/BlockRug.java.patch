@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/multiBlocks/BlockRug.java
++++ b/com/pixelmongenerations/common/block/multiBlocks/BlockRug.java
+@@ -26,7 +26,7 @@
+         this.color = type;
+         this.setHardness(0.5F);
+         this.setSoundType(SoundType.CLOTH);
+-        this.setTranslationKey(type + "Rug");
++        this.setUnlocalizedName(type + "Rug");
+     }
+ 
+     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/gui/npc/GuiTradeYesNo.java
++++ b/com/pixelmongenerations/client/gui/npc/GuiTradeYesNo.java
+@@ -31,7 +31,7 @@
+     }
+ 
+     public GuiTradeYesNo(int traderId) {
+-        this(-1, (NPCTrader)EntityNPC.locateNPCClient(Minecraft.getMinecraft().world, traderId, NPCTrader.class).orElse((Object)null));
++        this(-1, (NPCTrader)EntityNPC.locateNPCClient(Minecraft.getMinecraft().world, traderId, NPCTrader.class).orElse(null));
+     }
+ 
+     public void updateScreen() {

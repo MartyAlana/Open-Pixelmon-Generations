@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/ranch/BlockRanchBlock.java
++++ b/com/pixelmongenerations/common/block/ranch/BlockRanchBlock.java
+@@ -39,7 +39,7 @@
+         super(Material.ROCK, 1, 2.0D, 1);
+         this.setHardness(2.5F);
+         this.setSoundType(SoundType.STONE);
+-        this.setTranslationKey("ranchblock");
++        this.setUnlocalizedName("ranchblock");
+         this.setHarvestLevel("pickaxe", 1);
+     }
+ 

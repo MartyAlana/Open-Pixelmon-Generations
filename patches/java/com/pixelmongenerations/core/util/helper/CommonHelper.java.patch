@@ -1,0 +1,29 @@
+--- a/com/pixelmongenerations/core/util/helper/CommonHelper.java
++++ b/com/pixelmongenerations/core/util/helper/CommonHelper.java
+@@ -23,7 +23,7 @@
+ 
+     public static void ensureIndex(ArrayList a, int i) {
+         while(a.size() <= i) {
+-            a.add((Object)null);
++            a.add(null);
+         }
+ 
+     }
+@@ -38,7 +38,7 @@
+     }
+ 
+     public static <T> void insert(ArrayList<T> a, T value) {
+-        int nullIndex = a.indexOf((Object)null);
++        int nullIndex = a.indexOf(null);
+         if (nullIndex == -1) {
+             a.add(value);
+         } else {
+@@ -167,7 +167,7 @@
+ 
+     public static <V> V getIgnoreCase(Map<String, V> map, String key) {
+         if (key == null) {
+-            return map.get((Object)null);
++            return map.get(null);
+         } else {
+             Iterator var2 = map.entrySet().iterator();
+ 

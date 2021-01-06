@@ -1,0 +1,28 @@
+--- a/com/pixelmongenerations/common/battle/controller/CalcPriority.java
++++ b/com/pixelmongenerations/common/battle/controller/CalcPriority.java
+@@ -5,6 +5,8 @@
+ import com.pixelmongenerations.common.battle.controller.participants.ParticipantType;
+ import com.pixelmongenerations.common.battle.controller.participants.PixelmonWrapper;
+ import com.pixelmongenerations.common.battle.status.GrassyTerrain;
++import net.minecraft.entity.player.EntityPlayerMP;
++
+ import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.Iterator;
+@@ -57,14 +59,14 @@
+     }
+ 
+     public static void recalculateMoveSpeed(BattleControllerBase bc, int turn) {
+-        ArrayList toMove = new ArrayList();
++        ArrayList<PixelmonWrapper> toMove = new ArrayList();
+ 
+         while(bc.turnList.size() > turn) {
+             toMove.add(bc.turnList.remove(turn));
+         }
+ 
+         sortByMoveSpeed(bc, toMove);
+-        bc.turnList.addAll((Collection)toMove.stream().filter((p) -> {
++        bc.turnList.addAll(toMove.stream().filter((p) -> {
+             return p.isAlive();
+         }).collect(Collectors.toList()));
+     }

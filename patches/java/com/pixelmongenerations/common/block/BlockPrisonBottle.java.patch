@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockPrisonBottle.java
++++ b/com/pixelmongenerations/common/block/BlockPrisonBottle.java
+@@ -14,7 +14,7 @@
+     public BlockPrisonBottle() {
+         super(Material.ROCK);
+         this.setHardness(2.5F);
+-        this.setTranslationKey("prison_bottle");
++        this.setUnlocalizedName("prison_bottle");
+     }
+ 
+     public boolean isOpaqueCube(IBlockState state) {

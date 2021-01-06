@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/tileEntities/TileEntityBerryTree.java
++++ b/com/pixelmongenerations/common/block/tileEntities/TileEntityBerryTree.java
+@@ -149,7 +149,7 @@
+             TileEntityBerryTree.class.getClass();
+             var10000 = var10000.filter(TileEntityBerryTree.class::isInstance);
+             TileEntityBerryTree.class.getClass();
+-            EnumBerry b = (EnumBerry)var10000.map(TileEntityBerryTree.class::cast).map(TileEntityBerryTree::getBerry).findFirst().orElse((Object)null);
++            EnumBerry b = (EnumBerry)var10000.map(TileEntityBerryTree.class::cast).map(TileEntityBerryTree::getBerry).findFirst().orElse(null);
+             if (b != null) {
+                 EnumBerry mutationBerry = (EnumBerry)berryMutations.get(this.berry, b);
+                 if (mutationBerry == null) {

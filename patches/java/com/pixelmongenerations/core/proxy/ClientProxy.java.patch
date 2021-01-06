@@ -1,0 +1,33 @@
+--- a/com/pixelmongenerations/core/proxy/ClientProxy.java
++++ b/com/pixelmongenerations/core/proxy/ClientProxy.java
+@@ -417,8 +417,8 @@
+             field = var2[var4];
+ 
+             try {
+-                if (field.get((Object)null) instanceof Block) {
+-                    block = (Block)field.get((Object)null);
++                if (field.get(null) instanceof Block) {
++                    block = (Block)field.get(null);
+                     if (block instanceof MultiBlock || block.getRenderType(block.getDefaultState()) == EnumBlockRenderType.INVISIBLE || block instanceof GenericModelBlock || block instanceof BlockGenericModelMultiblock) {
+                         ModelLoader.setCustomStateMapper(block, pixelmonStateMapper);
+                     }
+@@ -435,8 +435,8 @@
+             field = var2[var4];
+ 
+             try {
+-                if (field.get((Object)null) instanceof Block) {
+-                    block = (Block)field.get((Object)null);
++                if (field.get(null) instanceof Block) {
++                    block = (Block)field.get(null);
+                     if (block instanceof MultiBlock || block.getRenderType(block.getDefaultState()) == EnumBlockRenderType.MODEL) {
+                         ModelLoader.setCustomStateMapper(block, pixelmonStateMapper);
+                     }
+@@ -793,7 +793,7 @@
+     }
+ 
+     public String getTextureName(ResourceLocation resourceLocation) {
+-        String[] splits = resourceLocation.getPath().split("/");
++        String[] splits = resourceLocation.getResourcePath().split("/");
+         String textureName = splits[splits.length - 1].replaceAll(".png", "");
+         return textureName;
+     }

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/world/gen/structure/util/StructureSnapshot.java
++++ b/com/pixelmongenerations/common/world/gen/structure/util/StructureSnapshot.java
+@@ -56,7 +56,7 @@
+         int id = this.ids[x][y][z];
+         BlockPos pos = new BlockPos(x, y, z);
+         StructureSnapshot.BlockState state = (StructureSnapshot.BlockState)this.idToBlock.inverse().get(id);
+-        NBTTagCompound nbt = (NBTTagCompound)this.tileEntityData.getOrDefault(pos, (Object)null);
++        NBTTagCompound nbt = (NBTTagCompound)this.tileEntityData.getOrDefault(pos, null);
+         return new PixelBlockSnapshot(new BlockPos(x, y, z), state.getBlockState(), nbt);
+     }
+ 

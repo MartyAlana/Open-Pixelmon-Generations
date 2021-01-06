@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/multiBlocks/BlockTV.java
++++ b/com/pixelmongenerations/common/block/multiBlocks/BlockTV.java
+@@ -24,7 +24,7 @@
+         super(Material.IRON, 1, 1.1D, 1);
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.METAL);
+-        this.setTranslationKey("TV");
++        this.setUnlocalizedName("TV");
+     }
+ 
+     protected AxisAlignedBB getMultiBlockBoundingBox(IBlockAccess worldIn, BlockPos pos, EnumMultiPos multiPos, EnumFacing facing) {

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/SwitchBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/SwitchBlock.java
+@@ -17,7 +17,7 @@
+         super(Material.IRON);
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.METAL);
+-        this.setTranslationKey("Switch");
++        this.setUnlocalizedName("Switch");
+     }
+ 
+     public TileEntity createNewTileEntity(World worldIn, int meta) {

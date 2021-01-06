@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/enums/EnumSpecies.java
++++ b/com/pixelmongenerations/core/enums/EnumSpecies.java
+@@ -1101,7 +1101,7 @@
+ 
+     public static EnumSpecies getFromPixelmonId(int id) {
+         BaseStats stats = PokemonRegistry.getBaseFor(id);
+-        return (EnumSpecies)getFromName(stats.pixelmonName).orElse((Object)null);
++        return (EnumSpecies)getFromName(stats.pixelmonName).orElse(null);
+     }
+ 
+     public static EnumSpecies getFromOrdinal(int ordinal) {

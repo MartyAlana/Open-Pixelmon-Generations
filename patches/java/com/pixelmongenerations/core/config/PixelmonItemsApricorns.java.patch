@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/core/config/PixelmonItemsApricorns.java
++++ b/com/pixelmongenerations/core/config/PixelmonItemsApricorns.java
+@@ -48,7 +48,7 @@
+ 
+             for(int var3 = 0; var3 < var2; ++var3) {
+                 Field field = var1[var3];
+-                Item item = (Item)field.get((Object)null);
++                Item item = (Item)field.get(null);
+                 if (item instanceof ItemApricornCooked && ((ItemApricornCooked)item).apricorn == type) {
+                     return item;
+                 }
+@@ -67,7 +67,7 @@
+ 
+             for(int var3 = 0; var3 < var2; ++var3) {
+                 Field field = var1[var3];
+-                Item item = (Item)field.get((Object)null);
++                Item item = (Item)field.get(null);
+                 if (item instanceof ItemApricorn && ((ItemApricorn)item).apricorn == type) {
+                     return item;
+                 }

@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/battle/status/EntryHazard.java
++++ b/com/pixelmongenerations/common/battle/status/EntryHazard.java
+@@ -23,7 +23,6 @@
+ 
+     protected void applyEffect(PixelmonWrapper user, PixelmonWrapper target) {
+         if (user.targetIndex == 0 || user.bc.simulateMode) {
+-            int message = false;
+             EntryHazard hazard = (EntryHazard)target.getStatus(this.type);
+             byte message;
+             if (hazard == null) {

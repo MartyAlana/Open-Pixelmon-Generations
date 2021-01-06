@@ -1,0 +1,29 @@
+--- a/com/pixelmongenerations/common/item/ItemCandyBag.java
++++ b/com/pixelmongenerations/common/item/ItemCandyBag.java
+@@ -51,7 +51,7 @@
+                         boolAddedToInventory = player.inventory.addItemStackToInventory(stack);
+                         if (!boolAddedToInventory && stack.getItemDamage() == 0) {
+                             player.dropItem(stack.getItem(), 2);
+-                            itemName = stack.getTranslationKey();
++                            itemName = stack.getUnlocalizedName();
+                             ChatHandler.sendFormattedChat(player, TextFormatting.RED, "pixelmon.drops.fullinventory", I18n.translateToLocal(itemName + ".name"));
+                         }
+                     } else if (player.getRNG().nextFloat() <= 0.3F) {
+@@ -59,7 +59,7 @@
+                         boolAddedToInventory = player.inventory.addItemStackToInventory(stack);
+                         if (!boolAddedToInventory && stack.getItemDamage() == 0) {
+                             player.dropItem(stack.getItem(), 1);
+-                            itemName = stack.getTranslationKey();
++                            itemName = stack.getUnlocalizedName();
+                             ChatHandler.sendFormattedChat(player, TextFormatting.RED, "pixelmon.drops.fullinventory", I18n.translateToLocal(itemName + ".name"));
+                         }
+                     } else {
+@@ -67,7 +67,7 @@
+                         boolAddedToInventory = player.inventory.addItemStackToInventory(stack);
+                         if (!boolAddedToInventory && stack.getItemDamage() == 0) {
+                             player.dropItem(stack.getItem(), 1);
+-                            itemName = stack.getTranslationKey();
++                            itemName = stack.getUnlocalizedName();
+                             ChatHandler.sendFormattedChat(player, TextFormatting.RED, "pixelmon.drops.fullinventory", I18n.translateToLocal(itemName + ".name"));
+                         }
+                     }

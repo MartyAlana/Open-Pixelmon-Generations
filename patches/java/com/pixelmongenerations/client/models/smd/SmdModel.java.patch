@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/models/smd/SmdModel.java
++++ b/com/pixelmongenerations/client/models/smd/SmdModel.java
+@@ -376,7 +376,7 @@
+ 
+     public void render(boolean hasChanged) {
+         boolean isPokeball = false;
+-        if (this.owner.resource.getPath().contains("pokeballs")) {
++        if (this.owner.resource.getResourcePath().contains("pokeballs")) {
+             isPokeball = true;
+         }
+ 

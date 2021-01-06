@@ -1,0 +1,102 @@
+--- a/com/pixelmongenerations/core/util/helper/ArrayHelper.java
++++ b/com/pixelmongenerations/core/util/helper/ArrayHelper.java
+@@ -3,32 +3,27 @@
+ import com.pixelmongenerations.core.util.IEncodeable;
+ import io.netty.buffer.ByteBuf;
+ import java.util.ArrayList;
+-import java.util.Iterator;
+ import java.util.List;
++import java.util.Objects;
++
+ import net.minecraftforge.fml.common.network.ByteBufUtils;
+ 
+ public class ArrayHelper {
+     public static <T> boolean contains(T[] array, T value) {
+-        if (array == null) {
+-            return false;
+-        } else {
+-            for(int i = 0; i < array.length; ++i) {
+-                if (array[i] == value || array[i] != null && value != null && array[i].equals(value)) {
++        if (array != null) {
++            for (T t : array) {
++                if (Objects.equals(t, value)) {
+                     return true;
+                 }
+             }
++        }
+ 
+             return false;
+         }
+-    }
+ 
+     public static <T> boolean arrayHasNull(T[] array) {
+         if (array != null && array.length != 0) {
+-            Object[] var1 = array;
+-            int var2 = array.length;
+-
+-            for(int var3 = 0; var3 < var2; ++var3) {
+-                T object = var1[var3];
++            for (T object : array) {
+                 if (object == null) {
+                     return true;
+                 }
+@@ -51,14 +46,10 @@
+             buffer.writeInt(0);
+         } else {
+             buffer.writeInt(array.length);
+-            IEncodeable[] var2 = array;
+-            int var3 = array.length;
+ 
+-            for(int var4 = 0; var4 < var3; ++var4) {
+-                IEncodeable encodeable = var2[var4];
++            for (IEncodeable encodeable : array) {
+                 encodeable.encodeInto(buffer);
+             }
+-
+         }
+     }
+ 
+@@ -67,10 +58,8 @@
+             buffer.writeInt(0);
+         } else {
+             buffer.writeInt(list.size());
+-            Iterator var2 = list.iterator();
+ 
+-            while(var2.hasNext()) {
+-                IEncodeable encodeable = (IEncodeable)var2.next();
++            for (IEncodeable encodeable : list) {
+                 encodeable.encodeInto(buffer);
+             }
+ 
+@@ -81,7 +70,7 @@
+         if (list == null) {
+             buffer.writeInt(0);
+         } else {
+-            encodeStringArray(buffer, (String[])list.toArray(new String[list.size()]));
++            encodeStringArray(buffer, list.toArray(new String[0]));
+         }
+     }
+ 
+@@ -90,11 +79,9 @@
+             buffer.writeInt(0);
+         } else {
+             buffer.writeInt(array.length);
+-            String[] var2 = array;
+-            int var3 = array.length;
+ 
+-            for(int var4 = 0; var4 < var3; ++var4) {
+-                String string = var2[var4];
++            for (String s : array) {
++                String string = s;
+                 if (string == null) {
+                     string = "";
+                 }
+@@ -106,7 +93,7 @@
+     }
+ 
+     public static List<String> decodeStringList(ByteBuf buffer) {
+-        ArrayList<String> list = new ArrayList();
++        ArrayList<String> list = new ArrayList<>();
+         int listLength = buffer.readInt();
+ 
+         for(int i = 0; i < listLength; ++i) {

@@ -11,10 +11,13 @@ plugins {
 version = "8.2.2"
 group = "com.pixelmongenerations"
 
-val downloadUrl = "http://download2347.mediafire.com/5v8ohsg8ceog/4kw5iwyhgmyk3zi/PixelmonGenerations-1.12.2-8.2.2-universal.jar"
 val bon2DownloadUrl = "https://ci.tterrag.com/job/BON2/lastSuccessfulBuild/artifact/build/libs/BON-2.4.0.15-all.jar"
 
 repositories {
+	maven {
+		url = uri("https://maven.fabricmc.net/")
+	}
+
 	maven {
 		url = uri("http://maven.shadowfacts.net/")
 	}
@@ -43,6 +46,7 @@ val bon2 by configurations.creating
 dependencies {
 	minecraft("net.minecraftforge", "forge", "1.12.2-14.23.5.2854")
 
+	implementation("com.github.thecodewarrior", "BinarySMD", "-SNAPSHOT")
 	implementation("org.msgpack", "msgpack-core", "0.8.17")
 	implementation("org.jetbrains", "annotations", "17.0.0")
 	implementation("com.typesafe", "config", "1.4.1")
@@ -58,7 +62,7 @@ dependencies {
 		exclude(group = "com.github.thecodewarrior")
 	}
 
-	decompiler("net.minecraftforge", "forgeflower", "1.0.342.8")
+	decompiler("com.github.fesh0r", "fernflower", "dbf407a655")
 	bon2("lastSuccessfulBuild", "BON", "2.4.0.15", classifier = "all")
 }
 
@@ -150,32 +154,21 @@ val setup by tasks.registering {
 		File(".gradle/decompiled").mkdirs()
 		File("build/decompiled").mkdirs()
 
-		logger.info("Downloading")
-
-		uri(downloadUrl).toURL().openStream().use { download ->
-			File("build/pixelmon.jar").outputStream().use { file ->
-				download.copyTo(file)
-			}
-		}
-
 		logger.info("Remapping")
 
 		javaexec {
 			main = "com.github.parker8283.bon2.BON2"
 			classpath(bon2)
-			args("--inputJar", "build/pixelmon.jar", "--outputJar", "build/pixelcrab.jar", "--mappingsVer", "1.12-snapshot_20180814")
+			args("--inputJar", "pixelmon.jar", "--outputJar", "build/pixelcrab.jar", "--mappingsVer", "1.12-snapshot_20180814")
 		}
 
 		logger.info("Decompiling")
 
-		val libraries = File.createTempFile("libraries", ".txt")
-		libraries.writeText(configurations.compileClasspath.files.joinToString("\n") { "-e=$it" })
-
 		javaexec {
 			main = "org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler"
 			classpath(decompiler)
-			args("-din=1", "-rbr=1", "-dgs=1", "-asc=1", "-rsy=1", "-iec=1", "-jvn=1", "-isl=0", "-iib=1", "-log=TRACE", "-ind=    ", "-cfg")
-			args(libraries, "build/pixelcrab.jar", "build/decompiled/")
+			args("-din=1", "-dgs=1", "-asc=1", "-rsy=1", "-log=TRACE", "-ind=    ")
+			args("build/pixelcrab.jar", "build/decompiled/")
 		}
 
 		logger.info("Copying sources")

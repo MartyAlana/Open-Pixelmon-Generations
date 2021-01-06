@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/heldItems/ItemBerry.java
++++ b/com/pixelmongenerations/common/item/heldItems/ItemBerry.java
+@@ -139,7 +139,7 @@
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.translateToLocal("gui.shopkeeper." + this.getTranslationKey());
++        String info = I18n.translateToLocal("gui.shopkeeper." + this.getUnlocalizedName());
+         if (!this.hasHideFlag(stack) && !info.startsWith("gui.shopkeeper.")) {
+             if (GuiScreen.isShiftKeyDown()) {
+                 tooltip.add(info);

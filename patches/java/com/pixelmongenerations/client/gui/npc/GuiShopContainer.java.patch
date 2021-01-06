@@ -1,0 +1,14 @@
+--- a/com/pixelmongenerations/client/gui/npc/GuiShopContainer.java
++++ b/com/pixelmongenerations/client/gui/npc/GuiShopContainer.java
+@@ -289,9 +289,9 @@
+             this.mc.renderEngine.bindTexture(new ResourceLocation("pixelmon:textures/gui/shopkeeperitemdesc.png"));
+             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+             GuiHelper.drawImageQuad((double)(this.width / 2 - 210), (double)(this.height / 2), 170.0D, 71.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+-            String locale = I18n.translateToLocal("gui.shopkeeper." + clientItem.getItemStack().getTranslationKey().toLowerCase());
++            String locale = I18n.translateToLocal("gui.shopkeeper." + clientItem.getItemStack().getUnlocalizedName().toLowerCase());
+             if (locale.contains("gui.shopkeeper")) {
+-                locale = I18n.translateToLocalFormatted("gui.shopkeeper.item.notfound", new Object[]{clientItem.getItemStack().getTranslationKey().toLowerCase()});
++                locale = I18n.translateToLocalFormatted("gui.shopkeeper.item.notfound", new Object[]{clientItem.getItemStack().getUnlocalizedName().toLowerCase()});
+             }
+ 
+             this.fontRenderer.drawSplitString(locale, this.width / 2 - 210 + 6, this.height / 2 + 6, 160, 16777215);

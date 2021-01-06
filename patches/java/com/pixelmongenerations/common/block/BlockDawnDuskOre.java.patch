@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockDawnDuskOre.java
++++ b/com/pixelmongenerations/common/block/BlockDawnDuskOre.java
+@@ -31,7 +31,7 @@
+         this.setHardness(hardness);
+         this.setSoundType(SoundType.STONE);
+         this.setTickRandomly(true);
+-        this.setTranslationKey("dawnduskore");
++        this.setUnlocalizedName("dawnduskore");
+         this.setCreativeTab(PixelmonCreativeTabs.natural);
+     }
+ 

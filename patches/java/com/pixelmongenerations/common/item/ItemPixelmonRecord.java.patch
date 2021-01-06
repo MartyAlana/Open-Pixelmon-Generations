@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/common/item/ItemPixelmonRecord.java
++++ b/com/pixelmongenerations/common/item/ItemPixelmonRecord.java
+@@ -30,7 +30,7 @@
+         super(name, record);
+         this.musicName = name;
+         this.duration = duration;
+-        this.setTranslationKey(name);
++        this.setUnlocalizedName(name);
+         this.setRegistryName("pixelmon:record_" + name);
+         this.canSpawnMeloetta = canSpawnMeloetta;
+     }
+@@ -60,7 +60,7 @@
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.translateToLocal("gui.shopkeeper." + this.getTranslationKey());
++        String info = I18n.translateToLocal("gui.shopkeeper." + this.getUnlocalizedName());
+         if (!this.hasHideFlag(stack) && !info.startsWith("gui.shopkeeper.")) {
+             tooltip.add(GuiScreen.isShiftKeyDown() ? info : "Hold shift for more info.");
+         }

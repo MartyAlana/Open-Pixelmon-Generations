@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/block/BlockMasterChest.java
++++ b/com/pixelmongenerations/common/block/BlockMasterChest.java
+@@ -7,6 +7,6 @@
+     public BlockMasterChest() {
+         super(TileEntityPokeChest.class);
+         this.TYPE = EnumPokeChestType.MASTERBALL;
+-        this.setTranslationKey("masterchest");
++        this.setUnlocalizedName("masterchest");
+     }
+ }

@@ -1,0 +1,33 @@
+--- a/com/pixelmongenerations/common/battle/rules/clauses/BattleClauseRegistry.java
++++ b/com/pixelmongenerations/common/battle/rules/clauses/BattleClauseRegistry.java
+@@ -35,10 +35,10 @@
+     public static final String SKY_BATTLE = "sky";
+     public static final String SLEEP_CLAUSE = "sleep";
+     private static int clauseVersion;
+-    private static final BattleClauseRegistry<BattleClause> clauseRegistry = new BattleClauseRegistry((id) -> {
++    private static final BattleClauseRegistry<BattleClause> clauseRegistry = new BattleClauseRegistry<>((id) -> {
+         return new BattleClause(id);
+     });
+-    private static final BattleClauseRegistry<Tier> tierRegistry = new BattleClauseRegistry((id) -> {
++    private static final BattleClauseRegistry<Tier> tierRegistry = new BattleClauseRegistry<>((id) -> {
+         return null;
+     });
+     private Function<String, T> getDefault;
+@@ -107,7 +107,7 @@
+             clause = (BattleClause)this.getDefault.apply(id);
+         }
+ 
+-        return clause;
++        return (T) clause;
+     }
+ 
+     public boolean hasClause(String id) {
+@@ -156,7 +156,7 @@
+         Iterator var3 = newClauses.iterator();
+ 
+         while(var3.hasNext()) {
+-            T clause = (BattleClause)var3.next();
++            T clause = (T) var3.next();
+             this.registerCustomClause(clause);
+         }
+ 

@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/core/database/DatabaseStats.java
++++ b/com/pixelmongenerations/core/database/DatabaseStats.java
+@@ -160,7 +160,7 @@
+ 
+                             while(var40.hasNext()) {
+                                 Biome biome = (Biome)var40.next();
+-                                if (biome.getRegistryName().getPath().toLowerCase().replaceAll("_", "").contains(biomeString)) {
++                                if (biome.getRegistryName().getResourcePath().toLowerCase().replaceAll("_", "").contains(biomeString)) {
+                                     biomes.add(biome);
+                                 }
+                             }
+@@ -171,7 +171,7 @@
+ 
+                             while(var44.hasNext()) {
+                                 Biome biome2 = (Biome)var44.next();
+-                                if (biome2.getRegistryName().getPath().toLowerCase().replaceAll("_", "").contains(biomeString)) {
++                                if (biome2.getRegistryName().getResourcePath().toLowerCase().replaceAll("_", "").contains(biomeString)) {
+                                     biomes.add(biome2);
+                                 }
+                             }

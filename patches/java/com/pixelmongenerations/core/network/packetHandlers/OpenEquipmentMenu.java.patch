@@ -1,0 +1,34 @@
+--- a/com/pixelmongenerations/core/network/packetHandlers/OpenEquipmentMenu.java
++++ b/com/pixelmongenerations/core/network/packetHandlers/OpenEquipmentMenu.java
+@@ -34,11 +34,11 @@
+                 dialogue.setName("Equipment");
+                 dialogue.column(1);
+                 dialogue.setText("What item would you like to equip or unequip?");
+-                PlayerStorage storage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
++                PlayerStorage storage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
+                 if (storage != null) {
+                     if (storage.megaData.canEquipMegaItem()) {
+                         dialogue.addChoice(new Choice(storage.megaData.getMegaItem() == EnumMegaItem.BraceletORAS ? "Unequip Mega Bracelet" : "Equip Mega Bracelet", (eventx) -> {
+-                            PlayerStorage playerStorage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
++                            PlayerStorage playerStorage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
+                             if (playerStorage.dynamaxData.getDynamaxItem() == EnumDynamaxItem.DynamaxBand) {
+                                 playerStorage.dynamaxData.setDynamaxItem(EnumDynamaxItem.None, false);
+                             }
+@@ -51,7 +51,7 @@
+ 
+                     if (storage.shinyData.canEquipShinyCharm()) {
+                         dialogue.addChoice(new Choice(storage.shinyData.getShinyItem() == EnumShinyItem.ShinyCharm ? "Unequip Shiny Charm" : "Equip Shiny Charm", (eventx) -> {
+-                            PlayerStorage playerStorage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
++                            PlayerStorage playerStorage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
+                             boolean equip = playerStorage.shinyData.getShinyItem() != EnumShinyItem.ShinyCharm;
+                             playerStorage.shinyData.setShinyItem(equip ? EnumShinyItem.ShinyCharm : EnumShinyItem.None, false);
+                             ChatHandler.sendChat(player, ChatHandler.getMessage("You " + (equip ? "equipped" : "unequipped") + " your Shiny Charm."));
+@@ -60,7 +60,7 @@
+ 
+                     if (storage.dynamaxData.canEquipDynamaxItem() && !Pixelmon.dynamaxDisabled) {
+                         dialogue.addChoice(new Choice(storage.dynamaxData.getDynamaxItem() == EnumDynamaxItem.DynamaxBand ? "Unequip Dynamax Band" : "Equip Dynamax Band", (eventx) -> {
+-                            PlayerStorage playerStorage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
++                            PlayerStorage playerStorage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
+                             if (playerStorage.megaData.getMegaItem() == EnumMegaItem.BraceletORAS) {
+                                 playerStorage.megaData.setMegaItem(EnumMegaItem.None, false);
+                             }

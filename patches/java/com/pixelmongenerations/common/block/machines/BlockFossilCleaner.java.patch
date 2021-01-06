@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockFossilCleaner.java
++++ b/com/pixelmongenerations/common/block/machines/BlockFossilCleaner.java
+@@ -28,7 +28,7 @@
+         super(Material.IRON, 1, 1.0D, 1);
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.STONE);
+-        this.setTranslationKey("fossilcleaner");
++        this.setUnlocalizedName("fossilcleaner");
+     }
+ 
+     public Item getDroppedItem(World world, BlockPos pos) {

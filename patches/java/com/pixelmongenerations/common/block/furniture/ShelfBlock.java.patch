@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/furniture/ShelfBlock.java
++++ b/com/pixelmongenerations/common/block/furniture/ShelfBlock.java
+@@ -20,7 +20,7 @@
+         super(Material.IRON, 3, 1.0D, 1);
+         this.setHardness(1.0F);
+         this.setSoundType(SoundType.METAL);
+-        this.setTranslationKey("shelf");
++        this.setUnlocalizedName("shelf");
+     }
+ 
+     protected Optional<TileEntity> getTileEntity(World var1, IBlockState var2) {

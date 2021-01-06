@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/client/render/tileEntities/RenderTileEntityApricornTrees.java
++++ b/com/pixelmongenerations/client/render/tileEntities/RenderTileEntityApricornTrees.java
+@@ -22,7 +22,7 @@
+             try {
+                 this.bindTexture(TEXTURES[tile.tree.ordinal()]);
+             } catch (NullPointerException var13) {
+-                Pixelmon.LOGGER.error("Can't find texture: " + TEXTURES[tile.tree.ordinal()].getPath());
++                Pixelmon.LOGGER.error("Can't find texture: " + TEXTURES[tile.tree.ordinal()].getResourcePath());
+                 return;
+             } catch (ArrayIndexOutOfBoundsException var14) {
+                 Pixelmon.LOGGER.error("Bad apricorn tree ordinal: " + tile.tree.ordinal());
+@@ -66,7 +66,7 @@
+                         this.obj = ObjLoader.loadModel(this.path);
+                     }
+                 } catch (Exception var2) {
+-                    System.out.println("Could not load the model: " + this.path.getPath());
++                    System.out.println("Could not load the model: " + this.path.getResourcePath());
+                     var2.printStackTrace();
+                 }
+             }

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/stats/evolution/conditions/PartyCondition.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/stats/evolution/conditions/PartyCondition.java
+@@ -42,7 +42,7 @@
+     }
+ 
+     public boolean passes(EntityPixelmon pokemon) {
+-        PlayerStorage storage = (PlayerStorage)pokemon.getStorage().orElse((Object)null);
++        PlayerStorage storage = (PlayerStorage)pokemon.getStorage().orElse(null);
+         if (storage != null) {
+             NBTTagCompound[] var3 = storage.partyPokemon;
+             int var4 = var3.length;

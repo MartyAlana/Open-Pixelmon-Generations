@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/common/block/MultiBlock.java
++++ b/com/pixelmongenerations/common/block/MultiBlock.java
+@@ -51,7 +51,7 @@
+     }
+ 
+     public IBlockState getStateFromMeta(int meta) {
+-        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(MULTIPOS, EnumMultiPos.fromMeta((meta & 15) >> 2));
++        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(MULTIPOS, EnumMultiPos.fromMeta((meta & 15) >> 2));
+     }
+ 
+     public IBlockState withRotation(IBlockState state, Rotation rot) {
+@@ -141,7 +141,7 @@
+     }
+ 
+     public TileEntity createTileEntity(World world, IBlockState state) {
+-        return state.getValue(MULTIPOS) == EnumMultiPos.BASE ? (TileEntity)this.getTileEntity(world, state).orElse((Object)null) : null;
++        return state.getValue(MULTIPOS) == EnumMultiPos.BASE ? (TileEntity)this.getTileEntity(world, state).orElse(null) : null;
+     }
+ 
+     protected abstract Optional<TileEntity> getTileEntity(World var1, IBlockState var2);

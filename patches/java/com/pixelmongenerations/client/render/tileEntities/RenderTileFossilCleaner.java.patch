@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/render/tileEntities/RenderTileFossilCleaner.java
++++ b/com/pixelmongenerations/client/render/tileEntities/RenderTileFossilCleaner.java
+@@ -122,7 +122,7 @@
+                     this.bindTexture(fossil.getFossil().getTexture());
+                     fossilModel = (BlockModelHolder)fossil.getFossil().getModel();
+                 } else {
+-                    Pixelmon.LOGGER.warn("Unrecognised item type in Fossil cleaner: " + itemInside.getTranslationKey());
++                    Pixelmon.LOGGER.warn("Unrecognised item type in Fossil cleaner: " + itemInside.getUnlocalizedName());
+                 }
+ 
+                 if (fossilModel != null) {

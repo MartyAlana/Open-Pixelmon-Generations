@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/render/RenderPixelmon.java
++++ b/com/pixelmongenerations/client/render/RenderPixelmon.java
+@@ -566,7 +566,7 @@
+         if (resourcelocation == null) {
+             return false;
+         } else {
+-            String[] splits = resourcelocation.getPath().split("/");
++            String[] splits = resourcelocation.getResourcePath().split("/");
+             String textureName = splits[splits.length - 1].replaceAll(".png", "");
+             Optional<DynTexture> dynTextureOpt = ClientProxy.TEXTURE_STORE.getObject(textureName);
+             if (dynTextureOpt.isPresent()) {

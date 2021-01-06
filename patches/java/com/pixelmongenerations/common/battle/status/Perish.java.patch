@@ -1,0 +1,13 @@
+--- a/com/pixelmongenerations/common/battle/status/Perish.java
++++ b/com/pixelmongenerations/common/battle/status/Perish.java
+@@ -71,8 +71,8 @@
+             var9 = pw.getParticipant().getOpponents().iterator();
+ 
+             while(var9.hasNext()) {
+-                BattleParticipant opponent = (BattleParticipant)var9.next();
+-                if (opponent.countAblePokemon() <= pw.bc.rules.battleType.numPokemon) {
++                BattleParticipant playerOpponent = (BattleParticipant)var9.next();
++                if (playerOpponent.countAblePokemon() <= pw.bc.rules.battleType.numPokemon) {
+                     userChoice.raiseWeight(100.0F);
+                 }
+             }

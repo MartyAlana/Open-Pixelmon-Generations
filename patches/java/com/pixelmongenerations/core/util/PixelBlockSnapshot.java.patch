@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/core/util/PixelBlockSnapshot.java
++++ b/com/pixelmongenerations/core/util/PixelBlockSnapshot.java
+@@ -155,7 +155,7 @@
+             compound.setString("blockMod", this.blockIdentifier.getNamespace());
+         }
+ 
+-        compound.setString("blockName", this.blockIdentifier.getPath());
++        compound.setString("blockName", this.blockIdentifier.getResourcePath());
+         compound.setInteger("x", this.pos.getX());
+         compound.setInteger("y", this.pos.getY());
+         compound.setInteger("z", this.pos.getZ());
+@@ -207,7 +207,7 @@
+             try {
+                 this.replacedBlock = ((Block)blockRegistry.getValue(this.blockIdentifier)).getStateFromMeta(this.meta);
+             } catch (Exception var3) {
+-                System.out.println("Cannot find Block " + this.blockIdentifier.getNamespace() + ": " + this.blockIdentifier.getPath());
++                System.out.println("Cannot find Block " + this.blockIdentifier.getNamespace() + ": " + this.blockIdentifier.getResourcePath());
+             }
+         }
+ 

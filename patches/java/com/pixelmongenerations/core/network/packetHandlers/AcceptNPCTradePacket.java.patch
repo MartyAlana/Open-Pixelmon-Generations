@@ -1,0 +1,13 @@
+--- a/com/pixelmongenerations/core/network/packetHandlers/AcceptNPCTradePacket.java
++++ b/com/pixelmongenerations/core/network/packetHandlers/AcceptNPCTradePacket.java
+@@ -45,8 +45,8 @@
+             if (message.offerSlot >= 0 && message.offerSlot <= 5) {
+                 FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
+                     EntityPlayerMP player = ctx.getServerHandler().player;
+-                    PlayerStorage storage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse((Object)null);
+-                    NPCTrader trader = (NPCTrader)EntityNPC.locateNPCServer(player.world, message.traderId, NPCTrader.class).orElse((Object)null);
++                    PlayerStorage storage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(player).orElse(null);
++                    NPCTrader trader = (NPCTrader)EntityNPC.locateNPCServer(player.world, message.traderId, NPCTrader.class).orElse(null);
+                     if (storage != null && trader != null) {
+                         EntityPixelmon playerOffer = storage.getPokemon(storage.getIDFromPosition(message.offerSlot), player.world);
+                         if (playerOffer != null && trader.getExchange().equals(playerOffer.getPokemonName())) {

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/command/Debug.java
++++ b/com/pixelmongenerations/core/command/Debug.java
+@@ -145,7 +145,7 @@
+                 try {
+                     Method m = PixelmonModelRegistry.class.getDeclaredMethod("init");
+                     m.setAccessible(true);
+-                    m.invoke((Object)null);
++                    m.invoke(null);
+                 } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException var39) {
+                     var39.printStackTrace();
+                 }

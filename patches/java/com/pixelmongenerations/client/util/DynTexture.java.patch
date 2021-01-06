@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/util/DynTexture.java
++++ b/com/pixelmongenerations/client/util/DynTexture.java
+@@ -51,7 +51,7 @@
+                     return image;
+                 } else {
+                     Pixelmon var10000;
+-                    if (FilenameUtils.getExtension(this.textureURL.getPath()).equalsIgnoreCase("png")) {
++                    if (FilenameUtils.getExtension(this.textureURL.getResourcePath()).equalsIgnoreCase("png")) {
+                         image = ImageIO.read(this.textureURL);
+                         if (image == null) {
+                             this.state = DynTexture.LoadState.Failed;

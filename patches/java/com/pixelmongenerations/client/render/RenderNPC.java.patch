@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/render/RenderNPC.java
++++ b/com/pixelmongenerations/client/render/RenderNPC.java
+@@ -116,7 +116,7 @@
+     protected boolean bindEntityTexture(EntityNPC entity) {
+         if (entity.getCustomSteveTexture() != null) {
+             String texture = entity.getCustomSteveTexture();
+-            DynTexture dynTexture = (DynTexture)ClientProxy.TEXTURE_STORE.getObject(texture).orElse((Object)null);
++            DynTexture dynTexture = (DynTexture)ClientProxy.TEXTURE_STORE.getObject(texture).orElse(null);
+             if (dynTexture != null) {
+                 dynTexture.loadImage(true);
+                 return true;

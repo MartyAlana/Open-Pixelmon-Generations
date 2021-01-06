@@ -1,0 +1,21 @@
+--- a/com/pixelmongenerations/common/battle/attacks/Attack.java
++++ b/com/pixelmongenerations/common/battle/attacks/Attack.java
+@@ -376,7 +376,7 @@
+ 
+                             EffectBase critModifier = null;
+                             if (!this.cantMiss && !RandomHelper.getRandomChance((int)accuracy)) {
+-                                this.onMiss(user, target, moveResults, (Object)null);
++                                this.onMiss(user, target, moveResults, null);
+                             } else {
+                                 AttackResult finalResult = AttackResult.proceed;
+                                 AttackResult applyEffectResult = AttackResult.proceed;
+@@ -875,8 +875,7 @@
+ 
+     public static double calcCriticalHit(EffectBase e, PixelmonWrapper user, PixelmonWrapper target) {
+         if (!target.getBattleAbility(user).preventsCriticalHits(user) && !target.hasStatus(StatusType.LuckyChant)) {
+-            int critStage = 1;
+-            int critStage = critStage + user.getUsableHeldItem().adjustCritStage(user);
++            int critStage = 1 + user.getUsableHeldItem().adjustCritStage(user);
+             AbilityBase userAbility = user.getBattleAbility();
+             if (userAbility instanceof SuperLuck) {
+                 ++critStage;

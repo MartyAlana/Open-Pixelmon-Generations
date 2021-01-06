@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockTablePC.java
++++ b/com/pixelmongenerations/common/block/BlockTablePC.java
+@@ -25,7 +25,7 @@
+     public BlockTablePC() {
+         super(Material.ROCK);
+         this.setHardness(2.5F);
+-        this.setTranslationKey("tablepc");
++        this.setUnlocalizedName("tablepc");
+     }
+ 
+     public boolean isOpaqueCube(IBlockState state) {

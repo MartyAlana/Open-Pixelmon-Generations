@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/spawning/BlockPixelmonSpawner.java
++++ b/com/pixelmongenerations/common/block/spawning/BlockPixelmonSpawner.java
+@@ -30,7 +30,7 @@
+         this.setBlockUnbreakable();
+         this.setResistance(6000000.0F);
+         this.setCreativeTab(PixelmonCreativeTabs.utilityBlocks);
+-        this.setTranslationKey("pixelmonSpawner");
++        this.setUnlocalizedName("pixelmonSpawner");
+     }
+ 
+     public TileEntity createNewTileEntity(World world, int var1) {

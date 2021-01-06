@@ -1,0 +1,44 @@
+--- a/com/pixelmongenerations/common/battle/controller/participants/PlayerParticipant.java
++++ b/com/pixelmongenerations/common/battle/controller/participants/PlayerParticipant.java
+@@ -226,7 +226,6 @@
+         Iterator var8 = this.controlledPokemon.iterator();
+ 
+         while(true) {
+-            PixelmonWrapper pw;
+             do {
+                 if (!var8.hasNext()) {
+                     var2 = this.allPokemon;
+@@ -471,8 +470,8 @@
+                 }
+             }
+ 
+-            ArrayList playerSpectators;
+-            ArrayList teamPokemon;
++            ArrayList<Spectator> playerSpectators;
++            ArrayList<PixelmonWrapper> teamPokemon;
+             if (this.bc.battleTurn == -1) {
+                 this.updateOpponentPokemon();
+                 if (this.bc.getTeam(this).size() > 1) {
+@@ -486,11 +485,11 @@
+             }
+ 
+             if (!this.bc.battleEnded) {
+-                teamPokemon = this.getTeamPokemonList();
+-                Pixelmon.NETWORK.sendTo(new SetBattlingPokemon(teamPokemon), this.player);
++                ArrayList<PixelmonWrapper> teamPokemon2 = this.getTeamPokemonList();
++                Pixelmon.NETWORK.sendTo(new SetBattlingPokemon(teamPokemon2), this.player);
+                 playerSpectators = this.bc.getPlayerSpectators(this);
+                 playerSpectators.forEach((spectator) -> {
+-                    spectator.sendMessage(new SetBattlingPokemon(teamPokemon));
++                    spectator.sendMessage(new SetBattlingPokemon(teamPokemon2));
+                 });
+             }
+ 
+@@ -577,7 +576,6 @@
+ 
+     public void givePlayerExp(PixelmonWrapper pixelmon) {
+         int opponentPixelmonLevel = pixelmon.getLevelNum();
+-        int expAmount = false;
+         int divisor = 5;
+         int expAmount;
+         if (opponentPixelmonLevel >= 75) {

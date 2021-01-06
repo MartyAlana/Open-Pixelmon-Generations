@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/util/PFileUtils.java
++++ b/com/pixelmongenerations/core/util/PFileUtils.java
+@@ -25,7 +25,7 @@
+             }
+         } catch (IOException var7) {
+             successful = false;
+-            System.out.println("Failed to download: " + url.getPath());
++            System.out.println("Failed to download: " + url.getResourcePath());
+             var7.printStackTrace();
+         }
+ 

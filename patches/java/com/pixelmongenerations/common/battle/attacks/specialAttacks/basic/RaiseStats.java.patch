@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/battle/attacks/specialAttacks/basic/RaiseStats.java
++++ b/com/pixelmongenerations/common/battle/attacks/specialAttacks/basic/RaiseStats.java
+@@ -7,7 +7,7 @@
+ public class RaiseStats extends SpecialAttackBase {
+     public AttackResult applyEffectDuring(PixelmonWrapper user, PixelmonWrapper target) {
+         if (this.checkChance()) {
+-            user.getBattleStats().modifyStat(1, (StatsType[])(StatsType.Attack, StatsType.Defence, StatsType.SpecialAttack, StatsType.SpecialDefence, StatsType.Speed));
++            user.getBattleStats().modifyStat(1, StatsType.Attack, StatsType.Defence, StatsType.SpecialAttack, StatsType.SpecialDefence, StatsType.Speed);
+         }
+ 
+         return AttackResult.proceed;

@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/common/block/BlockPokeChest.java
++++ b/com/pixelmongenerations/common/block/BlockPokeChest.java
+@@ -58,7 +58,7 @@
+         this.drops = null;
+         this.setResistance(6000000.0F);
+         this.pokeChestTileEntityClass = tileEntityClass;
+-        this.setTranslationKey("pokechest");
++        this.setUnlocalizedName("pokechest");
+     }
+ 
+     protected BlockStateContainer createBlockState() {
+@@ -178,7 +178,7 @@
+ 
+                         tile.setCustomDrops(itemStack);
+                         tile.setOwner((UUID)null);
+-                        ChatHandler.sendChat(player, "pixelmon.blocks.chestset", I18n.translateToLocal(itemStack.getTranslationKey() + ".name"));
++                        ChatHandler.sendChat(player, "pixelmon.blocks.chestset", I18n.translateToLocal(itemStack.getUnlocalizedName() + ".name"));
+                     }
+                 }
+ 

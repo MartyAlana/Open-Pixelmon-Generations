@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/spawnmethod/BlockPrisonBottleStem.java
++++ b/com/pixelmongenerations/common/block/spawnmethod/BlockPrisonBottleStem.java
+@@ -23,7 +23,7 @@
+     public BlockPrisonBottleStem() {
+         super(Material.ROCK);
+         this.setHardness(2.5F);
+-        this.setTranslationKey("prison_bottle_stem");
++        this.setUnlocalizedName("prison_bottle_stem");
+     }
+ 
+     public boolean isOpaqueCube(IBlockState state) {

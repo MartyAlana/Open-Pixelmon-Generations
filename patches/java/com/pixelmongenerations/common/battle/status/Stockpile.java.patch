@@ -1,0 +1,19 @@
+--- a/com/pixelmongenerations/common/battle/status/Stockpile.java
++++ b/com/pixelmongenerations/common/battle/status/Stockpile.java
+@@ -19,14 +19,14 @@
+         if (stockpileIndex == -1) {
+             user.addStatus(new Stockpile(), target);
+             user.bc.sendToAll("pixelmon.status.stockpile", user.getNickname(), 1);
+-            user.getBattleStats().modifyStat(1, (StatsType[])(StatsType.Defence, StatsType.SpecialDefence));
++            user.getBattleStats().modifyStat(1, StatsType.Defence, StatsType.SpecialDefence);
+         } else {
+             Stockpile stockpile = (Stockpile)user.getStatus(stockpileIndex);
+             if (stockpile.numStockpiles < 3) {
+                 if (!user.bc.simulateMode) {
+                     ++stockpile.numStockpiles;
+                     user.bc.sendToAll("pixelmon.status.stockpile", user.getNickname(), stockpile.numStockpiles);
+-                    user.getBattleStats().modifyStat(1, (StatsType[])(StatsType.Defence, StatsType.SpecialDefence));
++                    user.getBattleStats().modifyStat(1, StatsType.Defence, StatsType.SpecialDefence);
+                 }
+             } else {
+                 user.bc.sendToAll("pixelmon.effect.effectfailed");

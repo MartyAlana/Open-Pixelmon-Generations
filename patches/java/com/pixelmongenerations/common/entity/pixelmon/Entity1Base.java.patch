@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/Entity1Base.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/Entity1Base.java
+@@ -212,7 +212,7 @@
+ 
+     public void setName(String name) {
+         this.dataManager.set(EntityPixelmon.dwName, name);
+-        this.species = (EnumSpecies)EnumSpecies.getFromName(name).orElse((Object)null);
++        this.species = (EnumSpecies)EnumSpecies.getFromName(name).orElse(null);
+     }
+ 
+     public boolean hasCustomName() {

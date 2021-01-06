@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/stats/ExtraStats.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/stats/ExtraStats.java
+@@ -22,7 +22,7 @@
+         Optional var10000 = EnumSpecies.getFromName(name);
+         EnumMap var10001 = statsList;
+         var10001.getClass();
+-        return (ExtraStats)var10000.map(var10001::get).map(Supplier::get).orElse((Object)null);
++        return (ExtraStats)var10000.map(var10001::get).map(Supplier::get).orElse(null);
+     }
+ 
+     public static void getNBTTags(HashMap<String, Class> tags) {

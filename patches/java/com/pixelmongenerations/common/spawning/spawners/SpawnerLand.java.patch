@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/spawning/spawners/SpawnerLand.java
++++ b/com/pixelmongenerations/common/spawning/spawners/SpawnerLand.java
+@@ -29,7 +29,7 @@
+             if (this.isBlockValidForPixelmonSpawning(world, new BlockPos(pos.getX(), topEarth, pos.getZ()))) {
+                 cpY = topEarth;
+             } else {
+-                String biomeID = world.getBiome(pos).getRegistryName().getPath();
++                String biomeID = world.getBiome(pos).getRegistryName().getResourcePath();
+                 if (PixelmonBiomeDictionary.isBiomeOfType(biomeID, EnumBiomeType.JUNGLE)) {
+                     for(int i = 0; i < 5; ++i) {
+                         if (this.isBlockValidForPixelmonSpawning(world, new BlockPos(pos.getX(), topEarth + i, pos.getZ()))) {

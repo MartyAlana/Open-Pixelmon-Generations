@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockHiddenWoodenDoor.java
++++ b/com/pixelmongenerations/common/block/BlockHiddenWoodenDoor.java
+@@ -19,7 +19,7 @@
+         super(Material.WOOD);
+         this.setHardness(1.0F);
+         this.setBlockUnbreakable();
+-        this.setTranslationKey("hidden_wooden_door");
++        this.setUnlocalizedName("hidden_wooden_door");
+     }
+ 
+     @Nullable

@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/block/BlockBauxiteOre.java
++++ b/com/pixelmongenerations/common/block/BlockBauxiteOre.java
+@@ -6,6 +6,6 @@
+ public class BlockBauxiteOre extends Block {
+     public BlockBauxiteOre(Material par2Material) {
+         super(par2Material);
+-        this.setTranslationKey("bauxiteOre");
++        this.setUnlocalizedName("bauxiteOre");
+     }
+ }

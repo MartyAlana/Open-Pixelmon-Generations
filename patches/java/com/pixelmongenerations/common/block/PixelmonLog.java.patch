@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/PixelmonLog.java
++++ b/com/pixelmongenerations/common/block/PixelmonLog.java
+@@ -14,7 +14,7 @@
+ 
+ public class PixelmonLog extends BlockLog {
+     public PixelmonLog(String name) {
+-        this.setTranslationKey(name);
++        this.setUnlocalizedName(name);
+         this.setSoundType(SoundType.WOOD);
+         this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, EnumAxis.Y));
+         this.setCreativeTab(PixelmonCreativeTabs.buildingBlocks);

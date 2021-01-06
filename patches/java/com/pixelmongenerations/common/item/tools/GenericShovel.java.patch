@@ -1,0 +1,27 @@
+--- a/com/pixelmongenerations/common/item/tools/GenericShovel.java
++++ b/com/pixelmongenerations/common/item/tools/GenericShovel.java
+@@ -20,12 +20,12 @@
+ public class GenericShovel extends ItemSpade {
+     public GenericShovel(ToolMaterial material, String itemName) {
+         super(material);
+-        this.setTranslationKey(itemName);
++        this.setUnlocalizedName(itemName);
+         this.setRegistryName(itemName);
+     }
+ 
+-    public String getTranslationKey() {
+-        return super.getTranslationKey().substring(5);
++    public String getUnlocalizedName() {
++        return super.getUnlocalizedName().substring(5);
+     }
+ 
+     public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+@@ -35,7 +35,7 @@
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getTranslationKey());
++        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getUnlocalizedName());
+         if (!this.hasHideFlag(stack) && !info.startsWith("gui.shopkeeper.")) {
+             tooltip.add(GuiScreen.isShiftKeyDown() ? info : I18n.translateToLocal("pixelmon.item.tooltip"));
+         }

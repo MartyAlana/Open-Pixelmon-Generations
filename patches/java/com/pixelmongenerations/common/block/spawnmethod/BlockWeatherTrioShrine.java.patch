@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/spawnmethod/BlockWeatherTrioShrine.java
++++ b/com/pixelmongenerations/common/block/spawnmethod/BlockWeatherTrioShrine.java
+@@ -21,7 +21,7 @@
+     public BlockWeatherTrioShrine(EnumSpecies pokemon) {
+         this.setBlockUnbreakable();
+         this.pokemon = pokemon;
+-        this.setTranslationKey(pokemon.name.toLowerCase() + "_shrine");
++        this.setUnlocalizedName(pokemon.name.toLowerCase() + "_shrine");
+     }
+ 
+     public TileEntityShrine createTileEntity() {

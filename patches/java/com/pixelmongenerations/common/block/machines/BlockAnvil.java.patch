@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockAnvil.java
++++ b/com/pixelmongenerations/common/block/machines/BlockAnvil.java
+@@ -46,7 +46,7 @@
+         this.setHardness(1.0F);
+         this.setResistance(2000.0F);
+         this.setSoundType(SoundType.METAL);
+-        this.setTranslationKey("anvil");
++        this.setUnlocalizedName("anvil");
+     }
+ 
+     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {

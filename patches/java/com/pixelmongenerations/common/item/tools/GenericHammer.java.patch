@@ -1,0 +1,22 @@
+--- a/com/pixelmongenerations/common/item/tools/GenericHammer.java
++++ b/com/pixelmongenerations/common/item/tools/GenericHammer.java
+@@ -25,8 +25,8 @@
+         super(material, itemName);
+     }
+ 
+-    public String getTranslationKey() {
+-        return super.getTranslationKey().substring(5);
++    public String getUnlocalizedName() {
++        return super.getUnlocalizedName().substring(5);
+     }
+ 
+     public float getDestroySpeed(ItemStack stack, IBlockState state) {
+@@ -51,7 +51,7 @@
+ 
+     @SideOnly(Side.CLIENT)
+     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+-        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getTranslationKey());
++        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getUnlocalizedName());
+         if (!this.hasHideFlag(stack) && !info.startsWith("gui.shopkeeper.")) {
+             tooltip.add(GuiScreen.isShiftKeyDown() ? info : I18n.translateToLocal("pixelmon.item.tooltip"));
+         }

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/BlockEvolutionStoneOre.java
++++ b/com/pixelmongenerations/common/block/BlockEvolutionStoneOre.java
+@@ -32,7 +32,7 @@
+         }
+ 
+         this.setCreativeTab(PixelmonCreativeTabs.natural);
+-        this.setTranslationKey(itemName);
++        this.setUnlocalizedName(itemName);
+     }
+ 
+     public EnumBlockRenderType getRenderType(IBlockState state) {

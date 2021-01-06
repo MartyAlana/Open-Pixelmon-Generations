@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/api/pokemon/PokemonSpec.java
++++ b/com/pixelmongenerations/api/pokemon/PokemonSpec.java
+@@ -392,7 +392,7 @@
+                             case 18:
+                                 if (value != null) {
+                                     Optional<AbilityBase> optAbility = AbilityBase.getAbility(value);
+-                                    this.ability = (String)optAbility.map(AbilityBase::getName).orElse((Object)null);
++                                    this.ability = (String)optAbility.map(AbilityBase::getName).orElse(null);
+                                 }
+                                 break;
+                             case 19:
+@@ -559,7 +559,7 @@
+     private static ExtraSpecType findExtraSpec(String key) {
+         return (ExtraSpecType)extraSpecTypes.entries().stream().filter((e) -> {
+             return ((String)e.getValue()).equals(key);
+-        }).map(Entry::getKey).findAny().orElse((Object)null);
++        }).map(Entry::getKey).findAny().orElse(null);
+     }
+ 
+     public PokemonSpec copy() {

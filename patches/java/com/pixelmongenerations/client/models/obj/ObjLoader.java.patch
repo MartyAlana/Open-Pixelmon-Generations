@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/client/models/obj/ObjLoader.java
++++ b/com/pixelmongenerations/client/models/obj/ObjLoader.java
+@@ -17,6 +17,6 @@
+     }
+ 
+     public static boolean accepts(ResourceLocation modelLocation) {
+-        return modelLocation.getPath().endsWith(".obj");
++        return modelLocation.getResourcePath().endsWith(".obj");
+     }
+ }

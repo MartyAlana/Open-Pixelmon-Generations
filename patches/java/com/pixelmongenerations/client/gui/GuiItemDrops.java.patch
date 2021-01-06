@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/gui/GuiItemDrops.java
++++ b/com/pixelmongenerations/client/gui/GuiItemDrops.java
+@@ -186,7 +186,7 @@
+         int itemYPos = (this.height - 182) / 2 + 35;
+         GuiHelper.drawGradientRect(d, itemYPos, this.zLevel, d + 100, itemYPos + 105, colour, colour, false);
+         if (this.mouseOverIndex != -1) {
+-            String itemName = this.drops.items[this.mouseOverIndex].itemStack.getTranslationKey();
++            String itemName = this.drops.items[this.mouseOverIndex].itemStack.getUnlocalizedName();
+             this.s = I18n.format(itemName + ".name", new Object[0]);
+             GuiHelper.drawCenteredString(this.s, (float)((this.width - 280) / 2 + 225), (float)(itemYPos + 5), 16777215);
+             GuiHelper.drawCenteredString(I18n.format("gui.guiItemDrops.click", new Object[0]), (float)((this.width - 280) / 2 + 225), (float)(itemYPos + 90), 16777215);

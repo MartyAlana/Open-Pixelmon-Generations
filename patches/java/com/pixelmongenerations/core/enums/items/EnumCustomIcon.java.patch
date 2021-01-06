@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/enums/items/EnumCustomIcon.java
++++ b/com/pixelmongenerations/core/enums/items/EnumCustomIcon.java
+@@ -247,7 +247,7 @@
+         return this.name;
+     }
+ 
+-    public String getPath() {
++    public String getResourcePath() {
+         return "pixelmon:customicon/" + this.name;
+     }
+ 

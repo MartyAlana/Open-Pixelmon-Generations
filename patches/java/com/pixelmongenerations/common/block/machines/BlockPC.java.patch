@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/machines/BlockPC.java
++++ b/com/pixelmongenerations/common/block/machines/BlockPC.java
+@@ -39,7 +39,7 @@
+     public BlockPC() {
+         super(Material.ROCK, 1, 2.0D, 1);
+         this.setHardness(2.5F);
+-        this.setTranslationKey("pc");
++        this.setUnlocalizedName("pc");
+     }
+ 
+     public int quantityDropped(Random random) {

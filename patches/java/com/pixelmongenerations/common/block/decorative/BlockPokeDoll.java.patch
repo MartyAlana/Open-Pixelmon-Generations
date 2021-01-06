@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/block/decorative/BlockPokeDoll.java
++++ b/com/pixelmongenerations/common/block/decorative/BlockPokeDoll.java
+@@ -25,7 +25,7 @@
+     public BlockPokeDoll(String name, boolean shiny, float scale) {
+         super(Material.CLOTH);
+         this.setSoundType(SoundType.CLOTH);
+-        this.setTranslationKey("pokedoll_" + name);
++        this.setUnlocalizedName("pokedoll_" + name);
+         this.setHardness(1.0F);
+         this.setCreativeTab(PixelmonCreativeTabs.pokedolls);
+         this.name = name;

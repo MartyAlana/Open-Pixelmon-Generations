@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/data/pokemon/PokemonRegistry.java
++++ b/com/pixelmongenerations/core/data/pokemon/PokemonRegistry.java
+@@ -22,7 +22,7 @@
+         Optional<BaseStats> stats = defs.stream().filter((baseStats) -> {
+             return baseStats.pokemon == species && baseStats.form == form;
+         }).findFirst();
+-        return !stats.isPresent() && form == -1 ? getBaseFor(species, 0) : (BaseStats)stats.orElse((Object)null);
++        return !stats.isPresent() && form == -1 ? getBaseFor(species, 0) : (BaseStats)stats.orElse(null);
+     }
+ 
+     public static int getFormForPokemonId(int pokemonId) {
