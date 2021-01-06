@@ -1,2 +1,2 @@
 # Open-Pixelmon-Generations
-Pixelmon: Generations under Creative Commons license with no legal flaws whatsoever.
+Pixelmon: Generations under The Lesser GPL license with 0 legal flaws whatsoever.
