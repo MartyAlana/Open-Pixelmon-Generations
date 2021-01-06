@@ -1,0 +1,13 @@
+--- a/com/pixelmongenerations/common/starter/CustomStarters.java
++++ b/com/pixelmongenerations/common/starter/CustomStarters.java
+@@ -6,8 +6,8 @@
+ import com.pixelmongenerations.core.config.PixelmonConfig;
+ import com.pixelmongenerations.core.config.StarterList;
+ import com.pixelmongenerations.core.enums.EnumSpecies;
+-import info.pixelmon.shadow.ninja.leaping.configurate.commented.CommentedConfigurationNode;
+-import info.pixelmon.shadow.ninja.leaping.configurate.objectmapping.ObjectMappingException;
++import ninja.leaping.configurate.commented.CommentedConfigurationNode;
++import ninja.leaping.configurate.objectmapping.ObjectMappingException;
+ import java.util.Arrays;
+ import java.util.List;
+ import java.util.Optional;

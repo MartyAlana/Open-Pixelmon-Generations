@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/gui/factory/config/PixelmonConfigGui.java
++++ b/com/pixelmongenerations/client/gui/factory/config/PixelmonConfigGui.java
+@@ -2,7 +2,7 @@
+ 
+ import com.google.common.collect.Lists;
+ import com.pixelmongenerations.core.config.PixelmonConfig;
+-import info.pixelmon.shadow.ninja.leaping.configurate.commented.CommentedConfigurationNode;
++import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+ import java.util.ArrayList;
+ import java.util.Collections;
+ import java.util.List;

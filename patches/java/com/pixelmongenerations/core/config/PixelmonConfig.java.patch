@@ -1,0 +1,17 @@
+--- a/com/pixelmongenerations/core/config/PixelmonConfig.java
++++ b/com/pixelmongenerations/core/config/PixelmonConfig.java
+@@ -5,10 +5,10 @@
+ import com.pixelmongenerations.common.starter.CustomStarters;
+ import com.pixelmongenerations.core.Pixelmon;
+ import com.pixelmongenerations.core.enums.battle.EnumBattleAIMode;
+-import info.pixelmon.shadow.ninja.leaping.configurate.ConfigurationOptions;
+-import info.pixelmon.shadow.ninja.leaping.configurate.commented.CommentedConfigurationNode;
+-import info.pixelmon.shadow.ninja.leaping.configurate.hocon.HoconConfigurationLoader;
+-import info.pixelmon.shadow.ninja.leaping.configurate.objectmapping.ObjectMappingException;
++import ninja.leaping.configurate.ConfigurationOptions;
++import ninja.leaping.configurate.commented.CommentedConfigurationNode;
++import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
++import ninja.leaping.configurate.objectmapping.ObjectMappingException;
+ import java.io.File;
+ import java.io.IOException;
+ import java.lang.reflect.Field;

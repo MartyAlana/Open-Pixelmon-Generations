@@ -1,0 +1,15 @@
+--- a/mcmod.info
++++ b/mcmod.info
+@@ -8,8 +8,10 @@
+   "forgeversion": "Forge 14.23.5.2768",
+   "url": "https://pixelmongenerations.com/",
+   "updateUrl": "https://pixelmongenerations.com/",
+-  "authorList": ["Pixelmon Generations Development Team"],
+-  "credits": "Our community, our team, and the original Pixelmon team.",
++    "authorList": [
++      "Pixelmon Generations Development Team"
++    ],
++    "credits": "A big \n....................../´¯/) \n....................,/¯../ \n.................../..../ \n............./´¯/'...'/´¯¯`·¸ \n........../'/.../..../......./¨¯\\ \n........('(...´...´.... ¯~/'...') \n.........\\.................'...../ \n..........''...\\.......... _.·´ \n............\\..............( \n..............\\.............\\...\n to the lead people of Pixelmon: Generations for making it ARR",
+   "logoFile": "",
+   "screenshots": [],
+   "dependencies": []
