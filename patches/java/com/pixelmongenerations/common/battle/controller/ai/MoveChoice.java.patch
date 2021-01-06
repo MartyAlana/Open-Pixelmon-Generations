@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/battle/controller/ai/MoveChoice.java
++++ b/com/pixelmongenerations/common/battle/controller/ai/MoveChoice.java
+@@ -128,7 +128,7 @@
+     }
+ 
+     public String toString() {
+-        String s = this.isAttack() ? this.attack.getAttackBase().getUnlocalizedName() : "Switch";
++        String s = this.isAttack() ? this.attack.getAttackBase().getTranslationKey() : "Switch";
+         s = s + ", Tier " + this.tier + ", Weight " + this.weight;
+         return s;
+     }

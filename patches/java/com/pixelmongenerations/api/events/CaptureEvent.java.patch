@@ -1,0 +1,27 @@
+--- a/com/pixelmongenerations/api/events/CaptureEvent.java
++++ b/com/pixelmongenerations/api/events/CaptureEvent.java
+@@ -38,13 +38,13 @@
+     @Cancelable
+     public static class SuccessfulCaptureEvent extends CaptureEvent {
+         public SuccessfulCaptureEvent(EntityPlayerMP player, EntityPixelmon pokemon, EntityPokeBall pokeball) {
+-            super(player, pokemon, pokeball, null);
++            super(player, pokemon, pokeball);
+         }
+     }
+ 
+     public static class FailedCaptureEvent extends CaptureEvent {
+         public FailedCaptureEvent(EntityPlayerMP player, EntityPixelmon pokemon, EntityPokeBall pokeball) {
+-            super(player, pokemon, pokeball, null);
++            super(player, pokemon, pokeball);
+         }
+     }
+ 
+@@ -54,7 +54,7 @@
+         private double ballBonus;
+ 
+         public StartCaptureEvent(EntityPlayerMP player, EntityPixelmon pokemon, EntityPokeBall pokeball, int catchRate, double ballBonus) {
+-            super(player, pokemon, pokeball, null);
++            super(player, pokemon, pokeball);
+             this.catchRate = catchRate;
+             this.ballBonus = ballBonus;
+         }

@@ -1,3 +1,4 @@
+import org.apache.tools.ant.taskdefs.condition.Os
 import uk.jamierocks.propatcher.task.ApplyPatchesTask
 import uk.jamierocks.propatcher.task.MakePatchesTask
 import uk.jamierocks.propatcher.task.ResetSourcesTask
@@ -6,12 +7,11 @@ plugins {
 	java
 	id("net.minecraftforge.gradle")
 	id("uk.jamierocks.propatcher") version "1.3.2" apply false
+	id("com.dorongold.task-tree") version "1.5"
 }
 
 version = "8.2.2"
 group = "com.pixelmongenerations"
-
-val bon2DownloadUrl = "https://ci.tterrag.com/job/BON2/lastSuccessfulBuild/artifact/build/libs/BON-2.4.0.15-all.jar"
 
 repositories {
 	maven {
@@ -55,19 +55,20 @@ dependencies {
 	implementation("ninja.leaping.configurate", "configurate-hocon", "3.3")
 	implementation("ninja.leaping.configurate", "configurate-parent", "3.7.1", ext = "pom")
 
-	implementation(fg.deobf("net.shadowfacts:Forgelin:1.8.4"))
-	implementation(fg.deobf("com.teamwizardry.librarianlib:librarianlib-1.12.2:v4.21-4.20-SNAPSHOT")).apply {
+	implementation(fg.deobf("com.teamwizardry.librarianlib:librarianlib-1.12.2:4.22-SNAPSHOT")).apply {
 		this as ExternalModuleDependency
 		isChanging = true
 		exclude(group = "com.github.thecodewarrior")
 	}
+
+	runtime("net.shadowfacts:Forgelin:1.8.4")
 
 	decompiler("com.github.fesh0r", "fernflower", "dbf407a655")
 	bon2("lastSuccessfulBuild", "BON", "2.4.0.15", classifier = "all")
 }
 
 minecraft {
-	mappings("snapshot", "20171003-1.12")
+	mappings("snapshot", "20180814-1.12")
 
 	file("src/main/resources/META-INF/pixelmon_at.cfg").apply {
 		if (exists()) {
@@ -80,6 +81,12 @@ minecraft {
 			workingDirectory = "run/client"
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
+
+			mods {
+				create("pixelmon") {
+					source(sourceSets["main"])
+				}
+			}
 		}
 
 		create("server") {
@@ -87,6 +94,12 @@ minecraft {
 
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
+
+			mods {
+				create("pixelmon") {
+					source(sourceSets["main"])
+				}
+			}
 		}
 	}
 }
@@ -211,5 +224,20 @@ tasks.named<Jar>("jar") {
 				"FMLAT" to "pixelmon_at.cfg",
 				"FMLCorePlugin" to "com.pixelmongenerations.core.plugin.EarlyLoadPlugin"
 		))
+	}
+}
+
+// Hack to get resources to work
+tasks.named<JavaCompile>("compileJava") {
+	doLast {
+		for (child in File("src/main/resources").listFiles()) {
+			// Linux specific, sorry!
+			if (Os.isFamily(Os.FAMILY_UNIX) && !child.exists()) {
+				exec {
+					workingDir = destinationDir
+					commandLine("ln", "-s", child.toString())
+				}
+			}
+		}
 	}
 }

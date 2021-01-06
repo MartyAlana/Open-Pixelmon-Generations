@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/stats/BattleStats.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/stats/BattleStats.java
+@@ -662,7 +662,6 @@
+             status = (StatusBase)var3.next();
+         }
+ 
+-        GlobalStatusBase status;
+         for(var3 = this.pixelmon.bc.globalStatusController.getGlobalStatuses().iterator(); var3.hasNext(); stats = status.modifyBaseStats(this.pixelmon, stats)) {
+             status = (GlobalStatusBase)var3.next();
+         }

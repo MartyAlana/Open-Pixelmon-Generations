@@ -1,0 +1,15 @@
+--- a/com/pixelmongenerations/common/block/tileEntities/TileEntityCelestialAltar.java
++++ b/com/pixelmongenerations/common/block/tileEntities/TileEntityCelestialAltar.java
+@@ -54,11 +54,7 @@
+             if (type.isCorrectTime(this.world)) {
+                 PlayerStorage storage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage((EntityPlayerMP)player).get();
+                 IntStream var10000 = IntStream.range(0, 6);
+-                storage.getClass();
+-                Stream var9 = var10000.mapToObj(storage::getIDFromPosition).map((id) -> {
+-                    return storage.getPokemon(id, this.world);
+-                }).filter(Objects::nonNull);
+-                type.getClass();
++                Stream<EntityPixelmon> var9 = var10000.mapToObj(storage::getIDFromPosition).map((id) -> storage.getPokemon(id, this.world)).filter(Objects::nonNull);
+                 Optional<EntityPixelmon> pixelmonOptional = var9.filter(type::isPokemonUsable).findFirst();
+                 if (pixelmonOptional.isPresent()) {
+                     if (!this.world.isRemote) {

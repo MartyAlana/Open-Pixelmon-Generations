@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/client/models/tmt/TmtTessellator.java
++++ b/com/pixelmongenerations/client/models/tmt/TmtTessellator.java
+@@ -73,7 +73,6 @@
+ 
+             int vtc;
+             while(offs < this.vertexCount) {
+-                int vtc = false;
+                 if (this.drawMode == 7 && convertQuadsToTriangles) {
+                     vtc = Math.min(this.vertexCount - offs, trivertsInBuffer);
+                 } else {

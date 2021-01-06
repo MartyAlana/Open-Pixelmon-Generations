@@ -1,0 +1,89 @@
+--- a/com/pixelmongenerations/common/spawning/PlayerTrackingSpawner.java
++++ b/com/pixelmongenerations/common/spawning/PlayerTrackingSpawner.java
+@@ -26,7 +26,7 @@
+     public final UUID playerUUID;
+     protected BlockCollection collection;
+     protected ArrayList<SpawnLocation> spawnLocations;
+-    protected ArrayList<SpawnAction<? extends Entity>> possibleSpawns = new ArrayList();
++    protected ArrayList<SpawnAction<? extends Entity>> possibleSpawns = new ArrayList<>();
+     public int minDistFromCentre;
+     public int maxDistFromCentre;
+     public float horizontalTrackFactor;
+@@ -100,13 +100,13 @@
+     }
+ 
+     public ArrayList<SpawnAction<? extends Entity>> calculateSpawnActions(ArrayList<SpawnLocation> spawnLocations) {
+-        ArrayList<SpawnAction<? extends Entity>> toSpawn = new ArrayList();
+-        HashMap<SpawnInfo, SpawnLocation> potentialSpawns = new HashMap();
+-        HashMap<SpawnInfo, Float> adjustedRarities = new HashMap();
+-        Iterator var5 = spawnLocations.iterator();
++        ArrayList<SpawnAction<? extends Entity>> toSpawn = new ArrayList<>();
++        HashMap<SpawnInfo, SpawnLocation> potentialSpawns = new HashMap<>();
++        HashMap<SpawnInfo, Float> adjustedRarities = new HashMap<>();
++        Iterator<SpawnLocation> var5 = spawnLocations.iterator();
+ 
+         while(var5.hasNext()) {
+-            SpawnLocation spawnLocation2 = (SpawnLocation)var5.next();
++            SpawnLocation spawnLocation2 = var5.next();
+             SpawnInfo weightedSpawnInfo = this.getWeightedSpawnInfo(spawnLocation2);
+             if (weightedSpawnInfo != null) {
+                 float rarity = weightedSpawnInfo.getAdjustedRarity(spawnLocation2);
+@@ -118,21 +118,21 @@
+         while(!potentialSpawns.isEmpty() && this.hasCapacity(toSpawn.size() + 1) && toSpawn.size() <= this.spawnsPerPass) {
+             float raritySum = 0.0F;
+ 
+-            Entry entry;
+-            for(Iterator var13 = adjustedRarities.entrySet().iterator(); var13.hasNext(); raritySum += (Float)entry.getValue()) {
+-                entry = (Entry)var13.next();
++            Entry<SpawnInfo, Float> entry;
++            for(Iterator<Entry<SpawnInfo, Float>> var13 = adjustedRarities.entrySet().iterator(); var13.hasNext(); raritySum += entry.getValue()) {
++                entry = var13.next();
+             }
+ 
+             float chosenSum = RandomHelper.getRandomNumberBetween(0.0F, raritySum);
+             raritySum = 0.0F;
+-            Iterator it = adjustedRarities.entrySet().iterator();
++            Iterator<Entry<SpawnInfo, Float>> it = adjustedRarities.entrySet().iterator();
+ 
+             while(it.hasNext()) {
+-                Entry entry = (Entry)it.next();
++                entry = it.next();
+                 if (!potentialSpawns.containsKey(entry.getKey())) {
+                     it.remove();
+-                } else if (!((raritySum += (Float)entry.getValue()) < chosenSum)) {
+-                    SpawnInfo spawn = (SpawnInfo)entry.getKey();
++                } else if (!((raritySum += entry.getValue()) < chosenSum)) {
++                    SpawnInfo spawn = entry.getKey();
+                     SpawnLocation chosenLocation = (SpawnLocation)potentialSpawns.get(spawn);
+                     MutableBlockPos pos = chosenLocation.location.pos;
+                     toSpawn.add(spawn.construct(this, chosenLocation));
+@@ -181,13 +181,13 @@
+             }
+ 
+             this.maxDistFromCentre = maximum;
+-            return this;
++            return (E) this;
+         }
+ 
+         public <E extends PlayerTrackingSpawner.PlayerTrackingSpawnerBuilder<T>> E setTrackFactors(float horizontal, float vertical) {
+             this.horizontalTrackFactor = horizontal;
+             this.verticalTrackFactor = vertical;
+-            return this;
++            return (E) this;
+         }
+ 
+         public <E extends PlayerTrackingSpawner.PlayerTrackingSpawnerBuilder<T>> E setSliceRadii(int horizontal, int vertical) {
+@@ -201,11 +201,11 @@
+             }
+ 
+             this.verticalSliceRadius = vertical;
+-            return this;
++            return (E) this;
+         }
+ 
+         public T apply(T spawner) {
+-            super.apply((TickingSpawner)spawner);
++            super.apply(spawner);
+             spawner.minDistFromCentre = this.minDistFromCentre;
+             spawner.maxDistFromCentre = this.maxDistFromCentre;
+             spawner.verticalTrackFactor = this.verticalTrackFactor;

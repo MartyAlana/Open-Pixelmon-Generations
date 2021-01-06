@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/abilities/Forewarn.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/abilities/Forewarn.java
+@@ -81,7 +81,7 @@
+         if (a == null) {
+             return 0;
+         } else {
+-            String attackName = a.getAttackBase().getUnlocalizedName();
++            String attackName = a.getAttackBase().getTranslationKey();
+             if (exceptionMoves.containsKey(attackName)) {
+                 return (Integer)exceptionMoves.get(attackName);
+             } else {

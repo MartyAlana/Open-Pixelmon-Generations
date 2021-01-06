@@ -1,0 +1,12 @@
+--- a/com/pixelmongenerations/client/gui/battles/battleScreens/MainMenu.java
++++ b/com/pixelmongenerations/client/gui/battles/battleScreens/MainMenu.java
+@@ -134,8 +134,7 @@
+             this.bm.mode = BattleMode.MainMenu;
+         } else {
+             x1 = width / 2 + 31;
+-            x2 = height - this.parent.getGuiHeight() + 9;
+-            int x2 = width / 2 + 90;
++            x2 = width / 2 + 90;
+             int y2 = height - this.parent.getGuiHeight() + 35;
+             int w = 48;
+             int h = 16;

@@ -1,15 +1,57 @@
 --- a/com/pixelmongenerations/common/battle/attacks/ZAttackBase.java
 +++ b/com/pixelmongenerations/common/battle/attacks/ZAttackBase.java
+@@ -36,8 +36,8 @@
+ 
+     public static Map<String, ZAttackBase> generate(AttackBase base) {
+         Builder<String, ZAttackBase> mapBuilder = ImmutableMap.builder();
+-        System.out.println("Generating Z moves for " + base.getUnlocalizedName());
+-        String var2 = base.getUnlocalizedName();
++        System.out.println("Generating Z moves for " + base.getTranslationKey());
++        String var2 = base.getTranslationKey();
+         byte var3 = -1;
+         switch(var2.hashCode()) {
+         case -1711673756:
+@@ -181,14 +181,14 @@
+         ZAttackBase zAttackBase;
+         if (base.attackCategory != AttackCategory.Status) {
+             zAttackBase = (ZAttackBase)((Function)typeMap.get(base.attackType)).apply(base);
+-            if (base.getUnlocalizedName().equals("Weather Ball")) {
++            if (base.getTranslationKey().equals("Weather Ball")) {
+                 zAttackBase.effects.add(new WeatherBall());
+             }
+ 
+             mapBuilder.put(base.attackType.name(), zAttackBase);
+         } else {
+             zAttackBase = new ZAttackBase();
+-            zAttackBase.setAttackName("Z-" + base.getUnlocalizedName());
++            zAttackBase.setAttackName("Z-" + base.getTranslationKey());
+             zAttackBase.attackType = base.attackType;
+             zAttackBase.attackCategory = base.attackCategory;
+             zAttackBase.basePower = base.basePower;
 @@ -197,7 +197,7 @@
              zAttackBase.animations = base.animations;
              zAttackBase.targetingInfo = base.targetingInfo;
              zAttackBase.effects = base.effects;
 -            zAttackBase.zeffect = (ZEffect)statusEffects.getOrDefault(base.getUnlocalizedName(), (Object)null);
-+            zAttackBase.zeffect = (ZEffect)statusEffects.getOrDefault(base.getUnlocalizedName(), null);
++            zAttackBase.zeffect = (ZEffect)statusEffects.getOrDefault(base.getTranslationKey(), null);
              mapBuilder.put(base.attackType.name(), zAttackBase);
          }
  
-@@ -305,12 +305,13 @@
+@@ -220,7 +220,7 @@
+     }
+ 
+     private static int adjustPower(AttackBase attack) {
+-        String var1 = attack.getUnlocalizedName();
++        String var1 = attack.getTranslationKey();
+         byte var2 = -1;
+         switch(var1.hashCode()) {
+         case -511500717:
+@@ -301,16 +301,17 @@
+ 
+     public static Attack getZMove(Attack attack, boolean isMetronome) {
+         String key = "Any";
+-        if (attack.getAttackBase().getUnlocalizedName().equals("Thunderbolt")) {
++        if (attack.getAttackBase().getTranslationKey().equals("Thunderbolt")) {
              key = RandomHelper.rand.nextBoolean() ? "Pikachu" : "Raichu";
          }
  

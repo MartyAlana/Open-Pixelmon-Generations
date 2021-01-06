@@ -1,0 +1,29 @@
+--- a/com/pixelmongenerations/client/gui/npcEditor/GuiTrainerEditor.java
++++ b/com/pixelmongenerations/client/gui/npcEditor/GuiTrainerEditor.java
+@@ -71,22 +71,14 @@
+             int dropDownHeightStart = this.height / 2 + 20;
+             int dropDownWidth = 100;
+             int dropDownHeight = 100;
+-            this.addDropDown((new GuiDropDown(Arrays.asList(EnumBossMode.values()), this.trainer.getBossMode(), dropDownLeft, dropDownHeightStart, dropDownWidth, dropDownHeight)).setGetOptionString((bossMode) -> {
+-                return bossMode.getLocalizedName();
+-            }).setOnSelected(this::selectBossMode));
+-            this.addDropDown((new GuiDropDown(Arrays.asList(EnumTrainerAI.values()), this.trainer.getAIMode(), dropDownLeft, dropDownHeightStart + 25, dropDownWidth, dropDownHeight)).setGetOptionString((aiMode) -> {
+-                return aiMode.getLocalizedName();
+-            }).setOnSelected((aiMode) -> {
++            this.addDropDown((new GuiDropDown<>(Arrays.asList(EnumBossMode.values()), this.trainer.getBossMode(), dropDownLeft, dropDownHeightStart, dropDownWidth, dropDownHeight)).setGetOptionString(EnumBossMode::getLocalizedName).setOnSelected(this::selectBossMode));
++            this.addDropDown((new GuiDropDown<>(Arrays.asList(EnumTrainerAI.values()), this.trainer.getAIMode(), dropDownLeft, dropDownHeightStart + 25, dropDownWidth, dropDownHeight)).setGetOptionString(EnumTrainerAI::getLocalizedName).setOnSelected((aiMode) -> {
+                 this.trainer.setAIMode(aiMode);
+             }));
+             int battleAITop = dropDownHeightStart + 50;
+-            this.addDropDown((new GuiDropDown(Arrays.asList(EnumBattleAIMode.values()), this.trainer.getBattleAIMode(), dropDownLeft, battleAITop - 10, dropDownWidth, dropDownHeight)).setGetOptionString((battleAI) -> {
+-                return battleAI.getLocalizedName();
+-            }).setOnSelected(this::selectBattleAIMode).setInactiveTop(battleAITop));
++            this.addDropDown((new GuiDropDown<>(Arrays.asList(EnumBattleAIMode.values()), this.trainer.getBattleAIMode(), dropDownLeft, battleAITop - 10, dropDownWidth, dropDownHeight)).setGetOptionString(EnumBattleAIMode::getLocalizedName).setOnSelected(this::selectBattleAIMode).setInactiveTop(battleAITop));
+             int encounterModeTop = dropDownHeightStart + 75;
+-            this.addDropDown((new GuiDropDown(Arrays.asList(EnumEncounterMode.values()), this.trainer.getEncounterMode(), dropDownLeft, encounterModeTop - 35, dropDownWidth, dropDownHeight)).setGetOptionString((encounterMode) -> {
+-                return encounterMode.getLocalizedName();
+-            }).setOnSelected(this::selectEncounterMode).setInactiveTop(encounterModeTop));
++            this.addDropDown((new GuiDropDown<>(Arrays.asList(EnumEncounterMode.values()), this.trainer.getEncounterMode(), dropDownLeft, encounterModeTop - 35, dropDownWidth, dropDownHeight)).setGetOptionString(EnumEncounterMode::getLocalizedName).setOnSelected(this::selectEncounterMode).setInactiveTop(encounterModeTop));
+             this.buttonList.add(new GuiButton(11, this.width / 2 + 40, this.height / 2 - 18, 100, 20, I18n.translateToLocal("gui.battlerules.title")));
+             this.buttonList.add(new GuiButton(7, this.width / 2 - 190, this.height / 2 + 90, 100, 20, I18n.translateToLocal("gui.trainereditor.more")));
+             this.buttonList.add(new GuiButton(8, this.width / 2 - 180, this.height / 2 - 120, 80, 20, I18n.translateToLocal("gui.trainereditor.delete")));

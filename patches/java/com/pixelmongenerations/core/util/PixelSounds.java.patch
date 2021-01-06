@@ -1,0 +1,57 @@
+--- a/com/pixelmongenerations/core/util/PixelSounds.java
++++ b/com/pixelmongenerations/core/util/PixelSounds.java
+@@ -69,14 +69,14 @@
+     public static Table<EnumSpecies, IEnumForm, Map<BaseStats.SoundType, SoundEvent>> pixelmonSounds;
+ 
+     public static void registerSounds(IForgeRegistry<SoundEvent> registry) {
+-        registry.registerAll(new SoundEvent[]{pc, pokelootObtained, cameraShutter, healerActive, pokeballClose, pokeballRelease, pokeballCapture, pokeballCaptureSuccess, flute, zygardeCell, womrhole, ui_click, get_item, lava_crystal_shatter, lugia_shrine_song, track1, track2, track3, track4, track5, track6, track7, track8, track9, track10, battle1, battle2, battle3, battle4, battle5, battle6, battle7, battle8, battle9, battle10, day, night});
++        registry.registerAll(pc, pokelootObtained, cameraShutter, healerActive, pokeballClose, pokeballRelease, pokeballCapture, pokeballCaptureSuccess, flute, zygardeCell, womrhole, ui_click, get_item, lava_crystal_shatter, lugia_shrine_song, track1, track2, track3, track4, track5, track6, track7, track8, track9, track10, battle1, battle2, battle3, battle4, battle5, battle6, battle7, battle8, battle9, battle10, day, night);
+         pixelmonSounds = HashBasedTable.create();
+         registerCries(registry);
+     }
+ 
+     private static SoundEvent create(String name) {
+         ResourceLocation resourcelocation = new ResourceLocation("pixelmon:" + name);
+-        return (SoundEvent)(new SoundEvent(resourcelocation)).setRegistryName(resourcelocation);
++        return (new SoundEvent(resourcelocation)).setRegistryName(resourcelocation);
+     }
+ 
+     private static SoundEvent registerSound(IForgeRegistry<SoundEvent> registry, String soundNameIn) {
+@@ -134,19 +134,19 @@
+             while(var4.hasNext()) {
+                 IEnumForm form = (IEnumForm)var4.next();
+                 Optional statsOptional;
+-                if (pixelmonSounds.contains(pixelmon, form) && (statsOptional = Entity3HasStats.getBaseStats((String)pixelmon.name, form.getForm())).isPresent()) {
++                if (pixelmonSounds.contains(pixelmon, form) && (statsOptional = Entity3HasStats.getBaseStats(pixelmon.name, form.getForm())).isPresent()) {
+                     BaseStats stats = (BaseStats)statsOptional.get();
+-                    Map<BaseStats.SoundType, SoundEvent> map = (Map)pixelmonSounds.get(pixelmon, form);
++                    Map<BaseStats.SoundType, SoundEvent> map = pixelmonSounds.get(pixelmon, form);
+                     if (map.containsKey(BaseStats.SoundType.Neutral)) {
+-                        stats.addSound(BaseStats.SoundType.Neutral, (SoundEvent)map.get(BaseStats.SoundType.Neutral));
++                        stats.addSound(BaseStats.SoundType.Neutral, map.get(BaseStats.SoundType.Neutral));
+                     }
+ 
+                     if (map.containsKey(BaseStats.SoundType.Female)) {
+-                        stats.addSound(BaseStats.SoundType.Female, (SoundEvent)map.get(BaseStats.SoundType.Female));
++                        stats.addSound(BaseStats.SoundType.Female, map.get(BaseStats.SoundType.Female));
+                     }
+ 
+                     if (map.containsKey(BaseStats.SoundType.Male)) {
+-                        stats.addSound(BaseStats.SoundType.Male, (SoundEvent)map.get(BaseStats.SoundType.Male));
++                        stats.addSound(BaseStats.SoundType.Male, map.get(BaseStats.SoundType.Male));
+                     }
+                 }
+             }
+@@ -155,9 +155,9 @@
+     }
+ 
+     public static Optional<SoundEvent> getSoundFor(EntityPixelmon pixelmon) {
+-        Map sounds;
+-        Map soundMap;
+-        if ((sounds = pixelmonSounds.row(pixelmon.getSpecies())) != null && (soundMap = (Map)sounds.get(pixelmon.getFormEnum())) != null) {
++        Map<IEnumForm, Map<BaseStats.SoundType, SoundEvent>> sounds;
++        Map<BaseStats.SoundType, SoundEvent> soundMap;
++        if ((sounds = pixelmonSounds.row(pixelmon.getSpecies())) != null && (soundMap = sounds.get(pixelmon.getFormEnum())) != null) {
+             Gender gender = EntityPixelmon.getRandomGender(pixelmon.baseStats);
+             BaseStats.SoundType type = gender == Gender.Male ? BaseStats.SoundType.Male : (gender == Gender.Female ? BaseStats.SoundType.Female : (gender == Gender.None ? BaseStats.SoundType.Neutral : BaseStats.SoundType.Neutral));
+             if (soundMap.containsKey(type)) {

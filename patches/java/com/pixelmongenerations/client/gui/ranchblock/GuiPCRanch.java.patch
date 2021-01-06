@@ -1,0 +1,13 @@
+--- a/com/pixelmongenerations/client/gui/ranchblock/GuiPCRanch.java
++++ b/com/pixelmongenerations/client/gui/ranchblock/GuiPCRanch.java
+@@ -49,10 +49,8 @@
+         }
+ 
+         if ((new Rectangle(this.sortX, this.sortY, 15, 20)).contains(x, y)) {
+-            this.getClass();
+             this.currentSearchType = "BYNAME";
+         } else if ((new Rectangle(this.sortX + 18, this.sortY, 15, 20)).contains(x, y)) {
+-            this.getClass();
+             this.currentSearchType = "BYDEXNUMBER";
+         } else if ((new Rectangle(this.sortX - 92, this.sortY, 15, 20)).contains(x, y)) {
+             this.boxNumber = this.boxNumber == 0 ? PlayerComputerStorage.boxCount - 1 : --this.boxNumber;

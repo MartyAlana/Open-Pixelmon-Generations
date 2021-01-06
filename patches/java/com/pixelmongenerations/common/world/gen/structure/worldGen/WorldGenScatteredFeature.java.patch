@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/world/gen/structure/worldGen/WorldGenScatteredFeature.java
++++ b/com/pixelmongenerations/common/world/gen/structure/worldGen/WorldGenScatteredFeature.java
+@@ -20,7 +20,6 @@
+ public class WorldGenScatteredFeature extends MapGenScatteredFeature implements IWorldGenerator {
+     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+         int xPos = random.nextInt(16) + chunkX * 16;
+-        int yPos = true;
+         BlockPos pos = new BlockPos(xPos, 64, random.nextInt(16) + chunkZ * 16);
+         boolean ultraSpace = this.isUltraSpace(world.getBiome(pos));
+         if (ultraSpace || random.nextInt(12) == 1) {

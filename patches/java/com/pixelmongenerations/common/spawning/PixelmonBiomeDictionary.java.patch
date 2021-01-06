@@ -1,38 +1,19 @@
 --- a/com/pixelmongenerations/common/spawning/PixelmonBiomeDictionary.java
 +++ b/com/pixelmongenerations/common/spawning/PixelmonBiomeDictionary.java
-@@ -44,7 +44,7 @@
-             }
+@@ -116,8 +116,6 @@
  
-             if (biomeList[biomeID] == null) {
--                biomeList[biomeID] = new PixelmonBiomeDictionary.PixelmonBiomeInfo(Biome.getBiomeForId(biomeID).getRegistryName().getPath(), biomeEnglishName, types);
-+                biomeList[biomeID] = new PixelmonBiomeDictionary.PixelmonBiomeInfo(Biome.getBiomeForId(biomeID).getRegistryName().getResourcePath(), biomeEnglishName, types);
-             } else {
-                 Collections.addAll(biomeList[biomeID].typeList, types);
-             }
-@@ -56,7 +56,7 @@
-     }
+     public static ArrayList<Integer> getBiomeIDsMatchingAllTags(ArrayList<EnumBiomeType> tags) {
+         ArrayList<Integer> intBiomeIDs = new ArrayList();
+-        int intCountMatches = false;
+-
+         for(int i = 0; i < biomeList.length; ++i) {
+             int intCountMatches = 0;
+             if (tags != null && !tags.isEmpty() && biomeList[i] != null && biomeList[i].typeList != null) {
+@@ -141,7 +139,6 @@
  
-     public static EnumBiomeType[] getTypesForBiome(Biome biome) {
--        return getTypesForBiomeID(biome.getRegistryName().getPath());
-+        return getTypesForBiomeID(biome.getRegistryName().getResourcePath());
-     }
+     public static ArrayList<Integer> getBiomeIDsMatchingAllTagsExactly(ArrayList<EnumBiomeType> tags) {
+         ArrayList<Integer> intBiomeIDs = new ArrayList();
+-        int intCountMatches = false;
  
-     public static EnumBiomeType[] getTypesForBiomeID(String biomeID) {
-@@ -69,7 +69,7 @@
-     }
- 
-     public static PixelmonBiomeDictionary.PixelmonBiomeInfo getBiomeInfo(Biome biome) {
--        return biome != null ? getBiomeInfo(biome.getRegistryName().getPath()) : null;
-+        return biome != null ? getBiomeInfo(biome.getRegistryName().getResourcePath()) : null;
-     }
- 
-     public static PixelmonBiomeDictionary.PixelmonBiomeInfo getBiomeInfo(String biomeID) {
-@@ -87,7 +87,7 @@
-     }
- 
-     public static boolean isBiomeOfType(Biome biome, EnumBiomeType tag) {
--        return isBiomeOfType(biome.getRegistryName().getPath(), tag);
-+        return isBiomeOfType(biome.getRegistryName().getResourcePath(), tag);
-     }
- 
-     public static boolean isBiomeOfType(String biomeID, EnumBiomeType tag) {
+         for(int i = 0; i < biomeList.length; ++i) {
+             int intCountMatches = 0;

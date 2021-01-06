@@ -9,3 +9,21 @@
      }
  
      public static EnumSpecies getFromOrdinal(int ordinal) {
+@@ -1225,7 +1225,7 @@
+     }
+ 
+     public boolean hasSpecialTexture(IEnumForm form, int specialTexutre) {
+-        return this.hasSpecialTexture(form) && ((Multimap)specialTextureMap.get(this)).get(form).stream().map(IEnumSpecialTexture::getId).anyMatch((a) -> {
++        return this.hasSpecialTexture(form) && (specialTextureMap.get(this)).get(form).stream().map(IEnumSpecialTexture::getId).anyMatch((a) -> {
+             return a == specialTexutre;
+         });
+     }
+@@ -1290,7 +1290,7 @@
+     }
+ 
+     public IEnumSpecialTexture getSpecialTexture(IEnumForm form, int index) {
+-        return (IEnumSpecialTexture)(this.hasSpecialTexture(form, index) ? (IEnumSpecialTexture)((Multimap)specialTextureMap.get(this)).get(form).stream().filter((a) -> {
++        return (this.hasSpecialTexture(form, index) ? (specialTextureMap.get(this)).get(form).stream().filter((a) -> {
+             return a.getId() == index;
+         }).findAny().orElse(EnumTextures.None) : EnumTextures.None);
+     }

@@ -1,0 +1,12 @@
+--- a/com/pixelmongenerations/common/world/ultraspace/layer/UltraSpaceGenLayer.java
++++ b/com/pixelmongenerations/common/world/ultraspace/layer/UltraSpaceGenLayer.java
+@@ -10,8 +10,7 @@
+     }
+ 
+     public static GenLayer[] makeTheWorld(long seed) {
+-        GenLayer biomes = new UltraSpaceGenLayerBiomes(1L);
+-        GenLayer biomes = new GenLayerZoom(1000L, biomes);
++        GenLayer biomes = new GenLayerZoom(1000L, new UltraSpaceGenLayerBiomes(1L));
+         biomes = new GenLayerZoom(1001L, biomes);
+         biomes = new GenLayerZoom(1002L, biomes);
+         biomes = new GenLayerZoom(1003L, biomes);

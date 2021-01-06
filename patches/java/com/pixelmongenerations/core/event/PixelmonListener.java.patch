@@ -1,0 +1,32 @@
+--- a/com/pixelmongenerations/core/event/PixelmonListener.java
++++ b/com/pixelmongenerations/core/event/PixelmonListener.java
+@@ -547,23 +547,22 @@
+                         return this.check(a, ParticipantType.Trainer, BattleResults.DEFEAT);
+                     }).count();
+                     if (amount > 0) {
+-                        Stream var10000 = event.getBattleResults().entrySet().stream().filter((a) -> {
+-                            return this.check(a, ParticipantType.Player, BattleResults.VICTORY);
+-                        }).map(Entry::getKey);
+-                        PlayerParticipant.class.getClass();
++                        Stream<BattleParticipant> var10000 = event.getBattleResults().entrySet().stream()
++                                .filter((a) -> this.check(a, ParticipantType.Player, BattleResults.VICTORY))
++                                .map(Entry::getKey);
+                         var10000.map(PlayerParticipant.class::cast).map((a) -> {
+                             return a.player;
+                         }).forEach((player) -> {
+-                            Iterator var2 = player.inventory.mainInventory.iterator();
++                            Iterator iter = player.inventory.mainInventory.iterator();
+ 
+                             ItemStack item;
+                             int dmg;
+                             do {
+-                                if (!var2.hasNext()) {
++                                if (!iter.hasNext()) {
+                                     return;
+                                 }
+ 
+-                                item = (ItemStack)var2.next();
++                                item = (ItemStack)iter.next();
+                                 dmg = item.getItemDamage();
+                             } while(item.getItem() != PixelmonItems.sparklingStone);
+ 

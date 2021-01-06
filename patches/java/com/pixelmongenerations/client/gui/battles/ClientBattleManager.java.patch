@@ -1,0 +1,45 @@
+--- a/com/pixelmongenerations/client/gui/battles/ClientBattleManager.java
++++ b/com/pixelmongenerations/client/gui/battles/ClientBattleManager.java
+@@ -30,13 +30,8 @@
+ import com.pixelmongenerations.core.network.packetHandlers.battles.SwitchPokemon;
+ import com.pixelmongenerations.core.proxy.ClientProxy;
+ import com.pixelmongenerations.core.util.PixelmonMethods;
+-import java.util.ArrayList;
+-import java.util.Iterator;
+-import java.util.LinkedList;
+-import java.util.List;
+-import java.util.Queue;
+-import java.util.Timer;
+-import java.util.UUID;
++
++import java.util.*;
+ import java.util.stream.Stream;
+ import net.minecraft.client.Minecraft;
+ import net.minecraft.entity.Entity;
+@@ -490,22 +485,18 @@
+ 
+     public void finishSelection() {
+         this.mode = BattleMode.Waiting;
+-        Stream var10000 = this.selectedActions.stream().filter((action) -> {
+-            return action != null;
+-        });
+-        SimpleNetworkWrapper var10001 = Pixelmon.NETWORK;
+-        var10000.forEach(var10001::sendToServer);
++        this.selectedActions.stream()
++                .filter(Objects::nonNull)
++                .forEach(Pixelmon.NETWORK::sendToServer);
+         this.selectedActions.clear();
+         PixelmonData[] var1 = ServerStorageDisplay.getPokemon();
+         int var2 = var1.length;
+ 
+-        for(int var3 = 0; var3 < var2; ++var3) {
+-            PixelmonData data = var1[var3];
++        for (PixelmonData data : var1) {
+             if (data != null) {
+                 data.selected = false;
+             }
+         }
+-
+     }
+ 
+     public void setTeamPokemon(int[][] pokemon) {

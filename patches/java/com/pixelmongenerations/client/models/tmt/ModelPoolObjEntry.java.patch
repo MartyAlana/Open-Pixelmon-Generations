@@ -1,0 +1,42 @@
+--- a/com/pixelmongenerations/client/models/tmt/ModelPoolObjEntry.java
++++ b/com/pixelmongenerations/client/models/tmt/ModelPoolObjEntry.java
+@@ -91,7 +91,7 @@
+                             normals.add(new float[]{v[0], v[1], v[2]});
+                         } else if (s.startsWith("f ")) {
+                             s = s.substring(s.indexOf(" ") + 1).trim();
+-                            ArrayList<PositionTextureVertex> v = new ArrayList();
++                            ArrayList<PositionTextureVertex> vertexArrayList = new ArrayList();
+                             finalPhase = 0;
+                             float[] normal = new float[]{0.0F, 0.0F, 0.0F};
+                             ArrayList iNormal = new ArrayList();
+@@ -120,7 +120,6 @@
+                                         curUV = new float[]{0.0F, 0.0F};
+                                     }
+ 
+-                                    int vnInt = false;
+                                     int vnInt;
+                                     if (f.length == 3) {
+                                         if (f[2].equals("")) {
+@@ -157,7 +156,7 @@
+                                 normal[1] += curNormals[1];
+                                 normal[2] += curNormals[2];
+                                 if (vInt < verts.size()) {
+-                                    v.add(((PositionTransformVertex)verts.get(vInt)).setTexturePosition(curUV[0], curUV[1]));
++                                    vertexArrayList.add(((PositionTransformVertex)verts.get(vInt)).setTexturePosition(curUV[0], curUV[1]));
+                                     if (verts.get(vInt) instanceof PositionTransformVertex) {
+                                         ((PositionTransformVertex)verts.get(vInt)).addGroup(this.group);
+                                     }
+@@ -174,10 +173,10 @@
+                             normal[0] /= d;
+                             normal[1] /= d;
+                             normal[2] /= d;
+-                            PositionTextureVertex[] vToArr = new PositionTextureVertex[v.size()];
++                            PositionTextureVertex[] vToArr = new PositionTextureVertex[vertexArrayList.size()];
+ 
+-                            for(int i = 0; i < v.size(); ++i) {
+-                                vToArr[i] = (PositionTextureVertex)v.get(i);
++                            for(int j = 0; j < vertexArrayList.size(); ++j) {
++                                vToArr[j] = (PositionTextureVertex)vertexArrayList.get(j);
+                             }
+ 
+                             TexturedPolygon poly = new TexturedPolygon(vToArr);

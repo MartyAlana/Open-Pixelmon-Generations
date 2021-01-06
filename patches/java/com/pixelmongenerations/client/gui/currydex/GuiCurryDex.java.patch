@@ -1,0 +1,14 @@
+--- a/com/pixelmongenerations/client/gui/currydex/GuiCurryDex.java
++++ b/com/pixelmongenerations/client/gui/currydex/GuiCurryDex.java
+@@ -107,9 +107,9 @@
+             haze.setSprite(curry.getHazeSprite());
+             haze.setTint(a.flavor.getColor());
+         };
+-        ScrollableEntryList<CurryDexEntry> dexEntries = new ScrollableEntryList(292, 28, 6, dex.getEntries(), GuiCurryDex.CurryEntryComponent::new, consumer);
++        ScrollableEntryList<CurryDexEntry> dexEntries = new ScrollableEntryList<>(292, 28, 6, dex.getEntries(), GuiCurryDex.CurryEntryComponent::new, consumer);
+         consumer.accept(dexEntries.getSelectedItem());
+-        this.getMain().add(new GuiLayer[]{dexEntries});
++        this.getMain().add(dexEntries);
+     }
+ 
+     public void initGui() {

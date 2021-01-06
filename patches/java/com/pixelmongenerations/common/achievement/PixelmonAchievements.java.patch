@@ -1,0 +1,102 @@
+--- a/com/pixelmongenerations/common/achievement/PixelmonAchievements.java
++++ b/com/pixelmongenerations/common/achievement/PixelmonAchievements.java
+@@ -18,7 +18,7 @@
+ 
+ public class PixelmonAchievements {
+     private static boolean called = false;
+-    public static final StatBase itemFinderChieve = getStat("achievement.itemFinder", "ItemFinderChieve", (StatBase)null).registerStat();
++    public static final StatBase itemFinderChieve = getStat("achievement.itemFinder", "ItemFinderChieve", null).registerStat();
+     public static final StatBase hiddenLootChieve;
+     public static final StatBase normalLootChieve;
+     public static final StatBase masterBallChieve;
+@@ -66,11 +66,11 @@
+     public static StatBase teamplasma3;
+ 
+     private static StatBase getStat(String lang, String name, StatBase parent) {
+-        return new StatBase(name, new TextComponentTranslation(lang, new Object[0]));
++        return new StatBase(name, new TextComponentTranslation(lang));
+     }
+ 
+     private static StatBase getStat(String lang, String name, Block item, StatBase parent) {
+-        return new StatBase(name, new TextComponentTranslation(lang, new Object[0]));
++        return new StatBase(name, new TextComponentTranslation(lang));
+     }
+ 
+     public static void SetupAchievements() {
+@@ -82,8 +82,7 @@
+     public static void captureChieves(EntityPlayerMP player, EntityPixelmon pokemon) {
+         String name = pokemon.getPokemonName();
+         player.addStat(firstcatchChieve, 1);
+-        Stream var10000 = EnumSpecies.legendaries.stream();
+-        name.getClass();
++        Stream<String> var10000 = EnumSpecies.legendaries.stream();
+         var10000.filter(name::equalsIgnoreCase).forEach((p) -> {
+             player.addStat(legendaryChieve, 1);
+         });
+@@ -107,24 +106,21 @@
+ 
+     public static void pokedexChieves(EntityPlayerMP player) {
+         Optional<PlayerStorage> optstorage = PixelmonStorage.pokeBallManager.getPlayerStorage(player);
+-        if (optstorage.isPresent()) {
+         }
+ 
+-    }
+-
+     static {
+         hiddenLootChieve = getStat("achievement.itemhiddenloot", "HiddenPokeLootChieve", Blocks.GLASS_PANE, itemFinderChieve).registerStat();
+-        normalLootChieve = getStat("achievement.normalloot", "NormalPokeLootChieve", PixelmonBlocks.pokeChest, (StatBase)null).registerStat();
+-        masterBallChieve = getStat("achievement.lootmasterball", "LootMasterBallChieve", (StatBase)null).registerStat();
+-        grottoChieve = getStat("achievement.grotto", "GrottoChieve", Blocks.SAPLING, (StatBase)null).registerStat();
+-        apricornChieve = getStat("achievement.apricorn", "ApricornChieve", (StatBase)null).registerStat();
++        normalLootChieve = getStat("achievement.normalloot", "NormalPokeLootChieve", PixelmonBlocks.pokeChest, null).registerStat();
++        masterBallChieve = getStat("achievement.lootmasterball", "LootMasterBallChieve", null).registerStat();
++        grottoChieve = getStat("achievement.grotto", "GrottoChieve", Blocks.SAPLING, null).registerStat();
++        apricornChieve = getStat("achievement.apricorn", "ApricornChieve", null).registerStat();
+         pokeballChieve = getStat("achievement.pokeball", "PokeballChieve", apricornChieve).registerStat();
+         legendaryChieve = getStat("achievement.catchlegendary", "LegendaryChieve", pokeballChieve).registerStat();
+         shinyChieve = getStat("achievement.catchshiny", "ShinyChieve", pokeballChieve).registerStat();
+         firstcatchChieve = getStat("achievement.firstcatch", "FirstCatchChieve", pokeballChieve).registerStat();
+-        trainerChieve = getStat("achievement.beattrainer", "TrainerChieve", (StatBase)null).registerStat();
+-        pvpChieve = getStat("achievement.winpvp", "PvPChieve", (StatBase)null).registerStat();
+-        dex1Chieve = getStat("achievement.completedex1", "dex1Chieve", (StatBase)null).registerStat();
++        trainerChieve = getStat("achievement.beattrainer", "TrainerChieve", null).registerStat();
++        pvpChieve = getStat("achievement.winpvp", "PvPChieve", null).registerStat();
++        dex1Chieve = getStat("achievement.completedex1", "dex1Chieve", null).registerStat();
+         dex10Chieve = getStat("achievement.completedex10", "dex10Chieve", dex1Chieve).registerStat();
+         dex20Chieve = getStat("achievement.completedex20", "dex20Chieve", dex10Chieve).registerStat();
+         dex30Chieve = getStat("achievement.completedex30", "dex30Chieve", dex20Chieve).registerStat();
+@@ -135,26 +131,26 @@
+         dex80Chieve = getStat("achievement.completedex80", "dex80Chieve", dex70Chieve).registerStat();
+         dex90Chieve = getStat("achievement.completedex90", "dex90Chieve", dex80Chieve).registerStat();
+         dex100Chieve = getStat("achievement.completedex100", "dex100Chieve", dex90Chieve).registerStat();
+-        teammagma = getStat("achievement.teammagma", "teammagma", (StatBase)null).registerStat();
+-        teamaqua = getStat("achievement.teamaqua", "teamaqua", (StatBase)null).registerStat();
++        teammagma = getStat("achievement.teammagma", "teammagma", null).registerStat();
++        teamaqua = getStat("achievement.teamaqua", "teamaqua", null).registerStat();
+         teammagma1 = getStat("achievement.teammagma1", "teammagma1", teammagma).registerStat();
+         teamaqua1 = getStat("achievement.teamaqua1", "teamaqua1", teamaqua).registerStat();
+-        getSilicon = getStat("achievement.getsilicon", "getSilicon", (StatBase)null).registerStat();
+-        pokeGift = getStat("achievement.pokegift", "pokeGift", PixelmonBlocks.pokegiftBlock, (StatBase)null).registerStat();
+-        givenPokeGift = getStat("achievement.givenpokegift", "givenPokeGift", PixelmonBlocks.pokegiftBlock, (StatBase)null).registerStat();
++        getSilicon = getStat("achievement.getsilicon", "getSilicon", null).registerStat();
++        pokeGift = getStat("achievement.pokegift", "pokeGift", PixelmonBlocks.pokegiftBlock, null).registerStat();
++        givenPokeGift = getStat("achievement.givenpokegift", "givenPokeGift", PixelmonBlocks.pokegiftBlock, null).registerStat();
+         teammagma2 = getStat("achievement.teammagma2", "teammagma2", teammagma1).registerStat();
+         teammagma3 = getStat("achievement.teammagma3", "teammagma3", teammagma2).registerStat();
+         teamaqua2 = getStat("achievement.teamaqua2", "teamaqua2", teamaqua1).registerStat();
+         teamaqua3 = getStat("achievement.teamaqua3", "teamaqua3", teamaqua2).registerStat();
+-        teamrocket = getStat("achievement.teamrocket", "teamrocket", (StatBase)null).registerStat();
++        teamrocket = getStat("achievement.teamrocket", "teamrocket", null).registerStat();
+         teamrocket1 = getStat("achievement.teamrocket1", "teamrocket1", teamrocket).registerStat();
+         teamrocket2 = getStat("achievement.teamrocket2", "teamrocket2", teamrocket1).registerStat();
+         teamrocket3 = getStat("achievement.teamrocket3", "teamrocket3", teamrocket2).registerStat();
+-        teamgalactic = getStat("achievement.teamgalactic", "teamgalactic", (StatBase)null).registerStat();
++        teamgalactic = getStat("achievement.teamgalactic", "teamgalactic", null).registerStat();
+         teamgalactic1 = getStat("achievement.teamgalactic1", "teamgalactic1", teamgalactic).registerStat();
+         teamgalactic2 = getStat("achievement.teamgalactic2", "teamgalactic2", teamgalactic1).registerStat();
+         teamgalactic3 = getStat("achievement.teamgalactic3", "teamgalactic3", teamgalactic2).registerStat();
+-        teamplasma = getStat("achievement.teamplasma", "teamplasma", (StatBase)null).registerStat();
++        teamplasma = getStat("achievement.teamplasma", "teamplasma", null).registerStat();
+         teamplasma1 = getStat("achievement.teamplasma1", "teamplasma1", teamplasma).registerStat();
+         teamplasma2 = getStat("achievement.teamplasma2", "teamplasma2", teamplasma1).registerStat();
+         teamplasma3 = getStat("achievement.teamplasma3", "teamplasma3", teamplasma2).registerStat();

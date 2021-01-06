@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/core/proxy/ConfigBase.java
++++ b/com/pixelmongenerations/core/proxy/ConfigBase.java
+@@ -72,6 +72,6 @@
+             var11.printStackTrace();
+         }
+ 
+-        return t;
++        return (T) t;
+     }
+ }

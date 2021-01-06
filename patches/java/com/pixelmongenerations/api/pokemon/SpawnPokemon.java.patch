@@ -1,0 +1,12 @@
+--- a/com/pixelmongenerations/api/pokemon/SpawnPokemon.java
++++ b/com/pixelmongenerations/api/pokemon/SpawnPokemon.java
+@@ -88,8 +88,7 @@
+         private float yaw;
+ 
+         private Builder() {
+-            PokemonSpec var10001 = new PokemonSpec(new String[]{EnumSpecies.Magikarp.name});
+-            this.spec = var10001::create;
++            this.spec = new PokemonSpec(EnumSpecies.Magikarp.name)::create;
+             this.z = 0.0F;
+         }
+ 

@@ -1,0 +1,221 @@
+--- a/com/pixelmongenerations/common/spawning/SpawnRegistry.java
++++ b/com/pixelmongenerations/common/spawning/SpawnRegistry.java
+@@ -1,5 +1,6 @@
+ package com.pixelmongenerations.common.spawning;
+ 
++import com.pixelmongenerations.api.spawning.SpawnSet;
+ import com.pixelmongenerations.api.spawning.archetypes.entities.pokemon.SpawnInfoPokemon;
+ import com.pixelmongenerations.api.spawning.conditions.LocationType;
+ import com.pixelmongenerations.api.spawning.util.SetLoader;
+@@ -14,22 +15,18 @@
+ import com.pixelmongenerations.core.enums.EnumNPCType;
+ import com.pixelmongenerations.core.enums.EnumSpecies;
+ import com.pixelmongenerations.core.util.helper.RandomHelper;
+-import java.util.ArrayList;
+-import java.util.HashMap;
+-import java.util.HashSet;
+-import java.util.Iterator;
+-import java.util.List;
+-import java.util.Optional;
++
++import java.util.*;
+ import java.util.stream.Collectors;
+ import java.util.stream.Stream;
+ 
+ public class SpawnRegistry {
+-    private static HashMap<String, List<SpawnData>> landSpawns = new HashMap();
+-    private static HashMap<String, List<SpawnData>> undergroundSpawns = new HashMap();
+-    private static HashMap<String, List<SpawnData>> biomeWaterSpawns = new HashMap();
+-    private static HashMap<String, List<SpawnData>> airSpawns = new HashMap();
+-    private static HashMap<String, List<SpawnData>> legendarySpawns = new HashMap();
+-    private static HashMap[] npcSpawns = new HashMap[EnumNPCType.values().length];
++	private static final HashMap<String, List<SpawnData>> landSpawns = new HashMap();
++	private static final HashMap<String, List<SpawnData>> undergroundSpawns = new HashMap();
++	private static final HashMap<String, List<SpawnData>> biomeWaterSpawns = new HashMap();
++	private static final HashMap<String, List<SpawnData>> airSpawns = new HashMap();
++	private static final HashMap<String, List<SpawnData>> legendarySpawns = new HashMap();
++	private static final HashMap[] npcSpawns = new HashMap[EnumNPCType.values().length];
+ 
+     public static void addPixelmonSpawn(BaseStats stats) {
+         Integer[] biomeIDs = stats.biomeIDs;
+@@ -41,27 +38,27 @@
+             Integer[] var6;
+             int var7;
+             int var8;
+-            Integer biomeID;
++			int biomeID;
+             if (stats.rarity.day >= 0 && stats.rarity.dawndusk >= 0 && stats.rarity.night >= 0) {
+                 if (stats.rarity.day > 0 || stats.rarity.dawndusk > 0 || stats.rarity.night > 0) {
+                     if (stats.spawnLocations == null) {
+                         Integer[] var10 = biomeIDs;
+                         var3 = biomeIDs.length;
+ 
+-                        for(var4 = 0; var4 < var3; ++var4) {
+-                            Integer biomeID = var10[var4];
+-                            storeSpawnInfo(landSpawns, stats.pixelmonName, stats.rarity, EnumEntityListClassType.Pixelmon, PixelmonBiomeDictionary.getBiomeNameFromID(biomeID), (SpawnLocation)null);
++						for (var4 = 0; var4 < var3; ++var4) {
++							biomeID = var10[var4];
++							storeSpawnInfo(landSpawns, stats.pixelmonName, stats.rarity, EnumEntityListClassType.Pixelmon, PixelmonBiomeDictionary.getBiomeNameFromID(biomeID), null);
+                         }
+                     } else {
+                         var2 = stats.spawnLocations;
+                         var3 = var2.length;
+ 
+-                        for(var4 = 0; var4 < var3; ++var4) {
++						for (var4 = 0; var4 < var3; ++var4) {
+                             s = var2[var4];
+                             var6 = biomeIDs;
+                             var7 = biomeIDs.length;
+ 
+-                            for(var8 = 0; var8 < var7; ++var8) {
++							for (var8 = 0; var8 < var7; ++var8) {
+                                 biomeID = var6[var8];
+                                 if (s != SpawnLocation.Land && s != SpawnLocation.Air) {
+                                     if (s == SpawnLocation.AirPersistent) {
+@@ -94,12 +91,12 @@
+                 var2 = stats.spawnLocations;
+                 var3 = var2.length;
+ 
+-                for(var4 = 0; var4 < var3; ++var4) {
++				for (var4 = 0; var4 < var3; ++var4) {
+                     s = var2[var4];
+                     var6 = biomeIDs;
+                     var7 = biomeIDs.length;
+ 
+-                    for(var8 = 0; var8 < var7; ++var8) {
++					for (var8 = 0; var8 < var7; ++var8) {
+                         biomeID = var6[var8];
+                         storeSpawnInfo(legendarySpawns, stats.pixelmonName, stats.rarity, EnumEntityListClassType.Pixelmon, PixelmonBiomeDictionary.getBiomeNameFromID(biomeID), s);
+                     }
+@@ -116,8 +113,8 @@
+             Pixelmon.LOGGER.info("Unable to add custom spawn for " + pixelmonName + " to " + biomeName + ". Pok\u00c3\u00a9mon does not exist!");
+             return false;
+         } else {
+-            String correctName = ((EnumSpecies)EnumSpecies.getFromName(pixelmonName).get()).name;
+-            stats = (BaseStats)Entity3HasStats.getBaseStats(correctName).get();
++			String correctName = EnumSpecies.getFromName(pixelmonName).get().name;
++			stats = Entity3HasStats.getBaseStats(correctName).get();
+             biomeID = PixelmonBiomeDictionary.getBiomeIDFromName(biomeName);
+             if (biomeID == null) {
+                 Pixelmon.LOGGER.info("Unable to add custom spawn for " + pixelmonName + " to " + biomeName + ". Biome not found!");
+@@ -144,17 +141,17 @@
+             String[] var4 = biomeIDs;
+             int var5 = biomeIDs.length;
+ 
+-            for(int var6 = 0; var6 < var5; ++var6) {
++			for (int var6 = 0; var6 < var5; ++var6) {
+                 String biomeID = var4[var6];
+-                storeSpawnInfo(npcSpawns[npcType.ordinal()], name, new Rarity(rarity, rarity, rarity), EnumEntityListClassType.NPC, biomeID, (SpawnLocation)null);
++				storeSpawnInfo(npcSpawns[npcType.ordinal()], name, new Rarity(rarity, rarity, rarity), EnumEntityListClassType.NPC, biomeID, null);
+             }
+ 
+         }
+     }
+ 
+     private static void storeSpawnInfo(HashMap<String, List<SpawnData>> hashmap, String name, Rarity rarity, EnumEntityListClassType type, String biomeID, SpawnLocation s) {
+-        List<SpawnData> spawnList = hashmap.containsKey(biomeID) ? (List)hashmap.get(biomeID) : new ArrayList();
+-        ((List)spawnList).add(new SpawnData(name, rarity, type, s));
++		List<SpawnData> spawnList = hashmap.containsKey(biomeID) ? hashmap.get(biomeID) : new ArrayList();
++		spawnList.add(new SpawnData(name, rarity, type, s));
+         hashmap.put(biomeID, spawnList);
+     }
+ 
+@@ -163,7 +160,7 @@
+         if (!statOptional.isPresent()) {
+             Pixelmon.LOGGER.info(name + " returned NULL stats.");
+         } else {
+-            BaseStats stats = (BaseStats)statOptional.get();
++			BaseStats stats = statOptional.get();
+             int ID = stats.nationalPokedexNumber;
+             if (!hashmap.containsKey(name) && stats.rarity != null) {
+                 if (ID <= 151) {
+@@ -215,39 +212,28 @@
+     }
+ 
+     public static List<SpawnData> getLegendarySpawnsForBiome(String biomeName) {
+-        return (List)legendarySpawns.get(biomeName);
++		return legendarySpawns.get(biomeName);
+     }
+ 
+     public static List<SpawnData> getSpawnsForBiome(String biomeName) {
+-        Stream var10000 = SetLoader.getAllSets().stream().flatMap((spawnSet) -> {
+-            return spawnSet.spawnInfos.stream();
+-        });
+-        SpawnInfoPokemon.class.getClass();
+-        var10000 = var10000.filter(SpawnInfoPokemon.class::isInstance);
+-        SpawnInfoPokemon.class.getClass();
+-        return (List)var10000.map(SpawnInfoPokemon.class::cast).filter((info) -> {
+-            return info.condition.biomes.stream().anyMatch((biome1) -> {
+-                return biome1.getRegistryName().toString().equalsIgnoreCase(biomeName);
+-            });
+-        }).filter((info) -> {
+-            return !EnumSpecies.legendaries.contains(info.getPokemonSpec().name) && !EnumSpecies.ultrabeasts.contains(info.getPokemonSpec().name);
+-        }).filter((info) -> {
+-            return info.locationTypes.contains(LocationType.LAND);
+-        }).map((info) -> {
+-            return new SpawnData(info.getPokemonSpec().name, ((BaseStats)Entity3HasStats.getBaseStats(info.getPokemonSpec().name).get()).rarity, EnumEntityListClassType.Pixelmon, SpawnLocation.Land);
+-        }).collect(Collectors.toList());
++		return SetLoader.getAllSets().stream()
++				.flatMap((spawnSet) -> spawnSet.spawnInfos.stream())
++				.filter(SpawnInfoPokemon.class::isInstance)
++				.map(SpawnInfoPokemon.class::cast)
++				.filter((info) -> info.condition.biomes.stream()
++						.anyMatch((biome1) -> biome1.getRegistryName().toString().equalsIgnoreCase(biomeName)))
++				.filter((info) -> !EnumSpecies.legendaries.contains(info.getPokemonSpec().name) && !EnumSpecies.ultrabeasts.contains(info.getPokemonSpec().name))
++				.filter((info) -> info.locationTypes.contains(LocationType.LAND))
++				.map((info) -> new SpawnData(info.getPokemonSpec().name, Entity3HasStats.getBaseStats(info.getPokemonSpec().name).get().rarity, EnumEntityListClassType.Pixelmon, SpawnLocation.Land))
++				.collect(Collectors.toList());
+     }
+ 
+     public static List<SpawnData> getUndergroundSpawns() {
+         ArrayList<SpawnData> undergroundSpawnData = new ArrayList();
+         HashSet alreadyListed = new HashSet();
+-        Iterator var2 = undergroundSpawns.keySet().iterator();
+ 
+-        while(var2.hasNext()) {
+-            String biomeName = (String)var2.next();
+-            ((List)undergroundSpawns.get(biomeName)).stream().filter((sd) -> {
+-                return !alreadyListed.contains(sd.name);
+-            }).forEach((sd) -> {
++		for (String biomeName : undergroundSpawns.keySet()) {
++			(undergroundSpawns.get(biomeName)).stream().filter((sd) -> !alreadyListed.contains(sd.name)).forEach((sd) -> {
+                 undergroundSpawnData.add(sd);
+                 alreadyListed.add(sd.name);
+             });
+@@ -257,11 +243,11 @@
+     }
+ 
+     public static List<SpawnData> getWaterSpawnsForBiome(String biomeName) {
+-        return (List)biomeWaterSpawns.get(biomeName);
++		return biomeWaterSpawns.get(biomeName);
+     }
+ 
+     public static List<SpawnData> getAirSpawnsForBiome(String biomeName) {
+-        return (List)airSpawns.get(biomeName);
++		return airSpawns.get(biomeName);
+     }
+ 
+     public static List<SpawnData> getNPCSpawnsForBiome(String biomeID) {
+@@ -270,11 +256,11 @@
+         EnumNPCType[] var3 = EnumNPCType.values();
+         int var4 = var3.length;
+ 
+-        for(int var5 = 0; var5 < var4; ++var5) {
++		for (int var5 = 0; var5 < var4; ++var5) {
+             EnumNPCType t = var3[var5];
+             HashMap typeSpawns = npcSpawns[t.ordinal()];
+             List spawnsForBiome;
+-            if (typeSpawns != null && (spawnsForBiome = (List)typeSpawns.get(biomeID)) != null) {
++			if (typeSpawns != null && (spawnsForBiome = (List) typeSpawns.get(biomeID)) != null) {
+                 eligibleTypes.add(spawnsForBiome);
+                 eligibleTypeRarities.add(ServerNPCRegistry.rarities.getRarityForType(t));
+             }
+@@ -282,7 +268,7 @@
+ 
+         int npcTypeIndex = RandomHelper.getRandomIndexFromWeights(eligibleTypeRarities);
+         if (npcTypeIndex != -1) {
+-            return (List)eligibleTypes.get(npcTypeIndex);
++			return (List) eligibleTypes.get(npcTypeIndex);
+         } else {
+             return null;
+         }

@@ -1,14 +1,23 @@
 --- a/com/pixelmongenerations/common/block/MultiBlock.java
 +++ b/com/pixelmongenerations/common/block/MultiBlock.java
-@@ -51,7 +51,7 @@
+@@ -37,7 +37,7 @@
+     public int width;
+     public int length;
+     public double height;
+-    private static HashMap<Block, BoundingBoxSet> boundingBoxes;
++    private static final HashMap<Block, BoundingBoxSet> boundingBoxes;
+ 
+     protected MultiBlock(Material material, int width, double height, int length) {
+         super(material);
+@@ -47,7 +47,7 @@
+     }
+ 
+     protected BlockStateContainer createBlockState() {
+-        return new BlockStateContainer(this, new IProperty[]{FACING, MULTIPOS});
++        return new BlockStateContainer(this, FACING, MULTIPOS);
      }
  
      public IBlockState getStateFromMeta(int meta) {
--        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(MULTIPOS, EnumMultiPos.fromMeta((meta & 15) >> 2));
-+        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(MULTIPOS, EnumMultiPos.fromMeta((meta & 15) >> 2));
-     }
- 
-     public IBlockState withRotation(IBlockState state, Rotation rot) {
 @@ -141,7 +141,7 @@
      }
  

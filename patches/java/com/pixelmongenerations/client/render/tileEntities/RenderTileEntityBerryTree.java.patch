@@ -52,10 +52,10 @@
 -                builder.pos(0.0D, 1.0D, 0.0D).tex(1.0D, 0.0D).color(r, g, b, 1.0F).normal((float)f.getXOffset(), (float)f.getYOffset(), (float)f.getZOffset()).endVertex();
 -                builder.pos(1.0D, 1.0D, 0.0D).tex(0.0D, 0.0D).color(r, g, b, 1.0F).normal((float)f.getXOffset(), (float)f.getYOffset(), (float)f.getZOffset()).endVertex();
 -                builder.pos(1.0D, 0.0D, 0.0D).tex(0.0D, 1.0D).color(r, g, b, 1.0F).normal((float)f.getXOffset(), (float)f.getYOffset(), (float)f.getZOffset()).endVertex();
-+                builder.pos(0.0D, 0.0D, 0.0D).tex(1.0D, 1.0D).color(r, g, b, 1.0F).normal((float) f.getFrontOffsetX(), (float) f.getFrontOffsetY(), (float) f.getFrontOffsetZ()).endVertex();
-+                builder.pos(0.0D, 1.0D, 0.0D).tex(1.0D, 0.0D).color(r, g, b, 1.0F).normal((float) f.getFrontOffsetX(), (float) f.getFrontOffsetY(), (float) f.getFrontOffsetZ()).endVertex();
-+                builder.pos(1.0D, 1.0D, 0.0D).tex(0.0D, 0.0D).color(r, g, b, 1.0F).normal((float) f.getFrontOffsetX(), (float) f.getFrontOffsetY(), (float) f.getFrontOffsetZ()).endVertex();
-+                builder.pos(1.0D, 0.0D, 0.0D).tex(0.0D, 1.0D).color(r, g, b, 1.0F).normal((float) f.getFrontOffsetX(), (float) f.getFrontOffsetY(), (float) f.getFrontOffsetZ()).endVertex();
++                builder.pos(0.0D, 0.0D, 0.0D).tex(1.0D, 1.0D).color(r, g, b, 1.0F).normal((float) f.getXOffset(), (float) f.getYOffset(), (float) f.getZOffset()).endVertex();
++                builder.pos(0.0D, 1.0D, 0.0D).tex(1.0D, 0.0D).color(r, g, b, 1.0F).normal((float) f.getXOffset(), (float) f.getYOffset(), (float) f.getZOffset()).endVertex();
++                builder.pos(1.0D, 1.0D, 0.0D).tex(0.0D, 0.0D).color(r, g, b, 1.0F).normal((float) f.getXOffset(), (float) f.getYOffset(), (float) f.getZOffset()).endVertex();
++                builder.pos(1.0D, 0.0D, 0.0D).tex(0.0D, 1.0D).color(r, g, b, 1.0F).normal((float) f.getXOffset(), (float) f.getYOffset(), (float) f.getZOffset()).endVertex();
                  Tessellator.getInstance().draw();
                  GlStateManager.popMatrix();
                  GlStateManager.popMatrix();

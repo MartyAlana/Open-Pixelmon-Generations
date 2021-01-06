@@ -18,12 +18,77 @@
          if (nullIndex == -1) {
              a.add(value);
          } else {
-@@ -167,7 +167,7 @@
+@@ -127,23 +127,21 @@
+ 
+     public static <K, V> Map<K, V> addEntries(Map<K, V> map, Object[] kvs) {
+         for(int i = 0; i < kvs.length / 2; ++i) {
+-            map.put(kvs[i * 2], kvs[i * 2 + 1]);
++            map.put((K) kvs[i * 2], (V) kvs[i * 2 + 1]);
+         }
+ 
+         return map;
+     }
+ 
+     public static String[] getLinesInCurlyBracketBlock(BufferedReader reader, String line, String regexCriteria) {
+-        int lcbi = true;
+-        int rcbi = true;
+-        ArrayList params = new ArrayList();
++        ArrayList params = new ArrayList<>();
+ 
+         try {
+             if (line == null) {
+                 line = reader.readLine();
+             }
+ 
+-            while(line != null && line.indexOf("{") < 0) {
++            while(line != null && !line.contains("{")) {
+                 line = reader.readLine();
+             }
+ 
+@@ -152,14 +150,14 @@
+                     params.add(line);
+                 }
+ 
+-                if (line.indexOf("}") >= 0) {
+-                    return (String[])params.toArray(new String[params.size()]);
++                if (line.contains("}")) {
++                    return (String[])params.toArray(new String[0]);
+                 }
+ 
+                 line = reader.readLine();
+             }
+ 
+-            return (String[])params.toArray(new String[params.size()]);
++            return (String[])params.toArray(new String[0]);
+         } catch (IOException var7) {
+             throw new RuntimeException(var7);
+         }
+@@ -167,22 +165,15 @@
  
      public static <V> V getIgnoreCase(Map<String, V> map, String key) {
          if (key == null) {
 -            return map.get((Object)null);
 +            return map.get(null);
          } else {
-             Iterator var2 = map.entrySet().iterator();
+-            Iterator var2 = map.entrySet().iterator();
+-
+-            Entry entry;
+-            do {
+-                if (!var2.hasNext()) {
+-                    return null;
++            return map.entrySet().stream()
++                    .filter(entry -> entry.getKey().equalsIgnoreCase(key))
++                    .findAny()
++                    .map(Entry::getValue)
++                    .orElse(null);
+                 }
+-
+-                entry = (Entry)var2.next();
+-            } while(!key.equalsIgnoreCase((String)entry.getKey()));
+-
+-            return entry.getValue();
+         }
+-    }
  
+     public static String textInQuotes(String str) {
+         return RegexPatterns.REMOVEQUOTES.matcher(str).replaceAll("$1").trim();

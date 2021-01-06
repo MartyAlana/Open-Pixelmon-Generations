@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/data/moves/MoveLoader.java
++++ b/com/pixelmongenerations/core/data/moves/MoveLoader.java
+@@ -125,7 +125,7 @@
+                                 relevantPath = setPath.getParent().getFileName().toString() + "/" + relevantPath;
+                             }
+ 
+-                            File file = new File(primaryPath + "/" + relevantPath + set.getUnlocalizedName() + ".move.json");
++                            File file = new File(primaryPath + "/" + relevantPath + set.getTranslationKey() + ".move.json");
+                             if (!file.exists()) {
+                                 file.getParentFile().mkdirs();
+                                 PrintWriter pw = new PrintWriter(file);

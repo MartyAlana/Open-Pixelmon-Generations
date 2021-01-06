@@ -1,0 +1,41 @@
+--- a/com/pixelmongenerations/core/command/CheckSpawns.java
++++ b/com/pixelmongenerations/core/command/CheckSpawns.java
+@@ -63,12 +63,10 @@
+ 
+             EntityPlayerMP player = (EntityPlayerMP)sender;
+             PlayerTrackingSpawner pspawner = null;
+-            Iterator var12 = PixelmonSpawning.coordinator.spawners.iterator();
+ 
+-            while(var12.hasNext()) {
+-                AbstractSpawner abstractSpawner = (AbstractSpawner)var12.next();
+-                if (abstractSpawner instanceof PlayerTrackingSpawner && ((PlayerTrackingSpawner)abstractSpawner).playerUUID.equals(player.getUniqueID())) {
+-                    pspawner = (PlayerTrackingSpawner)abstractSpawner;
++            for (AbstractSpawner abstractSpawner : PixelmonSpawning.coordinator.spawners) {
++                if (abstractSpawner instanceof PlayerTrackingSpawner && ((PlayerTrackingSpawner) abstractSpawner).playerUUID.equals(player.getUniqueID())) {
++                    pspawner = (PlayerTrackingSpawner) abstractSpawner;
+                     break;
+                 }
+             }
+@@ -78,10 +76,11 @@
+                 return;
+             }
+ 
++            PlayerTrackingSpawner finalPspawner = pspawner;
+             PixelmonSpawning.coordinator.processor.addProcess(() -> {
+                 BlockPos pos = player.getPosition();
+-                BlockCollection collection = new BlockCollection(player.getEntityWorld(), pos.getX() - pspawner.horizontalSliceRadius, pos.getX() + pspawner.horizontalSliceRadius, pos.getY() - pspawner.verticalSliceRadius, pos.getY() + pspawner.verticalSliceRadius, pos.getZ() - pspawner.horizontalSliceRadius, pos.getZ() + pspawner.horizontalSliceRadius);
+-                ICalculateSpawnLocations calculator = pspawner.spawnLocationCalculator;
++                BlockCollection collection = new BlockCollection(player.getEntityWorld(), pos.getX() - finalPspawner.horizontalSliceRadius, pos.getX() + finalPspawner.horizontalSliceRadius, pos.getY() - finalPspawner.verticalSliceRadius, pos.getY() + finalPspawner.verticalSliceRadius, pos.getZ() - finalPspawner.horizontalSliceRadius, pos.getZ() + finalPspawner.horizontalSliceRadius);
++                ICalculateSpawnLocations calculator = finalPspawner.spawnLocationCalculator;
+                 ArrayList<SpawnInfo> possibleSpawns = new ArrayList();
+                 float raritySum = 0.0F;
+                 HashMap<SpawnInfo, Float> adjustedRarities = new HashMap();
+@@ -166,7 +165,7 @@
+                         spawnLocation = (SpawnLocation)var13.next();
+                     } while(!spawnLocation.location.pos.equals(pos) && !regional);
+ 
+-                    ArrayList<SpawnInfo> blockPossibleSpawns = pspawner.getSuitableSpawns(spawnLocation);
++                    ArrayList<SpawnInfo> blockPossibleSpawns = finalPspawner.getSuitableSpawns(spawnLocation);
+                     Iterator var16 = blockPossibleSpawns.iterator();
+ 
+                     while(var16.hasNext()) {

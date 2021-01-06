@@ -1,5 +1,14 @@
 --- a/com/pixelmongenerations/core/command/Debug.java
 +++ b/com/pixelmongenerations/core/command/Debug.java
+@@ -62,7 +62,7 @@
+ 
+     public void execute(ICommandSender sender, String[] args) throws CommandException {
+         if (args.length == 0) {
+-            throw new CommandException(this.getUsage(sender), new Object[0]);
++            throw new CommandException(this.getUsage(sender));
+         } else {
+             String var3 = args[0].toLowerCase();
+             byte var4 = -1;
 @@ -145,7 +145,7 @@
                  try {
                      Method m = PixelmonModelRegistry.class.getDeclaredMethod("init");
@@ -9,3 +18,155 @@
                  } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException var39) {
                      var39.printStackTrace();
                  }
+@@ -173,7 +173,7 @@
+                 }
+ 
+                 long toc = System.currentTimeMillis();
+-                this.sendMessage(sender, "Time to process " + n + " collections of radius " + radius + " (" + n * 8 * radius * radius * radius + " blocks): " + (toc - tic) + " milliseconds.", new Object[0]);
++                this.sendMessage(sender, "Time to process " + n + " collections of radius " + radius + " (" + n * 8 * radius * radius * radius + " blocks): " + (toc - tic) + " milliseconds.");
+                 break;
+             case 6:
+                 if (args.length != 3) {
+@@ -187,7 +187,7 @@
+                             form = parseInt(args[1].split(":")[1]);
+                         }
+ 
+-                        EnumSpecies pokemon = EnumSpecies.valueOf(name);
++                        pokemon = EnumSpecies.valueOf(name);
+                         double scale = parseDouble(args[2]);
+                         PixelmonModelBase model = (PixelmonModelBase)PixelmonModelRegistry.getModel(pokemon, pokemon.getFormEnum(form));
+                         if (model instanceof PixelmonModelSmd) {
+@@ -234,15 +234,15 @@
+ 
+                 for(var55 = 0; var55 < var45; ++var55) {
+                     pokemon = var43[var55];
+-                    set = (SpawnSet)SetLoader.getSet(pokemon.name());
++                    set = SetLoader.getSet(pokemon.name());
+                     if (set != null) {
+                         if (set.spawnInfos.size() == 1) {
+                             SpawnInfoPokemon pokemonInfo = (SpawnInfoPokemon)set.spawnInfos.get(0);
+                             PokemonSpec spec = pokemonInfo.getPokemonSpec();
+-                            species = (EnumSpecies)EnumSpecies.getFromName(spec.name).get();
++                            species = EnumSpecies.getFromName(spec.name).get();
+                             if (!EnumSpecies.formList.containsKey(species)) {
+                                 spec.form = -1;
+-                            } else if (((IEnumForm)EnumSpecies.formList.get(species).get(0)).getClass() == EnumForms.class) {
++                            } else if (EnumSpecies.formList.get(species).get(0).getClass() == EnumForms.class) {
+                             }
+ 
+                             pokemonInfo.setPokemon(spec);
+@@ -263,10 +263,10 @@
+                     if (list.isEmpty()) {
+                         return "";
+                     } else {
+-                        String str = cap ? (String)raiseFirstCap.apply(list.get(0).toString()) : list.get(0).toString();
++                        String str = cap ? raiseFirstCap.apply(list.get(0).toString()) : list.get(0).toString();
+ 
+                         for(int i = 1; i < list.size(); ++i) {
+-                            str = str + ", " + (cap ? (String)raiseFirstCap.apply(list.get(i).toString()) : list.get(i).toString());
++                            str = str + ", " + (cap ? raiseFirstCap.apply(list.get(i).toString()) : list.get(i).toString());
+                         }
+ 
+                         return str + "\n";
+@@ -278,11 +278,10 @@
+                     file.createNewFile();
+                     PrintWriter pw = new PrintWriter(file);
+                     EnumSpecies[] var47 = EnumSpecies.values();
+-                    int var49 = var47.length;
+ 
+-                    for(int var53 = 0; var53 < var49; ++var53) {
+-                        species = var47[var53];
+-                        SpawnSet set = (SpawnSet)SetLoader.getSet(species.name);
++                    for (EnumSpecies enumSpecies : var47) {
++                        species = enumSpecies;
++                        set = SetLoader.getSet(species.name);
+                         if (set == null) {
+                             System.out.println("Empty: " + species.name);
+                         } else {
+@@ -292,14 +291,12 @@
+                             ArrayList<String> biomes = new ArrayList();
+                             ArrayList<WorldTime> times = new ArrayList();
+                             ArrayList<WeatherType> weathers = new ArrayList();
+-                            Iterator var32 = set.spawnInfos.iterator();
+ 
+-                            while(var32.hasNext()) {
+-                                SpawnInfo info = (SpawnInfo)var32.next();
++                            for (SpawnInfo info : set.spawnInfos) {
+                                 Iterator var34 = info.locationTypes.iterator();
+ 
+-                                while(var34.hasNext()) {
+-                                    LocationType location = (LocationType)var34.next();
++                                while (var34.hasNext()) {
++                                    LocationType location = (LocationType) var34.next();
+                                     if (!locations.contains(location)) {
+                                         locations.add(location);
+                                     }
+@@ -307,8 +304,8 @@
+ 
+                                 var34 = info.condition.biomes.iterator();
+ 
+-                                while(var34.hasNext()) {
+-                                    Biome biome = (Biome)var34.next();
++                                while (var34.hasNext()) {
++                                    Biome biome = (Biome) var34.next();
+                                     PixelmonBiomeDictionary.PixelmonBiomeInfo biomeInfo = PixelmonBiomeDictionary.getBiomeInfo(biome);
+                                     if (!biomes.contains(biomeInfo.biomeEnglishName)) {
+                                         biomes.add(biomeInfo.biomeEnglishName);
+@@ -317,8 +314,8 @@
+ 
+                                 var34 = info.condition.times.iterator();
+ 
+-                                while(var34.hasNext()) {
+-                                    WorldTime time = (WorldTime)var34.next();
++                                while (var34.hasNext()) {
++                                    WorldTime time = (WorldTime) var34.next();
+                                     if (!times.contains(time)) {
+                                         times.add(time);
+                                     }
+@@ -326,24 +323,24 @@
+ 
+                                 var34 = info.condition.weathers.iterator();
+ 
+-                                while(var34.hasNext()) {
+-                                    WeatherType weather = (WeatherType)var34.next();
++                                while (var34.hasNext()) {
++                                    WeatherType weather = (WeatherType) var34.next();
+                                     if (!weathers.contains(weather)) {
+                                         weathers.add(weather);
+                                     }
+                                 }
+                             }
+ 
+-                            String locString = (String)listToString.apply(locations, true);
++                            String locString = listToString.apply(locations, true);
+                             if (!locString.equals("")) {
+                                 wikiBit = wikiBit + "|" + locString;
+-                                String biomeString = (String)listToString.apply(biomes, false);
++                                String biomeString = listToString.apply(biomes, false);
+                                 if (!biomeString.equals("")) {
+                                     wikiBit = wikiBit + "|" + biomeString;
+-                                    String timeString = (String)listToString.apply(times, true);
++                                    String timeString = listToString.apply(times, true);
+                                     if (!timeString.equals("")) {
+                                         wikiBit = wikiBit + "|" + timeString;
+-                                        String weatherString = (String)listToString.apply(weathers, true);
++                                        String weatherString = listToString.apply(weathers, true);
+                                         if (!weatherString.equals("")) {
+                                             wikiBit = wikiBit + "|" + weatherString;
+                                             wikiBit = wikiBit + "|-\n";
+@@ -365,12 +362,12 @@
+             case 11:
+                 String action = args[1].toLowerCase();
+                 if (!action.equals("matches") && !action.equals("apply")) {
+-                    throw new CommandException("Use with /pixeldebug testspec <matches/apply> <slot> <spec>", new Object[0]);
++                    throw new CommandException("Use with /pixeldebug testspec <matches/apply> <slot> <spec>");
+                 }
+ 
+-                PlayerStorage storage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage((EntityPlayerMP)sender).get();
++                PlayerStorage storage = PixelmonStorage.pokeBallManager.getPlayerStorage((EntityPlayerMP)sender).get();
+                 EntityPixelmon pixelmon = storage.getPokemon(storage.getIDFromPosition(parseInt(args[2], 0, 5)), sender.getEntityWorld());
+-                String[] specs = (String[])Arrays.asList(args).subList(3, args.length).toArray(new String[0]);
++                String[] specs = Arrays.copyOfRange(args, 3, args.length);
+                 sender.sendMessage(new TextComponentString(String.format("Testing '%s' on %s.", String.join(" ", specs), pixelmon.getName())));
+                 if (action.equals("matches")) {
+                     boolean result = (new PokemonSpec(specs)).matches(pixelmon);

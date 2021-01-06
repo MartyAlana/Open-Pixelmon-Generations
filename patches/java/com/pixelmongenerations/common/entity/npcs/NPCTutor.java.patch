@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/common/entity/npcs/NPCTutor.java
++++ b/com/pixelmongenerations/common/entity/npcs/NPCTutor.java
+@@ -112,7 +112,7 @@
+             nbt.setInteger("numAttacks", this.attackList.size());
+ 
+             for(int i = 0; i < this.attackList.size(); ++i) {
+-                nbt.setString("attack" + i, ((Attack)this.attackList.get(i)).getAttackBase().getUnlocalizedName());
++                nbt.setString("attack" + i, ((Attack)this.attackList.get(i)).getAttackBase().getTranslationKey());
+                 nbt.setInteger("attack" + i + "costNum", ((ArrayList)this.costs.get(i)).size());
+ 
+                 for(int j = 0; j < ((ArrayList)this.costs.get(i)).size(); ++j) {
+@@ -227,7 +227,7 @@
+             buf.writeInt(attackList.size());
+ 
+             for(int i = 0; i < attackList.size(); ++i) {
+-                ByteBufUtils.writeUTF8String(buf, ((Attack)attackList.get(i)).getAttackBase().getUnlocalizedName());
++                ByteBufUtils.writeUTF8String(buf, ((Attack)attackList.get(i)).getAttackBase().getTranslationKey());
+                 buf.writeInt(((ArrayList)costs.get(i)).size());
+ 
+                 for(int j = 0; j < ((ArrayList)costs.get(i)).size(); ++j) {

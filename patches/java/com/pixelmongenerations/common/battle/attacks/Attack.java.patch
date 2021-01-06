@@ -19,3 +19,40 @@
              AbilityBase userAbility = user.getBattleAbility();
              if (userAbility instanceof SuperLuck) {
                  ++critStage;
+@@ -1039,7 +1038,7 @@
+ 
+         for(int var4 = 0; var4 < var3; ++var4) {
+             String a = var2[var4];
+-            if (this.getAttackBase().getUnlocalizedName().equalsIgnoreCase(a)) {
++            if (this.getAttackBase().getTranslationKey().equalsIgnoreCase(a)) {
+                 return true;
+             }
+         }
+@@ -1120,15 +1119,15 @@
+     }
+ 
+     public boolean equals(Object compare) {
+-        return !(compare instanceof Attack) ? false : this.getAttackBase().getUnlocalizedName().equalsIgnoreCase(((Attack)compare).getAttackBase().getUnlocalizedName());
++        return !(compare instanceof Attack) ? false : this.getAttackBase().getTranslationKey().equalsIgnoreCase(((Attack)compare).getAttackBase().getTranslationKey());
+     }
+ 
+     public int hashCode() {
+-        return this.getAttackBase() == null ? 0 : this.getAttackBase().getUnlocalizedName().hashCode();
++        return this.getAttackBase() == null ? 0 : this.getAttackBase().getTranslationKey().hashCode();
+     }
+ 
+     public String toString() {
+-        return this.getAttackBase().getUnlocalizedName();
++        return this.getAttackBase().getTranslationKey();
+     }
+ 
+     public double getTypeEffectiveness(PixelmonWrapper user, PixelmonWrapper target) {
+@@ -1214,7 +1213,7 @@
+             while(var2.hasNext()) {
+                 AttackBase a = (AttackBase)var2.next();
+                 fullAttackList[a.attackIndex] = a;
+-                fullAttackMap.put(a.getUnlocalizedName().toLowerCase(), a);
++                fullAttackMap.put(a.getTranslationKey().toLowerCase(), a);
+                 fullAttackMap.put(a.getLocalizedName().toLowerCase(), a);
+             }
+         }

@@ -1,0 +1,18 @@
+--- a/com/pixelmongenerations/core/config/PixelmonItemsTMs.java
++++ b/com/pixelmongenerations/core/config/PixelmonItemsTMs.java
+@@ -24,13 +24,13 @@
+             return attack.trIndex != -1 || attack.tmIndex != -1;
+         }).forEach((attack) -> {
+             if (attack.tmIndex != -1 && !usedTms.contains(attack.tmIndex)) {
+-                ItemTM item = new ItemTM(attack.getUnlocalizedName(), attack.tmIndex, attack.attackType, false);
++                ItemTM item = new ItemTM(attack.getTranslationKey(), attack.tmIndex, attack.attackType, false);
+                 TMs.add(item);
+                 usedTms.add(attack.tmIndex);
+             }
+ 
+             if (attack.trIndex != -1 && !usedHms.contains(attack.trIndex)) {
+-                ItemTR itemx = new ItemTR(attack.getUnlocalizedName(), attack.trIndex, attack.attackType);
++                ItemTR itemx = new ItemTR(attack.getTranslationKey(), attack.trIndex, attack.attackType);
+                 TRs.add(itemx);
+                 usedHms.add(attack.trIndex);
+             }

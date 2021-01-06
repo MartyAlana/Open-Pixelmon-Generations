@@ -1,0 +1,285 @@
+--- a/com/pixelmongenerations/common/block/spawning/BlockSpawningHandler.java
++++ b/com/pixelmongenerations/common/block/spawning/BlockSpawningHandler.java
+@@ -49,7 +49,7 @@
+ 
+     public void performBattleStartCheck(World world, BlockPos pos, Entity entity, EntityPixelmon entityPixelmon, String areaname, EnumBattleStartTypes startType) {
+         EntityPlayerMP playerMP = (EntityPlayerMP)entity;
+-        if (BattleRegistry.getBattle((EntityPlayer)playerMP) == null) {
++        if (BattleRegistry.getBattle(playerMP) == null) {
+             if (!MinecraftForge.EVENT_BUS.post(new PixelmonBlockTriggeredBattleEvent(this, world, pos, playerMP, entityPixelmon, startType))) {
+                 if (startType != EnumBattleStartTypes.PUGRASSSINGLE && startType != EnumBattleStartTypes.PUGRASSDOUBLE && startType != EnumBattleStartTypes.SEAWEED && startType != EnumBattleStartTypes.CUSTOMGRASS) {
+                     if (startType == EnumBattleStartTypes.HEADBUTT) {
+@@ -68,7 +68,7 @@
+                         this.createBattle(world, pos, playerMP, areaname, EnumBattleStartTypes.SWEETSCENT, entityPixelmon);
+                     }
+                 } else if (startType == EnumBattleStartTypes.PUGRASSSINGLE) {
+-                    this.createBattle(world, pos, playerMP, areaname, EnumBattleStartTypes.PUGRASSSINGLE, (EntityPixelmon)null);
++                    this.createBattle(world, pos, playerMP, areaname, EnumBattleStartTypes.PUGRASSSINGLE, null);
+                 } else if (startType == EnumBattleStartTypes.PUGRASSDOUBLE) {
+                     this.createDoubleBattle(world, pos, playerMP, areaname);
+                 } else if (startType == EnumBattleStartTypes.SEAWEED) {
+@@ -86,7 +86,7 @@
+         BlockSpawnData spawnData = null;
+         Optional<PlayerStorage> optstorage = PixelmonStorage.pokeBallManager.getPlayerStorage(player);
+         if (optstorage.isPresent()) {
+-            PlayerStorage storage = (PlayerStorage)optstorage.get();
++            PlayerStorage storage = optstorage.get();
+             if (storage.getFirstAblePokemon(worldIn) == null) {
+                 return;
+             }
+@@ -98,19 +98,19 @@
+                 SpawnLocation spawnLocation;
+                 if (startType == EnumBattleStartTypes.HEADBUTT) {
+                     if (Headbutt.HEADBUTT_SPAWNER != null && PixelmonSpawning.coordinator != null) {
+-                        spawnLocation = new SpawnLocation(new MutableLocation(worldIn, pos), LocationType.getPotentialTypes(worldIn.getBlockState(player.getPosition().add(0, -1, 0))), worldIn.getBlockState(pos).getBlock(), (ArrayList)null, worldIn.getBiome(pos), worldIn.canSeeSky(pos), 6);
++                        spawnLocation = new SpawnLocation(new MutableLocation(worldIn, pos), LocationType.getPotentialTypes(worldIn.getBlockState(player.getPosition().add(0, -1, 0))), worldIn.getBlockState(pos).getBlock(), null, worldIn.getBiome(pos), worldIn.canSeeSky(pos), 6);
+                         Entity entity = Headbutt.HEADBUTT_SPAWNER.trigger(spawnLocation);
+                         if (entity instanceof EntityPixelmon) {
+                             pixelmon = (EntityPixelmon)entity;
+                         }
+                     } else {
+                         int heatbuttSelector = RNG.nextInt(EnumSpecies.headbuttEncounters.size());
+-                        String pokemonName = ((EnumSpecies)EnumSpecies.getFromName((String)EnumSpecies.headbuttEncounters.get(heatbuttSelector)).orElse(EnumSpecies.Magikarp)).name;
++                        pokemonName = EnumSpecies.getFromName(EnumSpecies.headbuttEncounters.get(heatbuttSelector)).orElse(EnumSpecies.Magikarp).name;
+ 
+                         while(true) {
+                             if (!pokemonName.equals(EnumSpecies.Magikarp.name)) {
+                                 pixelmon = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                                pixelmon.setLocationAndAngles((double)pos.getX(), (double)pos.up().getY(), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                                pixelmon.setLocationAndAngles(pos.getX(), pos.up().getY(), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+                                 if (!worldIn.isRemote) {
+                                     worldIn.spawnEntity(pixelmon);
+                                 }
+@@ -118,13 +118,13 @@
+                             }
+ 
+                             heatbuttSelector = RNG.nextInt(EnumSpecies.headbuttEncounters.size());
+-                            pokemonName = ((EnumSpecies)EnumSpecies.getFromName((String)EnumSpecies.headbuttEncounters.get(heatbuttSelector)).orElse(EnumSpecies.Magikarp)).name;
++                            pokemonName = EnumSpecies.getFromName(EnumSpecies.headbuttEncounters.get(heatbuttSelector)).orElse(EnumSpecies.Magikarp).name;
+                         }
+                     }
+ 
+-                    playerParticipant = new PlayerParticipant(player, new EntityPixelmon[]{fightingPokemon});
+-                    WildPixelmonParticipant wildPixelmonParticipant = new WildPixelmonParticipant(true, new EntityPixelmon[]{pixelmon});
+-                    if (pixelmon == null || MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, startType, fightingPokemon, pixelmon, (EntityPixelmon)null))) {
++                    playerParticipant = new PlayerParticipant(player, fightingPokemon);
++                    WildPixelmonParticipant wildPixelmonParticipant = new WildPixelmonParticipant(true, pixelmon);
++                    if (pixelmon == null || MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, startType, fightingPokemon, pixelmon, null))) {
+                         return;
+                     }
+ 
+@@ -135,19 +135,19 @@
+                         SpatialData data = RockSmash.ROCK_SMASH_SPAWNER.calculateSpatialData(worldIn, pos.up(), 10, true, (block) -> {
+                             return true;
+                         });
+-                        SpawnLocation spawnLocation = new SpawnLocation(new MutableLocation(worldIn, pos), Lists.newArrayList(new LocationType[]{LocationType.ROCK_SMASH}), data.baseBlock, data.uniqueSurroundingBlocks, worldIn.getBiome(pos), worldIn.canSeeSky(pos), 10);
++                        spawnLocation = new SpawnLocation(new MutableLocation(worldIn, pos), Lists.newArrayList(LocationType.ROCK_SMASH), data.baseBlock, data.uniqueSurroundingBlocks, worldIn.getBiome(pos), worldIn.canSeeSky(pos), 10);
+                         Object entity = RockSmash.ROCK_SMASH_SPAWNER.trigger(spawnLocation);
+                         if (entity instanceof EntityPixelmon) {
+                             pixelmon = (EntityPixelmon)entity;
+                         }
+                     } else {
+                         minLvl = RNG.nextInt(EnumSpecies.rockSmashEncounters.size());
+-                        pokemonName = ((EnumSpecies)EnumSpecies.getFromName((String)EnumSpecies.rockSmashEncounters.get(minLvl)).orElse(EnumSpecies.Magikarp)).name;
++                        pokemonName = EnumSpecies.getFromName(EnumSpecies.rockSmashEncounters.get(minLvl)).orElse(EnumSpecies.Magikarp).name;
+ 
+                         while(true) {
+                             if (!pokemonName.equals(EnumSpecies.Magikarp.name)) {
+                                 pixelmon = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                                pixelmon.setLocationAndAngles((double)pos.getX(), (double)pos.up().getY(), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                                pixelmon.setLocationAndAngles(pos.getX(), pos.up().getY(), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+                                 if (!worldIn.isRemote) {
+                                     worldIn.spawnEntity(pixelmon);
+                                 }
+@@ -155,20 +155,20 @@
+                             }
+ 
+                             minLvl = RNG.nextInt(EnumSpecies.rockSmashEncounters.size());
+-                            pokemonName = ((EnumSpecies)EnumSpecies.getFromName((String)EnumSpecies.rockSmashEncounters.get(minLvl)).orElse(EnumSpecies.Magikarp)).name;
++                            pokemonName = EnumSpecies.getFromName(EnumSpecies.rockSmashEncounters.get(minLvl)).orElse(EnumSpecies.Magikarp).name;
+                         }
+                     }
+ 
+-                    playerParticipant = new PlayerParticipant(player, new EntityPixelmon[]{fightingPokemon});
+-                    WildPixelmonParticipant wildPixelmonParticipant = new WildPixelmonParticipant(true, new EntityPixelmon[]{pixelmon});
+-                    if (pixelmon == null || MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, startType, fightingPokemon, pixelmon, (EntityPixelmon)null))) {
++                    playerParticipant = new PlayerParticipant(player, fightingPokemon);
++                    WildPixelmonParticipant wildPixelmonParticipant = new WildPixelmonParticipant(true, pixelmon);
++                    if (pixelmon == null || MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, startType, fightingPokemon, pixelmon, null))) {
+                         return;
+                     }
+ 
+                     wildPixelmonParticipant.startedBattle = true;
+                     new BattleControllerBase(playerParticipant, wildPixelmonParticipant);
+                 } else if (startType == EnumBattleStartTypes.SWEETSCENT && PixelmonSpawning.coordinator != null) {
+-                    spawnLocation = new SpawnLocation(new MutableLocation(worldIn, pos), LocationType.getPotentialTypes(worldIn.getBlockState(player.getPosition().add(0, -1, 0))), worldIn.getBlockState(pos).getBlock(), (ArrayList)null, worldIn.getBiome(pos), worldIn.canSeeSky(pos), 6);
++                    spawnLocation = new SpawnLocation(new MutableLocation(worldIn, pos), LocationType.getPotentialTypes(worldIn.getBlockState(player.getPosition().add(0, -1, 0))), worldIn.getBlockState(pos).getBlock(), null, worldIn.getBiome(pos), worldIn.canSeeSky(pos), 6);
+                     ArrayList<SpawnLocation> spawnLocations = new ArrayList();
+                     spawnLocations.add(spawnLocation);
+                     PlayerTrackingSpawner playerTrackingSpawner = new PlayerTrackingSpawner(player.getUniqueID());
+@@ -186,15 +186,15 @@
+                         return;
+                     }
+ 
+-                    SpawnAction<? extends Entity> spawnAction = (SpawnAction)possibleSpawns.get(0);
++                    SpawnAction<? extends Entity> spawnAction = possibleSpawns.get(0);
+                     Entity entity = spawnAction.getOrCreateEntity();
+                     if (entity instanceof EntityPixelmon) {
+                         pixelmon = (EntityPixelmon)entity;
+                     }
+ 
+-                    PlayerParticipant playerParticipant3 = new PlayerParticipant(player, new EntityPixelmon[]{fightingPokemon});
+-                    WildPixelmonParticipant wildPixelmonParticipant = new WildPixelmonParticipant(true, new EntityPixelmon[]{pixelmon});
+-                    if (pixelmon == null || MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, startType, fightingPokemon, pixelmon, (EntityPixelmon)null))) {
++                    PlayerParticipant playerParticipant3 = new PlayerParticipant(player, fightingPokemon);
++                    WildPixelmonParticipant wildPixelmonParticipant = new WildPixelmonParticipant(true, pixelmon);
++                    if (pixelmon == null || MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, startType, fightingPokemon, pixelmon, null))) {
+                         return;
+                     }
+ 
+@@ -211,11 +211,11 @@
+                     }
+ 
+                     pixelmon = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                    pixelmon.setLocationAndAngles((double)pos.getX(), (double)((float)pos.getY() + spawner.getYOffset((float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), pixelmon)), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                    pixelmon.setLocationAndAngles(pos.getX(), (float)pos.getY() + spawner.getYOffset((float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), pixelmon), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+                 } else if (startType == EnumBattleStartTypes.CUSTOMGRASS) {
+                     pixelmon = fightingPokemon;
+                 } else if (PixelmonSpawning.coordinator != null) {
+-                    SpawnLocation spawnLocation = new SpawnLocation(new MutableLocation(worldIn, pos), LocationType.getPotentialTypes(worldIn.getBlockState(player.getPosition().add(0, -1, 0))), worldIn.getBlockState(pos).getBlock(), (ArrayList)null, worldIn.getBiome(pos), worldIn.canSeeSky(pos), 6);
++                    SpawnLocation spawnLocation = new SpawnLocation(new MutableLocation(worldIn, pos), LocationType.getPotentialTypes(worldIn.getBlockState(player.getPosition().add(0, -1, 0))), worldIn.getBlockState(pos).getBlock(), null, worldIn.getBiome(pos), worldIn.canSeeSky(pos), 6);
+                     ArrayList<SpawnLocation> spawnLocations = new ArrayList();
+                     spawnLocations.add(spawnLocation);
+                     PlayerTrackingSpawner playerTrackingSpawner = new PlayerTrackingSpawner(player.getUniqueID());
+@@ -233,7 +233,7 @@
+                         return;
+                     }
+ 
+-                    SpawnAction<? extends Entity> spawnAction = (SpawnAction)possibleSpawns.get(0);
++                    SpawnAction<? extends Entity> spawnAction = possibleSpawns.get(0);
+                     Entity entity = spawnAction.getOrCreateEntity();
+                     if (entity instanceof EntityPixelmon) {
+                         pixelmon = (EntityPixelmon)entity;
+@@ -261,8 +261,8 @@
+ 
+                     pixelmon.loadMoveset();
+                 } else if (spawnData != null) {
+-                    minLvl = ((BlockSpawnData)spawnData).minLvl;
+-                    maxLvl = ((BlockSpawnData)spawnData).maxLvl;
++                    minLvl = spawnData.minLvl;
++                    maxLvl = spawnData.maxLvl;
+                     if (minLvl < maxLvl) {
+                         int lvl = RNG.nextInt(maxLvl - minLvl) + minLvl;
+                         pixelmon.getLvl().setLevel(lvl);
+@@ -273,9 +273,9 @@
+                     pixelmon.loadMoveset();
+                 }
+ 
+-                PlayerParticipant playerParticipant2 = new PlayerParticipant(player, new EntityPixelmon[]{startingPixelmon});
+-                WildPixelmonParticipant wildPixelmonParticipant2 = new WildPixelmonParticipant(true, new EntityPixelmon[]{pixelmon});
+-                if (MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, startType, fightingPokemon, pixelmon, (EntityPixelmon)null))) {
++                PlayerParticipant playerParticipant2 = new PlayerParticipant(player, startingPixelmon);
++                WildPixelmonParticipant wildPixelmonParticipant2 = new WildPixelmonParticipant(true, pixelmon);
++                if (MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, startType, fightingPokemon, pixelmon, null))) {
+                     return;
+                 }
+ 
+@@ -289,7 +289,7 @@
+     private void createDoubleBattle(World worldIn, BlockPos pos, EntityPlayerMP player, String areaname) {
+         Optional<PlayerStorage> optstorage = PixelmonStorage.pokeBallManager.getPlayerStorage(player);
+         if (optstorage.isPresent()) {
+-            PlayerStorage storage = (PlayerStorage)optstorage.get();
++            PlayerStorage storage = optstorage.get();
+             if (storage.getFirstAblePokemon(worldIn) == null) {
+                 return;
+             }
+@@ -307,24 +307,24 @@
+                 }
+ 
+                 pixelmon1 = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                pixelmon1.setLocationAndAngles((double)pos.getX(), (double)((float)pos.getY() + spawner.getYOffset((float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), pixelmon1)), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                pixelmon1.setLocationAndAngles(pos.getX(), (float)pos.getY() + spawner.getYOffset((float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), pixelmon1), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+                 pokemonName = this.getPixelmonNameFromSpawner(worldIn, pos, spawner);
+                 pixelmon2 = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                pixelmon2.setLocationAndAngles((double)pos.getX(), (double)((float)pos.getY() + spawner.getYOffset((float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), pixelmon2)), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                pixelmon2.setLocationAndAngles(pos.getX(), (float)pos.getY() + spawner.getYOffset((float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), pixelmon2), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+             } else {
+-                BlockSpawnArea spawnArea = (BlockSpawnArea)BlockSpawnRegistry.areaSpawns.get(areaname);
++                BlockSpawnArea spawnArea = BlockSpawnRegistry.areaSpawns.get(areaname);
+                 pokemonName = this.getPixelmonNameFromArea(worldIn, spawnArea);
+                 if (pokemonName == null) {
+                     return;
+                 }
+ 
+-                spawnData1 = (BlockSpawnData)spawnArea.blockSpawns.get(pokemonName);
++                spawnData1 = spawnArea.blockSpawns.get(pokemonName);
+                 pixelmon1 = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                pixelmon1.setLocationAndAngles((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                pixelmon1.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+                 pokemonName = this.getPixelmonNameFromArea(worldIn, spawnArea);
+-                spawnData2 = (BlockSpawnData)spawnArea.blockSpawns.get(pokemonName);
++                spawnData2 = spawnArea.blockSpawns.get(pokemonName);
+                 pixelmon2 = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                pixelmon2.setLocationAndAngles((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                pixelmon2.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+             }
+ 
+             if (!worldIn.isRemote) {
+@@ -375,11 +375,11 @@
+ 
+             EntityPixelmon primaryPixelmon = storage.getFirstAblePokemon(worldIn);
+             EntityPixelmon secondaryPixelmon = storage.getSecondAblePokemon(worldIn);
+-            if (MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, EnumBattleStartTypes.PUGRASSDOUBLE, (EntityPixelmon)null, pixelmon1, pixelmon2))) {
++            if (MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, EnumBattleStartTypes.PUGRASSDOUBLE, null, pixelmon1, pixelmon2))) {
+                 return;
+             }
+ 
+-            new BattleControllerBase(new PlayerParticipant(player, new EntityPixelmon[]{primaryPixelmon, secondaryPixelmon}), new WildPixelmonParticipant(true, new EntityPixelmon[]{pixelmon1, pixelmon2}));
++            new BattleControllerBase(new PlayerParticipant(player, primaryPixelmon, secondaryPixelmon), new WildPixelmonParticipant(true, pixelmon1, pixelmon2));
+         }
+ 
+     }
+@@ -389,7 +389,7 @@
+         BlockSpawnData spawnData = null;
+         Optional<PlayerStorage> optstorage = PixelmonStorage.pokeBallManager.getPlayerStorage(player);
+         if (optstorage.isPresent()) {
+-            PlayerStorage storage = (PlayerStorage)optstorage.get();
++            PlayerStorage storage = optstorage.get();
+             if (storage.getFirstAblePokemon(worldIn) == null) {
+                 return;
+             }
+@@ -404,17 +404,17 @@
+                 }
+ 
+                 pixelmon = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                pixelmon.setLocationAndAngles((double)pos.getX(), (double)((float)pos.getY() + spawner.getYOffset((float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), pixelmon)), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                pixelmon.setLocationAndAngles(pos.getX(), (float)pos.getY() + spawner.getYOffset((float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), pixelmon), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+             } else {
+-                BlockSpawnArea spawnArea = (BlockSpawnArea)BlockSpawnRegistry.areaSpawns.get(areaname);
++                BlockSpawnArea spawnArea = BlockSpawnRegistry.areaSpawns.get(areaname);
+                 pokemonName = this.getPixelmonNameFromArea(worldIn, spawnArea);
+                 if (pokemonName == null) {
+                     return;
+                 }
+ 
+-                spawnData = (BlockSpawnData)spawnArea.blockSpawns.get(pokemonName);
++                spawnData = spawnArea.blockSpawns.get(pokemonName);
+                 pixelmon = (EntityPixelmon)PixelmonEntityList.createEntityByName(pokemonName, worldIn);
+-                pixelmon.setLocationAndAngles((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
++                pixelmon.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), worldIn.rand.nextFloat() * 360.0F, 0.0F);
+             }
+ 
+             if (!worldIn.isRemote) {
+@@ -451,9 +451,9 @@
+                 pixelmon.loadMoveset();
+             }
+ 
+-            PlayerParticipant playerParticipant = new PlayerParticipant(player, new EntityPixelmon[]{startingPixelmon});
+-            WildPixelmonParticipant wildPixelmonParticipant = new WildPixelmonParticipant(true, new EntityPixelmon[]{pixelmon});
+-            if (MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, EnumBattleStartTypes.SEAWEED, (EntityPixelmon)null, pixelmon, (EntityPixelmon)null))) {
++            PlayerParticipant playerParticipant = new PlayerParticipant(player, startingPixelmon);
++            WildPixelmonParticipant wildPixelmonParticipant = new WildPixelmonParticipant(true, pixelmon);
++            if (MinecraftForge.EVENT_BUS.post(new PixelmonBlockStartingBattleEvent(worldIn, pos, player, EnumBattleStartTypes.SEAWEED, null, pixelmon, null))) {
+                 return;
+             }
+ 

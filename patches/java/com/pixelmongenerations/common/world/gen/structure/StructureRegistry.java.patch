@@ -1,0 +1,77 @@
+--- a/com/pixelmongenerations/common/world/gen/structure/StructureRegistry.java
++++ b/com/pixelmongenerations/common/world/gen/structure/StructureRegistry.java
+@@ -65,7 +65,7 @@
+         }
+ 
+         InputStream istream = !PixelmonConfig.useExternalJSONFilesStructures ? StructureRegistry.class.getResourceAsStream("/assets/pixelmon/structures/structures.json") : new FileInputStream(new File(structuresDir, "structures.json"));
+-        JsonObject json = (new JsonParser()).parse(new InputStreamReader((InputStream)istream, StandardCharsets.UTF_8)).getAsJsonObject();
++        JsonObject json = (new JsonParser()).parse(new InputStreamReader(istream, StandardCharsets.UTF_8)).getAsJsonObject();
+         JsonArray jsonArray;
+         int i;
+         JsonObject struct;
+@@ -241,7 +241,7 @@
+                     for(j = 0; j < npcsArray.size(); ++j) {
+                         String biome = npcsArray.get(j).getAsString();
+                         if (BetterSpawnerConfig.INSTANCE.biomeCategories.containsKey(biome)) {
+-                            ((ArrayList)BetterSpawnerConfig.INSTANCE.biomeCategories.get(biome)).stream().map(ResourceLocation::new).map(WorldHelper::demandBiome).filter(Optional::isPresent).map(Optional::get).forEach(info::addBiome);
++                            BetterSpawnerConfig.INSTANCE.biomeCategories.get(biome).stream().map(ResourceLocation::new).map(WorldHelper::demandBiome).filter(Optional::isPresent).map(Optional::get).forEach(info::addBiome);
+                         } else {
+                             WorldHelper.demandBiome(new ResourceLocation(biome)).ifPresent(info::addBiome);
+                         }
+@@ -270,7 +270,7 @@
+ 
+                 while(var15.hasNext()) {
+                     Biome biome = (Biome)var15.next();
+-                    ArrayList<StandaloneStructureInfo> structures = structuresByBiome.containsKey(biome) ? (ArrayList)structuresByBiome.get(biome) : new ArrayList();
++                    ArrayList<StandaloneStructureInfo> structures = structuresByBiome.containsKey(biome) ? structuresByBiome.get(biome) : new ArrayList();
+                     structures.add(info);
+                     structuresByBiome.put(biome, structures);
+                 }
+@@ -372,7 +372,7 @@
+     }
+ 
+     private static NBTTagCompound loadSnapshot(String snapshotPath) throws IOException {
+-        return loadSnapshot((InputStream)(new FileInputStream(new File(snapshotPath))));
++        return loadSnapshot(new FileInputStream(new File(snapshotPath)));
+     }
+ 
+     private static NBTTagCompound loadSnapshot(InputStream stream) throws IOException {
+@@ -444,12 +444,12 @@
+ 
+     public static StandaloneStructureInfo getScatteredStructureFromBiome(Random random, Biome biomeGenForCoords) {
+         ArrayList<StandaloneStructureInfo> possibleStructures = null;
+-        possibleStructures = (ArrayList)structuresByBiome.get(biomeGenForCoords);
++        possibleStructures = structuresByBiome.get(biomeGenForCoords);
+         if (possibleStructures != null && !possibleStructures.isEmpty()) {
+             int weightSum = 0;
+ 
+             StandaloneStructureInfo info;
+-            for(Iterator var4 = possibleStructures.iterator(); var4.hasNext(); weightSum += info.getRarity()) {
++            for(Iterator<?> var4 = possibleStructures.iterator(); var4.hasNext(); weightSum += info.getRarity()) {
+                 info = (StandaloneStructureInfo)var4.next();
+             }
+ 
+@@ -459,12 +459,10 @@
+ 
+             int weight = random.nextInt(weightSum);
+             int count = 0;
+-            Iterator var6 = possibleStructures.iterator();
+ 
+-            while(var6.hasNext()) {
+-                StandaloneStructureInfo info = (StandaloneStructureInfo)var6.next();
+-                if (weight <= (count += info.getRarity())) {
+-                    return info;
++            for (StandaloneStructureInfo structureInfo : possibleStructures) {
++                if (weight <= (count += structureInfo.getRarity())) {
++                    return structureInfo;
+                 }
+             }
+         }
+@@ -473,6 +471,6 @@
+     }
+ 
+     public static GymInfo getNextGym(WorldGymData data, Random random) {
+-        return Math.random() < 0.125D ? (GymInfo)RandomHelper.getRandomElementFromList(gyms) : null;
++        return Math.random() < 0.125D ? RandomHelper.getRandomElementFromList(gyms) : null;
+     }
+ }

@@ -1,0 +1,25 @@
+--- a/com/pixelmongenerations/core/data/trainers/TrainerSpawns.java
++++ b/com/pixelmongenerations/core/data/trainers/TrainerSpawns.java
+@@ -39,7 +39,7 @@
+         InputStream iStream = ServerNPCRegistry.class.getResourceAsStream("/assets/pixelmon/npcs/spawns.json");
+ 
+         try {
+-            SPAWNS = ((TrainerSpawns.SpawnSet)GSON.fromJson(new InputStreamReader(iStream), TrainerSpawns.SpawnSet.class)).spawns;
++            SPAWNS = GSON.fromJson(new InputStreamReader(iStream), SpawnSet.class).spawns;
+             iStream.close();
+             Pixelmon.LOGGER.info("Loaded Trainer Spawns");
+         } catch (Exception var7) {
+@@ -48,11 +48,8 @@
+             var7.printStackTrace();
+         }
+ 
+-        Iterator var5 = SPAWNS.keySet().iterator();
+-
+-        while(var5.hasNext()) {
+-            EnumNPCType type = (EnumNPCType)var5.next();
+-            ((ArrayList)SPAWNS.get(type)).forEach((spawn) -> {
++        for (EnumNPCType type : SPAWNS.keySet()) {
++            SPAWNS.get(type).forEach((spawn) -> {
+                 SpawnRegistry.addNPCSpawn(spawn.name, spawn.rarity, type, spawn.biomeIds);
+             });
+         }

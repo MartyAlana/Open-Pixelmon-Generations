@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/entity/projectiles/EntityHook.java
++++ b/com/pixelmongenerations/common/entity/projectiles/EntityHook.java
+@@ -279,7 +279,6 @@
+                                     caught = null;
+                                 }
+ 
+-                                int displayedMarks = true;
+                                 FishingEvent.FishingCatchEvent catchEvent = null;
+                                 if (caught != null) {
+                                     this.caught = caught;

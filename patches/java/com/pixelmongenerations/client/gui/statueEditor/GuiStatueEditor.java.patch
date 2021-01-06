@@ -1,0 +1,62 @@
+--- a/com/pixelmongenerations/client/gui/statueEditor/GuiStatueEditor.java
++++ b/com/pixelmongenerations/client/gui/statueEditor/GuiStatueEditor.java
+@@ -78,26 +78,24 @@
+             int buttonHeight = 20;
+             int textFieldHeight = 17;
+             this.buttonList.add(new GuiButton(0, this.controlLeft + 2, this.height - buttonHeight - 12, 80, buttonHeight, I18n.translateToLocal("gui.update.text")));
+-            ArrayList<EnumStatueTextureType> textures = new ArrayList(Arrays.asList(EnumStatueTextureType.values()));
++            ArrayList<EnumStatueTextureType> textures = new ArrayList<>(Arrays.asList(EnumStatueTextureType.values()));
+             BaseStats stats = this.statue.initializeBaseStatsIfNull();
+             if (stats == null) {
+                 GuiHelper.closeScreen();
+             } else {
+-                this.addDropDown((new GuiDropDown(textures, this.statue.getTextureType(), this.controlLeft + 228, this.controlTop + 20, 80, 150)).setGetOptionString(EnumStatueTextureType::getLocalizedName).setOnSelected((texture) -> {
++                this.addDropDown((new GuiDropDown<>(textures, this.statue.getTextureType(), this.controlLeft + 228, this.controlTop + 20, 80, 150)).setGetOptionString(EnumStatueTextureType::getLocalizedName).setOnSelected((texture) -> {
+                     Pixelmon.NETWORK.sendToServer(new StatuePacketServer(EnumStatuePacketMode.SetTextureType, statueId, texture.toString()));
+                 }).setInactiveTop(this.controlTop + 20));
+-                this.addDropDown((new GuiDropDown(this.statue.getSpecies().getSpecialTextures(this.statue.getForm()), this.statue.getSpecies().getSpecialTexture(this.statue.getFormEnum(), this.statue.getSpecialTextureId()), this.controlLeft + 228, this.controlTop + 44, 80, 150)).setGetOptionString(IEnumSpecialTexture::name).setOnSelected((specialTexture) -> {
++                this.addDropDown((new GuiDropDown<>(this.statue.getSpecies().getSpecialTextures(this.statue.getForm()), this.statue.getSpecies().getSpecialTexture(this.statue.getFormEnum(), this.statue.getSpecialTextureId()), this.controlLeft + 228, this.controlTop + 44, 80, 150)).setGetOptionString(IEnumSpecialTexture::name).setOnSelected((specialTexture) -> {
+                     Pixelmon.NETWORK.sendToServer(new StatuePacketServer(EnumStatuePacketMode.SetSpecial, statueId, specialTexture.getId()));
+                 }).setInactiveTop(this.controlTop + 44));
+-                Stream var10000 = this.statue.getSpecies().getAllForms().stream();
+-                EnumSpecies var10001 = this.statue.getSpecies();
+-                var10001.getClass();
+-                List<IEnumForm> forms = (List)var10000.map(var10001::getFormEnum).collect(Collectors.toList());
++                Stream<Integer> var10000 = this.statue.getSpecies().getAllForms().stream();
++                List<IEnumForm> forms = var10000.map(this.statue.getSpecies()::getFormEnum).collect(Collectors.toList());
+                 if (EnumSpecies.hasNoFormForm(this.statue.getSpecies())) {
+                     forms.add(EnumForms.NoForm);
+                 }
+ 
+-                this.addDropDown((new GuiDropDown(forms, this.statue.getFormEnum(), this.controlLeft + 228, this.controlTop + 68, 80, 150)).setGetOptionString((iEnumForm) -> {
++                this.addDropDown((new GuiDropDown<>(forms, this.statue.getFormEnum(), this.controlLeft + 228, this.controlTop + 68, 80, 150)).setGetOptionString((iEnumForm) -> {
+                     return iEnumForm == EnumForms.NoForm ? "None" : iEnumForm.getProperName();
+                 }).setOnSelected((f) -> {
+                     int form = f.getForm();
+@@ -109,7 +107,7 @@
+ 
+                     this.statue.setForm(form);
+                 }).setInactiveTop(this.controlTop + 68));
+-                this.addDropDown((new GuiDropDown(EnumGrowth.getProperOrder(), this.statue.getGrowth(), this.controlLeft + 45, this.controlTop + 4, 80, 150)).setGetOptionString(EnumGrowth::getLocalizedName).setOnSelected((growth) -> {
++                this.addDropDown((new GuiDropDown<>(EnumGrowth.getProperOrder(), this.statue.getGrowth(), this.controlLeft + 45, this.controlTop + 4, 80, 150)).setGetOptionString(EnumGrowth::getLocalizedName).setOnSelected((growth) -> {
+                     Pixelmon.NETWORK.sendToServer(new StatuePacketServer(EnumStatuePacketMode.SetGrowth, statueId, growth.toString()));
+                 }).setInactiveTop(this.controlTop + 35));
+                 this.buttonList.add(new GuiButton(1, this.controlLeft + 85, this.height - 12 - buttonHeight, 50, buttonHeight, I18n.translateToLocal("gui.save.text")));
+@@ -117,7 +115,7 @@
+                 if (this.statue.isSmd() && this.statue.getFrameCount() > 0) {
+                     int animTop = this.controlTop + 73;
+                     List<String> anims = this.statue.getAllAnimations();
+-                    this.addDropDown((new GuiDropDown(anims, this.statue.getAnimation(), this.controlLeft + 48, animTop + Math.max(-16, (anims.size() - 1) * -10), 60, 100)).setGetOptionString((animation) -> {
++                    this.addDropDown((new GuiDropDown<>(anims, this.statue.getAnimation(), this.controlLeft + 48, animTop + Math.max(-16, (anims.size() - 1) * -10), 60, 100)).setGetOptionString((animation) -> {
+                         return I18n.translateToLocal("gui.model." + animation);
+                     }).setOnSelected(this::selectAnimation).setInactiveTop(this.controlTop + 73));
+                     this.tbFrame = new GuiTextField(9, this.mc.fontRenderer, this.controlLeft + 158, this.controlTop + 70, 40, textFieldHeight);
+@@ -157,7 +155,7 @@
+                 this.initGui();
+             }
+ 
+-            ArrayList<GuiTextField> guiTextFields = new ArrayList(4);
++            ArrayList<GuiTextField> guiTextFields = new ArrayList<>(4);
+             this.tbName.textboxKeyTyped(key, keyCode);
+             guiTextFields.add(this.tbName);
+             this.tbLabel.textboxKeyTyped(key, keyCode);

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/gui/PixelmonToast.java
++++ b/com/pixelmongenerations/client/gui/PixelmonToast.java
+@@ -38,8 +38,6 @@
+             toastGui.getMinecraft().fontRenderer.drawString(this.title, 30, 7, i | -16777216);
+             toastGui.getMinecraft().fontRenderer.drawString(this.text, 30, 18, -1);
+         } else {
+-            int j = true;
+-            float f = 300.0F;
+             int i1;
+             if (delta < 1500L) {
+                 i1 = MathHelper.floor(MathHelper.clamp((float)(1500L - delta) / 300.0F, 0.0F, 1.0F) * 255.0F) << 24 | 67108864;

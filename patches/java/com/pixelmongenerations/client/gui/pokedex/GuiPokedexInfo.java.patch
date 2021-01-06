@@ -1,0 +1,24 @@
+--- a/com/pixelmongenerations/client/gui/pokedex/GuiPokedexInfo.java
++++ b/com/pixelmongenerations/client/gui/pokedex/GuiPokedexInfo.java
+@@ -125,10 +125,10 @@
+         this.fontRenderer.drawString("Spawn Times", this.toInt((double)this.width / 1.265D / (double)textScale), this.toInt((double)((float)yPos / textScale)), 3552822);
+         int biomeWidth = this.toInt((double)this.width / 6.8D);
+         this.fontRenderer.drawSplitString(serverTimes != null ? serverTimes : this.loadingText, this.toInt((double)this.width / 1.265D / (double)textScale), this.toInt(((double)yPos + (double)textGap * 1.6D) / (double)textScale), biomeWidth, 3552822);
+-        int textHeight = yPos + this.toInt((double)this.height / 6.6D);
++        textHeight = yPos + this.toInt((double)this.height / 6.6D);
+         this.fontRenderer.drawString("Shiny Preview", this.toInt((double)this.width / 1.265D / (double)textScale), this.toInt((double)((float)textHeight / textScale)), 3552822);
+         int textWidth = this.toInt((double)(20.0F * textScale));
+-        int textHeight = this.toInt((double)this.width / 1.265D) - textWidth / 2;
++        textHeight = this.toInt((double)this.width / 1.265D) - textWidth / 2;
+         int shinyStatusY = this.toInt((double)textHeight + (double)textGap * 1.6D) - textWidth / 2;
+         int shinyStatusWidth = textHeight + this.toInt((double)((float)this.fontRenderer.getStringWidth("Off") * textScale)) + textWidth;
+         int shinyStatusHeight = shinyStatusY + this.toInt((double)((float)this.fontRenderer.FONT_HEIGHT * textScale)) + textWidth;
+@@ -178,7 +178,7 @@
+             langString = this.loadingText;
+         }
+ 
+-        float textScale = 1.5F;
++        textScale = 1.5F;
+         textHeight = this.toInt((double)(this.width / 24));
+         textWidth = this.toInt((double)((float)(this.width / 5 * 2) / textScale));
+ 

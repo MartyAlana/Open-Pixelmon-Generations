@@ -1,11 +1,38 @@
 --- a/com/pixelmongenerations/common/block/spawnmethod/BlockWeatherTrioShrine.java
 +++ b/com/pixelmongenerations/common/block/spawnmethod/BlockWeatherTrioShrine.java
-@@ -21,7 +21,7 @@
+@@ -16,7 +16,7 @@
+ import net.minecraft.world.World;
+ 
+ public class BlockWeatherTrioShrine extends BlockShrine {
+-    private EnumSpecies pokemon;
++    private final EnumSpecies pokemon;
+ 
      public BlockWeatherTrioShrine(EnumSpecies pokemon) {
          this.setBlockUnbreakable();
-         this.pokemon = pokemon;
--        this.setTranslationKey(pokemon.name.toLowerCase() + "_shrine");
-+        this.setUnlocalizedName(pokemon.name.toLowerCase() + "_shrine");
+@@ -29,18 +29,15 @@
      }
  
-     public TileEntityShrine createTileEntity() {
+     protected boolean checkExtraRequirements(EntityPlayer player, World world, BlockPos pos) {
+-        PlayerStorage storage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage((EntityPlayerMP)player).get();
++        PlayerStorage storage = PixelmonStorage.pokeBallManager.getPlayerStorage((EntityPlayerMP)player).get();
+         IntStream var10000 = IntStream.range(0, 6);
+-        storage.getClass();
+-        return var10000.mapToObj(storage::getIDFromPosition).map((a) -> {
+-            return storage.getAlreadyExists(a, player.world);
+-        }).flatMap((a) -> {
+-            return (Stream)a.map(Stream::of).orElse(Stream.empty());
+-        }).filter((a) -> {
+-            return a.getSpecies() == EnumSpecies.Rayquaza;
+-        }).anyMatch((a) -> {
+-            return a.getFormEnum() == EnumForms.Mega;
+-        });
++        return var10000.mapToObj(storage::getIDFromPosition)
++                .map((a) -> storage.getAlreadyExists(a, player.world))
++                .flatMap((a) -> a
++                        .map(Stream::of)
++                        .orElse(Stream.empty()))
++                .filter((a) -> a.getSpecies() == EnumSpecies.Rayquaza)
++                .anyMatch((a) -> a.getFormEnum() == EnumForms.Mega);
+     }
+ 
+     public boolean canAccept(EnumSpecies species, IEnumForm form) {

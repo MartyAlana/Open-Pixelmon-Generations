@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/command/Battle2.java
++++ b/com/pixelmongenerations/core/command/Battle2.java
+@@ -77,7 +77,7 @@
+                     this.sendMessage(sender, TextFormatting.RED, "pixelmon.command.battle2.cantstart", new Object[0]);
+                 }
+ 
+-                int i = 0;
++                i = 0;
+ 
+                 while(true) {
+                     EntityPixelmon wildPart;

@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/api/events/SpectateEvent.java
++++ b/com/pixelmongenerations/api/events/SpectateEvent.java
+@@ -27,7 +27,7 @@
+         private final EntityPlayerMP target;
+ 
+         public StartSpectate(EntityPlayerMP spectator, BattleControllerBase battleController, EntityPlayerMP target) {
+-            super(spectator, battleController, null);
++            super(spectator, battleController);
+             this.target = target;
+         }
+ 
+@@ -38,7 +38,7 @@
+ 
+     public static class StopSpectate extends SpectateEvent {
+         public StopSpectate(EntityPlayerMP spectator, BattleControllerBase battleController) {
+-            super(spectator, battleController, null);
++            super(spectator, battleController);
+         }
+     }
+ }

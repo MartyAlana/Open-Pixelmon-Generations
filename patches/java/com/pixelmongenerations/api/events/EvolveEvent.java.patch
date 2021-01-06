@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/api/events/EvolveEvent.java
++++ b/com/pixelmongenerations/api/events/EvolveEvent.java
+@@ -39,7 +39,7 @@
+     @Cancelable
+     public static class PreEvolve extends EvolveEvent {
+         public PreEvolve(EntityPlayerMP player, EntityPixelmon preEvo, Evolution evo) {
+-            super(player, preEvo, evo, null);
++            super(player, preEvo, evo);
+         }
+     }
+ 
+@@ -47,7 +47,7 @@
+         private final EntityPixelmon pokemon;
+ 
+         public PostEvolve(EntityPlayerMP player, EntityPixelmon preEvo, Evolution evo, EntityPixelmon pokemon) {
+-            super(player, preEvo, evo, null);
++            super(player, preEvo, evo);
+             this.pokemon = pokemon;
+         }
+ 

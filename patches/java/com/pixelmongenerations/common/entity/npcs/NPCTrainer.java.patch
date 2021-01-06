@@ -1,0 +1,45 @@
+--- a/com/pixelmongenerations/common/entity/npcs/NPCTrainer.java
++++ b/com/pixelmongenerations/common/entity/npcs/NPCTrainer.java
+@@ -858,22 +858,22 @@
+ 
+                 for(i = 0; i < preBattle.tagCount(); ++i) {
+                     NBTTagCompound compound = preBattle.getCompoundTagAt(i);
+-                    UUID uuid = compound.getUniqueId("UUID");
++                    UUID plrUuid = compound.getUniqueId("UUID");
+                     long time = mode != EnumEncounterMode.OncePerPlayer ? compound.getLong("time") : 0L;
+                     long curDay;
+                     long oldDay;
+                     if (mode == EnumEncounterMode.OncePerDay) {
+                         curDay = System.currentTimeMillis() / 86400000L;
+                         if (curDay <= (oldDay = time / 86400000L)) {
+-                            this.playerEncounters.put(uuid, time);
++                            this.playerEncounters.put(plrUuid, time);
+                         }
+                     } else if (mode == EnumEncounterMode.OncePerMCDay) {
+                         curDay = this.world.getTotalWorldTime() / 24000L;
+                         if (curDay <= (oldDay = time / 24000L)) {
+-                            this.playerEncounters.put(uuid, time);
++                            this.playerEncounters.put(plrUuid, time);
+                         }
+                     } else {
+-                        this.playerEncounters.put(uuid, 0L);
++                        this.playerEncounters.put(plrUuid, 0L);
+                     }
+                 }
+             }
+@@ -945,12 +945,12 @@
+     public void randomisePokemon(EntityPlayer player) {
+         BaseTrainer base = this.getBaseTrainer();
+         int i;
+-        ArrayList randomParty;
++        ArrayList<PokemonForm> randomParty;
+         if (base.name.equals("Steve")) {
+             i = RandomHelper.getRandomNumberBetween(1, 6);
+-            randomParty = new ArrayList(i);
++            randomParty = new ArrayList<>(i);
+ 
+-            for(int i = 0; i < i; ++i) {
++            for(int j = 0; j < i; ++i) {
+                 randomParty.add(new PokemonForm(EnumSpecies.randomPoke()));
+             }
+ 

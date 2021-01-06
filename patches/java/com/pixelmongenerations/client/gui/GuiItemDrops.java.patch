@@ -1,11 +1,92 @@
 --- a/com/pixelmongenerations/client/gui/GuiItemDrops.java
 +++ b/com/pixelmongenerations/client/gui/GuiItemDrops.java
-@@ -186,7 +186,7 @@
-         int itemYPos = (this.height - 182) / 2 + 35;
+@@ -37,8 +37,8 @@
+ 
+     public void initGui() {
+         super.initGui();
+-        this.buttonList.add(new GuiButton(0, (this.width - 280) / 2 + 50, this.height - 91 + 100, I18n.format("gui.guiItemDrops.takeAll", new Object[0])));
+-        this.buttonList.add(new GuiButton(0, (this.width - 280) / 2 + 50, this.height - 91 + 100, I18n.format("gui.guiItemDrops.discard", new Object[0])));
++        this.buttonList.add(new GuiButton(0, (this.width - 280) / 2 + 50, this.height - 91 + 100, I18n.format("gui.guiItemDrops.takeAll")));
++        this.buttonList.add(new GuiButton(0, (this.width - 280) / 2 + 50, this.height - 91 + 100, I18n.format("gui.guiItemDrops.discard")));
+     }
+ 
+     public void drawBackground(int par1) {
+@@ -128,11 +128,11 @@
+         if (this.drops.hasCustomTitle) {
+             this.s = this.drops.customTitle.getUnformattedText();
+         } else if (this.drops.mode == ItemDropMode.Boss) {
+-            this.s = RegexPatterns.$_P_VAR.matcher(I18n.format("gui.guiItemDrops.beatBossPixelmon1", new Object[0])).replaceAll(Entity1Base.getLocalizedName(ClientProxy.battleManager.displayedEnemyPokemon[0].pokemonName));
++            this.s = RegexPatterns.$_P_VAR.matcher(I18n.format("gui.guiItemDrops.beatBossPixelmon1")).replaceAll(Entity1Base.getLocalizedName(ClientProxy.battleManager.displayedEnemyPokemon[0].pokemonName));
+         } else if (this.drops.mode == ItemDropMode.Totem) {
+-            this.s = RegexPatterns.$_P_VAR.matcher(I18n.format("gui.guiItemDrops.beatTotemPixelmon1", new Object[0])).replaceAll(Entity1Base.getLocalizedName(ClientProxy.battleManager.displayedEnemyPokemon[0].pokemonName));
++            this.s = RegexPatterns.$_P_VAR.matcher(I18n.format("gui.guiItemDrops.beatTotemPixelmon1")).replaceAll(Entity1Base.getLocalizedName(ClientProxy.battleManager.displayedEnemyPokemon[0].pokemonName));
+         } else if (this.drops.mode == ItemDropMode.NormalTrainer) {
+-            this.s = I18n.format("gui.guiItemDrops.beatTrainer1", new Object[0]);
++            this.s = I18n.format("gui.guiItemDrops.beatTrainer1");
+         }
+ 
+         this.mc.fontRenderer.drawString(this.s, (this.width - 280) / 2 + 10, (this.height - 182) / 2 + 15, 16777215);
+@@ -142,16 +142,14 @@
+         int buttonHeight = 20;
+         colour = i >= xPos && i <= xPos + buttonWidth && j >= yPos && j <= yPos + buttonWidth ? new Vector4f(1.0F, 1.0F, 1.0F, 1.4F) : new Vector4f(0.0F, 0.0F, 0.0F, 0.4F);
+         GuiHelper.drawGradientRect(xPos, yPos, this.zLevel, xPos + buttonWidth, yPos + buttonHeight, colour, colour, false);
+-        this.s = I18n.format("gui.guiItemDrops.takeAll", new Object[0]);
++        this.s = I18n.format("gui.guiItemDrops.takeAll");
+         GuiHelper.drawCenteredString(this.s, (float)(xPos + buttonWidth / 2), (float)(yPos + 7), 16777215);
+         xPos = (this.width - 280) / 2 + 10;
+         yPos = (this.height - 182) / 2 + 150;
+         colour = i >= xPos && i <= xPos + buttonWidth && j >= yPos && j <= yPos + buttonWidth ? new Vector4f(1.0F, 1.0F, 1.0F, 1.4F) : new Vector4f(0.0F, 0.0F, 0.0F, 0.4F);
+         GuiHelper.drawGradientRect(xPos, yPos, this.zLevel, xPos + buttonWidth, yPos + buttonHeight, colour, colour, false);
+-        this.s = I18n.format("gui.guiItemDrops.drop", new Object[0]);
++        this.s = I18n.format("gui.guiItemDrops.drop");
+         GuiHelper.drawCenteredString(this.s, (float)(xPos + buttonWidth / 2), (float)(yPos + 7), 16777215);
+-        int x = false;
+-        int y = false;
+         colour = new Vector4f(0.1F, 0.1F, 0.1F, 0.3F);
+         int x = (this.width - 280) / 2 + 5;
+         int y = (this.height - 182) / 2 + 35;
+@@ -187,36 +185,36 @@
          GuiHelper.drawGradientRect(d, itemYPos, this.zLevel, d + 100, itemYPos + 105, colour, colour, false);
          if (this.mouseOverIndex != -1) {
--            String itemName = this.drops.items[this.mouseOverIndex].itemStack.getTranslationKey();
-+            String itemName = this.drops.items[this.mouseOverIndex].itemStack.getUnlocalizedName();
-             this.s = I18n.format(itemName + ".name", new Object[0]);
+             String itemName = this.drops.items[this.mouseOverIndex].itemStack.getTranslationKey();
+-            this.s = I18n.format(itemName + ".name", new Object[0]);
++            this.s = I18n.format(itemName + ".name");
              GuiHelper.drawCenteredString(this.s, (float)((this.width - 280) / 2 + 225), (float)(itemYPos + 5), 16777215);
-             GuiHelper.drawCenteredString(I18n.format("gui.guiItemDrops.click", new Object[0]), (float)((this.width - 280) / 2 + 225), (float)(itemYPos + 90), 16777215);
+-            GuiHelper.drawCenteredString(I18n.format("gui.guiItemDrops.click", new Object[0]), (float)((this.width - 280) / 2 + 225), (float)(itemYPos + 90), 16777215);
++            GuiHelper.drawCenteredString(I18n.format("gui.guiItemDrops.click"), (float)((this.width - 280) / 2 + 225), (float)(itemYPos + 90), 16777215);
+             d = (this.width / 3 - 93) / 2 + 69;
+             itemYPos = (this.height / 3 - 60) / 2 + 21;
+             GlStateManager.scale(3.0F, 3.0F, 3.0F);
+             RenderHelper.enableGUIStandardItemLighting();
+             this.itemRender.renderItemAndEffectIntoGUI(this.drops.items[this.mouseOverIndex].itemStack, d, itemYPos);
+-            this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.drops.items[this.mouseOverIndex].itemStack, d, itemYPos, (String)null);
++            this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.drops.items[this.mouseOverIndex].itemStack, d, itemYPos, null);
+             GlStateManager.scale(0.33333334F, 0.33333334F, 0.33333334F);
+             this.isFirst = false;
+         } else if (this.isFirst) {
+-            this.s = I18n.format("gui.guiItemDrops.mouse", new Object[0]);
++            this.s = I18n.format("gui.guiItemDrops.mouse");
+             this.mc.fontRenderer.drawString(this.s, (this.width - 280) / 2 + 228 - this.mc.fontRenderer.getStringWidth(this.s) / 2, (this.height - 182) / 2 + 100, 8947848);
+-            this.s = I18n.format("gui.guiItemDrops.see", new Object[0]);
++            this.s = I18n.format("gui.guiItemDrops.see");
+             this.mc.fontRenderer.drawString(this.s, (this.width - 280) / 2 + 228 - this.mc.fontRenderer.getStringWidth(this.s) / 2, (this.height - 182) / 2 + 114, 8947848);
+-            this.s = I18n.format("gui.guiItemDrops.details", new Object[0]);
++            this.s = I18n.format("gui.guiItemDrops.details");
+             this.mc.fontRenderer.drawString(this.s, (this.width - 280) / 2 + 228 - this.mc.fontRenderer.getStringWidth(this.s) / 2, (this.height - 182) / 2 + 128, 8947848);
+         }
+ 
+         y = 0;
+         x = 0;
+ 
+-        for(int d = 0; d < this.drops.items.length; ++d) {
++        for(d = 0; d < this.drops.items.length; ++d) {
+             if (this.drops.items[d] != null) {
+                 xPos = (this.width - 280) / 2 + 15 + x * itemSpacingX;
+                 yPos = (this.height - 182) / 2 + 45 + y * itemSpacingY;
+                 RenderHelper.enableGUIStandardItemLighting();
+                 this.itemRender.renderItemAndEffectIntoGUI(this.drops.items[d].itemStack, xPos + 4, yPos + 3);
+-                this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.drops.items[d].itemStack, xPos + 4, yPos + 3, (String)null);
++                this.itemRender.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.drops.items[d].itemStack, xPos + 4, yPos + 3, null);
+             }
+ 
+             ++x;

@@ -1,0 +1,46 @@
+--- a/com/pixelmongenerations/client/render/BlockModelHolder.java
++++ b/com/pixelmongenerations/client/render/BlockModelHolder.java
+@@ -8,8 +8,8 @@
+ import net.minecraft.util.ResourceLocation;
+ 
+ public class BlockModelHolder<M extends ModelBase> extends ModelHolder<M> {
+-    private Class<M> type;
+-    private ResourceLocation resource;
++    private final Class<M> type;
++    private final ResourceLocation resource;
+     private Object[] parameters;
+ 
+     public BlockModelHolder(Class<M> clazz, ResourceLocation resource) {
+@@ -27,7 +27,7 @@
+     }
+ 
+     public BlockModelHolder(ResourceLocation model) {
+-        this(GenericSmdModel.class, model);
++        this((Class<M>) GenericSmdModel.class, model);
+     }
+ 
+     public BlockModelHolder(String modelPath) {
+@@ -35,19 +35,19 @@
+     }
+ 
+     public void render() {
+-        this.getModel().render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 1.0F);
++        this.getModel().render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 1.0F);
+     }
+ 
+     public void render(float scale) {
+-        this.getModel().render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, scale);
++        this.getModel().render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, scale);
+     }
+ 
+     protected M loadModel() {
+         if (this.type == GenericSmdModel.class) {
+-            return new GenericSmdModel(this.resource, false);
++            return (M) new GenericSmdModel(this.resource, false);
+         } else {
+             try {
+-                return this.parameters != null ? (ModelBase)this.type.getConstructors()[0].newInstance(this.parameters) : (ModelBase)this.type.getConstructor().newInstance();
++                return this.parameters != null ? (M) this.type.getConstructors()[0].newInstance(this.parameters) : this.type.getConstructor().newInstance();
+             } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException var2) {
+                 var2.printStackTrace();
+                 return null;

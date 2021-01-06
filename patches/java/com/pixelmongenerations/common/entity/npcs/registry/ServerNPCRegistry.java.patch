@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/entity/npcs/registry/ServerNPCRegistry.java
++++ b/com/pixelmongenerations/common/entity/npcs/registry/ServerNPCRegistry.java
+@@ -322,7 +322,6 @@
+ 
+         String filename;
+         File trainersDir;
+-        JsonArray skArray;
+         if (json.has("shopKeepers")) {
+             trainersDir = new File(npcsDir, "shopKeepers");
+             trainersDir.mkdir();

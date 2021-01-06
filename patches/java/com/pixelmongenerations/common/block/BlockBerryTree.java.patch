@@ -1,0 +1,128 @@
+--- a/com/pixelmongenerations/common/block/BlockBerryTree.java
++++ b/com/pixelmongenerations/common/block/BlockBerryTree.java
+@@ -62,15 +62,15 @@
+         }
+ 
+         TileEntityBerryTree tile;
+-        return (tile = (TileEntityBerryTree)BlockHelper.getTileEntity(TileEntityBerryTree.class, world, pos)) != null && tile.getStage() < 2 ? 1.0F : 2.0F;
++        return (tile = BlockHelper.getTileEntity(TileEntityBerryTree.class, world, pos)) != null && tile.getStage() < 2 ? 1.0F : 2.0F;
+     }
+ 
+     public IBlockState withRotation(IBlockState state, Rotation rot) {
+-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
++        return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+     }
+ 
+     public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+-        return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
++        return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
+     }
+ 
+     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+@@ -79,7 +79,7 @@
+ 
+     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+         ArrayList<ItemStack> drops = new ArrayList();
+-        TileEntityBerryTree tile = (TileEntityBerryTree)BlockHelper.getTileEntity(TileEntityBerryTree.class, world, pos);
++        TileEntityBerryTree tile = BlockHelper.getTileEntity(TileEntityBerryTree.class, world, pos);
+         if (tile == null) {
+             return drops;
+         } else {
+@@ -88,7 +88,7 @@
+                 return Collections.singletonList(new ItemStack(this.berry.getBerry()));
+             } else {
+                 if (world instanceof World) {
+-                    drops = (ArrayList)IntStream.range(0, tile.getProjectedYield()).mapToObj((i) -> {
++                    drops = IntStream.range(0, tile.getProjectedYield()).mapToObj((i) -> {
+                         return this.getBerry(this.berry);
+                     }).collect(Collectors.toCollection(ArrayList::new));
+                     if (tile.getBerryMutation() != null) {
+@@ -125,7 +125,7 @@
+             }
+ 
+             TileEntityBerryTree tile;
+-            if ((tile = (TileEntityBerryTree)BlockHelper.getTileEntity(TileEntityBerryTree.class, world, pos)) == null) {
++            if ((tile = BlockHelper.getTileEntity(TileEntityBerryTree.class, world, pos)) == null) {
+                 return false;
+             } else {
+                 byte stage = tile.getStage();
+@@ -149,13 +149,13 @@
+     }
+ 
+     protected BlockStateContainer createBlockState() {
+-        return new BlockStateContainer(this, new IProperty[]{FACING, BLOCKPOS});
++        return new BlockStateContainer(this, FACING, BLOCKPOS);
+     }
+ 
+     public int getMetaFromState(IBlockState state) {
+         int b0 = 0;
+-        int i = b0 | ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
+-        return i | ((EnumBlockPos)state.getValue(BLOCKPOS)).toMeta() << 2;
++        int i = b0 | state.getValue(FACING).getHorizontalIndex();
++        return i | state.getValue(BLOCKPOS).toMeta() << 2;
+     }
+ 
+     public IBlockState getStateFromMeta(int meta) {
+@@ -171,16 +171,16 @@
+     }
+ 
+     public void growStage(World world, Random rand, BlockPos pos, IBlockState state) {
+-        EnumBlockPos blockpos = (EnumBlockPos)state.getValue(BLOCKPOS);
++        EnumBlockPos blockpos = state.getValue(BLOCKPOS);
+         if (blockpos == EnumBlockPos.TOP) {
+             pos = pos.down();
+         }
+ 
+         TileEntityBerryTree tile;
+-        if ((tile = (TileEntityBerryTree)BlockHelper.getTileEntity(TileEntityBerryTree.class, world, pos)) != null) {
++        if ((tile = BlockHelper.getTileEntity(TileEntityBerryTree.class, world, pos)) != null) {
+             int stage = tile.getStage();
+             if (stage < 6) {
+-                int stage = stage + 1;
++                stage = stage + 1;
+                 tile.setStage((byte)stage);
+                 if (stage == 6) {
+                     MinecraftForge.EVENT_BUS.post(new BerryEvent.BerryReadyEvent(this.berry, pos, tile));
+@@ -197,13 +197,13 @@
+     }
+ 
+     public void replant(World worldIn, BlockPos pos, IBlockState state) {
+-        EnumBlockPos blockpos = (EnumBlockPos)state.getValue(BLOCKPOS);
++        EnumBlockPos blockpos = state.getValue(BLOCKPOS);
+         if (blockpos == EnumBlockPos.TOP) {
+             pos = pos.down();
+         }
+ 
+         TileEntityBerryTree tile;
+-        if ((tile = (TileEntityBerryTree)BlockHelper.getTileEntity(TileEntityBerryTree.class, worldIn, pos)) != null) {
++        if ((tile = BlockHelper.getTileEntity(TileEntityBerryTree.class, worldIn, pos)) != null) {
+             byte stage = tile.getStage();
+             tile.setStage((byte)1);
+             if (stage >= 3 && this.berry.height > 1) {
+@@ -237,7 +237,7 @@
+     }
+ 
+     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+-        EnumBlockPos multiPos = (EnumBlockPos)state.getValue(BLOCKPOS);
++        EnumBlockPos multiPos = state.getValue(BLOCKPOS);
+         if (multiPos == EnumBlockPos.TOP) {
+             pos = pos.down();
+         }
+@@ -257,7 +257,7 @@
+     }
+ 
+     public boolean removedByPlayerNoDrops(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+-        EnumBlockPos multiPos = (EnumBlockPos)state.getValue(BLOCKPOS);
++        EnumBlockPos multiPos = state.getValue(BLOCKPOS);
+         if (multiPos == EnumBlockPos.TOP) {
+             pos = pos.down();
+         }
+@@ -286,7 +286,7 @@
+ 
+     public boolean canGrowStage(World worldObj, BlockPos pos, IBlockState state, int stage) {
+         if (stage == 2 && this.berry.height != 1) {
+-            EnumBlockPos blockpos = (EnumBlockPos)state.getValue(BLOCKPOS);
++            EnumBlockPos blockpos = state.getValue(BLOCKPOS);
+             BlockPos loc = pos;
+             if (blockpos == EnumBlockPos.BOTTOM) {
+                 loc = pos.up();

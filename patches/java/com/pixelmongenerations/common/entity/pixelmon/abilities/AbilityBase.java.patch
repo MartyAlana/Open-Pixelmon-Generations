@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/abilities/AbilityBase.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/abilities/AbilityBase.java
+@@ -191,7 +191,7 @@
+     }
+ 
+     public static boolean ignoreAbility(PixelmonWrapper user, PixelmonWrapper opponent) {
+-        if (user == null || user.attack == null || !user.attack.getAttackBase().getUnlocalizedName().equals("G-Max Fireball") && !user.attack.getAttackBase().getUnlocalizedName().equals("G-Max Drum Solo") && !user.attack.getAttackBase().getUnlocalizedName().equals("G-Max Hydrosnipe") && !user.attack.getAttackBase().getUnlocalizedName().equals("Sunsteel Strike") && !user.attack.getAttackBase().getUnlocalizedName().equals("Photon Geyser") && !user.attack.getAttackBase().getUnlocalizedName().equals("Moongeist Beam")) {
++        if (user == null || user.attack == null || !user.attack.getAttackBase().getTranslationKey().equals("G-Max Fireball") && !user.attack.getAttackBase().getTranslationKey().equals("G-Max Drum Solo") && !user.attack.getAttackBase().getTranslationKey().equals("G-Max Hydrosnipe") && !user.attack.getAttackBase().getTranslationKey().equals("Sunsteel Strike") && !user.attack.getAttackBase().getTranslationKey().equals("Photon Geyser") && !user.attack.getAttackBase().getTranslationKey().equals("Moongeist Beam")) {
+             AbilityBase userAbility = user == null ? null : user.getBattleAbility();
+             if (opponent.getAbility() instanceof PrimordialSea) {
+                 return false;

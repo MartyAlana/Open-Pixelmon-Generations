@@ -1,0 +1,19 @@
+--- a/com/pixelmongenerations/common/world/ultraspace/biome/UltraJungleBiome.java
++++ b/com/pixelmongenerations/common/world/ultraspace/biome/UltraJungleBiome.java
+@@ -30,7 +30,7 @@
+ import net.minecraftforge.fml.relauncher.SideOnly;
+ 
+ public class UltraJungleBiome extends Biome {
+-    private static int[] foliageBuffer = new int[65536];
++    private static final int[] foliageBuffer = new int[65536];
+     private final boolean isEdge;
+     private static final IBlockState JUNGLE_LOG;
+     private static final IBlockState JUNGLE_LEAF;
+@@ -87,7 +87,6 @@
+         if (TerrainGen.decorate(worldIn, rand, new ChunkPos(pos), EventType.GRASS)) {
+             for(int j1 = 0; j1 < 50; ++j1) {
+                 k = rand.nextInt(16) + 8;
+-                int l = true;
+                 int i1 = rand.nextInt(16) + 8;
+                 worldgenvines.generate(worldIn, rand, pos.add(k, 128, i1));
+             }

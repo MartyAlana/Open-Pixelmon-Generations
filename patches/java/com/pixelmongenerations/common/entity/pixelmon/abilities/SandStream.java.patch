@@ -1,0 +1,18 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/abilities/SandStream.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/abilities/SandStream.java
+@@ -7,13 +7,9 @@
+ 
+ public class SandStream extends AbilityBase {
+     public void applySwitchInEffect(PixelmonWrapper newPokemon) {
+-        Stream var10000 = newPokemon.bc.getActivePokemon().stream().map(PixelmonWrapper::getBattleAbility);
+-        WeatherTrio.class.getClass();
++        Stream<AbilityBase> var10000 = newPokemon.bc.getActivePokemon().stream().map(PixelmonWrapper::getBattleAbility);
+         var10000 = var10000.filter(WeatherTrio.class::isInstance);
+-        WeatherTrio.class.getClass();
+-        if (var10000.map(WeatherTrio.class::cast).map((a) -> {
+-            return a.weather;
+-        }).noneMatch(Weather::isWeatherTrioStatus) && !(newPokemon.bc.globalStatusController.getWeatherIgnoreAbility() instanceof Sandstorm)) {
++        if (var10000.map(WeatherTrio.class::cast).map((a) -> a.weather).noneMatch(Weather::isWeatherTrioStatus) && !(newPokemon.bc.globalStatusController.getWeatherIgnoreAbility() instanceof Sandstorm)) {
+             Sandstorm sandstorm = new Sandstorm();
+             sandstorm.setStartTurns(newPokemon);
+             newPokemon.bc.globalStatusController.addGlobalStatus(sandstorm);

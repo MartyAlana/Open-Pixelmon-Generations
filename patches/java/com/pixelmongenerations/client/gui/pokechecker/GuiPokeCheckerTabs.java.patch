@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/client/gui/pokechecker/GuiPokeCheckerTabs.java
++++ b/com/pixelmongenerations/client/gui/pokechecker/GuiPokeCheckerTabs.java
+@@ -101,7 +101,6 @@
+             }
+ 
+             this.mouseDragged(minecraft, this.x, this.y);
+-            int var6 = false;
+             int var6;
+             if (this.tabType > 4 && this.tabType != 7) {
+                 var6 = 16777215;

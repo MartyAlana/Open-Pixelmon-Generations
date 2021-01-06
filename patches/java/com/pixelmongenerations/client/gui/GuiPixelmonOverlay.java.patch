@@ -1,0 +1,264 @@
+--- a/com/pixelmongenerations/client/gui/GuiPixelmonOverlay.java
++++ b/com/pixelmongenerations/client/gui/GuiPixelmonOverlay.java
+@@ -107,7 +107,7 @@
+                 float slotHeight = 30.0F;
+                 GuiResources.dock.bind();
+                 this.zLevel = -90.0F;
+-                GuiHelper.drawImageQuad(0.0D, (double)topSideBar, 22.0D, 203.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                GuiHelper.drawImageQuad(0.0D, topSideBar, 22.0D, 203.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                 int leftText = 30;
+                 this.fontRenderer.setUnicodeFlag(true);
+                 int i = 0;
+@@ -126,7 +126,7 @@
+                         scaledWidth = eventResolution.getScaledWidth();
+                         if (PixelmonConfig.showTarget && p != null && p.outside) {
+                             mc.renderEngine.bindTexture(GuiResources.targetArea);
+-                            GuiHelper.drawImageQuad((double)(scaledWidth - 76), 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                            GuiHelper.drawImageQuad(scaledWidth - 76, 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                             this.fontRenderer.drawString(GameSettings.getKeyDisplayString(ClientProxy.actionKeyBind.getKeyCode()), scaledWidth - 50, 0, 16777215);
+                             if (p.targetId != -1) {
+                                 EntityLivingBase entity = (EntityLivingBase)mc.world.getEntityByID(p.targetId);
+@@ -139,21 +139,21 @@
+                                         GuiHelper.bindPokemonSprite(pokemon.getSpecies().getNationalPokedexInteger(), pokemon.getForm(), pokemon.getGender(), pokemon.getSpecialTextureIndex(), pokemon.getCustomTexture(), pokemon.isShiny(), mc);
+                                     }
+ 
+-                                    GuiHelper.drawImageQuad((double)(scaledWidth - 75), 3.0D, 20.0D, 20.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                                    GuiHelper.drawImageQuad(scaledWidth - 75, 3.0D, 20.0D, 20.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                                 } else if (entity instanceof EntityPlayer) {
+                                     mc.getRenderManager().renderEngine.bindTexture(((AbstractClientPlayer)entity).getLocationSkin());
+-                                    GuiHelper.drawImageQuad((double)(scaledWidth - 73), 5.0D, 18.0D, 18.0F, 0.125D, 0.125D, 0.25D, 0.25D, this.zLevel);
++                                    GuiHelper.drawImageQuad(scaledWidth - 73, 5.0D, 18.0D, 18.0F, 0.125D, 0.125D, 0.25D, 0.25D, this.zLevel);
+                                 } else if (entity instanceof NPCTrainer) {
+                                     mc.getRenderManager().renderEngine.bindTexture(AbstractClientPlayer.getLocationSkin(""));
+-                                    GuiHelper.drawImageQuad((double)(scaledWidth - 73), 5.0D, 18.0D, 18.0F, 0.125D, 0.125D, 0.25D, 0.25D, this.zLevel);
++                                    GuiHelper.drawImageQuad(scaledWidth - 73, 5.0D, 18.0D, 18.0F, 0.125D, 0.125D, 0.25D, 0.25D, this.zLevel);
+                                 }
+                             } else {
+                                 mc.renderEngine.bindTexture(GuiResources.notarget);
+-                                GuiHelper.drawImageQuad((double)(scaledWidth - 76), 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                                GuiHelper.drawImageQuad(scaledWidth - 76, 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                             }
+ 
+                             mc.renderEngine.bindTexture(GuiResources.targetAreaOver);
+-                            GuiHelper.drawImageQuad((double)(scaledWidth - 76), 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                            GuiHelper.drawImageQuad(scaledWidth - 76, 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                         }
+ 
+                         if (p != null && p.outside && PixelmonConfig.allowExternalMoves) {
+@@ -162,27 +162,27 @@
+                             if (moves != null) {
+                                 if (moves.length > index) {
+                                     mc.renderEngine.bindTexture(GuiResources.targetArea);
+-                                    GuiHelper.drawImageQuad((double)(scaledWidth - 42), 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                                    GuiHelper.drawImageQuad(scaledWidth - 42, 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                                     ExternalMoveData move = moves[index];
+                                     mc.renderEngine.bindTexture(move.getBaseExternalMove().getIcon());
+-                                    GuiHelper.drawImageQuad((double)(scaledWidth - 42), 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                                    GuiHelper.drawImageQuad(scaledWidth - 42, 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                                     mc.renderEngine.bindTexture(GuiResources.targetAreaOver);
+-                                    GuiHelper.drawImageQuad((double)(scaledWidth - 42), 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+-                                    double cooldown = (double)move.getBaseExternalMove().getCooldown(p);
++                                    GuiHelper.drawImageQuad(scaledWidth - 42, 2.0D, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                                    double cooldown = move.getBaseExternalMove().getCooldown(p);
+                                     if ((double)mc.world.getTotalWorldTime() < (double)move.timeLastUsed + cooldown) {
+                                         double percentLeft = (double)(mc.world.getTotalWorldTime() - move.timeLastUsed);
+                                         percentLeft = 1.0D - percentLeft / cooldown;
+                                         mc.renderEngine.bindTexture(GuiResources.cooldown);
+                                         int pixels = (int)(percentLeft * 24.0D);
+-                                        GuiHelper.drawImageQuad((double)(scaledWidth - 42), (double)(26 - pixels), 24.0D, (float)pixels, 0.0D, (double)(1.0F - (float)pixels / 24.0F), 1.0D, 1.0D, this.zLevel);
++                                        GuiHelper.drawImageQuad(scaledWidth - 42, 26 - pixels, 24.0D, (float)pixels, 0.0D, 1.0F - (float)pixels / 24.0F, 1.0D, 1.0D, this.zLevel);
+                                     }
+ 
+                                     this.fontRenderer.drawString(GameSettings.getKeyDisplayString(ClientProxy.externalKeyBind.getKeyCode()), scaledWidth - 17, 0, 16777215);
+                                     String nameString = "";
+                                     if (move.moveIndex == 5) {
+-                                        nameString = I18n.format("externalMove.forage.name", new Object[0]);
++                                        nameString = I18n.format("externalMove.forage.name");
+                                     } else if (move.moveIndex == 99) {
+-                                        nameString = I18n.format("externalMove.megaEvolution.name", new Object[0]);
++                                        nameString = I18n.format("externalMove.megaEvolution.name");
+                                     } else {
+                                         nameString = p.moveset[move.moveIndex].getAttack().getAttackBase().getLocalizedName();
+                                     }
+@@ -215,7 +215,7 @@
+ 
+                             if (textureX != -1.0F && p.health > 0) {
+                                 mc.renderEngine.bindTexture(GuiResources.status);
+-                                GuiHelper.drawImageQuad((double)(leftText + 46), (double)(yPos + 1), 14.720000267028809D, 6.44F, (double)(textureX / 299.0F), (double)(textureY / 210.0F), (double)((textureX + 147.0F) / 299.0F), (double)((textureY + 68.0F) / 210.0F), this.zLevel);
++                                GuiHelper.drawImageQuad(leftText + 46, yPos + 1, 14.720000267028809D, 6.44F, textureX / 299.0F, textureY / 210.0F, (textureX + 147.0F) / 299.0F, (textureY + 68.0F) / 210.0F, this.zLevel);
+                             }
+                         }
+ 
+@@ -226,10 +226,10 @@
+                             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                             if (p.gender == Gender.Male && !p.isEgg) {
+                                 mc.renderEngine.bindTexture(GuiResources.male);
+-                                GuiHelper.drawImageQuad((double)(this.fontRenderer.getStringWidth(displayName) + leftText - 1), (double)yPos, 5.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                                GuiHelper.drawImageQuad(this.fontRenderer.getStringWidth(displayName) + leftText - 1, yPos, 5.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                             } else if (p.gender == Gender.Female && !p.isEgg) {
+                                 mc.renderEngine.bindTexture(GuiResources.female);
+-                                GuiHelper.drawImageQuad((double)(this.fontRenderer.getStringWidth(displayName) + leftText - 1), (double)yPos, 5.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                                GuiHelper.drawImageQuad(this.fontRenderer.getStringWidth(displayName) + leftText - 1, yPos, 5.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                             }
+                         }
+ 
+@@ -250,25 +250,25 @@
+                             mc.renderEngine.bindTexture(GuiResources.normal);
+                         }
+ 
+-                        GuiHelper.drawImageQuad(-3.0D, (double)(yPos - 7), 32.0D, 32.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                        GuiHelper.drawImageQuad(-3.0D, yPos - 7, 32.0D, 32.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                         this.drawPokemonSprite(p, yPos, mc);
+                         if (!p.heldItem.isEmpty()) {
+                             mc.renderEngine.bindTexture(GuiResources.heldItem);
+-                            GuiHelper.drawImageQuad(18.0D, (double)(yPos + 13), 6.0D, 6.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                            GuiHelper.drawImageQuad(18.0D, yPos + 13, 6.0D, 6.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                         }
+ 
+                         if (!isGuiMinimized && !p.isEgg) {
+-                            String levelString = I18n.format("gui.screenpokechecker.lvl", new Object[0]) + " " + p.lvl;
++                            String levelString = I18n.format("gui.screenpokechecker.lvl") + " " + p.lvl;
+                             this.fontRenderer.drawString(levelString, leftText - 1, yPos + 1 + this.fontRenderer.FONT_HEIGHT, 16777215);
+                             if (p.health <= 0) {
+-                                this.fontRenderer.drawString(I18n.format("gui.creativeinv.fainted", new Object[0]), leftText + 1 + this.fontRenderer.getStringWidth(levelString), yPos + 1 + this.fontRenderer.FONT_HEIGHT, 16777215);
++                                this.fontRenderer.drawString(I18n.format("gui.creativeinv.fainted"), leftText + 1 + this.fontRenderer.getStringWidth(levelString), yPos + 1 + this.fontRenderer.FONT_HEIGHT, 16777215);
+                             } else {
+-                                this.fontRenderer.drawString(I18n.format("nbt.hp.name", new Object[0]) + " " + p.health + "/" + p.hp, leftText + 2 + this.fontRenderer.getStringWidth(levelString), yPos + 1 + this.fontRenderer.FONT_HEIGHT, 16777215);
++                                this.fontRenderer.drawString(I18n.format("nbt.hp.name") + " " + p.health + "/" + p.hp, leftText + 2 + this.fontRenderer.getStringWidth(levelString), yPos + 1 + this.fontRenderer.FONT_HEIGHT, 16777215);
+                             }
+                         }
+                     } else {
+                         mc.renderEngine.bindTexture(GuiResources.available);
+-                        GuiHelper.drawImageQuad(5.0D, (double)(yPos + 1), 16.0D, 16.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                        GuiHelper.drawImageQuad(5.0D, yPos + 1, 16.0D, 16.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                     }
+ 
+                     ++i;
+@@ -287,7 +287,7 @@
+ 
+     private void drawPokemonSprite(PixelmonData p, int yPos, Minecraft mc) {
+         GuiHelper.bindPokemonSprite(p, mc);
+-        GuiHelper.drawImageQuad(1.0D, (double)(yPos - 3 - (p.isGen6Sprite() ? 0 : 3)), 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++        GuiHelper.drawImageQuad(1.0D, yPos - 3 - (p.isGen6Sprite() ? 0 : 3), 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+     }
+ 
+     public void checkEntitysInWorld(World world) {
+@@ -297,7 +297,7 @@
+         });
+ 
+         for(int i = 0; i < world.loadedEntityList.size(); ++i) {
+-            Entity e = (Entity)world.loadedEntityList.get(i);
++            Entity e = world.loadedEntityList.get(i);
+             if (e instanceof EntityPixelmon) {
+                 int[] existingID = ((EntityPixelmon)e).getPokemonId();
+                 if (existingID[0] != -1) {
+@@ -422,7 +422,7 @@
+         float alpha;
+         int c;
+         if (messageName != null) {
+-            spectateString = RegexPatterns.$_L_VAR.matcher(RegexPatterns.$_P_VAR.matcher(I18n.format("gui.spectate.spectateMessage", new Object[0])).replaceAll(messageName)).replaceAll(GameSettings.getKeyDisplayString(ClientProxy.spectateKeyBind.getKeyCode()));
++            spectateString = RegexPatterns.$_L_VAR.matcher(RegexPatterns.$_P_VAR.matcher(I18n.format("gui.spectate.spectateMessage")).replaceAll(messageName)).replaceAll(GameSettings.getKeyDisplayString(ClientProxy.spectateKeyBind.getKeyCode()));
+             width = this.fontRenderer.getStringWidth(spectateString);
+             alpha = 1.0F - (float)fadeInTicks / 20.0F * 0.7F;
+             c = GuiHelper.toColourValue(0.7F, 0.7F, 0.7F, alpha);
+@@ -430,7 +430,7 @@
+         }
+ 
+         if (oldMessageName != null && fadeOutTicks > 0) {
+-            spectateString = RegexPatterns.$_L_VAR.matcher(RegexPatterns.$_P_VAR.matcher(I18n.format("gui.spectate.spectateMessage", new Object[0])).replaceAll(oldMessageName)).replaceAll(GameSettings.getKeyDisplayString(ClientProxy.spectateKeyBind.getKeyCode()));
++            spectateString = RegexPatterns.$_L_VAR.matcher(RegexPatterns.$_P_VAR.matcher(I18n.format("gui.spectate.spectateMessage")).replaceAll(oldMessageName)).replaceAll(GameSettings.getKeyDisplayString(ClientProxy.spectateKeyBind.getKeyCode()));
+             width = this.fontRenderer.getStringWidth(spectateString);
+             alpha = (float)fadeOutTicks / 15.0F * 0.7F;
+             c = GuiHelper.toColourValue(0.7F, 0.7F, 0.7F, alpha);
+@@ -454,85 +454,21 @@
+         return uuid != null ? uuid : (lastUuid != null && fadeOutTicks > 0 ? lastUuid : null);
+     }
+ 
+-    public void addPartyOverlay() {
+-        GuiLayer dock = (new StackLayoutBuilder(0.0D, 0.0D)).alignCenterY().layer();
+-        EnumPartySlot[] var2 = EnumPartySlot.values();
+-        int var3 = var2.length;
+-
+-        for(int var4 = 0; var4 < var3; ++var4) {
+-            EnumPartySlot i = var2[var4];
+-            PokemonLayer layer = new PokemonLayer(() -> {
+-                return ServerStorageDisplay.getPokemon()[i.ordinal()];
+-            });
+-            GuiLayer base = (new StackLayoutBuilder(0.0D, 0.0D)).horizontal().layer();
+-            layer.add(new GuiLayer[]{base});
+-            layer.setSize(Vec2d.getPooled(32.0D, 32.0D));
+-            GuiLayer display = new GuiLayer(0, 0);
+-            display.setSize(Vec2d.getPooled(32.0D, 32.0D));
+-            base.add(new GuiLayer[]{display});
+-            PixelmonSprite pixelmonSprite = new PixelmonSprite(layer.getData());
+-            SpriteLayer pokemonSprite = new SpriteLayer(pixelmonSprite, 0, 0);
+-            SpriteLayer ballLayer = new SpriteLayer(this.getAvailable(), 0, 0);
+-            ballLayer.setScale(0.5D);
+-            layer.hook(PreFrameEvent.class, (a) -> {
+-                PixelmonData data = layer.getData();
+-                if (data != null) {
+-                    pokemonSprite.setSprite(new PixelmonSprite(data));
+-                    ballLayer.setSprite(this.getSprite(data.pokeball));
+-                    ballLayer.setScale(0.5D);
+-                } else {
+-                    pokemonSprite.setSprite((ISprite)null);
+-                    ballLayer.setSprite(this.getAvailable());
+-                    ballLayer.setScale(0.25D);
+-                }
+-
+-            });
+-            display.hook(LayoutChildren.class, (a) -> {
+-                Vec2d pos = display.getSize().divide(2.0D);
+-                Iterator var3 = display.getChildren().iterator();
+-
+-                while(var3.hasNext()) {
+-                    GuiLayer child = (GuiLayer)var3.next();
+-                    child.setPos(pos);
+-                    child.setAnchor(Vec2d.getPooled(0.5D, 0.5D));
+-                }
+-
+-            });
+-            display.add(new GuiLayer[]{ballLayer, pokemonSprite});
+-            dock.add(new GuiLayer[]{layer});
+-        }
+-
+-        GuiHud.INSTANCE.getAll().getVLeft().add(new GuiLayer[]{dock});
+-    }
+-
+     public void reloadHud() {
+-        BiFunction var10000 = (binding, rl) -> {
++        BiFunction<KeyBinding, ResourceLocation, ?> var10000 = (binding, rl) -> {
+             GuiLayer layer = new GuiLayer();
+             layer.setSize(Vec2d.getPooled(30.0D, 30.0D));
+             SpriteLayer spriteLayer = new SpriteLayer(new Sprite(rl), 0, 0, 20, 20);
+             TextLayer textLayer = new TextLayer(20, 17, GameSettings.getKeyDisplayString(binding.getKeyCode()));
+             textLayer.setColor(Color.WHITE);
+-            layer.add(new GuiLayer[]{spriteLayer, textLayer});
++            layer.add(spriteLayer, textLayer);
+             return layer;
+         };
+-        StackLayer var10001 = GuiHud.INSTANCE.getAll().getHBottomRight();
+-        var10001.getClass();
+-        BiConsumer<KeyBinding, ResourceLocation> biConsumer = var10000.consume((xva$0) -> {
+-            var10001.add(new GuiLayer[]{xva$0});
+-        });
+-        var10000 = (binding, rl) -> {
+-            GuiLayer layer = new GuiLayer();
+-            layer.setSize(Vec2d.getPooled(30.0D, 30.0D));
+-            SpriteLayer spriteLayer = new SpriteLayer(new Sprite(rl), 0, 0, 20, 20);
+-            TextLayer textLayer = new TextLayer(20, 17, GameSettings.getKeyDisplayString(binding.getKeyCode()));
+-            textLayer.setColor(Color.WHITE);
+-            layer.add(new GuiLayer[]{spriteLayer, textLayer});
+-            return layer;
+-        };
+-        var10001 = GuiHud.INSTANCE.getAll().getHTopRight();
+-        var10001.getClass();
++        StackLayer bottomRight = GuiHud.INSTANCE.getAll().getHBottomRight();
++        BiConsumer<KeyBinding, ResourceLocation> biConsumer = var10000.consume((xva$0) -> bottomRight.add((GuiLayer) xva$0));
++        StackLayer topRight = GuiHud.INSTANCE.getAll().getHTopRight();
+         BiConsumer<KeyBinding, ResourceLocation> biConsumerTR = var10000.consume((xva$0) -> {
+-            var10001.add(new GuiLayer[]{xva$0});
++            topRight.add((GuiLayer) xva$0);
+         });
+         if (ClientProxy.wikiKeyBind.getKeyCode() != 0) {
+             biConsumer.accept(ClientProxy.wikiKeyBind, GuiResources.wikiItemIcon);

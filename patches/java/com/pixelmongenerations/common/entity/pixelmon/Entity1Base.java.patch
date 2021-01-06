@@ -1,11 +1,120 @@
 --- a/com/pixelmongenerations/common/entity/pixelmon/Entity1Base.java
 +++ b/com/pixelmongenerations/common/entity/pixelmon/Entity1Base.java
+@@ -81,7 +81,7 @@
+     }
+ 
+     public String getPokemonName() {
+-        return (String)this.dataManager.get(EntityPixelmon.dwName);
++        return this.dataManager.get(EntityPixelmon.dwName);
+     }
+ 
+     public String getLocalizedName() {
+@@ -93,7 +93,7 @@
+     }
+ 
+     public String getNickname() {
+-        String nickname = (String)this.dataManager.get(EntityPixelmon.dwNickname);
++        String nickname = this.dataManager.get(EntityPixelmon.dwNickname);
+         return PixelmonConfig.allowNicknames && !nickname.isEmpty() ? nickname : this.getLocalizedName();
+     }
+ 
+@@ -106,11 +106,11 @@
+     }
+ 
+     public boolean hasNickname() {
+-        return !((String)this.dataManager.get(EntityPixelmon.dwNickname)).equals("");
++        return !this.dataManager.get(EntityPixelmon.dwNickname).equals("");
+     }
+ 
+     public int[] getPokemonId() {
+-        return new int[]{(Integer)this.dataManager.get(EntityPixelmon.dwPokemonID1), (Integer)this.dataManager.get(EntityPixelmon.dwPokemonID2)};
++        return new int[]{this.dataManager.get(EntityPixelmon.dwPokemonID1), this.dataManager.get(EntityPixelmon.dwPokemonID2)};
+     }
+ 
+     public void setPokemonId(int[] id) {
+@@ -119,7 +119,7 @@
+     }
+ 
+     public EnumBossMode getBossMode() {
+-        return !this.world.isRemote ? this.serverBossMode : EnumBossMode.getMode((Integer)this.dataManager.get(EntityPixelmon.dwBossMode));
++        return !this.world.isRemote ? this.serverBossMode : EnumBossMode.getMode(this.dataManager.get(EntityPixelmon.dwBossMode));
+     }
+ 
+     public void setBoss(EnumBossMode mode) {
+@@ -132,11 +132,11 @@
+     }
+ 
+     public EnumNature getNature() {
+-        return EnumNature.getNatureFromIndex((Integer)this.dataManager.get(EntityPixelmon.dwNature));
++        return EnumNature.getNatureFromIndex(this.dataManager.get(EntityPixelmon.dwNature));
+     }
+ 
+     public EnumNature getPseudoNature() {
+-        return EnumNature.getNatureFromIndex((Integer)this.dataManager.get(EntityPixelmon.dwPseudoNature));
++        return EnumNature.getNatureFromIndex(this.dataManager.get(EntityPixelmon.dwPseudoNature));
+     }
+ 
+     public void setNature(EnumNature nature) {
+@@ -156,7 +156,7 @@
+     }
+ 
+     public EnumGrowth getGrowth() {
+-        return EnumGrowth.getGrowthFromIndex((Integer)this.dataManager.get(EntityPixelmon.dwGrowth));
++        return EnumGrowth.getGrowthFromIndex(this.dataManager.get(EntityPixelmon.dwGrowth));
+     }
+ 
+     public void setGrowth(EnumGrowth growth) {
+@@ -169,12 +169,12 @@
+     }
+ 
+     public Gender getGender() {
+-        int gender = (Integer)this.dataManager.get(EntityPixelmon.dwGender);
++        int gender = this.dataManager.get(EntityPixelmon.dwGender);
+         return Gender.getGender((short)gender);
+     }
+ 
+     public SpawnLocation getSpawnLocation() {
+-        return SpawnLocation.getFromIndex((Integer)this.dataManager.get(EntityPixelmon.dwSpawnLocation));
++        return SpawnLocation.getFromIndex(this.dataManager.get(EntityPixelmon.dwSpawnLocation));
+     }
+ 
+     public void setSpawnLocation(SpawnLocation spawnLocation) {
 @@ -212,7 +212,7 @@
  
      public void setName(String name) {
          this.dataManager.set(EntityPixelmon.dwName, name);
 -        this.species = (EnumSpecies)EnumSpecies.getFromName(name).orElse((Object)null);
-+        this.species = (EnumSpecies)EnumSpecies.getFromName(name).orElse(null);
++        this.species = EnumSpecies.getFromName(name).orElse(null);
      }
  
      public boolean hasCustomName() {
+@@ -304,10 +304,10 @@
+ 
+     public void writeEntityToNBT(NBTTagCompound nbt) {
+         super.writeEntityToNBT(nbt);
+-        nbt.setInteger("pixelmonID1", (Integer)this.dataManager.get(EntityPixelmon.dwPokemonID1));
+-        nbt.setInteger("pixelmonID2", (Integer)this.dataManager.get(EntityPixelmon.dwPokemonID2));
+-        nbt.setString("Name", (String)this.dataManager.get(EntityPixelmon.dwName));
+-        nbt.setString("Nickname", (String)this.dataManager.get(EntityPixelmon.dwNickname));
++        nbt.setInteger("pixelmonID1", this.dataManager.get(EntityPixelmon.dwPokemonID1));
++        nbt.setInteger("pixelmonID2", this.dataManager.get(EntityPixelmon.dwPokemonID2));
++        nbt.setString("Name", this.dataManager.get(EntityPixelmon.dwName));
++        nbt.setString("Nickname", this.dataManager.get(EntityPixelmon.dwNickname));
+         if (this.caughtBall != null) {
+             nbt.setInteger("CaughtBall", this.caughtBall.ordinal());
+         }
+@@ -315,10 +315,10 @@
+         nbt.setShort("Gender", (short)this.getGender().ordinal());
+         nbt.setBoolean("IsInBall", this.isInBall);
+         nbt.setBoolean("IsFainted", this.isFainted);
+-        nbt.setShort("BossMode", (short)(Integer)this.dataManager.get(EntityPixelmon.dwBossMode));
+-        nbt.setShort("Nature", (short)(Integer)this.dataManager.get(EntityPixelmon.dwNature));
+-        nbt.setShort("PseudoNature", (short)(Integer)this.dataManager.get(EntityPixelmon.dwPseudoNature));
+-        nbt.setShort("Growth", (short)(Integer)this.dataManager.get(EntityPixelmon.dwGrowth));
++        nbt.setShort("BossMode", this.dataManager.get(EntityPixelmon.dwBossMode).shortValue());
++        nbt.setShort("Nature", this.dataManager.get(EntityPixelmon.dwNature).shortValue());
++        nbt.setShort("PseudoNature", this.dataManager.get(EntityPixelmon.dwPseudoNature).shortValue());
++        nbt.setShort("Growth", this.dataManager.get(EntityPixelmon.dwGrowth).shortValue());
+         nbt.setString("originalTrainer", this.originalTrainer);
+         nbt.setString("originalTrainerUUID", this.originalTrainerUUID);
+     }

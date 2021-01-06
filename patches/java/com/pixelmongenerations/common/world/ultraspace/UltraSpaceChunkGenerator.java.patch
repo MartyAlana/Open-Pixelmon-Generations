@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/world/ultraspace/UltraSpaceChunkGenerator.java
++++ b/com/pixelmongenerations/common/world/ultraspace/UltraSpaceChunkGenerator.java
+@@ -265,7 +265,6 @@
+                 float f2 = 0.0F;
+                 float f3 = 0.0F;
+                 float f4 = 0.0F;
+-                int i1 = true;
+                 Biome biome = this.biomesForGeneration[k + 2 + (l + 2) * 10];
+ 
+                 for(int j1 = -2; j1 <= 2; ++j1) {

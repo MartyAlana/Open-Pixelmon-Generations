@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/api/events/DropEvent.java
++++ b/com/pixelmongenerations/api/events/DropEvent.java
+@@ -38,7 +38,7 @@
+     }
+ 
+     public ImmutableList<DroppedItem> getDrops() {
+-        return ImmutableList.builder().addAll(this.drops).build();
++        return ImmutableList.copyOf(this.drops);
+     }
+ 
+     public void addDrop(ItemStack drop) {

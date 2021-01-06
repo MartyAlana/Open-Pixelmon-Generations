@@ -1,0 +1,34 @@
+--- a/com/pixelmongenerations/client/gui/GuiResources.java
++++ b/com/pixelmongenerations/client/gui/GuiResources.java
+@@ -5,10 +5,8 @@
+ import net.minecraft.util.ResourceLocation;
+ 
+ public class GuiResources {
+-    public static ResourceLocation prefix = new ResourceLocation("pixelmon:textures/");
+-    private static Function<String, Sprite> spriteFunction = ((s) -> {
+-        return new ResourceLocation(prefix + s);
+-    }).andThen(Sprite::new);
++    public static final ResourceLocation prefix = new ResourceLocation("pixelmon:textures/");
++    public static final Function<String, Sprite> spriteFunction = s -> new Sprite(new ResourceLocation(prefix + s));
+     public static ResourceLocation lastBall;
+     public static ResourceLocation tradeGui;
+     public static ResourceLocation heldItem;
+@@ -229,15 +227,15 @@
+         eggManaphy2 = new ResourceLocation(prefix + "sprites/eggs/manaphy2.png");
+         eggManaphy3 = new ResourceLocation(prefix + "sprites/eggs/manaphy3.png");
+         available = new ResourceLocation(prefix + "gui/overlay/available.png");
+-        dock = (Sprite)spriteFunction.apply("gui/overlay/dock.png");
+-        balls = (Sprite)spriteFunction.apply("gui/overlay/balls.png");
++        dock = spriteFunction.apply("gui/overlay/dock.png");
++        balls = spriteFunction.apply("gui/overlay/balls.png");
+         fainted = new ResourceLocation(prefix + "gui/overlay/fainted.png");
+         faintedSelected = new ResourceLocation(prefix + "gui/overlay/selected-fainted.png");
+         normal = new ResourceLocation(prefix + "gui/overlay/normal.png");
+         released = new ResourceLocation(prefix + "gui/overlay/released.png");
+         releasedSelected = new ResourceLocation(prefix + "gui/overlay/selected-released.png");
+         selected = new ResourceLocation(prefix + "gui/overlay/selected.png");
+-        textbox = (Sprite)spriteFunction.apply("gui/overlay/ui.png");
++        textbox = spriteFunction.apply("gui/overlay/ui.png");
+         beast = new ResourceLocation(prefix + "gui/overlay/beast.png");
+         cherish = new ResourceLocation(prefix + "gui/overlay/cherish.png");
+         dive = new ResourceLocation(prefix + "gui/overlay/dive.png");

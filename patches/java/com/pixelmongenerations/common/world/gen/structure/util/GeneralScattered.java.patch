@@ -1,0 +1,28 @@
+--- a/com/pixelmongenerations/common/world/gen/structure/util/GeneralScattered.java
++++ b/com/pixelmongenerations/common/world/gen/structure/util/GeneralScattered.java
+@@ -287,10 +287,8 @@
+ 
+     protected boolean anyWaterUnder(World world, BlockPos pos) {
+         IntStream var10000 = IntStream.range(0, 4);
+-        pos.getClass();
+-        Stream var3 = var10000.mapToObj(pos::func_177979_c);
+-        world.getClass();
+-        return var3.map(world::func_180495_p).map(IBlockProperties::func_185904_a).anyMatch(Material::func_76224_d);
++        Stream<BlockPos> var3 = var10000.mapToObj(pos::down);
++        return var3.map(world::getBlockState).map(IBlockProperties::getMaterial).anyMatch(Material::isLiquid);
+     }
+ 
+     protected int getAverageSeaFloorLevel(World world) {
+@@ -318,11 +316,7 @@
+     }
+ 
+     protected int getSeaFloorY(int height, World world, int x, int z) {
+-        BlockPos pos;
+-        for(pos = new BlockPos(x, world.getSeaLevel() - 1, z); pos.getY() >= 0 && this.isWaterBLock(world, pos); pos = pos.down()) {
+-        }
+-
+-        int y = pos.getY();
++        int y = new BlockPos(x, world.getSeaLevel() - 1, z).getY();
+         return world.getSeaLevel() - y > height ? y : -1;
+     }
+ 

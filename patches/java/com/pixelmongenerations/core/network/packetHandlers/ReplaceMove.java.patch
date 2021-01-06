@@ -9,3 +9,12 @@
                          if (p == null) {
                              nbt = storage.getNBT(message.pokemonId);
                              if (nbt == null) {
+@@ -94,7 +94,7 @@
+ 
+                     if (pokemon != null) {
+                         TextComponentTranslation chatMessage;
+-                        if (!DatabaseMoves.CanLearnAttack(DatabaseMoves.getPokemonID(((PokemonLink)pokemon).getSpecies(), ((PokemonLink)pokemon).getBaseStats(), ((PokemonLink)pokemon).getForm(), false), a.getAttackBase().getUnlocalizedName())) {
++                        if (!DatabaseMoves.CanLearnAttack(DatabaseMoves.getPokemonID(((PokemonLink)pokemon).getSpecies(), ((PokemonLink)pokemon).getBaseStats(), ((PokemonLink)pokemon).getForm(), false), a.getAttackBase().getTranslationKey())) {
+                             chatMessage = ChatHandler.getMessage("replacemove.invalid", ((PokemonLink)pokemon).getRealNickname(), a.getAttackBase().getLocalizedName());
+                             if (bc != null && !bc.battleEnded) {
+                                 bc.sendToPlayer(player, chatMessage);

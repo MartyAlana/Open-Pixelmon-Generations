@@ -1,0 +1,41 @@
+--- a/com/pixelmongenerations/client/models/tmt/Shape2D.java
++++ b/com/pixelmongenerations/client/models/tmt/Shape2D.java
+@@ -22,7 +22,7 @@
+     }
+ 
+     public Coord2D[] getCoordArray() {
+-        return (Coord2D[])((Coord2D[])this.coords.toArray());
++        return (Coord2D[]) this.coords.toArray();
+     }
+ 
+     public Shape3D extrude(float x, float y, float z, float rotX, float rotY, float rotZ, float depth, int u, int v, float textureWidth, float textureHeight, int shapeTextureWidth, int shapeTextureHeight, int sideTextureWidth, int sideTextureHeight, float[] faceLengths) {
+@@ -30,7 +30,7 @@
+         PositionTransformVertex[] vertsTop = new PositionTransformVertex[this.coords.size()];
+         PositionTransformVertex[] vertsBottom = new PositionTransformVertex[this.coords.size()];
+         TexturedPolygon[] poly = new TexturedPolygon[this.coords.size() + 2];
+-        Vec3d extrudeVector = new Vec3d(0.0D, 0.0D, (double)depth);
++        Vec3d extrudeVector = new Vec3d(0.0D, 0.0D, depth);
+         extrudeVector = this.setVectorRotations(extrudeVector, rotX, rotY, rotZ);
+         if (faceLengths != null && faceLengths.length < this.coords.size()) {
+             faceLengths = null;
+@@ -42,8 +42,7 @@
+         float currentLength;
+         float ratioPosition;
+         for(int idx = 0; idx < this.coords.size(); ++idx) {
+-            Coord2D curCoord = (Coord2D)this.coords.get(idx);
+-            curCoord = (Coord2D)this.coords.get((idx + 1) % this.coords.size());
++            curCoord = this.coords.get((idx + 1) % this.coords.size());
+             float texU1 = (float)(curCoord.uCoord + u) / textureWidth;
+             currentLength = (float)(shapeTextureWidth * 2 - curCoord.uCoord + u) / textureWidth;
+             ratioPosition = (float)(curCoord.vCoord + v) / textureHeight;
+@@ -65,8 +64,8 @@
+         float currentLengthPosition = totalLength;
+ 
+         for(int idx = 0; idx < this.coords.size(); ++idx) {
+-            curCoord = (Coord2D)this.coords.get(idx);
+-            Coord2D nextCoord = (Coord2D)this.coords.get((idx + 1) % this.coords.size());
++            curCoord = this.coords.get(idx);
++            Coord2D nextCoord = this.coords.get((idx + 1) % this.coords.size());
+             currentLength = (float)Math.sqrt(Math.pow(curCoord.xCoord - nextCoord.xCoord, 2.0D) + Math.pow(curCoord.yCoord - nextCoord.yCoord, 2.0D));
+             if (faceLengths != null) {
+                 currentLength = faceLengths[faceLengths.length - idx - 1];

@@ -1,0 +1,186 @@
+--- a/com/pixelmongenerations/core/database/DatabaseMoves.java
++++ b/com/pixelmongenerations/core/database/DatabaseMoves.java
+@@ -32,7 +32,7 @@
+     private static List<Attack> transferMoveList;
+ 
+     public static Moveset getInitialMoves(PokemonLink pixelmon, int level) {
+-        ArrayList attackList = getMovesetUpToLevel(pixelmon.getBaseStats().id, level);
++        ArrayList<Attack> attackList = getMovesetUpToLevel(pixelmon.getBaseStats().id, level);
+ 
+         while(attackList.size() > 4) {
+             if (PixelmonConfig.useRecentLevelMoves) {
+@@ -56,19 +56,17 @@
+     }
+ 
+     public static ArrayList<Attack> getMovesetUpToLevel(int pokemonId, int level, boolean removeDuplicates) {
+-        ArrayList<Attack> attackList = new ArrayList();
++        ArrayList<Attack> attackList = new ArrayList<>();
+         BaseStats stats = PokemonRegistry.getBaseFor(pokemonId);
+-        Iterator var5 = stats.moves.levelMoves.keySet().iterator();
++        Iterator<Integer> var5 = stats.moves.levelMoves.keySet().iterator();
+ 
+         int j;
+         while(var5.hasNext()) {
+-            j = (Integer)var5.next();
++            j = var5.next();
+ 
+             try {
+                 if (level >= j) {
+-                    ((List)stats.moves.levelMoves.get(j)).forEach((move) -> {
+-                        attackList.add(getAttack(move));
+-                    });
++                    (stats.moves.levelMoves.get(j)).forEach((move) -> attackList.add(getAttack(move)));
+                 }
+             } catch (Exception var8) {
+                 System.out.println(String.format("Error getMovesetUpToLevel> Pixelmon ID: [%s] Level: [%s]", pokemonId, level));
+@@ -94,7 +92,7 @@
+     }
+ 
+     public static ArrayList<Attack> getAttacksAtLevel(Entity6CanBattle pokemon, int level) {
+-        ArrayList<Attack> attacks = new ArrayList();
++        ArrayList<Attack> attacks = new ArrayList<>();
+         int pokemonId = pokemon.baseStats.id;
+         boolean idChanged = false;
+         int tempId = getPokemonID(pokemon);
+@@ -116,19 +114,17 @@
+     }
+ 
+     private static ArrayList<Attack> attacksAtLevelQuery(int pokemonId, int level) {
+-        ArrayList<Attack> attacks = new ArrayList();
++        ArrayList<Attack> attacks = new ArrayList<>();
+         BaseStats stats = PokemonRegistry.getBaseFor(pokemonId);
+         if (stats.moves.levelMoves.containsKey(level)) {
+-            attacks.addAll((Collection)((List)stats.moves.levelMoves.get(level)).stream().map((moveName) -> {
+-                return getAttack(moveName);
+-            }).collect(Collectors.toList()));
++            attacks.addAll((stats.moves.levelMoves.get(level)).stream().map(DatabaseMoves::getAttack).collect(Collectors.toList()));
+         }
+ 
+         return attacks;
+     }
+ 
+     public static ArrayList<Attack> getAllAttacks(Entity6CanBattle pokemon) {
+-        ArrayList<Attack> attacks = new ArrayList();
++        ArrayList<Attack> attacks = new ArrayList<>();
+         BaseStats stats = PokemonRegistry.getBaseFor(getPokemonID(pokemon));
+         stats.moves.levelMoves.values().forEach((attackNames) -> {
+             attackNames.forEach((attackName) -> {
+@@ -143,16 +139,16 @@
+     }
+ 
+     public static ArrayList<Attack> getAllTMHMAttacks(int pokemonId) {
+-        ArrayList<Attack> attacks = new ArrayList();
++        ArrayList<Attack> attacks = new ArrayList<>();
+         BaseStats stats = PokemonRegistry.getBaseFor(pokemonId);
+-        attacks.addAll((Collection)stats.moves.tmTRMoves.stream().map((moveName) -> {
++        attacks.addAll((Collection<? extends Attack>)stats.moves.tmTRMoves.stream().map((moveName) -> {
+             return getAttack(moveName);
+         }).collect(Collectors.toList()));
+         return attacks;
+     }
+ 
+     public static ArrayList<Attack> getAllTutorAttacks(int pokemonId) {
+-        ArrayList<Attack> attacks = new ArrayList();
++        ArrayList<Attack> attacks = new ArrayList<>();
+         BaseStats stats = PokemonRegistry.getBaseFor(pokemonId);
+         stats.moves.tutorMoves.values().forEach((attackNames) -> {
+             attackNames.forEach((attackName) -> {
+@@ -167,9 +163,9 @@
+     }
+ 
+     public static ArrayList<Attack> getAllEggAttacks(int pokemonId) {
+-        ArrayList<Attack> attacks = new ArrayList();
++        ArrayList<Attack> attacks = new ArrayList<>();
+         BaseStats stats = PokemonRegistry.getBaseFor(pokemonId);
+-        attacks.addAll((Collection)stats.moves.eggMoves.stream().map((moveName) -> {
++        attacks.addAll((Collection<? extends Attack>)stats.moves.eggMoves.stream().map((moveName) -> {
+             return getAttack(moveName);
+         }).collect(Collectors.toList()));
+         return attacks;
+@@ -186,7 +182,7 @@
+ 
+     public static ArrayList<Attack> getAllEvolutionAttacks(int pokemonId) {
+         BaseStats stats = PokemonRegistry.getBaseFor(pokemonId);
+-        return (ArrayList)stats.moves.evolutionMoves.stream().map(DatabaseMoves::getAttack).collect(Collectors.toCollection(ArrayList::new));
++        return (ArrayList<Attack>)stats.moves.evolutionMoves.stream().map(DatabaseMoves::getAttack).collect(Collectors.toCollection(ArrayList::new));
+     }
+ 
+     public static ArrayList<Attack> getAllEvolutionAttacks(Entity6CanBattle pokemon) {
+@@ -194,7 +190,7 @@
+     }
+ 
+     public static ArrayList<Attack> getAllTMHMTutorAttacks(Entity6CanBattle pokemon) {
+-        ArrayList<Attack> attacks = new ArrayList();
++        ArrayList<Attack> attacks = new ArrayList<>();
+         attacks.addAll(getAllTMHMAttacks(pokemon));
+         attacks.addAll(getAllTutorAttacks(pokemon));
+         return attacks;
+@@ -221,9 +217,9 @@
+     }
+ 
+     private static List<String> getTutorMoves(Map<EnumTutorType, List<String>> tutorMoves, boolean includeEvents) {
+-        List<String> moves = (List)tutorMoves.getOrDefault(EnumTutorType.Regular, new ArrayList());
++        List<String> moves = (List<String>)tutorMoves.getOrDefault(EnumTutorType.Regular, new ArrayList<>());
+         if (includeEvents) {
+-            moves.addAll((Collection)tutorMoves.getOrDefault(EnumTutorType.Event, new ArrayList()));
++            moves.addAll((Collection<? extends String>)tutorMoves.getOrDefault(EnumTutorType.Event, new ArrayList<>()));
+         }
+ 
+         return moves;
+@@ -231,7 +227,7 @@
+ 
+     public static ArrayList<Attack> getAllTutorAttacks(boolean includeEvents) {
+         if (tutorMoveList == null) {
+-            tutorMoveList = (ArrayList)Stream.of(EnumSpecies.values()).flatMap((i) -> {
++            tutorMoveList = (ArrayList<Attack>)Stream.of(EnumSpecies.values()).flatMap((i) -> {
+                 return i.getAllForms().stream().map((a) -> {
+                     return Entity3HasStats.getBaseStats(i, a);
+                 });
+@@ -247,15 +243,16 @@
+ 
+     public static List<Attack> getAllTransferAttacks() {
+         if (transferMoveList == null) {
+-            transferMoveList = (List)Stream.of(EnumSpecies.values()).flatMap((i) -> {
+-                return i.getAllForms().stream().map((a) -> {
+-                    return Entity3HasStats.getBaseStats(i, a);
+-                });
+-            }).filter(Optional::isPresent).map(Optional::get).map((base) -> {
+-                return base.moves.tutorMoves;
+-            }).map((g) -> {
+-                return (List)g.getOrDefault(EnumTutorType.Transfer, new ArrayList());
+-            }).flatMap(Collection::stream).distinct().map(Attack::new).collect(Collectors.toList());
++            transferMoveList = Stream.of(EnumSpecies.values())
++                    .flatMap((i) -> i.getAllForms()
++                            .stream()
++                            .map((a) -> Entity3HasStats.getBaseStats(i, a)))
++                    .filter(Optional::isPresent).map(Optional::get)
++                    .map((base) -> base.moves.tutorMoves)
++                    .map((g) -> g.getOrDefault(EnumTutorType.Transfer, new ArrayList<>()))
++                    .flatMap(Collection::stream)
++                    .distinct().map(Attack::new)
++                    .collect(Collectors.toList());
+         }
+ 
+         return transferMoveList;
+@@ -264,7 +261,7 @@
+     public static boolean CanLearnAttack(int id, String attackName) {
+         try {
+             AttackBase attack = (AttackBase)Attack.getAttackBase(attackName).orElseThrow(NullPointerException::new);
+-            String moveName = attack.getUnlocalizedName();
++            String moveName = attack.getTranslationKey();
+             MoveContainer moves = PokemonRegistry.getBaseFor(id).moves;
+             return canLearnFromTable(MoveTable.Level, moves, moveName) || canLearnFromTable(MoveTable.TMTR, moves, moveName) || canLearnFromTable(MoveTable.Egg, moves, moveName) || canLearnFromTable(MoveTable.Tutor, moves, moveName) || canLearnFromTable(MoveTable.Evolution, moves, moveName);
+         } catch (Exception var5) {
+@@ -306,9 +303,9 @@
+     public static int getPokemonID(EnumSpecies pokemon, BaseStats stats, int form, boolean isMega) {
+         int id = stats.baseFormID;
+         boolean hasForms = stats != null && Entity3HasStats.hasForms(stats.pokemon);
+-        Optional baseStats;
+-        if (hasForms && form != -1 && (baseStats = Entity3HasStats.getBaseStats(pokemon, form)).isPresent() && id != ((BaseStats)baseStats.get()).id && !isMega) {
+-            id = ((BaseStats)baseStats.get()).id;
++        Optional<BaseStats> baseStats;
++        if (hasForms && form != -1 && (baseStats = Entity3HasStats.getBaseStats(pokemon, form)).isPresent() && id != (baseStats.get()).id && !isMega) {
++            id = (baseStats.get()).id;
+         }
+ 
+         return id;

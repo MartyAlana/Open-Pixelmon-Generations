@@ -1,0 +1,68 @@
+--- a/com/pixelmongenerations/client/gui/pokemoneditor/ImportExportConverter.java
++++ b/com/pixelmongenerations/client/gui/pokemoneditor/ImportExportConverter.java
+@@ -73,7 +73,7 @@
+ 
+         if (data.gender != Gender.None) {
+             exportText.append(" (");
+-            exportText.append((char)(data.gender == Gender.Male ? 'M' : 'F'));
++            exportText.append(data.gender == Gender.Male ? 'M' : 'F');
+             exportText.append(")");
+         }
+ 
+@@ -124,7 +124,7 @@
+             Attack attack;
+             if (data.moveset[i] != null && (attack = data.moveset[i].getAttack()) != null) {
+                 exportText.append("- ");
+-                exportText.append(attack.getAttackBase().getUnlocalizedName());
++                exportText.append(attack.getAttackBase().getTranslationKey());
+                 exportText.append("\n");
+             }
+         }
+@@ -254,7 +254,7 @@
+ 
+             Optional<FormData> formDataOptional = ImportExportForm.getInstance().getFormData(tempData.name);
+             if (formDataOptional.isPresent()) {
+-                FormData formData = (FormData)formDataOptional.get();
++                FormData formData = formDataOptional.get();
+                 tempData.name = formData.species.name;
+                 tempData.form = formData.form;
+             } else {
+@@ -264,7 +264,7 @@
+ 
+             BaseStats stats;
+             try {
+-                stats = (BaseStats)Entity3HasStats.getBaseStats((String)tempData.name, tempData.form).get();
++                stats = Entity3HasStats.getBaseStats(tempData.name, tempData.form).get();
+             } catch (NoSuchElementException var23) {
+                 return "Pok\u00e9mon";
+             }
+@@ -353,9 +353,8 @@
+                     } else if (currentLine.startsWith("Texture")) {
+                         moveText = getStringAfterColon(currentLine);
+                         EnumSpecies pokemon = tempData.getSpecies();
+-                        tempData.specialTexture = (short)((IEnumSpecialTexture)pokemon.getSpecialTextures(data.form).stream().filter((t) -> {
+-                            return t.name().equals(moveText);
+-                        }).findFirst().orElse(EnumTextures.None)).getId();
++                        String finalMoveText = moveText;
++                        tempData.specialTexture = (short) pokemon.getSpecialTextures(data.form).stream().filter((t) -> t.name().equals(finalMoveText)).findFirst().orElse(EnumTextures.None).getId();
+                     } else if (tempData.friendship == -1 && currentLine.startsWith("Happiness")) {
+                         numAbundantActivation = Integer.parseInt(getStringAfterColon(currentLine));
+                         if (numAbundantActivation < 0 || numAbundantActivation > FriendShip.getMaxFriendship()) {
+@@ -513,7 +512,7 @@
+         for(int var7 = 0; var7 < var6; ++var7) {
+             String stat = var5[var7];
+             stat = stat.trim();
+-            String statType = stat.substring(stat.lastIndexOf(32) + 1, stat.length());
++            String statType = stat.substring(stat.lastIndexOf(32) + 1);
+ 
+             for(int i = 0; i < STAT_TEXT.length; ++i) {
+                 if (STAT_TEXT[i].equalsIgnoreCase(statType)) {
+@@ -532,7 +531,7 @@
+             initializeNameMap();
+         }
+ 
+-        return importNameMap.containsKey(nameText) ? (String)importNameMap.get(nameText) : nameText;
++        return importNameMap.containsKey(nameText) ? importNameMap.get(nameText) : nameText;
+     }
+ 
+     private static void initializeNameMap() {

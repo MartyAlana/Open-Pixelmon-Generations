@@ -1,0 +1,47 @@
+--- a/com/pixelmongenerations/api/events/BreedEvent.java
++++ b/com/pixelmongenerations/api/events/BreedEvent.java
+@@ -34,7 +34,7 @@
+         private int breedingTicks;
+ 
+         public BreedingTickEvent(UUID owner, TileEntityRanchBase ranch, EntityPixelmon pokemon, int breedingTicks) {
+-            super(owner, ranch, null);
++            super(owner, ranch);
+             this.pokemon = pokemon;
+             this.breedingTicks = breedingTicks;
+         }
+@@ -58,7 +58,7 @@
+         private float breedingStrength;
+ 
+         public EnvironmentStrengthEvent(UUID owner, TileEntityRanchBase ranch, EntityPixelmon pokemon, RanchBounds ranchBounds, float breedingStrength) {
+-            super(owner, ranch, null);
++            super(owner, ranch);
+             this.pokemon = pokemon;
+             this.ranchBounds = ranchBounds;
+             this.breedingStrength = breedingStrength;
+@@ -87,7 +87,7 @@
+         private int newLevel;
+ 
+         public BreedingLevelChangedEvent(UUID owner, TileEntityRanchBase ranch, EntityPixelmon pokemon, int oldLevel, int newLevel) {
+-            super(owner, ranch, null);
++            super(owner, ranch);
+             this.pokemon = pokemon;
+             this.oldLevel = oldLevel;
+             this.newLevel = newLevel;
+@@ -123,7 +123,7 @@
+         private final EntityPixelmon parent2;
+ 
+         public MakeEggEvent(UUID owner, TileEntityRanchBase ranch, EntityPixelmon egg, EntityPixelmon parent1, EntityPixelmon parent2) {
+-            super(owner, ranch, null);
++            super(owner, ranch);
+             this.egg = egg;
+             this.parent1 = parent1;
+             this.parent2 = parent2;
+@@ -153,7 +153,7 @@
+         private EntityPixelmon egg;
+ 
+         public CollectEggEvent(UUID owner, TileEntityRanchBase ranch, EntityPixelmon egg) {
+-            super(owner, ranch, null);
++            super(owner, ranch);
+             this.egg = egg;
+         }
+ 

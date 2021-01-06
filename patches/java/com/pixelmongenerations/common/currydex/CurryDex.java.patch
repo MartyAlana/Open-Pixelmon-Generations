@@ -1,0 +1,84 @@
+--- a/com/pixelmongenerations/common/currydex/CurryDex.java
++++ b/com/pixelmongenerations/common/currydex/CurryDex.java
+@@ -33,12 +33,8 @@
+ import net.minecraftforge.common.MinecraftForge;
+ 
+ public class CurryDex {
+-    private static final Comparator<CurryDexEntry> comparator = Comparator.comparingInt((a) -> {
+-        return a.type.ordinal();
+-    }).thenComparingInt((a) -> {
+-        return a.flavor.ordinal();
+-    });
+-    List<CurryDexEntry> entries = new ArrayList();
++    private static final Comparator<CurryDexEntry> comparator = Comparator.comparingInt((CurryDexEntry a) -> a.type.ordinal()).thenComparingInt((a) -> a.flavor.ordinal());
++    List<CurryDexEntry> entries = new ArrayList<>();
+ 
+     public CurryDex() {
+     }
+@@ -57,15 +53,11 @@
+             dexEntry.flavor = data.getFlavor();
+             dexEntry.rating = data.getRating();
+             dexEntry.biome = player.world.getBiome(player.getPosition()).getRegistryName();
+-            dexEntry.pokemonName = (String)Stream.of(((PlayerStorage)storage.get()).partyPokemon).filter(Objects::nonNull).filter((a) -> {
+-                return a.hasKey("Nickname");
+-            }).map((a) -> {
+-                return a.getString("Nickname");
+-            }).map(Entity1Base::getLocalizedName).findFirst().orElse("n/a");
++            dexEntry.pokemonName = Stream.of(storage.get().partyPokemon).filter(Objects::nonNull).filter((a) -> a.hasKey("Nickname")).map((a) -> a.getString("Nickname")).map(Entity1Base::getLocalizedName).findFirst().orElse("n/a");
+             dexEntry.pos = player.getPosition();
+             CurryEvent.AddEntry event = new CurryEvent.AddEntry(player, data, dexEntry);
+             if (!MinecraftForge.EVENT_BUS.post(event)) {
+-                ((PlayerStorage)storage.get()).curryDex.add(event.getEntry());
++                storage.get().curryDex.add(event.getEntry());
+             }
+         }
+ 
+@@ -88,7 +80,7 @@
+     }
+ 
+     public NBTTagList toTag() {
+-        return (NBTTagList)this.entries.stream().map(CurryDexEntry::toNbt).collect(CurryDex.NbtListCollector.toNbtList());
++        return this.entries.stream().map(CurryDexEntry::toNbt).collect(NbtListCollector.toNbtList());
+     }
+ 
+     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+@@ -101,11 +93,10 @@
+     }
+ 
+     public static CurryDex fromNbt(NBTTagList compound) {
+-        Stream var10002 = Streams.stream(compound.iterator());
+-        NBTTagCompound.class.getClass();
+-        var10002 = var10002.filter(NBTTagCompound.class::isInstance);
+-        NBTTagCompound.class.getClass();
+-        return new CurryDex((List)var10002.map(NBTTagCompound.class::cast).map(CurryDexEntry::fromNbt).collect(Collectors.toList()));
++        return new CurryDex(Streams.stream(compound.iterator())
++                .filter(NBTTagCompound.class::isInstance)
++                .map(NBTTagCompound.class::cast)
++                .map(CurryDexEntry::fromNbt).collect(Collectors.toList()));
+     }
+ 
+     private void clear() {
+@@ -117,7 +108,7 @@
+     }
+ 
+     public CurryDexEntry getEntry(int id) {
+-        return (CurryDexEntry)this.entries.get(id);
++        return this.entries.get(id);
+     }
+ 
+     public List<CurryDexEntry> getEntries() {
+@@ -140,12 +131,12 @@
+         }
+ 
+         public BiConsumer<NBTTagList, T> accumulator() {
+-            return NBTTagList::func_74742_a;
++            return NBTTagList::appendTag;
+         }
+ 
+         public BinaryOperator<NBTTagList> combiner() {
+             return (a, b) -> {
+-                a.forEach(b::func_74742_a);
++                a.forEach(b::appendTag);
+                 return a;
+             };
+         }

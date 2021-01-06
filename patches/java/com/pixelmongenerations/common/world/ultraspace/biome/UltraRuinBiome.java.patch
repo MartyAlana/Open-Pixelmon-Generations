@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/common/world/ultraspace/biome/UltraRuinBiome.java
++++ b/com/pixelmongenerations/common/world/ultraspace/biome/UltraRuinBiome.java
+@@ -233,7 +233,6 @@
+         j4 = 0;
+ 
+         for(k4 = 0; k4 < k3; ++k4) {
+-            int i5 = true;
+             j4 += random.nextInt(16) + 4;
+ 
+             for(int k1 = 0; j4 + k1 < 64 && k1 < 1; ++k1) {

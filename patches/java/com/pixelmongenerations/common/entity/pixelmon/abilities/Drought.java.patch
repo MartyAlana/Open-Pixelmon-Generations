@@ -1,0 +1,18 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/abilities/Drought.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/abilities/Drought.java
+@@ -10,13 +10,9 @@
+ public class Drought extends AbilityBase {
+     public void applySwitchInEffect(PixelmonWrapper newPokemon) {
+         if (newPokemon.getSpecies() != EnumSpecies.Groudon || newPokemon.getHeldItem().getHeldItemType() != EnumHeldItems.redOrb) {
+-            Stream var10000 = newPokemon.bc.getActivePokemon().stream().map(PixelmonWrapper::getBattleAbility);
+-            WeatherTrio.class.getClass();
++            Stream<AbilityBase> var10000 = newPokemon.bc.getActivePokemon().stream().map(PixelmonWrapper::getBattleAbility);
+             var10000 = var10000.filter(WeatherTrio.class::isInstance);
+-            WeatherTrio.class.getClass();
+-            if (var10000.map(WeatherTrio.class::cast).map((a) -> {
+-                return a.weather;
+-            }).noneMatch(Weather::isWeatherTrioStatus) && !(newPokemon.bc.globalStatusController.getWeatherIgnoreAbility() instanceof Sunny)) {
++            if (var10000.map(WeatherTrio.class::cast).map((a) -> a.weather).noneMatch(Weather::isWeatherTrioStatus) && !(newPokemon.bc.globalStatusController.getWeatherIgnoreAbility() instanceof Sunny)) {
+                 Sunny sunny = new Sunny();
+                 sunny.setStartTurns(newPokemon);
+                 newPokemon.bc.globalStatusController.addGlobalStatus(sunny);

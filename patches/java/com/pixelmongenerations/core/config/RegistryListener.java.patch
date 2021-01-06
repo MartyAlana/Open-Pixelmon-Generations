@@ -1,17 +1,22 @@
 --- a/com/pixelmongenerations/core/config/RegistryListener.java
 +++ b/com/pixelmongenerations/core/config/RegistryListener.java
-@@ -107,8 +107,8 @@
+@@ -103,12 +103,10 @@
+     private static <T extends IForgeRegistryEntry<T>> void registerAllFields(Class clazzWithFields, Class<T> type, IForgeRegistry<T> registry) {
+         try {
+             Field[] var3 = clazzWithFields.getFields();
+-            int var4 = var3.length;
  
-             for(int var5 = 0; var5 < var4; ++var5) {
-                 Field field = var3[var5];
+-            for(int var5 = 0; var5 < var4; ++var5) {
+-                Field field = var3[var5];
 -                if (Modifier.isPublic(field.getModifiers()) && Modifier.isStatic(field.getModifiers()) && type.isInstance(field.get((Object)null))) {
 -                    registry.register((IForgeRegistryEntry)field.get((Object)null));
++            for (Field field : var3) {
 +                if (Modifier.isPublic(field.getModifiers()) && Modifier.isStatic(field.getModifiers()) && type.isInstance(field.get(null))) {
-+                    registry.register((IForgeRegistryEntry)field.get(null));
++                    registry.register((T) field.get(null));
                  }
              }
          } catch (Exception var7) {
-@@ -125,8 +125,8 @@
+@@ -125,8 +123,8 @@
  
              for(int var3 = 0; var3 < var2; ++var3) {
                  Field field = var1[var3];

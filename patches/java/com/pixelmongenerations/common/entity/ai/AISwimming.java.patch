@@ -1,0 +1,31 @@
+--- a/com/pixelmongenerations/common/entity/ai/AISwimming.java
++++ b/com/pixelmongenerations/common/entity/ai/AISwimming.java
+@@ -42,9 +42,7 @@
+             this.swimSpeed = 0.7F;
+         }
+ 
+-        if (this.pixelmon.battleController != null) {
+-            super.updateTask();
+-        } else {
++        if (this.pixelmon.battleController == null) {
+             boolean useLastChangeDirection = false;
+             World var10000 = this.pixelmon.world;
+             Vec3d var10001 = new Vec3d(this.pixelmon.posX, this.pixelmon.getEntityBoundingBox().minY, this.pixelmon.posZ);
+@@ -64,15 +62,15 @@
+             }
+ 
+             --this.ticksToRefresh;
+-            if (this.moveSpeed == 0.0F || useLastChangeDirection || this.pixelmon.motionX * this.pixelmon.motionX + this.pixelmon.motionZ * this.pixelmon.motionZ < (double)(this.moveSpeed / 4.0F)) {
++            if (this.moveSpeed == 0.0F || useLastChangeDirection || this.pixelmon.motionX * this.pixelmon.motionX + this.pixelmon.motionZ * this.pixelmon.motionZ < (double) (this.moveSpeed / 4.0F)) {
+                 this.pickDirection(useLastChangeDirection);
+                 this.pickSpeed();
+                 this.pixelmon.travel(0.0F, 0.0F, this.moveSpeed);
+             }
+ 
++        }
+             super.updateTask();
+         }
+-    }
+ 
+     public boolean shouldContinueExecuting() {
+         this.moveSpeed *= this.decayRate;

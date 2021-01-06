@@ -1,0 +1,38 @@
+--- a/com/pixelmongenerations/api/events/AnvilEvent.java
++++ b/com/pixelmongenerations/api/events/AnvilEvent.java
+@@ -31,7 +31,7 @@
+         private int force;
+ 
+         public BeatAnvilEvent(EntityPlayerMP player, TileEntityAnvil anvil, Item item, int neededHits, int force) {
+-            super(player, anvil, null);
++            super(player, anvil);
+             this.item = item;
+             this.neededHits = neededHits;
+             this.force = force;
+@@ -72,7 +72,7 @@
+         private int damage;
+ 
+         public HammerDamageEvent(EntityPlayerMP player, TileEntityAnvil anvil, ItemStack hammer, int damage) {
+-            super(player, anvil, null);
++            super(player, anvil);
+             this.hammer = hammer;
+             this.damage = damage;
+         }
+@@ -96,7 +96,7 @@
+         private final boolean isCollecting;
+ 
+         public MaterialChangedEvent(EntityPlayerMP player, TileEntityAnvil anvil, ItemStack material, boolean isCollecting) {
+-            super(player, anvil, null);
++            super(player, anvil);
+             this.material = material;
+             this.isCollecting = isCollecting;
+         }
+@@ -118,7 +118,7 @@
+         private Item item;
+ 
+         public FinishedSmithEvent(EntityPlayerMP player, TileEntityAnvil anvil, Item item) {
+-            super(player, anvil, null);
++            super(player, anvil);
+             this.item = item;
+         }
+ 

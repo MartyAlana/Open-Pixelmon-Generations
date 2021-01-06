@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/abilities/IronFist.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/abilities/IronFist.java
+@@ -7,7 +7,7 @@
+ public class IronFist extends AbilityBase {
+     public int[] modifyPowerAndAccuracyUser(int power, int accuracy, PixelmonWrapper user, PixelmonWrapper target, Attack a) {
+         String[] punchMoves = new String[]{"Bullet Punch", "Comet Punch", "Dizzy Punch", "Drain Punch", "DynamicPunch", "Fire Punch", "Focus Punch", "Hammer Arm", "Ice Punch", "Mach Punch", "Mega Punch", "Meteor Mash", "Shadow Punch", "Sky Uppercut", "Thunder Punch"};
+-        if (Arrays.asList(punchMoves).contains(a.getAttackBase().getUnlocalizedName())) {
++        if (Arrays.asList(punchMoves).contains(a.getAttackBase().getTranslationKey())) {
+             power = (int)((double)power * 1.2D);
+         }
+ 

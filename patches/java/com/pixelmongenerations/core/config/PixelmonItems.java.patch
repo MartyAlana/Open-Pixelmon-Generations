@@ -9,16 +9,7 @@
                  populateItemMap(object);
              } catch (Exception var6) {
              }
-@@ -1011,7 +1011,7 @@
- 
-         if (item != null) {
-             ItemStack itemStack = new ItemStack(item);
--            allItemMap.put(itemStack.getTranslationKey().toLowerCase(), item);
-+            allItemMap.put(itemStack.getUnlocalizedName().toLowerCase(), item);
-             allItemMap.put(itemStack.getDisplayName().toLowerCase(), item);
-             allItemList.add(item);
-         }
-@@ -1034,10 +1034,10 @@
+@@ -1034,8 +1034,8 @@
  
              for(int var2 = 0; var2 < var1; ++var2) {
                  Field field = var0[var2];
@@ -27,8 +18,5 @@
 +                if (field.get(null) instanceof Item) {
 +                    Item item = (Item)field.get(null);
                      if (item.getRegistryName() == null) {
--                        System.out.println(item.getTranslationKey() + " missing registery name!");
-+                        System.out.println(item.getUnlocalizedName() + " missing registery name!");
+                         System.out.println(item.getTranslationKey() + " missing registery name!");
                      }
- 
-                     ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));

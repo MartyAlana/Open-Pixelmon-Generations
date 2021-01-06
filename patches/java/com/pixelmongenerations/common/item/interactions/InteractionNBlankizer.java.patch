@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/interactions/InteractionNBlankizer.java
++++ b/com/pixelmongenerations/common/item/interactions/InteractionNBlankizer.java
+@@ -86,7 +86,7 @@
+                         pstore.addToParty((EntityPixelmon)PixelmonEntityList.createEntityFromNBT(nbt, player.getEntityWorld()));
+                         pixelmon.embeddedPokemon.remove(nbt);
+                         pixelmon.getMoveset().removeIf((a) -> {
+-                            return a.getAttackBase().getUnlocalizedName().equals(this.move);
++                            return a.getAttackBase().getTranslationKey().equals(this.move);
+                         });
+                         pixelmon.update(new EnumUpdateType[]{EnumUpdateType.Moveset});
+                         ChatHandler.sendChat(player, "pixelmon.necrozma.changeformback", pixelmon.getNickname());

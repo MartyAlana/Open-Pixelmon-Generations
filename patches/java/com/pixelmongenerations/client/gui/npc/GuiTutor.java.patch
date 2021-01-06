@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/gui/npc/GuiTutor.java
++++ b/com/pixelmongenerations/client/gui/npc/GuiTutor.java
+@@ -76,7 +76,7 @@
+                 }
+ 
+                 if (this.able[i] != 'a') {
+-                    this.able[i] = (char)(DatabaseMoves.CanLearnAttack(DatabaseMoves.getPokemonID(this.pokemon), ((Attack)attackList.get(i)).getAttackBase().getUnlocalizedName()) ? 121 : 110);
++                    this.able[i] = (char)(DatabaseMoves.CanLearnAttack(DatabaseMoves.getPokemonID(this.pokemon), ((Attack)attackList.get(i)).getAttackBase().getTranslationKey()) ? 121 : 110);
+                 }
+             }
+ 

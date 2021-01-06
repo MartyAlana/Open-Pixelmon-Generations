@@ -1,0 +1,57 @@
+--- a/com/pixelmongenerations/client/gui/pokemoneditor/ImportExportForm.java
++++ b/com/pixelmongenerations/client/gui/pokemoneditor/ImportExportForm.java
+@@ -10,8 +10,8 @@
+ 
+ class ImportExportForm {
+     private static ImportExportForm instance;
+-    private Map<EnumSpecies, Map<Short, String>> speciesMap = new HashMap();
+-    private Map<String, FormData> nameMap = new HashMap();
++    private final Map<EnumSpecies, Map<Short, String>> speciesMap = new HashMap();
++    private final Map<String, FormData> nameMap = new HashMap();
+ 
+     static ImportExportForm getInstance() {
+         if (instance == null) {
+@@ -33,7 +33,7 @@
+ 
+             while(var4.hasNext()) {
+                 IEnumForm iEnumForm = (IEnumForm)var4.next();
+-                this.addFormData(pokemon, (short)iEnumForm.getForm(), iEnumForm.getFormSuffix());
++                this.addFormData(pokemon, iEnumForm.getForm(), iEnumForm.getFormSuffix());
+             }
+         }
+ 
+@@ -51,11 +51,11 @@
+     }
+ 
+     private void addFormData(EnumSpecies species, short formIndex, String formName) {
+-        Object formMap;
++        Map<Short, String> formMap;
+         if (this.speciesMap.containsKey(species)) {
+-            formMap = (Map)this.speciesMap.get(species);
++            formMap = this.speciesMap.get(species);
+         } else {
+-            formMap = new HashMap();
++            formMap = new HashMap<>();
+             this.speciesMap.put(species, formMap);
+         }
+ 
+@@ -64,7 +64,7 @@
+             fullFormName = fullFormName + formName;
+         }
+ 
+-        ((Map)formMap).put(formIndex, fullFormName);
++        formMap.put(formIndex, fullFormName);
+         this.nameMap.put(fullFormName, new FormData(species, formIndex));
+     }
+ 
+@@ -74,8 +74,8 @@
+         }
+ 
+         if (this.speciesMap.containsKey(species)) {
+-            Map<Short, String> formMap = (Map)this.speciesMap.get(species);
+-            return formMap.containsKey(formIndex) ? (String)formMap.get(formIndex) : (String)formMap.get(Short.valueOf((short)0));
++            Map<Short, String> formMap = this.speciesMap.get(species);
++            return formMap.containsKey(formIndex) ? formMap.get(formIndex) : formMap.get(Short.valueOf((short)0));
+         } else {
+             return species.name;
+         }

@@ -1,0 +1,36 @@
+--- a/com/pixelmongenerations/api/spawning/calculators/ICalculateSpawnLocations.java
++++ b/com/pixelmongenerations/api/spawning/calculators/ICalculateSpawnLocations.java
+@@ -56,7 +56,7 @@
+                         canSeeSky = false;
+                     }
+ 
+-                    ArrayList types;
++                    ArrayList<LocationType> types;
+                     if (!(types = LocationType.getPotentialTypes(collection.getBlockState(baseX, baseY, baseZ))).isEmpty()) {
+                         ArrayList<LocationType> extended = new ArrayList(types);
+                         BlockPos base = new BlockPos(baseX, baseY + 1, baseZ);
+@@ -112,7 +112,7 @@
+                         }
+ 
+                         searchRad = this.getMaxSpawnLocationRadius();
+-                        ArrayList<Block> uniqueBlocks = new ArrayList();
++                        ArrayList<Block> uniqueBlocks = new ArrayList<>();
+ 
+                         for(x = baseX - searchRad; x < baseX + searchRad; ++x) {
+                             if (x <= collection.maxX && x >= collection.minX) {
+@@ -128,12 +128,9 @@
+                             }
+                         }
+ 
+-                        types.removeIf((type) -> {
+-                            return type.seesSky != null && canSeeSky != type.seesSky;
+-                        });
+-                        types.removeIf((type) -> {
+-                            return type.neededNearbyBlockCondition != null && !type.neededNearbyBlockCondition.test(uniqueBlocks);
+-                        });
++                        boolean finalCanSeeSky = canSeeSky;
++                        types.removeIf((type) -> type.seesSky != null && finalCanSeeSky != type.seesSky);
++                        types.removeIf((type) -> type.neededNearbyBlockCondition != null && !type.neededNearbyBlockCondition.test(uniqueBlocks));
+                         SpawnLocationEvent event;
+                         if (!types.isEmpty() && !MinecraftForge.EVENT_BUS.post(event = new SpawnLocationEvent(new SpawnLocation(new MutableLocation(world, baseX, baseY + 1, baseZ), types, collection.getBlockState(baseX, baseY, baseZ).getBlock(), uniqueBlocks, collection.getBiome(baseX, baseZ), canSeeSky, radius)))) {
+                             spawnableLocations.add(event.getSpawnLocation());

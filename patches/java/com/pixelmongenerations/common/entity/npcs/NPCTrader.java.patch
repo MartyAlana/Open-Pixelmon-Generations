@@ -1,0 +1,14 @@
+--- a/com/pixelmongenerations/common/entity/npcs/NPCTrader.java
++++ b/com/pixelmongenerations/common/entity/npcs/NPCTrader.java
+@@ -133,9 +133,9 @@
+         this.updateTradePair();
+         nbt.setString("Offer", this.getOffer());
+         nbt.setString("Exchange", this.getExchange());
+-        nbt.setShort("ModelIndex", (short)(Integer)this.dataManager.get(dwModel));
++        nbt.setShort("ModelIndex", this.dataManager.get(dwModel).shortValue());
+         if (this.getBaseTrainer().textures.size() > 1) {
+-            nbt.setInteger("TextureIndex", (Integer)this.dataManager.get(dwTextureIndex));
++            nbt.setInteger("TextureIndex", this.dataManager.get(dwTextureIndex));
+         }
+ 
+         nbt.setInteger("Shiny", this.getIsShiny() ? 1 : 0);

@@ -1,0 +1,56 @@
+--- a/com/pixelmongenerations/client/gui/currydex/ScrollableEntryList.java
++++ b/com/pixelmongenerations/client/gui/currydex/ScrollableEntryList.java
+@@ -21,7 +21,7 @@
+ public class ScrollableEntryList<T> extends GuiComponent {
+     private int selected = 0;
+     private final List<ScrollableEntryList.SelectableComponent<T>> elements = new ArrayList();
+-    private int visibleAmount;
++    private final int visibleAmount;
+     private final List<T> list;
+     private final ScrollPane pane = new ScrollPane();
+     private final RectLayer verticalBarColor;
+@@ -35,18 +35,18 @@
+         this.list = list;
+         GuiComponent contents = this.pane.getContent();
+         contents.setDisableMouseCollision(true);
+-        this.add(new GuiLayer[]{this.pane, this.pane.getVerticalScrollBar()});
+-        this.pane.getVerticalScrollBar().getHandle().add(new GuiLayer[]{this.verticalBarColor});
++        this.add(this.pane, this.pane.getVerticalScrollBar());
++        this.pane.getVerticalScrollBar().getHandle().add(this.verticalBarColor);
+         this.pane.getVerticalScrollBar().getHandle().BUS.hook(LayoutChildren.class, this::layoutVerticalHandle);
+         int width = 0;
+         int height = 0;
+         this.elementCount = visibleAmount + 2;
+ 
+         for(int i = 0; i < Math.min(visibleAmount + 2, list.size()); ++i) {
+-            ScrollableEntryList.SelectableComponent<T> t = (ScrollableEntryList.SelectableComponent)supplier.apply(this, consumer);
++            ScrollableEntryList.SelectableComponent<T> t = supplier.apply(this, consumer);
+             width = Math.max(width, t.getWidthi());
+             height = Math.max(height, t.getHeighti());
+-            t.setY((double)(i * height));
++            t.setY(i * height);
+             t.configure(list.get(i));
+             t.setSelected(i == this.selected);
+             t.setIndex(i);
+@@ -54,9 +54,7 @@
+         }
+ 
+         contents.setSize(VecHelpersKt.vec(width, height * list.size()));
+-        this.elements.forEach((xva$0) -> {
+-            rec$.add(new GuiLayer[]{xva$0});
+-        });
++        this.elements.forEach((xva$0) -> contents.add(xva$0));
+         this.elementHeight = height;
+         this.setSize(VecHelpersKt.vec(width, visibleAmount * this.elementHeight));
+     }
+@@ -86,8 +84,8 @@
+ 
+         while(var7.hasNext()) {
+             Integer i = (Integer)var7.next();
+-            ScrollableEntryList.SelectableComponent<T> element = (ScrollableEntryList.SelectableComponent)free.remove(0);
+-            element.setY((double)(i * this.elementHeight));
++            ScrollableEntryList.SelectableComponent<T> element = free.remove(0);
++            element.setY(i * this.elementHeight);
+             element.configure(this.list.get(i));
+             element.setSelected(i == this.selected);
+             element.setIndex(i);

@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/particleEffects/GenericRotatingParticles.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/particleEffects/GenericRotatingParticles.java
+@@ -38,8 +38,6 @@
+             int r = Integer.parseInt(tint[0]);
+             int g = Integer.parseInt(tint[1]);
+             int b = Integer.parseInt(tint[2]);
+-            int increment = true;
+-            int min = true;
+             if (r > 75 && b <= 75) {
+                 r -= 8;
+                 g += 8;

@@ -1,11 +1,11 @@
 --- a/com/pixelmongenerations/common/item/ItemZygardeCube.java
 +++ b/com/pixelmongenerations/common/item/ItemZygardeCube.java
-@@ -20,7 +20,7 @@
-         this.setMaxDamage(full);
-         this.setDamage(new ItemStack(this), 0);
-         this.setRegistryName("zygarde_cube");
--        this.setTranslationKey("zygarde_cube");
-+        this.setUnlocalizedName("zygarde_cube");
-     }
- 
-     public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+@@ -35,7 +35,7 @@
+         ItemStack stack = playerIn.getHeldItem(hand);
+         int damage = stack.getItemDamage();
+         if (damage >= full) {
+-            ChatHandler.sendChat(playerIn, "pixelmon.zygardecube.cellFull");
++            ChatHandler.sendChat(playerIn,  "pixelmon.zygardecube.cellFull");
+         } else {
+             ChatHandler.sendChat(playerIn, "pixelmon.zygardecube.cellAmount", damage);
+         }

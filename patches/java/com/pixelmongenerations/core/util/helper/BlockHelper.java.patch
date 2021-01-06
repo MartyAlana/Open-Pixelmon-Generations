@@ -1,0 +1,37 @@
+--- a/com/pixelmongenerations/core/util/helper/BlockHelper.java
++++ b/com/pixelmongenerations/core/util/helper/BlockHelper.java
+@@ -28,14 +28,14 @@
+ 
+             while(var9.hasNext()) {
+                 Entry<BlockPos, T> entry = (Entry)var9.next();
+-                double dis = getDistance(entity, (BlockPos)entry.getKey());
++                double dis = getDistance(entity, entry.getKey());
+                 if (!(dis >= distance)) {
+                     closest = entry;
+                     distance = dis;
+                 }
+             }
+ 
+-            return closest == null ? null : (TileEntity)closest.getValue();
++            return closest == null ? null : closest.getValue();
+         }
+     }
+ 
+@@ -54,7 +54,7 @@
+ 
+                     while(var13.hasNext()) {
+                         Entry<BlockPos, TileEntity> entry = (Entry)var13.next();
+-                        if (tileEntity.isAssignableFrom(((TileEntity)entry.getValue()).getClass()) && !(getDistance(entity, (BlockPos)entry.getKey()) > range) && predicate.test((TileEntity)entry.getValue())) {
++                        if (tileEntity.isAssignableFrom(entry.getValue().getClass()) && !(getDistance(entity, entry.getKey()) > range) && predicate.test((T) entry.getValue())) {
+                             map.put(entry.getKey(), entry.getValue());
+                         }
+                     }
+@@ -98,7 +98,7 @@
+         }
+ 
+         try {
+-            return te;
++            return (T) te;
+         } catch (Exception var5) {
+             te.invalidate();
+             return null;

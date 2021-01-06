@@ -1,0 +1,15 @@
+--- a/com/pixelmongenerations/client/gui/battles/rules/GuiBattleRulesBase.java
++++ b/com/pixelmongenerations/client/gui/battles/rules/GuiBattleRulesBase.java
+@@ -88,11 +88,10 @@
+         this.turnTimeField = this.createRuleField(var32++, rightFieldX, topY, numberFieldWidth, textHeight);
+         this.teamSelectTimeField = this.createRuleField(var32++, rightFieldX, centerY, numberFieldWidth, textHeight);
+         this.textFields.addAll(Arrays.asList(this.levelCapField, this.numPokemonField, this.turnTimeField, this.teamSelectTimeField));
+-        int buttonID = 0;
+         int onOffButtonWidth = 30;
+         int buttonHeight = 20;
+         int leftButton = leftFieldX - 1;
+-        int buttonID = buttonID + 1;
++        int buttonID = 1;
+         this.importExportButton = new GuiButton(buttonID, this.centerX + 90, this.centerY - 120, 100, buttonHeight, I18n.translateToLocal("gui.pokemoneditor.importexport"));
+         this.raiseToCapButton = new GuiButtonOnOff(buttonID, leftButton, centerY, onOffButtonWidth, buttonHeight, this.rules.raiseToCap);
+         this.fullHealButton = new GuiButtonOnOff(buttonID, leftButton, bottomY, onOffButtonWidth, buttonHeight, this.rules.fullHeal);

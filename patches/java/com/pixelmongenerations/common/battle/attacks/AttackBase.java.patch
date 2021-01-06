@@ -1,5 +1,14 @@
 --- a/com/pixelmongenerations/common/battle/attacks/AttackBase.java
 +++ b/com/pixelmongenerations/common/battle/attacks/AttackBase.java
+@@ -89,7 +89,7 @@
+         return I18n.translateToLocal("attack." + attackName.toLowerCase() + ".name");
+     }
+ 
+-    public String getUnlocalizedName() {
++    public String getTranslationKey() {
+         return this.attackName;
+     }
+ 
 @@ -126,7 +126,7 @@
      }
  

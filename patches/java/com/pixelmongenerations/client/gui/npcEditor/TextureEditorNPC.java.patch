@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/client/gui/npcEditor/TextureEditorNPC.java
++++ b/com/pixelmongenerations/client/gui/npcEditor/TextureEditorNPC.java
+@@ -43,7 +43,7 @@
+         this.y = y;
+         this.width = width;
+         this.yOffset = yOffset;
+-        gui.addDropDown((new GuiDropDown(ServerNPCRegistry.trainers.getTypes(), this.model, x, y + yOffset, width, 92)).setGetOptionString((trainer) -> {
++        gui.addDropDown((new GuiDropDown<>(ServerNPCRegistry.trainers.getTypes(), this.model, x, y + yOffset, width, 92)).setGetOptionString((trainer) -> {
+             return I18n.translateToLocal("trainer." + trainer.name);
+         }).setOnSelected(this::selectTrainerType).setInactiveTop(y).setOrdered());
+         if (this.model.textures.size() > 1) {
+@@ -56,7 +56,7 @@
+ 
+     private void displayTextureMenu() {
+         int modelDistance = 16;
+-        this.modelTextureDropDown = (new GuiDropDown(this.model.textures, this.npc.getTextureIndex(), this.x, this.y + Math.max(this.yOffset, (this.model.textures.size() - 1) * -10) + modelDistance, this.width, 70)).setGetOptionString((texture) -> {
++        this.modelTextureDropDown = (new GuiDropDown<>(this.model.textures, this.npc.getTextureIndex(), this.x, this.y + Math.max(this.yOffset, (this.model.textures.size() - 1) * -10) + modelDistance, this.width, 70)).setGetOptionString((texture) -> {
+             return I18n.translateToLocal("trainer.model." + texture);
+         }).setOnSelectedIndex(this::selectTexture).setInactiveTop(this.y + modelDistance);
+         this.gui.addDropDown(this.modelTextureDropDown);

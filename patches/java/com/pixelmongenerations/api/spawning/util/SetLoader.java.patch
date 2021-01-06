@@ -1,11 +1,26 @@
 --- a/com/pixelmongenerations/api/spawning/util/SetLoader.java
 +++ b/com/pixelmongenerations/api/spawning/util/SetLoader.java
-@@ -258,7 +258,7 @@
+@@ -41,19 +41,17 @@
+     public static final String SPAWN_SET_ROOT = "pixelmon/spawning/";
+     public static final String DEFAULT_SPAWN_SET_FOLDER = "default";
  
-                     while(var12.hasNext()) {
-                         Biome biome = (Biome)var12.next();
--                        if (biome.getRegistryName().getPath().toLowerCase().replaceAll(" ", "").replaceAll("_", "").equals(biomeInfos[biomeID].biomeName.toLowerCase().replaceAll(" ", "").replaceAll("_", ""))) {
-+                        if (biome.getRegistryName().getResourcePath().toLowerCase().replaceAll(" ", "").replaceAll("_", "").equals(biomeInfos[biomeID].biomeName.toLowerCase().replaceAll(" ", "").replaceAll("_", ""))) {
-                             biomes.add(biome);
-                         }
-                     }
+-    public static <T> ImmutableList<T> getAllSets() {
+-        ArrayList<T> loadedSetsT = new ArrayList();
+-        Iterator var1 = loadedSets.values().iterator();
++    public static ImmutableList<SpawnSet> getAllSets() {
++        ArrayList<SpawnSet> loadedSetsT = new ArrayList();
+ 
+-        while(var1.hasNext()) {
+-            SpawnSet spawnSet = (SpawnSet)var1.next();
++        for (SpawnSet spawnSet : loadedSets.values()) {
+             loadedSetsT.add(spawnSet);
+         }
+ 
+         return ImmutableList.copyOf(loadedSetsT);
+     }
+ 
+-    public static <T> T getSet(String name) {
++    public static SpawnSet getSet(String name) {
+         return loadedSets.get(name);
+     }
+ 

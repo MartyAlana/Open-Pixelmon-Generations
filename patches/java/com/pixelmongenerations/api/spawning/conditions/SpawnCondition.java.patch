@@ -1,36 +1,17 @@
 --- a/com/pixelmongenerations/api/spawning/conditions/SpawnCondition.java
 +++ b/com/pixelmongenerations/api/spawning/conditions/SpawnCondition.java
-@@ -44,12 +44,12 @@
-         this.stringBiomes = new ArrayList();
+@@ -113,12 +113,9 @@
  
-         Biome biome;
--        for(Iterator var1 = this.biomes.iterator(); var1.hasNext(); this.stringBiomes.add(biome.getRegistryName().getPath())) {
-+        for(Iterator var1 = this.biomes.iterator(); var1.hasNext(); this.stringBiomes.add(biome.getRegistryName().getResourcePath())) {
-             biome = (Biome)var1.next();
--            if (biome == null || biome.getRegistryName() == null || biome.getRegistryName().getPath() == null) {
-+            if (biome == null || biome.getRegistryName() == null || biome.getRegistryName().getResourcePath() == null) {
-                 System.out.println(biome);
-                 System.out.println(biome.getRegistryName());
--                System.out.println(biome.getRegistryName().getPath());
-+                System.out.println(biome.getRegistryName().getResourcePath());
-             }
+     public boolean fits(SpawnInfo spawnInfo, SpawnLocation spawnLocation) {
+         int ticks = (int)(spawnLocation.location.world.getWorldTime() % 24000L);
+-        boolean timeFits = false;
++        boolean timeFits;
+         if (this.times != null && !this.times.isEmpty()) {
+-            Stream var10000 = WorldTime.getCurrent(ticks).stream();
+-            ArrayList var10001 = this.times;
+-            var10001.getClass();
+-            timeFits = var10000.anyMatch(var10001::contains);
++            timeFits = WorldTime.getCurrent(ticks).stream().anyMatch(this.times::contains);
+         } else {
+             timeFits = true;
          }
- 
-@@ -87,7 +87,7 @@
-                                 if (((ResourceLocation)biomeEntry.getKey()).toString().equalsIgnoreCase(categoryBiome) && !this.biomes.contains(biomeEntry.getValue())) {
-                                     this.biomes.add(biomeEntry.getValue());
-                                 }
--                            } else if (((ResourceLocation)biomeEntry.getKey()).getPath().equalsIgnoreCase(categoryBiome) && !this.biomes.contains(biomeEntry.getValue())) {
-+                            } else if (((ResourceLocation)biomeEntry.getKey()).getResourcePath().equalsIgnoreCase(categoryBiome) && !this.biomes.contains(biomeEntry.getValue())) {
-                                 this.biomes.add(biomeEntry.getValue());
-                             }
-                         }
-@@ -102,7 +102,7 @@
-                             if (((ResourceLocation)biomeEntry.getKey()).toString().equalsIgnoreCase(stringBiome) && !this.biomes.contains(biomeEntry.getValue())) {
-                                 this.biomes.add(biomeEntry.getValue());
-                             }
--                        } else if (((ResourceLocation)biomeEntry.getKey()).getPath().equalsIgnoreCase(stringBiome) && !this.biomes.contains(biomeEntry.getValue())) {
-+                        } else if (((ResourceLocation)biomeEntry.getKey()).getResourcePath().equalsIgnoreCase(stringBiome) && !this.biomes.contains(biomeEntry.getValue())) {
-                             this.biomes.add(biomeEntry.getValue());
-                         }
-                     }

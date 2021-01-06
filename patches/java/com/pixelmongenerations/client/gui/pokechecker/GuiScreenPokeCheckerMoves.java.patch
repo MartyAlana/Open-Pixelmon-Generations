@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/gui/pokechecker/GuiScreenPokeCheckerMoves.java
++++ b/com/pixelmongenerations/client/gui/pokechecker/GuiScreenPokeCheckerMoves.java
+@@ -179,8 +179,6 @@
+             this.mc.fontRenderer.drawString(powerText, -40 + (46 - this.mc.fontRenderer.getStringWidth(powerText) / 2), 84, 3487029);
+             String accuracyText = I18n.translateToLocal("gui.battle.accuracy");
+             this.mc.fontRenderer.drawString(accuracyText, -40 + (46 - this.mc.fontRenderer.getStringWidth(accuracyText) / 2), 116, 3487029);
+-            int bpExtra = false;
+-            int acExtra = false;
+             if (attack.getAttackBase().basePower >= 100) {
+                 int var8 = this.mc.fontRenderer.getCharWidth('0');
+             }

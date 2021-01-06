@@ -1,11 +1,55 @@
 --- a/com/pixelmongenerations/common/block/spawnmethod/BlockRegiShrine.java
 +++ b/com/pixelmongenerations/common/block/spawnmethod/BlockRegiShrine.java
-@@ -45,7 +45,7 @@
-             return (String)substring.apply(cipher, a);
+@@ -31,18 +31,18 @@
+         return world.getBlockState(pos).getBlock() != PixelmonBlocks.fancyPillar && world.getBlockState(pos).getBlock() != PixelmonBlocks.castlePillar ? "-" : (String)BlockUnown.symbolFromState(world.getBlockState(pos.up())).orElse("-");
+     };
+     private static final TriFunction<World, EnumFacing, BlockPos, String> getSymbolSequence = (world, facing, pos) -> {
+-        return (String)function.apply(world, pos.offset(facing)) + (String)function.apply(world, pos) + (String)function.apply(world, pos.offset(facing.getOpposite()));
++        return function.apply(world, pos.offset(facing)) + function.apply(world, pos) + function.apply(world, pos.offset(facing.getOpposite()));
+     };
+     private static final BiFunction<String, Integer, String> substring = (cipher, i) -> {
+         return cipher.substring(i, i + 3);
+     };
+-    private EnumSpecies species;
+-    private List<String> list;
++    private final EnumSpecies species;
++    private final List<String> list;
+ 
+     public BlockRegiShrine(EnumSpecies species) {
+         String cipher = "-" + species.name.toUpperCase() + "-";
+-        this.list = (List)IntStream.range(0, cipher.length() - 2).boxed().map((a) -> {
+-            return (String)substring.apply(cipher, a);
++        this.list = IntStream.range(0, cipher.length() - 2).boxed().map((a) -> {
++            return substring.apply(cipher, a);
          }).collect(Collectors.toList());
          this.species = species;
--        this.setTranslationKey(species.name.toLowerCase() + "_shrine");
-+        this.setUnlocalizedName(species.name.toLowerCase() + "_shrine");
+         this.setTranslationKey(species.name.toLowerCase() + "_shrine");
+@@ -64,12 +64,12 @@
+         BiFunction<EnumFacing, BlockPos, String> getIndex = (facing, blockPos) -> {
+             return (String)getSymbolSequence.apply(world, facing, blockPos);
+         };
+-        return (List)this.checkIfInSequence(Axis.Z, pos, getIndex).orElse(this.checkIfInSequence(Axis.X, pos, getIndex).orElseGet(ArrayList::new));
++        return this.checkIfInSequence(Axis.Z, pos, getIndex).orElse(this.checkIfInSequence(Axis.X, pos, getIndex).orElseGet(ArrayList::new));
      }
  
-     public TileEntityShrine createTileEntity() {
+     private Optional<List<BlockPos>> checkIfInSequence(Axis axis, BlockPos pos, BiFunction<EnumFacing, BlockPos, String> getSymbol) {
+         EnumFacing facing = EnumFacing.getFacingFromAxis(AxisDirection.POSITIVE, axis);
+-        String sequence = (String)getSymbol.apply(facing, pos);
++        String sequence = getSymbol.apply(facing, pos);
+         if (!this.list.contains(sequence)) {
+             sequence = (new StringBuilder(sequence)).reverse().toString();
+             if (!this.list.contains(sequence)) {
+@@ -93,11 +93,9 @@
+     }
+ 
+     protected boolean checkExtraRequirements(EntityPlayer player, World world, BlockPos pos) {
+-        PlayerStorage storage = (PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage((EntityPlayerMP)player).get();
++        PlayerStorage storage = PixelmonStorage.pokeBallManager.getPlayerStorage((EntityPlayerMP)player).get();
+         IntStream var10000 = IntStream.range(0, 6);
+-        storage.getClass();
+-        Stream var5 = var10000.mapToObj(storage::getIDFromPosition);
+-        storage.getClass();
++        Stream<int[]> var5 = var10000.mapToObj(storage::getIDFromPosition);
+         return var5.map(storage::getNBT).filter(Objects::nonNull).map((a) -> {
+             return a.getString("Name");
+         }).map(EnumSpecies::getFromNameAnyCase).anyMatch((a) -> {

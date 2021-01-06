@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/command/PokeRetrieve.java
++++ b/com/pixelmongenerations/core/command/PokeRetrieve.java
+@@ -29,7 +29,7 @@
+     public void execute(ICommandSender sender, String[] args) throws CommandException {
+         if (sender instanceof EntityPlayerMP) {
+             EntityPlayerMP player = (EntityPlayerMP)sender;
+-            List players;
++            List<EntityPlayerMP> players;
+             if (args.length == 1) {
+                 Optional<Integer> radiusOpt = this.getRadius(args[0]);
+                 if (!radiusOpt.isPresent()) {

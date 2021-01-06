@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/gui/GuiHelper.java
++++ b/com/pixelmongenerations/client/gui/GuiHelper.java
+@@ -639,7 +639,7 @@
+         String accuracyString = attack.getAttackBase().accuracy > 0 ? "" + attack.getAttackBase().accuracy : "--";
+         fontRenderer.drawString(accuracyString, width / 2 - 60 - acextra, height / 2 + 70, 16777215);
+         fontRenderer.drawString(attack.getAttackCategory().getLocalizedName(), width / 2 - 120, height / 2 + 80, 16777215);
+-        fontRenderer.drawSplitString(I18n.format("attack." + attack.getAttackBase().getUnlocalizedName().toLowerCase() + ".description", new Object[0]), width / 2 - 20, y, 135, 16777215);
++        fontRenderer.drawSplitString(I18n.format("attack." + attack.getAttackBase().getTranslationKey().toLowerCase() + ".description", new Object[0]), width / 2 - 20, y, 135, 16777215);
+     }
+ 
+     public static void drawMoveset(PixelmonData pokemon, int width, int height, float zLevel) {

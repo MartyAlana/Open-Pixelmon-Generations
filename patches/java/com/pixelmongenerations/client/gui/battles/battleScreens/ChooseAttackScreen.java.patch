@@ -1,0 +1,27 @@
+--- a/com/pixelmongenerations/client/gui/battles/battleScreens/ChooseAttackScreen.java
++++ b/com/pixelmongenerations/client/gui/battles/battleScreens/ChooseAttackScreen.java
+@@ -89,7 +89,6 @@
+             i = width / 2 - 50;
+ 
+             int top;
+-            int i;
+             int left;
+             for(left = 0; left < numMoves; ++left) {
+                 top = i + (left % 2 == 1 ? 0 : -91);
+@@ -123,7 +122,6 @@
+             int i2;
+             int i1;
+             int k1;
+-            int l1;
+             if (hasZMove && !this.usedZMove) {
+                 left = (width - 287) / 2;
+                 top = height - guiHeight - 20;
+@@ -322,7 +320,7 @@
+                     this.drawGradientRect(l1 - 3, i2 - 3, l1 + l1 + 3, i2 - 3 + 1, 1347420415, 1347420415);
+                     this.drawGradientRect(l1 - 3, i2 + k + 2, l1 + l1 + 3, i2 + k + 3, 1344798847, 1344798847);
+ 
+-                    for(int k1 = 0; k1 < tooltip.size(); ++k1) {
++                    for(k1 = 0; k1 < tooltip.size(); ++k1) {
+                         String s1 = (String)tooltip.get(k1);
+                         this.fontRenderer.drawStringWithShadow(s1, (float)l1, (float)i2, -1);
+                         if (k1 == 0) {

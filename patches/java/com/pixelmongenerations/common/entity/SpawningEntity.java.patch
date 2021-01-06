@@ -1,0 +1,89 @@
+--- a/com/pixelmongenerations/common/entity/SpawningEntity.java
++++ b/com/pixelmongenerations/common/entity/SpawningEntity.java
+@@ -37,9 +37,9 @@
+             return Vec3d.ZERO;
+         };
+         this.pixelmonFunction = (w) -> {
+-            return (new PokemonSpec(new String[]{EnumSpecies.Magikarp.name})).create(w);
++            return (new PokemonSpec(EnumSpecies.Magikarp.name)).create(w);
+         };
+-        this.colors = Lists.newArrayList(new Color[]{ColorUtil.WHITE});
++        this.colors = Lists.newArrayList(ColorUtil.WHITE);
+         this.tick = 0;
+         this.maxTick = 200;
+     }
+@@ -65,7 +65,7 @@
+     public void onUpdate() {
+         super.onUpdate();
+         if (!this.world.isRemote) {
+-            Vec3d loc = (Vec3d)this.location.get();
++            Vec3d loc = this.location.get();
+             if (this.tick >= this.maxTick) {
+                 SpawnPokemon.builder().pixelmon(this.pixelmonFunction).pos(loc.x, loc.y, loc.z).build().spawn(this.player, this.world);
+                 SpawnMethodCooldowns.clearCooldown(this.player);
+@@ -80,7 +80,7 @@
+ 
+     protected void readEntityFromNBT(NBTTagCompound compound) {
+         if (compound.hasKey("colors")) {
+-            this.colors = (List)IntStream.of(compound.getIntArray("colors")).mapToObj(Color::new).collect(Collectors.toList());
++            this.colors = IntStream.of(compound.getIntArray("colors")).mapToObj(Color::new).collect(Collectors.toList());
+         }
+ 
+         if (compound.hasKey("tick")) {
+@@ -116,7 +116,7 @@
+ 
+     public SpawningEntity reposition() {
+         if (this.location != null) {
+-            Vec3d loc = (Vec3d)this.location.get();
++            Vec3d loc = this.location.get();
+             this.setPositionAndUpdate(loc.x, loc.y, loc.z);
+         }
+ 
+@@ -132,18 +132,18 @@
+             return Vec3d.ZERO;
+         };
+         private Function<World, EntityPixelmon> pixelmonFunction = (w) -> {
+-            return (new PokemonSpec(new String[]{EnumSpecies.Magikarp.name})).create(w);
++            return (new PokemonSpec(EnumSpecies.Magikarp.name)).create(w);
+         };
+         private List<Color> colors;
+         private int maxTick;
+ 
+         public Builder() {
+-            this.colors = Lists.newArrayList(new Color[]{ColorUtil.WHITE});
++            this.colors = Lists.newArrayList(ColorUtil.WHITE);
+             this.maxTick = 100;
+         }
+ 
+         public SpawningEntity.Builder pixelmon(EnumSpecies species) {
+-            return this.pixelmon(new PokemonSpec(new String[]{species.name}));
++            return this.pixelmon(new PokemonSpec(species.name));
+         }
+ 
+         public SpawningEntity.Builder pixelmon(PokemonSpec spec) {
+@@ -157,7 +157,7 @@
+         }
+ 
+         public SpawningEntity.Builder colors(Color... colors) {
+-            return this.colors((List)Lists.newArrayList(colors));
++            return this.colors(Lists.newArrayList(colors));
+         }
+ 
+         public SpawningEntity.Builder colors(List<Color> colors) {
+@@ -180,14 +180,11 @@
+         }
+ 
+         public SpawningEntity.Builder location(Vec3d vec3d) {
+-            return this.location(() -> {
+-                return vec3d;
+-            });
++            return this.location(() -> vec3d);
+         }
+ 
+         public SpawningEntity.Builder location(Entity entity) {
+-            entity.getClass();
+-            return this.location(entity::func_174791_d);
++            return this.location(entity::getPositionVector);
+         }
+ 
+         public SpawningEntity build(World world, EntityPlayerMP player) {

@@ -1,0 +1,64 @@
+--- a/com/pixelmongenerations/client/models/PixelmonModelHolder.java
++++ b/com/pixelmongenerations/client/models/PixelmonModelHolder.java
+@@ -9,7 +9,7 @@
+ import net.minecraft.client.model.ModelBase;
+ 
+ public class PixelmonModelHolder<M extends ModelBase> extends ModelHolder<M> {
+-    private Class<M> clazz;
++    private final Class<M> clazz;
+     private PixelmonSmdFactory factory;
+     private Future<M> future;
+ 
+@@ -19,7 +19,7 @@
+ 
+     public PixelmonModelHolder(PixelmonSmdFactory factory) {
+         this.factory = factory;
+-        this.clazz = PixelmonSmdFactory.Impl.class;
++        this.clazz = (Class<M>) PixelmonSmdFactory.Impl.class;
+     }
+ 
+     public M getModel() {
+@@ -33,9 +33,9 @@
+ 
+             if (this.future.isDone()) {
+                 try {
+-                    this.model = (ModelBase)this.future.get();
++                    this.model = this.future.get();
+                     loadedHolders.add(this);
+-                } catch (ExecutionException var2) {
++                } catch (ExecutionException ignored) {
+                 } catch (InterruptedException var3) {
+                     var3.printStackTrace();
+                 }
+@@ -43,19 +43,19 @@
+                 this.future = null;
+                 return this.model;
+             } else {
+-                return ResourceLoader.DUMMY;
++                return (M) ResourceLoader.DUMMY;
+             }
+         }
+     }
+ 
+     protected M loadModel() {
+         if (this.factory != null) {
+-            return this.factory.createModel();
++            return (M) this.factory.createModel();
+         } else if (this.clazz != null) {
+             try {
+                 Constructor<?> constructor = this.clazz.getConstructors()[0];
+                 if (constructor.getParameterCount() == 0) {
+-                    return (ModelBase)constructor.newInstance();
++                    return (M) constructor.newInstance();
+                 }
+ 
+                 Pixelmon.LOGGER.error("No valid constructor found in " + this.clazz.getSimpleName());
+@@ -63,7 +63,7 @@
+                 var2.printStackTrace();
+             }
+ 
+-            return ResourceLoader.DUMMY;
++            return (M) ResourceLoader.DUMMY;
+         } else {
+             return null;
+         }

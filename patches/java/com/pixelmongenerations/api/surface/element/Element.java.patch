@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/api/surface/element/Element.java
++++ b/com/pixelmongenerations/api/surface/element/Element.java
+@@ -35,7 +35,7 @@
+     }
+ 
+     public <T extends Element> T getAsElement(Class<T> targetClass) {
+-        return (Element)targetClass.cast(this);
++        return targetClass.cast(this);
+     }
+ 
+     public static class ElementBuilder {

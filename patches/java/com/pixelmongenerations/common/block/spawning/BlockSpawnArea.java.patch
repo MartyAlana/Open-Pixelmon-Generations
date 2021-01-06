@@ -1,0 +1,13 @@
+--- a/com/pixelmongenerations/common/block/spawning/BlockSpawnArea.java
++++ b/com/pixelmongenerations/common/block/spawning/BlockSpawnArea.java
+@@ -37,8 +37,8 @@
+ 
+             int rarity;
+             for(Iterator var6 = this.blockSpawns.values().iterator(); var6.hasNext(); sum += rarity) {
+-                BlockSpawnData spawnList = (BlockSpawnData)var6.next();
+-                int rarity = 0;
++                spawnList = (BlockSpawnData)var6.next();
++                rarity = 0;
+                 if (num < sum + (rarity = rarity + spawnList.getRarity(state))) {
+                     return spawnList.name;
+                 }

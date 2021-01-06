@@ -1,0 +1,64 @@
+--- a/com/pixelmongenerations/common/block/tileEntities/TileEntityCookingPot.java
++++ b/com/pixelmongenerations/common/block/tileEntities/TileEntityCookingPot.java
+@@ -50,7 +50,7 @@
+     }
+ 
+     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? this.handler : super.getCapability(capability, facing);
++        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) this.handler : super.getCapability(capability, facing);
+     }
+ 
+     public boolean hasCustomName() {
+@@ -62,7 +62,7 @@
+     }
+ 
+     public ITextComponent getDisplayName() {
+-        return (ITextComponent)(this.hasCustomName() ? new TextComponentString(this.customName) : new TextComponentTranslation("container.cooking_pot", new Object[0]));
++        return this.hasCustomName() ? new TextComponentString(this.customName) : new TextComponentTranslation("container.cooking_pot");
+     }
+ 
+     public void readFromNBT(NBTTagCompound compound) {
+@@ -107,10 +107,10 @@
+                 ++this.cookTime;
+                 if (this.cookTime == 200) {
+                     EnumCurryType type = !mainIngredient.isEmpty() && mainIngredient.getItem() instanceof CurryIngredient ? ((CurryIngredient)mainIngredient.getItem()).getType() : EnumCurryType.None;
+-                    List<Tuple<EnumBerry, EnumBerryQuality>> pairs = (List)Arrays.stream(berries).filter((berry) -> {
++                    List<Tuple<EnumBerry, EnumBerryQuality>> pairs = Arrays.stream(berries).filter((berry) -> {
+                         return !berry.isEmpty() && berry.getItem() instanceof ItemBerry;
+                     }).map((a) -> {
+-                        return new Tuple(((ItemBerry)a.getItem()).getBerry(), ItemBerry.getQuality(a));
++                        return new Tuple<>(((ItemBerry)a.getItem()).getBerry(), ItemBerry.getQuality(a));
+                     }).collect(Collectors.toList());
+                     CurryEvent.Cook event = new CurryEvent.Cook(type, pairs, this.createData(type, pairs));
+                     if (!MinecraftForge.EVENT_BUS.post(event)) {
+@@ -137,16 +137,12 @@
+     }
+ 
+     private CurryData createData(EnumCurryType mainIngredient, List<Tuple<EnumBerry, EnumBerryQuality>> berries) {
+-        EnumFlavor flavor = EnumBerry.getDominantFlavor((EnumBerry[])berries.stream().map(Tuple::func_76341_a).toArray((x$0) -> {
+-            return new EnumBerry[x$0];
+-        }));
+-        int average = (int)berries.stream().map(Tuple::func_76340_b).mapToInt(EnumBerryQuality::getIndex).average().orElse(0.0D);
++        EnumFlavor flavor = EnumBerry.getDominantFlavor(berries.stream().map(Tuple::getFirst).toArray(EnumBerry[]::new));
++        int average = (int)berries.stream().map(Tuple::getSecond).mapToInt(EnumBerryQuality::getIndex).average().orElse(0.0D);
+         EnumCurryTasteRating rating = EnumCurryTasteRating.fromId(average);
+-        Stream var10000 = Stream.concat(berries.stream(), Stream.of(mainIngredient));
+-        ICurryRarity.class.getClass();
+-        var10000 = var10000.filter(ICurryRarity.class::isInstance);
+-        ICurryRarity.class.getClass();
+-        int friendship = var10000.map(ICurryRarity.class::cast).mapToInt(ICurryRarity::getRarity).sum();
++        int friendship = Stream.concat(berries.stream(), Stream.of(mainIngredient))
++                .filter(ICurryRarity.class::isInstance)
++                .map(ICurryRarity.class::cast).mapToInt(ICurryRarity::getRarity).sum();
+         if (mainIngredient == EnumCurryType.Gigantamax) {
+             flavor = EnumFlavor.None;
+         }
+@@ -214,7 +210,7 @@
+     }
+ 
+     public List<ItemStack> getDrops() {
+-        return (List)IntStream.range(0, this.handler.getSlots()).mapToObj((i) -> {
++        return IntStream.range(0, this.handler.getSlots()).mapToObj((i) -> {
+             return this.handler.getStackInSlot(i);
+         }).filter((stack) -> {
+             return !stack.isEmpty();

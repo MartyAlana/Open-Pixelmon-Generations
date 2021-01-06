@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/core/network/packetHandlers/LearnMove.java
++++ b/com/pixelmongenerations/core/network/packetHandlers/LearnMove.java
+@@ -94,7 +94,7 @@
+ 
+                         Optional entityPixelmonOptional;
+                         EntityPixelmon p = (entityPixelmonOptional = storage.getAlreadyExists(message.pokemonId, player.world)).isPresent() ? (EntityPixelmon)entityPixelmonOptional.get() : storage.sendOut(message.pokemonId, player.world);
+-                        if (!message.checkAble || DatabaseMoves.CanLearnAttack(DatabaseMoves.getPokemonID((Entity6CanBattle)p), a.getAttackBase().getUnlocalizedName())) {
++                        if (!message.checkAble || DatabaseMoves.CanLearnAttack(DatabaseMoves.getPokemonID((Entity6CanBattle)p), a.getAttackBase().getTranslationKey())) {
+                             if (p != null && p.getMoveset() != null) {
+                                 if (p.getMoveset().size() >= 4) {
+                                     EntityPlayerMP targetPlayer = (EntityPlayerMP)p.getOwner();

@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/api/events/PixelmonStructureGenEvent.java
++++ b/com/pixelmongenerations/api/events/PixelmonStructureGenEvent.java
+@@ -40,7 +40,7 @@
+         public final boolean isGenerated;
+ 
+         public Post(World world, StructureScattered structureScattered, StructureInfo structure, BlockPos pos, boolean isGenerated) {
+-            super(world, structureScattered, structure, pos, null);
++            super(world, structureScattered, structure, pos);
+             this.isGenerated = isGenerated;
+         }
+     }
+@@ -48,7 +48,7 @@
+     @Cancelable
+     public static class Pre extends PixelmonStructureGenEvent {
+         public Pre(World world, StructureScattered structureScattered, StructureInfo structure, BlockPos pos) {
+-            super(world, structureScattered, structure, pos, null);
++            super(world, structureScattered, structure, pos);
+         }
+     }
+ }

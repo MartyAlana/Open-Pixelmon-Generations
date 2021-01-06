@@ -1,0 +1,118 @@
+--- a/com/pixelmongenerations/client/gui/pc/GuiPC.java
++++ b/com/pixelmongenerations/client/gui/pc/GuiPC.java
+@@ -459,32 +459,31 @@
+         int pokemonIndex;
+         PixelmonData pokemon;
+         int xPos;
+-        int yPos;
+         List matches;
+         int x2;
+         if (this.searchText.getText().isEmpty()) {
+             if (this.currentSearchType == null) {
+                 for(x = 0; x < this.pcNumWidth; ++x) {
+-                    for(int y = 0; y < this.pcNumHeight; ++y) {
++                    for(y = 0; y < this.pcNumHeight; ++y) {
+                         PixelmonData pkt = this.pcClient.getPokemonAtPos(this.boxNumber, y * this.pcNumWidth + x);
+                         if (pkt != null) {
+                             GuiHelper.bindPokemonSprite(pkt, this.mc);
+                             y = this.pcLeft + x * this.slotWidth;
+                             yPos = this.pcTop + y * this.slotHeight;
+-                            GuiHelper.drawImageQuad((double)(y + 2), (double)(yPos + 3 - (pkt.isGen6Sprite() ? -3 : 0)), 26.0D, 26.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                            GuiHelper.drawImageQuad(y + 2, yPos + 3 - (pkt.isGen6Sprite() ? -3 : 0), 26.0D, 26.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                             if (!pkt.heldItem.isEmpty()) {
+                                 this.mc.renderEngine.bindTexture(GuiResources.heldItem);
+-                                GuiHelper.drawImageQuad((double)(y + 22), (double)(yPos + 22), 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                                GuiHelper.drawImageQuad(y + 22, yPos + 22, 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                             }
+ 
+                             if (pkt.selected) {
+                                 this.mc.renderEngine.bindTexture(GuiResources.pcBox);
+-                                GuiHelper.drawImageQuad((double)y, (double)(yPos + 4), (double)this.slotWidth, (float)(this.slotHeight + 1), 0.0D, 0.55859375D, 0.12109375D, 0.68359375D, 0.0F);
++                                GuiHelper.drawImageQuad(y, yPos + 4, this.slotWidth, (float)(this.slotHeight + 1), 0.0D, 0.55859375D, 0.12109375D, 0.68359375D, 0.0F);
+                             }
+ 
+                             if (pkt.isInRanch) {
+                                 this.mc.renderEngine.bindTexture(GuiResources.padlock);
+-                                GuiHelper.drawImageQuad((double)(y + 2), (double)(yPos + 22), 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                                GuiHelper.drawImageQuad(y + 2, yPos + 22, 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                             }
+                         }
+                     }
+@@ -500,20 +499,20 @@
+                         GuiHelper.bindPokemonSprite(pokemon, this.mc);
+                         xPos = this.pcLeft + x2 * this.slotWidth;
+                         yPos = this.pcTop + y * this.slotHeight;
+-                        GuiHelper.drawImageQuad((double)(xPos + 2), (double)(yPos + 3 - (pokemon.isGen6Sprite() ? -3 : 0)), 26.0D, 26.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                        GuiHelper.drawImageQuad(xPos + 2, yPos + 3 - (pokemon.isGen6Sprite() ? -3 : 0), 26.0D, 26.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                         if (!pokemon.heldItem.isEmpty()) {
+                             this.mc.renderEngine.bindTexture(GuiResources.heldItem);
+-                            GuiHelper.drawImageQuad((double)(xPos + 22), (double)(yPos + 22), 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                            GuiHelper.drawImageQuad(xPos + 22, yPos + 22, 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                         }
+ 
+                         if (pokemon.selected) {
+                             this.mc.renderEngine.bindTexture(GuiResources.pcBox);
+-                            GuiHelper.drawImageQuad((double)xPos, (double)(yPos + 4), (double)this.slotWidth, (float)(this.slotHeight + 1), 0.0D, 0.55859375D, 0.12109375D, 0.68359375D, 0.0F);
++                            GuiHelper.drawImageQuad(xPos, yPos + 4, this.slotWidth, (float)(this.slotHeight + 1), 0.0D, 0.55859375D, 0.12109375D, 0.68359375D, 0.0F);
+                         }
+ 
+                         if (pokemon.isInRanch) {
+                             this.mc.renderEngine.bindTexture(GuiResources.padlock);
+-                            GuiHelper.drawImageQuad((double)(xPos + 2), (double)(yPos + 22), 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                            GuiHelper.drawImageQuad(xPos + 2, yPos + 22, 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                         }
+ 
+                         ++x2;
+@@ -539,20 +538,20 @@
+                     GuiHelper.bindPokemonSprite(pokemon, this.mc);
+                     xPos = this.pcLeft + x2 * this.slotWidth;
+                     yPos = this.pcTop + y * this.slotHeight;
+-                    GuiHelper.drawImageQuad((double)(xPos + 2), (double)(yPos + 3 - (pokemon.isGen6Sprite() ? -3 : 0)), 26.0D, 26.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                    GuiHelper.drawImageQuad(xPos + 2, yPos + 3 - (pokemon.isGen6Sprite() ? -3 : 0), 26.0D, 26.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                     if (!pokemon.heldItem.isEmpty()) {
+                         this.mc.renderEngine.bindTexture(GuiResources.heldItem);
+-                        GuiHelper.drawImageQuad((double)(xPos + 22), (double)(yPos + 22), 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                        GuiHelper.drawImageQuad(xPos + 22, yPos + 22, 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                     }
+ 
+                     if (pokemon.selected) {
+                         this.mc.renderEngine.bindTexture(GuiResources.pcBox);
+-                        GuiHelper.drawImageQuad((double)xPos, (double)(yPos + 4), (double)this.slotWidth, (float)(this.slotHeight + 1), 0.0D, 0.55859375D, 0.12109375D, 0.68359375D, 0.0F);
++                        GuiHelper.drawImageQuad(xPos, yPos + 4, this.slotWidth, (float)(this.slotHeight + 1), 0.0D, 0.55859375D, 0.12109375D, 0.68359375D, 0.0F);
+                     }
+ 
+                     if (pokemon.isInRanch) {
+                         this.mc.renderEngine.bindTexture(GuiResources.padlock);
+-                        GuiHelper.drawImageQuad((double)(xPos + 2), (double)(yPos + 22), 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                        GuiHelper.drawImageQuad(xPos + 2, yPos + 22, 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                     }
+ 
+                     ++x2;
+@@ -574,15 +573,15 @@
+                 x2 = this.partyLeft + x * this.slotWidth;
+                 y = this.partyTop;
+                 GuiHelper.bindPokemonSprite(pkt, this.mc);
+-                GuiHelper.drawImageQuad((double)(x2 + 2), (double)(y + 3 - (pkt.getNationalPokedexNumber() <= 649 ? 0 : -3)), 26.0D, 26.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                GuiHelper.drawImageQuad(x2 + 2, y + 3 - (pkt.getNationalPokedexNumber() <= 649 ? 0 : -3), 26.0D, 26.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                 if (!pkt.heldItem.isEmpty()) {
+                     this.mc.renderEngine.bindTexture(GuiResources.heldItem);
+-                    GuiHelper.drawImageQuad((double)(x2 + 18), (double)(y + 22), 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
++                    GuiHelper.drawImageQuad(x2 + 18, y + 22, 8.0D, 8.0F, 0.0D, 0.0D, 1.0D, 1.0D, 0.0F);
+                 }
+ 
+                 if (pkt.selected) {
+                     this.mc.renderEngine.bindTexture(GuiResources.pcBox);
+-                    GuiHelper.drawImageQuad((double)x2, (double)(y + 3), (double)this.slotWidth, (float)(this.slotHeight + 1), 0.0D, 0.55859375D, 0.12109375D, 0.68359375D, 0.0F);
++                    GuiHelper.drawImageQuad(x2, y + 3, this.slotWidth, (float)(this.slotHeight + 1), 0.0D, 0.55859375D, 0.12109375D, 0.68359375D, 0.0F);
+                 }
+             }
+         }
+@@ -603,7 +602,7 @@
+             this.mc.renderEngine.bindTexture(GuiResources.pokecheckerPopup);
+             this.menuLeft = this.menuX - 73;
+             this.menuTop = this.menuY - 10;
+-            GuiHelper.drawImageQuad((double)this.menuLeft, (double)this.menuTop, 67.0D, 73.0F, 0.0D, 0.0D, 0.26171875D, 0.28999999165534973D, -1.0F);
++            GuiHelper.drawImageQuad(this.menuLeft, this.menuTop, 67.0D, 73.0F, 0.0D, 0.0D, 0.26171875D, 0.28999999165534973D, -1.0F);
+         }
+ 
+     }

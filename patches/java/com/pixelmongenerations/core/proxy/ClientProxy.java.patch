@@ -1,6 +1,16 @@
 --- a/com/pixelmongenerations/core/proxy/ClientProxy.java
 +++ b/com/pixelmongenerations/core/proxy/ClientProxy.java
-@@ -417,8 +417,8 @@
+@@ -189,6 +189,9 @@
+ import net.minecraft.client.renderer.entity.RenderPlayer;
+ import net.minecraft.client.renderer.entity.RenderSnowball;
+ import net.minecraft.client.resources.DefaultPlayerSkin;
++import net.minecraft.client.resources.FallbackResourceManager;
++import net.minecraft.client.resources.IResourceManager;
++import net.minecraft.client.resources.SimpleReloadableResourceManager;
+ import net.minecraft.entity.player.EntityPlayer;
+ import net.minecraft.item.ItemStack;
+ import net.minecraft.tileentity.TileEntitySkull;
+@@ -417,8 +420,8 @@
              field = var2[var4];
  
              try {
@@ -11,7 +21,7 @@
                      if (block instanceof MultiBlock || block.getRenderType(block.getDefaultState()) == EnumBlockRenderType.INVISIBLE || block instanceof GenericModelBlock || block instanceof BlockGenericModelMultiblock) {
                          ModelLoader.setCustomStateMapper(block, pixelmonStateMapper);
                      }
-@@ -435,8 +435,8 @@
+@@ -435,8 +438,8 @@
              field = var2[var4];
  
              try {
@@ -22,12 +32,12 @@
                      if (block instanceof MultiBlock || block.getRenderType(block.getDefaultState()) == EnumBlockRenderType.MODEL) {
                          ModelLoader.setCustomStateMapper(block, pixelmonStateMapper);
                      }
-@@ -793,7 +793,7 @@
-     }
- 
-     public String getTextureName(ResourceLocation resourceLocation) {
--        String[] splits = resourceLocation.getPath().split("/");
-+        String[] splits = resourceLocation.getResourcePath().split("/");
-         String textureName = splits[splits.length - 1].replaceAll(".png", "");
-         return textureName;
-     }
+@@ -524,7 +527,7 @@
+         RenderingRegistry.registerEntityRenderingHandler(EntityPixelmonPainting.class, RenderPixelmonPainting::new);
+         RenderingRegistry.registerEntityRenderingHandler(EntityLegendFinder.class, new EntityLegendFinder.EntityLegendFactory());
+         RenderingRegistry.registerEntityRenderingHandler(EntityBike.class, RenderBike::new);
+-        RenderingRegistry.registerEntityRenderingHandler(EntityZygardeCell.class, RenderZygardeCell::new);
++//        RenderingRegistry.registerEntityRenderingHandler(EntityZygardeCell.class, RenderZygardeCell::new);
+         RenderingRegistry.registerEntityRenderingHandler(SpawningEntity.class, RenderSpawningEntity::new);
+         RenderingRegistry.registerEntityRenderingHandler(EntityMagmaCrystal.class, (a) -> {
+             return new RenderSnowball(a, PixelmonItems.magmaCrystal, Minecraft.getMinecraft().getRenderItem());

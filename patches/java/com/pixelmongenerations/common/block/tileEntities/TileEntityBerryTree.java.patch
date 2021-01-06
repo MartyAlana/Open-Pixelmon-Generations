@@ -1,11 +1,79 @@
 --- a/com/pixelmongenerations/common/block/tileEntities/TileEntityBerryTree.java
 +++ b/com/pixelmongenerations/common/block/tileEntities/TileEntityBerryTree.java
-@@ -149,7 +149,7 @@
-             TileEntityBerryTree.class.getClass();
-             var10000 = var10000.filter(TileEntityBerryTree.class::isInstance);
-             TileEntityBerryTree.class.getClass();
+@@ -60,7 +60,7 @@
+ 
+     public short getProjectedYield() {
+         if (this.isGenerated && this.projectedYield > 2.0D) {
+-            this.projectedYield = (double)(this.berry.minYield + this.world.rand.nextInt(2) + 1);
++            this.projectedYield = this.berry.minYield + this.world.rand.nextInt(2) + 1;
+         }
+ 
+         return (short)((short)((int)this.projectedYield) + this.getMulch().getBaseYieldIncrease());
+@@ -71,7 +71,7 @@
+ 
+     public TileEntityBerryTree(EnumBerry berry) {
+         this.berry = berry;
+-        this.projectedYield = (double)berry.minYield;
++        this.projectedYield = berry.minYield;
+     }
+ 
+     private void calculateNextGrowthStage() {
+@@ -104,7 +104,7 @@
+             if (!this.isGenerated && this.getBlock() != null) {
+                 while(currentWorldTime - this.lastWorldTime > (long)ticksPerHour) {
+                     this.onHour();
+-                    this.lastWorldTime += (long)ticksPerHour;
++                    this.lastWorldTime += ticksPerHour;
+                 }
+             }
+         } else if (this.world.getTotalWorldTime() % 60L == 0L && this.isDry) {
+@@ -139,21 +139,18 @@
+     private boolean checkMutation() {
+         if (!this.hasMutation && RandomHelper.getRandomChance(this.getMulch().isIncreasedMutationChance() ? 60 : 30)) {
+             this.hasMutation = true;
+-            Stream var10000 = Stream.of(EnumFacing.HORIZONTALS);
+-            BlockPos var10001 = this.pos;
+-            var10001.getClass();
+-            var10000 = var10000.map(var10001::func_177972_a);
+-            World var3 = this.world;
+-            var3.getClass();
+-            var10000 = var10000.map(var3::func_175625_s);
+-            TileEntityBerryTree.class.getClass();
+-            var10000 = var10000.filter(TileEntityBerryTree.class::isInstance);
+-            TileEntityBerryTree.class.getClass();
 -            EnumBerry b = (EnumBerry)var10000.map(TileEntityBerryTree.class::cast).map(TileEntityBerryTree::getBerry).findFirst().orElse((Object)null);
-+            EnumBerry b = (EnumBerry)var10000.map(TileEntityBerryTree.class::cast).map(TileEntityBerryTree::getBerry).findFirst().orElse(null);
++            EnumBerry b = Stream.of(EnumFacing.HORIZONTALS)
++                    .map(this.pos::offset)
++                    .map(this.world::getTileEntity)
++                    .filter(TileEntityBerryTree.class::isInstance)
++                    .map(TileEntityBerryTree.class::cast)
++                    .map(TileEntityBerryTree::getBerry)
++                    .findFirst()
++                    .orElse(null);
              if (b != null) {
-                 EnumBerry mutationBerry = (EnumBerry)berryMutations.get(this.berry, b);
+-                EnumBerry mutationBerry = (EnumBerry)berryMutations.get(this.berry, b);
++                EnumBerry mutationBerry = berryMutations.get(this.berry, b);
                  if (mutationBerry == null) {
+-                    mutationBerry = (EnumBerry)berryMutations.get(b, this.berry);
++                    mutationBerry = berryMutations.get(b, this.berry);
+                 }
+ 
+                 this.mutation = mutationBerry;
+@@ -229,7 +226,7 @@
+     }
+ 
+     public void replant() {
+-        this.projectedYield = (double)this.getBerry().minYield;
++        this.projectedYield = this.getBerry().minYield;
+         this.timeUntilWeeds = 2;
+         this.timeUntilDry = -1;
+         this.timeUntilInfested = 2;
+@@ -392,7 +389,7 @@
+     }
+ 
+     private void addToYield(double amount) {
+-        this.projectedYield = Math.min(this.projectedYield + amount, (double)this.berry.maxYield);
++        this.projectedYield = Math.min(this.projectedYield + amount, this.berry.maxYield);
+         System.out.println(this.projectedYield);
+     }
+ 

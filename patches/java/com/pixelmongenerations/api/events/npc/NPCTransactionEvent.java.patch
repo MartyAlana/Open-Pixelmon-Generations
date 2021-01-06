@@ -1,0 +1,20 @@
+--- a/com/pixelmongenerations/api/events/npc/NPCTransactionEvent.java
++++ b/com/pixelmongenerations/api/events/npc/NPCTransactionEvent.java
+@@ -50,7 +50,7 @@
+         private final BlockPos blockPos;
+ 
+         public Vending(EntityPlayerMP player, BlockVendingMachine block, BlockPos blockPos, ItemStack itemStack, int cost) {
+-            super(player, itemStack, cost, null);
++            super(player, itemStack, cost);
+             this.block = block;
+             this.blockPos = blockPos;
+         }
+@@ -71,7 +71,7 @@
+         private final int quantity;
+ 
+         public Shopkeeper(EntityPlayerMP player, NPCShopkeeper npc, EnumBuySell type, ItemStack itemStack, int quantity, int cost) {
+-            super(player, itemStack, cost, null);
++            super(player, itemStack, cost);
+             this.npc = npc;
+             this.type = type;
+             this.quantity = quantity;

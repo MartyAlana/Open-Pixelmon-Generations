@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/client/gui/elements/GuiTextFieldMultipleLine.java
++++ b/com/pixelmongenerations/client/gui/elements/GuiTextFieldMultipleLine.java
+@@ -44,7 +44,6 @@
+             String text = this.getText();
+             int start = cursorPosition < selectionEnd ? cursorPosition : selectionEnd;
+             int end = cursorPosition < selectionEnd ? selectionEnd : cursorPosition;
+-            int length = false;
+             if (!text.isEmpty()) {
+                 newText = newText + text.substring(0, start);
+             }

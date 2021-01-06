@@ -1,0 +1,31 @@
+--- a/com/pixelmongenerations/client/gui/cookingpot/ContainerCookingPot.java
++++ b/com/pixelmongenerations/client/gui/cookingpot/ContainerCookingPot.java
+@@ -19,7 +19,7 @@
+ 
+     public ContainerCookingPot(InventoryPlayer player, TileEntityCookingPot tileentity) {
+         this.tileentity = tileentity;
+-        IItemHandler handler = (IItemHandler)tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing)null);
++        IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+         this.addSlotToContainer(new PredicateSlotItemHandler(handler, 0, 26, 19, ContainerCookingPot::isBerry));
+         this.addSlotToContainer(new PredicateSlotItemHandler(handler, 1, 44, 19, ContainerCookingPot::isBerry));
+         this.addSlotToContainer(new PredicateSlotItemHandler(handler, 2, 62, 19, ContainerCookingPot::isBerry));
+@@ -37,8 +37,8 @@
+ 
+         int x;
+         for(x = 0; x < 3; ++x) {
+-            for(int x = 0; x < 9; ++x) {
+-                this.addSlotToContainer(new Slot(player, x + x * 9 + 9, 8 + x * 18, 84 + x * 18 + 11 + 9));
++            for(int y = 0; y < 9; ++y) {
++                this.addSlotToContainer(new Slot(player, x + y * 9 + 9, 8 + x * 18, 84 + y * 18 + 11 + 9));
+             }
+         }
+ 
+@@ -58,7 +58,7 @@
+ 
+     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+         ItemStack stack = ItemStack.EMPTY;
+-        Slot slot = (Slot)this.inventorySlots.get(index);
++        Slot slot = this.inventorySlots.get(index);
+         if (slot != null && slot.getHasStack()) {
+             ItemStack slotStack = slot.getStack();
+             stack = slotStack.copy();

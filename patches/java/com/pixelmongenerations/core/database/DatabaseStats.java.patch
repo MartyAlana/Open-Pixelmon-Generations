@@ -1,20 +1,258 @@
 --- a/com/pixelmongenerations/core/database/DatabaseStats.java
 +++ b/com/pixelmongenerations/core/database/DatabaseStats.java
-@@ -160,7 +160,7 @@
- 
-                             while(var40.hasNext()) {
-                                 Biome biome = (Biome)var40.next();
--                                if (biome.getRegistryName().getPath().toLowerCase().replaceAll("_", "").contains(biomeString)) {
-+                                if (biome.getRegistryName().getResourcePath().toLowerCase().replaceAll("_", "").contains(biomeString)) {
-                                     biomes.add(biome);
+@@ -75,11 +75,11 @@
+             String evolveCondition = def.evolveCondition;
+             if (def.alcremieEvo) {
+                 evolveInto = PokemonSpec.from(def.targetSpecies.name);
+-                currentEvolution = new MilceryEvolution(store.pokemon, evolveInto, (Item)null, new EvoCondition[0]);
++                currentEvolution = new MilceryEvolution(store.pokemon, evolveInto, null, new EvoCondition[0]);
+             } else if (def.natureEvolve != null) {
+                 evolveInto = PokemonSpec.from(def.targetSpecies.name);
+                 if (evolveLevel > 1) {
+-                    currentEvolution = new NatureEvolution(store.pokemon, evolveInto, evolveLevel, def.natureEvolve, new EvoCondition[0]);
++                    currentEvolution = new NatureEvolution(store.pokemon, evolveInto, evolveLevel, def.natureEvolve);
+                 }
+             } else {
+                 int pixelmonToID = def.targetId;
+@@ -87,14 +87,14 @@
+                 if (evolveCondition == null) {
+                     evolveInto = PokemonSpec.from(EnumSpecies.getFromPixelmonId(pixelmonToID).name);
+                     if (evolveLevel > 1) {
+-                        currentEvolution = new LevelingEvolution(store.pokemon, evolveInto, evolveLevel, new EvoCondition[0]);
++                        currentEvolution = new LevelingEvolution(store.pokemon, evolveInto, evolveLevel);
+                     }
+                 } else {
+                     String[] splits = evolveCondition.split(":");
+                     Optional<EnumSpecies> poke = EnumSpecies.getFromName(splits[splits.length - 1]);
+                     PokemonSpec to = evolveInto;
+                     if (poke.isPresent() && evolveInto == null) {
+-                        to = PokemonSpec.from(((EnumSpecies)poke.get()).name);
++                        to = PokemonSpec.from(poke.get().name);
+                         if (form != -1) {
+                             to.form = form;
+                         }
+@@ -103,27 +103,27 @@
+                     TimeCondition.EnumTime enumTime;
+                     if (splits[0].equalsIgnoreCase("time")) {
+                         enumTime = TimeCondition.EnumTime.getTime(splits[1]);
+-                        currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel, new EvoCondition[]{new TimeCondition(enumTime)});
++                        currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel, new TimeCondition(enumTime));
+                     } else if (splits[0].equalsIgnoreCase("weather")) {
+                         WeatherType weather = WeatherType.valueOf(splits[1].toUpperCase());
+                         if (weather != null) {
+-                            currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel, new EvoCondition[]{new WeatherCondition(weather)});
++                            currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel, new WeatherCondition(weather));
+                         } else {
+                             Pixelmon.LOGGER.error("Bad weather type: " + splits[1] + " for " + store.pokemon.name + " evolution.");
+                         }
+                     } else if (splits[0].equalsIgnoreCase("highaltitude")) {
+-                        currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel, new EvoCondition[]{new HighAltitudeCondition()});
++                        currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel, new HighAltitudeCondition());
+                     } else if (splits[0].equalsIgnoreCase("friendship")) {
+                         if (splits.length > 2) {
+                             enumTime = TimeCondition.EnumTime.getTime(splits[1]);
+-                            currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[]{new FriendshipCondition(), new TimeCondition(enumTime)});
++                            currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new FriendshipCondition(), new TimeCondition(enumTime));
+                         } else {
+-                            currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[]{new FriendshipCondition()});
++                            currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new FriendshipCondition());
+                         }
+                     } else if (splits[0].equalsIgnoreCase("fairymovefriendshipflowerbiome")) {
+-                        currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[]{new FriendshipCondition(), new MoveTypeCondition(EnumType.Fairy), new BiomeCondition(new Biome[]{Biomes.MUTATED_FOREST, Biomes.MUTATED_PLAINS})});
++                        currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new FriendshipCondition(), new MoveTypeCondition(EnumType.Fairy), new BiomeCondition(Biomes.MUTATED_FOREST, Biomes.MUTATED_PLAINS));
+                     } else if (splits[0].equalsIgnoreCase("trade")) {
+-                        currentEvolution = new TradeEvolution(store.pokemon, to, (EnumSpecies)null, new EvoCondition[0]);
++                        currentEvolution = new TradeEvolution(store.pokemon, to, null);
+                         if (splits.length > 2) {
+                             ItemHeld heldItem = PixelmonItemsHeld.getHeldItem(splits[1]);
+                             if (heldItem == null) {
+@@ -135,24 +135,24 @@
+                                     ((TradeEvolution)currentEvolution).with = withPoke;
                                  }
+                             } else {
+-                                ((Evolution)currentEvolution).conditions.add(new HeldItemCondition(PixelmonItemsHeld.getHeldItem(splits[1])));
++                                currentEvolution.conditions.add(new HeldItemCondition(PixelmonItemsHeld.getHeldItem(splits[1])));
                              }
-@@ -171,7 +171,7 @@
+                         }
+                     } else if (splits[0].equalsIgnoreCase("move")) {
+-                        currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[]{new MoveCondition(Integer.parseInt(splits[1]))});
++                        currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new MoveCondition(Integer.parseInt(splits[1])));
+                     } else if (EnumEvolutionStone.hasEvolutionStone(splits[0])) {
+-                        currentEvolution = new InteractEvolution(store.pokemon, to, EnumEvolutionStone.getEvolutionStone(splits[0]).getItem(0), new EvoCondition[0]);
++                        currentEvolution = new InteractEvolution(store.pokemon, to, EnumEvolutionStone.getEvolutionStone(splits[0]).getItem(0));
+                         if (splits.length > 2) {
+-                            ((Evolution)currentEvolution).conditions.add(new GenderCondition(new Gender[]{Gender.getGender(splits[1])}));
++                            currentEvolution.conditions.add(new GenderCondition(Gender.getGender(splits[1])));
+                         }
+                     } else if (EnumEvolutionRock.hasEvolutionRock(splits[0])) {
+-                        currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[]{new EvoRockCondition(EnumEvolutionRock.getEvolutionRock(splits[0]), 100)});
++                        currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoRockCondition(EnumEvolutionRock.getEvolutionRock(splits[0]), 100));
+                     } else if (splits[0].equalsIgnoreCase("levelupgender")) {
+-                        currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel, new EvoCondition[0]);
++                        currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel);
+                         Gender gender = splits[1].equalsIgnoreCase("male") ? Gender.Male : Gender.Female;
+-                        ((Evolution)currentEvolution).conditions.add(new GenderCondition(new Gender[]{gender}));
++                        currentEvolution.conditions.add(new GenderCondition(gender));
+                     } else if (splits[0].equalsIgnoreCase("levelupbiome")) {
+-                        currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[0]);
++                        currentEvolution = new LevelingEvolution(store.pokemon, to, 1);
+                         ArrayList<Biome> biomes = new ArrayList();
+                         if (splits.length < 4) {
+                             String biomeString = splits[1].toLowerCase();
+@@ -179,7 +179,7 @@
+                             ((LevelingEvolution)currentEvolution).level = level;
+                         }
  
-                             while(var44.hasNext()) {
-                                 Biome biome2 = (Biome)var44.next();
--                                if (biome2.getRegistryName().getPath().toLowerCase().replaceAll("_", "").contains(biomeString)) {
-+                                if (biome2.getRegistryName().getResourcePath().toLowerCase().replaceAll("_", "").contains(biomeString)) {
-                                     biomes.add(biome2);
-                                 }
+-                        ((Evolution)currentEvolution).conditions.add(new BiomeCondition(biomes));
++                        currentEvolution.conditions.add(new BiomeCondition(biomes));
+                     } else if (splits[0].equalsIgnoreCase("leveluphelditem")) {
+                         String itemString = splits[1];
+ 
+@@ -196,63 +196,63 @@
                              }
+ 
+                             if (timeCond != null) {
+-                                new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[]{new HeldItemCondition(item), timeCond});
++                                new LevelingEvolution(store.pokemon, to, 1, new HeldItemCondition(item), timeCond);
+                             }
+ 
+-                            currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[]{new HeldItemCondition(item)});
++                            currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new HeldItemCondition(item));
+                         } catch (Exception var22) {
+                             var22.printStackTrace();
+                             return;
+                         }
+                     } else if (splits[0].equalsIgnoreCase("party")) {
+-                        currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel, new EvoCondition[0]);
++                        currentEvolution = new LevelingEvolution(store.pokemon, to, evolveLevel);
+                         if (EnumType.hasType(splits[1])) {
+-                            ((Evolution)currentEvolution).conditions.add(new PartyCondition(new EnumType[]{EnumType.valueOf(splits[1])}));
++                            currentEvolution.conditions.add(new PartyCondition(EnumType.valueOf(splits[1])));
+                         } else if (EnumSpecies.getFromNameAnyCase(splits[1]) != null) {
+-                            ((Evolution)currentEvolution).conditions.add(new PartyCondition(new EnumSpecies[]{EnumSpecies.getFromNameAnyCase(splits[1])}));
++                            currentEvolution.conditions.add(new PartyCondition(EnumSpecies.getFromNameAnyCase(splits[1])));
+                         }
+                     } else if (!splits[0].equalsIgnoreCase("random")) {
+                         if (splits[0].equalsIgnoreCase("tyrogue")) {
+-                            evolutions.add(new LevelingEvolution(store.pokemon, PokemonSpec.from("Hitmonlee"), 20, new EvoCondition[]{new StatRatioCondition(StatsType.Attack, StatsType.Defence, 1.0F)}));
+-                            evolutions.add(new LevelingEvolution(store.pokemon, PokemonSpec.from("Hitmonchan"), 20, new EvoCondition[]{new StatRatioCondition(StatsType.Defence, StatsType.Attack, 1.0F)}));
+-                            currentEvolution = new LevelingEvolution(store.pokemon, PokemonSpec.from("Hitmontop"), 20, new EvoCondition[0]);
++                            evolutions.add(new LevelingEvolution(store.pokemon, PokemonSpec.from("Hitmonlee"), 20, new StatRatioCondition(StatsType.Attack, StatsType.Defence, 1.0F)));
++                            evolutions.add(new LevelingEvolution(store.pokemon, PokemonSpec.from("Hitmonchan"), 20, new StatRatioCondition(StatsType.Defence, StatsType.Attack, 1.0F)));
++                            currentEvolution = new LevelingEvolution(store.pokemon, PokemonSpec.from("Hitmontop"), 20);
+                         } else if (splits[0].equalsIgnoreCase("mantyke")) {
+                             to = PokemonSpec.from(EnumSpecies.Mantine.name);
+-                            currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new EvoCondition[]{new PartyCondition(new EnumSpecies[]{EnumSpecies.Remoraid})});
++                            currentEvolution = new LevelingEvolution(store.pokemon, to, 1, new PartyCondition(EnumSpecies.Remoraid));
+                         } else if (splits[0].equalsIgnoreCase("burmy")) {
+-                            evolutions.add(new LevelingEvolution(store.pokemon, PokemonSpec.from("Wormadam"), 20, new EvoCondition[]{new GenderCondition(new Gender[]{Gender.Female})}));
+-                            currentEvolution = new LevelingEvolution(store.pokemon, PokemonSpec.from("Mothim"), 20, new EvoCondition[]{new GenderCondition(new Gender[]{Gender.Male})});
++                            evolutions.add(new LevelingEvolution(store.pokemon, PokemonSpec.from("Wormadam"), 20, new GenderCondition(Gender.Female)));
++                            currentEvolution = new LevelingEvolution(store.pokemon, PokemonSpec.from("Mothim"), 20, new GenderCondition(Gender.Male));
+                         } else if (splits[0].equalsIgnoreCase("sinistea")) {
+                             if (store.form == 0) {
+-                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Polteageist.name), EnumEvolutionStone.CrackedPot.getItem(0), new EvoCondition[0]);
++                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Polteageist.name), EnumEvolutionStone.CrackedPot.getItem(0));
+                             } else if (store.form == 1) {
+-                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Polteageist.name), EnumEvolutionStone.ChippedPot.getItem(0), new EvoCondition[0]);
++                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Polteageist.name), EnumEvolutionStone.ChippedPot.getItem(0));
+                             }
+                         } else if (splits[0].equalsIgnoreCase("vulpix")) {
+                             if (store.form == -1) {
+-                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Ninetales.name), EnumEvolutionStone.Firestone.getItem(0), new EvoCondition[0]);
++                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Ninetales.name), EnumEvolutionStone.Firestone.getItem(0));
+                             } else if (store.form == 3) {
+-                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Ninetales.name), EnumEvolutionStone.Icestone.getItem(0), new EvoCondition[0]);
++                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Ninetales.name), EnumEvolutionStone.Icestone.getItem(0));
+                             }
+                         } else if (splits[0].equalsIgnoreCase("sandshrew")) {
+                             if (store.form == -1) {
+-                                currentEvolution = new LevelingEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Sandslash.name), 22, new EvoCondition[0]);
++                                currentEvolution = new LevelingEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Sandslash.name), 22);
+                             } else if (store.form == 3) {
+-                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Sandslash.name), EnumEvolutionStone.Icestone.getItem(0), new EvoCondition[0]);
++                                currentEvolution = new InteractEvolution(store.pokemon, PokemonSpec.from(EnumSpecies.Sandslash.name), EnumEvolutionStone.Icestone.getItem(0));
+                             }
+                         }
+                     } else {
+                         EnumSpecies[] pokemonChoices = new EnumSpecies[splits.length - 1];
+                         boolean invalid = false;
+ 
+-                        for(int i = 1; i < splits.length; ++i) {
++                        for(int j = 1; j < splits.length; ++j) {
+                             Optional<EnumSpecies> poke2 = EnumSpecies.getFromName(splits[splits.length - i]);
+                             if (!poke2.isPresent()) {
+                                 invalid = true;
+                                 break;
+                             }
+ 
+-                            pokemonChoices[i - 1] = (EnumSpecies)poke2.get();
++                            pokemonChoices[i - 1] = poke2.get();
+                         }
+ 
+                         if (invalid) {
+@@ -260,24 +260,22 @@
+                         }
+ 
+                         float chance = 1.0F / (float)pokemonChoices.length;
+-                        int i = 0;
++                        i = 0;
+ 
+                         while(true) {
+                             ++i;
+                             if (i >= pokemonChoices.length - 1) {
+-                                currentEvolution = new LevelingEvolution(store.pokemon, PokemonSpec.from(pokemonChoices[pokemonChoices.length - 1].name), evolveLevel, new EvoCondition[0]);
++                                currentEvolution = new LevelingEvolution(store.pokemon, PokemonSpec.from(pokemonChoices[pokemonChoices.length - 1].name), evolveLevel);
+                                 break;
+                             }
+ 
+-                            evolutions.add(new LevelingEvolution(store.pokemon, PokemonSpec.from(pokemonChoices[i].name), evolveLevel, new EvoCondition[]{new ChanceCondition(chance)}));
++                            evolutions.add(new LevelingEvolution(store.pokemon, PokemonSpec.from(pokemonChoices[i].name), evolveLevel, new ChanceCondition(chance)));
+                         }
+                     }
+ 
+-                    if (evolveInto == null) {
+                         evolveInto = to;
+                     }
+                 }
+-            }
+ 
+             boolean disableEvolution = false;
+             if (evolveInto != null && !PixelmonConfig.allGenerationsEnabled() && store.pokemon.name.equals(evolveInto.name) && Entity3HasStats.isAvailableGeneration(store.nationalPokedexNumber) && !Entity3HasStats.isAvailableGeneration(evolveInto.name)) {
+@@ -286,18 +284,18 @@
+ 
+             LevelingEvolution alolan;
+             if (store.pokemon == EnumSpecies.Espurr) {
+-                alolan = new LevelingEvolution(EnumSpecies.Espurr, PokemonSpec.from("Meowstic", "f:0"), ((LevelingEvolution)currentEvolution).level, new EvoCondition[]{new GenderCondition(new Gender[]{Gender.Male})});
++                alolan = new LevelingEvolution(EnumSpecies.Espurr, PokemonSpec.from("Meowstic", "f:0"), ((LevelingEvolution)currentEvolution).level, new GenderCondition(Gender.Male));
+                 evolutions.add(alolan);
+-                currentEvolution = new LevelingEvolution(EnumSpecies.Espurr, PokemonSpec.from("Meowstic", "f:1"), alolan.level, new EvoCondition[]{new GenderCondition(new Gender[]{Gender.Female})});
++                currentEvolution = new LevelingEvolution(EnumSpecies.Espurr, PokemonSpec.from("Meowstic", "f:1"), alolan.level, new GenderCondition(Gender.Female));
+             }
+ 
+             if (store.pokemon == EnumSpecies.Cubone) {
+-                alolan = new LevelingEvolution(EnumSpecies.Cubone, PokemonSpec.from("Marowak", "f:3"), 28, new EvoCondition[]{new TimeCondition(TimeCondition.EnumTime.Night)});
++                alolan = new LevelingEvolution(EnumSpecies.Cubone, PokemonSpec.from("Marowak", "f:3"), 28, new TimeCondition(TimeCondition.EnumTime.Night));
+                 evolutions.add(alolan);
+             }
+ 
+             if (form != -1) {
+-                ((Evolution)currentEvolution).setForm(form);
++                currentEvolution.setForm(form);
+             }
+ 
+             if (!disableEvolution) {
+@@ -306,10 +304,10 @@
+         }
+ 
+         if (store.pixelmonName.equals("Eevee")) {
+-            for(int i = 0; i < evolutions.size(); ++i) {
+-                Evolution e = (Evolution)evolutions.get(i);
++            for(int j = 0; j < evolutions.size(); ++j) {
++                Evolution e = evolutions.get(j);
+                 if (e.to.name.equals("Sylveon")) {
+-                    evolutions.remove(i);
++                    evolutions.remove(j);
+                     evolutions.add(0, e);
+                     break;
+                 }

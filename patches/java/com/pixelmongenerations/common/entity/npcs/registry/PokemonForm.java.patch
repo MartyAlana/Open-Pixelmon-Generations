@@ -1,0 +1,22 @@
+--- a/com/pixelmongenerations/common/entity/npcs/registry/PokemonForm.java
++++ b/com/pixelmongenerations/common/entity/npcs/registry/PokemonForm.java
+@@ -77,9 +77,7 @@
+     }
+ 
+     public int hashCode() {
+-        int prime = true;
+-        int result = 1;
+-        int result = 31 * result + this.form;
++        int result = 31 + this.form;
+         result = 31 * result + (this.pokemon == null ? 0 : this.pokemon.hashCode());
+         return result;
+     }
+@@ -251,7 +249,7 @@
+                 baseName = baseName + " " + (this.form == 2 ? "Y" : "X");
+             }
+ 
+-            return I18n.format("pixelmon.mega.name", new Object[]{baseName});
++            return I18n.format("pixelmon.mega.name", baseName);
+         } else {
+             String formName = "";
+             switch(this.pokemon) {

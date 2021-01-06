@@ -1,0 +1,22 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/externalMoves/LightFire.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/externalMoves/LightFire.java
+@@ -21,7 +21,7 @@
+         if (((EntityPlayerMP)user.getOwner()).interactionManager.getGameType() == GameType.ADVENTURE) {
+             return true;
+         } else {
+-            String attack = user.getMoveset().get(moveIndex).getAttackBase().getUnlocalizedName();
++            String attack = user.getMoveset().get(moveIndex).getAttackBase().getTranslationKey();
+             int width = 1;
+             int length = 1;
+             boolean cross = false;
+@@ -44,8 +44,8 @@
+             if (MinecraftForge.EVENT_BUS.post(lightFireEvent = new ExternalMoveEvent.LightFireMoveEvent((EntityPlayerMP)user.getOwner(), user, this, target, length, width, cross))) {
+                 return false;
+             } else {
+-                int length = lightFireEvent.getLength();
+-                int width = lightFireEvent.getWidth();
++                length = lightFireEvent.getLength();
++                width = lightFireEvent.getWidth();
+                 cross = lightFireEvent.isCross();
+                 BlockPos pos = target.getBlockPos();
+                 int initPosX = pos.getX();

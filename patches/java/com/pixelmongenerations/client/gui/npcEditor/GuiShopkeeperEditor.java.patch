@@ -1,0 +1,26 @@
+--- a/com/pixelmongenerations/client/gui/npcEditor/GuiShopkeeperEditor.java
++++ b/com/pixelmongenerations/client/gui/npcEditor/GuiShopkeeperEditor.java
+@@ -51,7 +51,7 @@
+         super.initGui();
+         this.buttonList.add(new GuiButton(1, this.width / 2 + 155, this.height / 2 + 90, 30, 20, I18n.translateToLocal("gui.guiItemDrops.ok")));
+         this.buttonList.add(new GuiButton(6, this.width / 2 + 100, this.height / 2 - 120, 80, 20, I18n.translateToLocal("gui.npceditor.despawn")));
+-        this.jsonDropDown = (new GuiDropDown(shopkeeperData, new ClientShopkeeperData(json), this.width / 2 - 10, this.height / 2 - 81, 140, 100)).setGetOptionString((shopkeeper) -> {
++        this.jsonDropDown = (new GuiDropDown<>(shopkeeperData, new ClientShopkeeperData(json), this.width / 2 - 10, this.height / 2 - 81, 140, 100)).setGetOptionString((shopkeeper) -> {
+             return I18n.translateToLocal("npc.shopkeeper." + shopkeeper.getID());
+         }).setOnSelected((shopkeeper) -> {
+             Pixelmon.NETWORK.sendToServer(new NPCServerPacket(shopkeeperID, EnumNPCServerPacketType.CycleJson, shopkeeper.getID()));
+@@ -91,12 +91,12 @@
+ 
+     private void resetDropDowns(ClientShopkeeperData currentShopkeeper, String newTexture) {
+         this.removeDropDown(this.nameDropDown);
+-        this.nameDropDown = (new GuiDropDown(currentShopkeeper.getNames(), name, this.width / 2 - 10, this.height / 2 - 51, 140, 100)).setOnSelectedIndex((index) -> {
++        this.nameDropDown = (new GuiDropDown<>(currentShopkeeper.getNames(), name, this.width / 2 - 10, this.height / 2 - 51, 140, 100)).setOnSelectedIndex((index) -> {
+             Pixelmon.NETWORK.sendToServer(new NPCServerPacket(shopkeeperID, EnumNPCServerPacketType.CycleName, index));
+         });
+         this.addDropDown(this.nameDropDown);
+         this.removeDropDown(this.textureDropDown);
+-        this.textureDropDown = (new GuiDropDown(currentShopkeeper.getTextures(), newTexture, this.width / 2 - 10, this.height / 2 - 21, 140, 100)).setGetOptionString((texture) -> {
++        this.textureDropDown = (new GuiDropDown<>(currentShopkeeper.getTextures(), newTexture, this.width / 2 - 10, this.height / 2 - 21, 140, 100)).setGetOptionString((texture) -> {
+             return I18n.translateToLocal("npc.model." + texture.replace(".png", ""));
+         }).setOnSelected((texture) -> {
+             Pixelmon.NETWORK.sendToServer(new NPCServerPacket(shopkeeperID, EnumNPCServerPacketType.CustomSteveTexture, texture));

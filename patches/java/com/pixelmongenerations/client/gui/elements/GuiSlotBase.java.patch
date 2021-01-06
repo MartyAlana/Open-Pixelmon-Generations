@@ -1,0 +1,10 @@
+--- a/com/pixelmongenerations/client/gui/elements/GuiSlotBase.java
++++ b/com/pixelmongenerations/client/gui/elements/GuiSlotBase.java
+@@ -226,7 +226,6 @@
+                 for(; !mc.gameSettings.touchscreen && Mouse.next(); mc.currentScreen.handleMouseInput()) {
+                     int scroll = Mouse.getEventDWheel();
+                     if (scroll != 0) {
+-                        byte scroll;
+                         if (scroll > 0) {
+                             scroll = -1;
+                         } else {

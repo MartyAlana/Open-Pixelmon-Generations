@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/battle/attacks/specialAttacks/basic/Pledge.java
++++ b/com/pixelmongenerations/common/battle/attacks/specialAttacks/basic/Pledge.java
+@@ -43,7 +43,7 @@
+         for(int i = 0; i < user.bc.turn; ++i) {
+             PixelmonWrapper currentPokemon = (PixelmonWrapper)user.bc.turnList.get(i);
+             Attack currentAttack;
+-            if (currentPokemon.canAttack && team.contains(currentPokemon) && (currentAttack = ((PixelmonWrapper)user.bc.turnList.get(i)).attack) != null && currentAttack.getAttackBase().getUnlocalizedName().contains("pledge") && !user.attack.equals(currentAttack)) {
++            if (currentPokemon.canAttack && team.contains(currentPokemon) && (currentAttack = ((PixelmonWrapper)user.bc.turnList.get(i)).attack) != null && currentAttack.getAttackBase().getTranslationKey().contains("pledge") && !user.attack.equals(currentAttack)) {
+                 beforePledge = currentAttack;
+             }
+         }

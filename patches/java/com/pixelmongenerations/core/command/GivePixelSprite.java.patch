@@ -1,0 +1,12 @@
+--- a/com/pixelmongenerations/core/command/GivePixelSprite.java
++++ b/com/pixelmongenerations/core/command/GivePixelSprite.java
+@@ -50,8 +50,7 @@
+                         return;
+                     }
+ 
+-                    int form = 0;
+-                    int form = args.length == 2 ? parseInt(args[1]) : pokemon.getFormEnum(form).getForm();
++                    int form = args.length == 2 ? parseInt(args[1]) : pokemon.getFormEnum(0).getForm();
+                     Optional<BaseStats> stats = Entity3HasStats.getBaseStats(pokemon.name);
+                     if (!stats.isPresent()) {
+                         player.sendMessage(new TextComponentString(this.getUsage(sender)));

@@ -1,0 +1,14 @@
+--- a/com/pixelmongenerations/core/network/packetHandlers/pokedex/OpenPokedex.java
++++ b/com/pixelmongenerations/core/network/packetHandlers/pokedex/OpenPokedex.java
+@@ -59,8 +59,10 @@
+                     pokedex.sendToPlayer(player);
+                 }
+ 
++                boolean finalOpenInfo = openInfo;
++                int finalId = id;
+                 player.getServer().addScheduledTask(() -> {
+-                    player.openGui(Pixelmon.INSTANCE, openInfo ? EnumGui.PokedexInfo.getIndex() : EnumGui.Pokedex.getIndex(), player.world, id, 0, 0);
++                    player.openGui(Pixelmon.INSTANCE, finalOpenInfo ? EnumGui.PokedexInfo.getIndex() : EnumGui.Pokedex.getIndex(), player.world, finalId, 0, 0);
+                 });
+             }
+ 

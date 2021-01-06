@@ -1,0 +1,143 @@
+--- a/com/pixelmongenerations/common/entity/npcs/registry/NPCRegistryTrainers.java
++++ b/com/pixelmongenerations/common/entity/npcs/registry/NPCRegistryTrainers.java
+@@ -39,7 +39,7 @@
+                 throw new LanguageNotFoundException();
+             } else if (istream != null) {
+                 TrainerData data = new TrainerData(name);
+-                JsonObject json = (new JsonParser()).parse(new InputStreamReader((InputStream)istream, StandardCharsets.UTF_8)).getAsJsonObject();
++                JsonObject json = (new JsonParser()).parse(new InputStreamReader(istream, StandardCharsets.UTF_8)).getAsJsonObject();
+                 String opening;
+                 if (json.has("data")) {
+                     JsonObject object = JsonUtils.getJsonObject(json.get("data"), "data");
+@@ -96,12 +96,12 @@
+                     }
+                 }
+ 
+-                Object list;
+-                if ((list = (List)thisData.trainers.get(data.trainerType)) == null) {
+-                    list = new ArrayList();
++                List<TrainerData> list;
++                if ((list = thisData.trainers.get(data.trainerType)) == null) {
++                    list = new ArrayList<>();
+                 }
+ 
+-                ((List)list).add(data);
++                list.add(data);
+                 thisData.trainers.put(data.trainerType, list);
+             }
+         } catch (LanguageNotFoundException var17) {
+@@ -112,9 +112,9 @@
+     }
+ 
+     public boolean has(String trainerName) {
+-        NPCRegistryData trainerData = (NPCRegistryData)ServerNPCRegistry.data.get(ServerNPCRegistry.en_us);
++        NPCRegistryData trainerData = ServerNPCRegistry.data.get(ServerNPCRegistry.en_us);
+         if (trainerData != null) {
+-            Iterator var3 = ((NPCRegistryData)ServerNPCRegistry.data.get(ServerNPCRegistry.en_us)).trainerTypes.iterator();
++            Iterator var3 = ServerNPCRegistry.data.get(ServerNPCRegistry.en_us).trainerTypes.iterator();
+ 
+             while(var3.hasNext()) {
+                 BaseTrainer trainer = (BaseTrainer)var3.next();
+@@ -128,7 +128,7 @@
+     }
+ 
+     public BaseTrainer get(String trainerName) {
+-        Iterator var2 = ((NPCRegistryData)ServerNPCRegistry.data.get(ServerNPCRegistry.en_us)).trainerTypes.iterator();
++        Iterator var2 = ServerNPCRegistry.data.get(ServerNPCRegistry.en_us).trainerTypes.iterator();
+ 
+         BaseTrainer trainer;
+         do {
+@@ -143,7 +143,7 @@
+     }
+ 
+     public BaseTrainer getById(int id) {
+-        NPCRegistryData englishData = (NPCRegistryData)ServerNPCRegistry.data.get(ServerNPCRegistry.en_us);
++        NPCRegistryData englishData = ServerNPCRegistry.data.get(ServerNPCRegistry.en_us);
+         if (englishData != null) {
+             Iterator var3 = englishData.trainerTypes.iterator();
+ 
+@@ -172,11 +172,11 @@
+     }
+ 
+     public TrainerData getRandomData(BaseTrainer trainer) {
+-        List<TrainerData> list = (List)((NPCRegistryData)ServerNPCRegistry.data.get(ServerNPCRegistry.en_us)).trainers.get(trainer);
++        List<TrainerData> list = ServerNPCRegistry.data.get(ServerNPCRegistry.en_us).trainers.get(trainer);
+         if (list == null) {
+             return null;
+         } else {
+-            TrainerData td = (TrainerData)RandomHelper.getRandomElementFromList(list);
++            TrainerData td = RandomHelper.getRandomElementFromList(list);
+             return td;
+         }
+     }
+@@ -198,7 +198,7 @@
+     }
+ 
+     public static BaseTrainer getByName(String name) {
+-        NPCRegistryData data = (NPCRegistryData)ServerNPCRegistry.data.get(ServerNPCRegistry.en_us);
++        NPCRegistryData data = ServerNPCRegistry.data.get(ServerNPCRegistry.en_us);
+         if (data != null) {
+             Iterator var2 = data.trainerTypes.iterator();
+ 
+@@ -230,9 +230,9 @@
+     }
+ 
+     private TrainerData findTrainerData(String langCode, BaseTrainer baseTrainer, String id) {
+-        NPCRegistryData npcData = (NPCRegistryData)ServerNPCRegistry.data.get(langCode);
++        NPCRegistryData npcData = ServerNPCRegistry.data.get(langCode);
+         List trainerData;
+-        if (npcData != null && (trainerData = (List)npcData.trainers.get(baseTrainer)) != null) {
++        if (npcData != null && (trainerData = npcData.trainers.get(baseTrainer)) != null) {
+             Iterator var6 = trainerData.iterator();
+ 
+             while(var6.hasNext()) {
+@@ -249,7 +249,7 @@
+     public String getTranslatedRandomName(String langCode, BaseTrainer baseTrainer, String id) {
+         try {
+             ArrayList<String> names = this.getTranslatedData(langCode.toLowerCase(), baseTrainer, id).names;
+-            return (String)RandomHelper.getRandomElementFromList(names);
++            return RandomHelper.getRandomElementFromList(names);
+         } catch (NullPointerException var5) {
+             return "Steve";
+         }
+@@ -261,7 +261,7 @@
+             index = 0;
+         }
+ 
+-        return (String)names.get(index);
++        return names.get(index);
+     }
+ 
+     public String getTranslatedGreeting(String langCode, BaseTrainer baseTrainer, String id, int index) {
+@@ -274,7 +274,7 @@
+                 index = 0;
+             }
+ 
+-            return ((TrainerChat)chat.get(index)).opening;
++            return chat.get(index).opening;
+         }
+     }
+ 
+@@ -288,7 +288,7 @@
+                 index = 0;
+             }
+ 
+-            return ((TrainerChat)chat.get(index)).win;
++            return chat.get(index).win;
+         }
+     }
+ 
+@@ -302,11 +302,11 @@
+                 index = 0;
+             }
+ 
+-            return ((TrainerChat)chat.get(index)).lose;
++            return chat.get(index).lose;
+         }
+     }
+ 
+     public ArrayList<BaseTrainer> getTypes() {
+-        return ServerNPCRegistry.data != null && ServerNPCRegistry.data.get(ServerNPCRegistry.en_us) != null ? ((NPCRegistryData)ServerNPCRegistry.data.get(ServerNPCRegistry.en_us)).trainerTypes : new ArrayList();
++        return ServerNPCRegistry.data != null && ServerNPCRegistry.data.get(ServerNPCRegistry.en_us) != null ? ServerNPCRegistry.data.get(ServerNPCRegistry.en_us).trainerTypes : new ArrayList();
+     }
+ }

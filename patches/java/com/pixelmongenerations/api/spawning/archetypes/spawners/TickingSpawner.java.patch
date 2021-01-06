@@ -1,0 +1,64 @@
+--- a/com/pixelmongenerations/api/spawning/archetypes/spawners/TickingSpawner.java
++++ b/com/pixelmongenerations/api/spawning/archetypes/spawners/TickingSpawner.java
+@@ -52,14 +52,14 @@
+             label25:
+             while(true) {
+                 if (this.hasCapacity(1) && spawns.size() <= this.spawnsPerPass) {
+-                    Iterator var3 = spawns.iterator();
++                    Iterator<SpawnAction<? extends Entity>> var3 = spawns.iterator();
+ 
+                     while(true) {
+                         if (!var3.hasNext()) {
+                             break label25;
+                         }
+ 
+-                        SpawnAction<? extends Entity> spawn = (SpawnAction)var3.next();
++                        SpawnAction<? extends Entity> spawn = var3.next();
+                         spawn.doSpawn(this);
+                     }
+                 }
+@@ -90,7 +90,7 @@
+                 this.spawnLocationCalculator = spawnLocationCalculator;
+             }
+ 
+-            return this;
++            return (E) this;
+         }
+ 
+         public <E extends TickingSpawner.TickingSpawnerBuilder<T>> E setSpawnFrequency(float spawnFrequency) {
+@@ -99,7 +99,7 @@
+             }
+ 
+             this.spawnFrequency = spawnFrequency;
+-            return this;
++            return (E) this;
+         }
+ 
+         public <E extends TickingSpawner.TickingSpawnerBuilder<T>> E setCapacity(int capacity) {
+@@ -108,7 +108,7 @@
+             }
+ 
+             this.capacity = capacity;
+-            return this;
++            return (E) this;
+         }
+ 
+         public <E extends TickingSpawner.TickingSpawnerBuilder<T>> E setDistanceBetweenSpawns(float minDistBetweenSpawns) {
+@@ -117,7 +117,7 @@
+             }
+ 
+             this.minDistBetweenSpawns = minDistBetweenSpawns;
+-            return this;
++            return (E) this;
+         }
+ 
+         public <E extends TickingSpawner.TickingSpawnerBuilder<T>> E setSpawnsPerPass(int spawnsPerPass) {
+@@ -126,7 +126,7 @@
+             }
+ 
+             this.spawnsPerPass = spawnsPerPass;
+-            return this;
++            return (E) this;
+         }
+ 
+         public T apply(T spawner) {

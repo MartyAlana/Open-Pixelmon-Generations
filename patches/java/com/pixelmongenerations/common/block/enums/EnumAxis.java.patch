@@ -1,0 +1,30 @@
+--- a/com/pixelmongenerations/common/block/enums/EnumAxis.java
++++ b/com/pixelmongenerations/common/block/enums/EnumAxis.java
+@@ -1,7 +1,7 @@
+ package com.pixelmongenerations.common.block.enums;
+ 
+-import net.minecraft.util.IStringSerializable;
+ import net.minecraft.util.EnumFacing.Axis;
++import net.minecraft.util.IStringSerializable;
+ 
+ public enum EnumAxis implements IStringSerializable {
+     X,
+@@ -22,6 +22,17 @@
+     }
+ 
+     public static EnumAxis fromFacingAxis(Axis axis) {
+-        // $FF: Couldn't be decompiled
++        switch (SwitchEnumAxis.AXIS_LOOKUP[axis.ordinal()]) {
++            case 1: {
++                return X;
+     }
++            case 2: {
++                return Z;
+ }
++            case 3: {
++                return Y;
++            }
++        }
++        return NONE;
++    }
++}

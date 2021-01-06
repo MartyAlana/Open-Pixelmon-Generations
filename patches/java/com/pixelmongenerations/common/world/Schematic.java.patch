@@ -1,0 +1,45 @@
+--- a/com/pixelmongenerations/common/world/Schematic.java
++++ b/com/pixelmongenerations/common/world/Schematic.java
+@@ -169,7 +169,6 @@
+             schematic.paletteMax = schematic.palette.size() - 1;
+         }
+ 
+-        int i;
+         int z;
+         if (nbt.getInteger("SchemFormat") > 0) {
+             int[] blockDataIntArray = nbt.getIntArray("BlockData");
+@@ -293,11 +292,10 @@
+ 
+     static IBlockState getBlockStateWithProperties(Block block, String[] properties) {
+         Map<String, String> propertyAndBlockStringsMap = new HashMap();
+-        String[] var3 = properties;
+         int var4 = properties.length;
+ 
+         for(int var5 = 0; var5 < var4; ++var5) {
+-            String property = var3[var5];
++            String property = properties[var5];
+             String[] propertyAndBlockStrings = property.split("=");
+             propertyAndBlockStringsMap.put(propertyAndBlockStrings[0], propertyAndBlockStrings[1]);
+         }
+@@ -319,10 +317,9 @@
+             } while(property == null);
+ 
+             Comparable<?> value = null;
+-            Iterator var9 = property.getAllowedValues().iterator();
+ 
+-            while(var9.hasNext()) {
+-                Comparable<?> object = (Comparable)var9.next();
++            for (Object o : property.getAllowedValues()) {
++                Comparable<?> object = (Comparable) o;
+                 if (object.toString().equals(entry.getValue())) {
+                     value = object;
+                     break;
+@@ -330,7 +327,7 @@
+             }
+ 
+             if (value != null) {
+-                chosenState = chosenState.withProperty(property, value);
++                chosenState = chosenState.withProperty(property, (Comparable) value);
+             }
+         }
+     }

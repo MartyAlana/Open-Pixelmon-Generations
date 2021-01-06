@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/client/gui/battles/GuiBattle.java
++++ b/com/pixelmongenerations/client/gui/battles/GuiBattle.java
+@@ -187,7 +187,7 @@
+                 messageHeight = (this.guiHeight - 6) / 4;
+ 
+                 for(Iterator var4 = this.messageLog.iterator(); var4.hasNext(); ++i) {
+-                    String message = (String)var4.next();
++                    message = (String)var4.next();
+                     int color = 16777215;
+                     if (i == 3) {
+                         color = 16776960;

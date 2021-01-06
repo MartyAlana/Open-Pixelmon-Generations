@@ -1,0 +1,123 @@
+--- a/com/pixelmongenerations/client/gui/pokedex/GuiPokedexHome.java
++++ b/com/pixelmongenerations/client/gui/pokedex/GuiPokedexHome.java
+@@ -70,21 +70,21 @@
+ 
+     public void drawGuiContainerBackgroundLayer(float renderPartialTicks, int mouseX, int mouseY) {
+         this.mc.renderEngine.bindTexture(GuiResources.pokedexHomeBackground);
+-        GuiHelper.drawImageQuad(0.0D, 0.0D, (double)this.width, (float)this.height, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++        GuiHelper.drawImageQuad(0.0D, 0.0D, this.width, (float)this.height, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+         String pageInfo = "Page #" + this.currentPage + " " + this.getDexRange(this.currentPage);
+         this.fontRenderer.drawString(pageInfo, this.width / 2 - this.fontRenderer.getStringWidth(pageInfo) / 2, this.toInt((double)this.height / 1.085D), 16777215);
+         this.searchText.drawTextBox();
+         int paddingSplitX = this.toInt((double)this.width / 15.2D / 2.0D);
+-        int paddingSplitY = this.toInt((double)(this.height / 3 / 2));
++        int paddingSplitY = this.toInt(this.height / 3 / 2);
+         int minX = paddingSplitX;
+         int maxX = this.width - paddingSplitX;
+         int minY = paddingSplitY;
+         int maxY = this.height - paddingSplitY;
+-        int widthGap = this.toInt((double)(((float)maxX - 48.0F) / 6.0F));
++        int widthGap = this.toInt(((float)maxX - 48.0F) / 6.0F);
+         widthGap += widthGap / 6;
+         int sideBuffer;
+         widthGap -= sideBuffer = this.toInt((double)widthGap * 0.03D);
+-        int heightGap = this.toInt((double)(((float)maxY - 48.0F) / 6.0F));
++        int heightGap = this.toInt(((float)maxY - 48.0F) / 6.0F);
+         heightGap += heightGap / 6;
+         int heightBuffer;
+         heightGap -= heightBuffer = this.toInt((double)heightGap * 0.03D);
+@@ -92,15 +92,15 @@
+         float textScale = 2.0F;
+ 
+         int dex;
+-        for(dex = this.toInt((double)((float)this.fontRenderer.getStringWidth(Integer.toString(this.pokedex.countCaught())) * textScale)); dex > this.width / 28; dex = this.toInt((double)((float)this.fontRenderer.getStringWidth(Integer.toString(this.pokedex.countCaught())) * textScale))) {
++        for(dex = this.toInt((float)this.fontRenderer.getStringWidth(Integer.toString(this.pokedex.countCaught())) * textScale); dex > this.width / 28; dex = this.toInt((float)this.fontRenderer.getStringWidth(Integer.toString(this.pokedex.countCaught())) * textScale)) {
+             textScale -= 0.05F;
+         }
+ 
+         GlStateManager.scale(textScale, textScale, textScale);
+         String caught = String.format("%03d", this.pokedex.countCaught());
+-        this.fontRenderer.drawString(caught, this.toInt((double)this.width / 4.7D / (double)textScale), this.toInt((double)((float)(this.height / 17) / textScale)), 16413256);
++        this.fontRenderer.drawString(caught, this.toInt((double)this.width / 4.7D / (double)textScale), this.toInt((float)(this.height / 17) / textScale), 16413256);
+         String seen = String.format("%03d", this.pokedex.seenCaught());
+-        this.fontRenderer.drawString(seen, this.toInt((double)this.width / 2.38D / (double)textScale), this.toInt((double)((float)(this.height / 17) / textScale)), 16413256);
++        this.fontRenderer.drawString(seen, this.toInt((double)this.width / 2.38D / (double)textScale), this.toInt((float)(this.height / 17) / textScale), 16413256);
+         GlStateManager.popMatrix();
+         GlStateManager.pushMatrix();
+         GlStateManager.scale(2.0F, 2.0F, 2.0F);
+@@ -123,7 +123,7 @@
+                     Optional<EnumSpecies> pokemonOpt = EnumSpecies.getFromDexUnsafe(dexNum);
+                     int x;
+                     if (this.pokedex.hasSeen(dexNum) && pokemonOpt.isPresent()) {
+-                        this.bindPokeSprite((EnumSpecies)pokemonOpt.get());
++                        this.bindPokeSprite(pokemonOpt.get());
+                         x = sideBuffer + minX + widthGap * col;
+                         y = heightBuffer + minY + heightGap * row;
+                         if (!this.isWithinBounds(mouseX, mouseY, x, y, this.toInt(48.0D)) || this.hoveredDex != 0 && this.hoveredDex != dexNum) {
+@@ -138,11 +138,11 @@
+                             GlStateManager.color(0.75F, 0.75F, 0.75F);
+                         }
+ 
+-                        GuiHelper.drawImageQuad((double)((float)x / 2.0F), (double)((float)y / 2.0F), 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                        GuiHelper.drawImageQuad((float)x / 2.0F, (float)y / 2.0F, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                     } else {
+                         x = this.toInt((double)(sideBuffer + minX + widthGap * col) + 10.909090909090908D);
+-                        y = this.toInt((double)((float)(heightBuffer + minY + heightGap * row) + 24.0F));
+-                        this.fontRenderer.drawString(String.format("%03d", dexNum), this.toInt((double)((float)x / 2.0F)), this.toInt((double)((float)y / 2.0F)), 3511710);
++                        y = this.toInt((float)(heightBuffer + minY + heightGap * row) + 24.0F);
++                        this.fontRenderer.drawString(String.format("%03d", dexNum), this.toInt((float)x / 2.0F), this.toInt((float)y / 2.0F), 3511710);
+                     }
+                 }
+             }
+@@ -157,11 +157,10 @@
+                         break;
+                     }
+ 
+-                    int dex = ((EnumSpecies)this.searchResults.get(dexNum)).getNationalPokedexInteger();
++                    dex = this.searchResults.get(dexNum).getNationalPokedexInteger();
+                     Optional<EnumSpecies> pokemonOpt = EnumSpecies.getFromDexUnsafe(dex);
+-                    int y;
+                     if (this.pokedex.hasSeen(dex) && pokemonOpt.isPresent()) {
+-                        this.bindPokeSprite((EnumSpecies)pokemonOpt.get());
++                        this.bindPokeSprite(pokemonOpt.get());
+                         y = sideBuffer + minX + widthGap * col;
+                         y = heightBuffer + minY + heightGap * row;
+                         if (!this.isWithinBounds(mouseX, mouseY, y, y, this.toInt(48.0D)) || this.hoveredDex != 0 && this.hoveredDex != dex) {
+@@ -176,11 +175,11 @@
+                             GlStateManager.color(0.75F, 0.75F, 0.75F);
+                         }
+ 
+-                        GuiHelper.drawImageQuad((double)((float)y / 2.0F), (double)((float)y / 2.0F), 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
++                        GuiHelper.drawImageQuad((float)y / 2.0F, (float)y / 2.0F, 24.0D, 24.0F, 0.0D, 0.0D, 1.0D, 1.0D, this.zLevel);
+                     } else {
+                         y = this.toInt((double)(sideBuffer + minX + widthGap * col) + 10.909090909090908D);
+-                        y = this.toInt((double)((float)(heightBuffer + minY + heightGap * row) + 24.0F));
+-                        this.fontRenderer.drawString(String.format("%03d", dex), this.toInt((double)((float)y / 2.0F)), this.toInt((double)((float)y / 2.0F)), 3511710);
++                        y = this.toInt((float)(heightBuffer + minY + heightGap * row) + 24.0F);
++                        this.fontRenderer.drawString(String.format("%03d", dex), this.toInt((float)y / 2.0F), this.toInt((float)y / 2.0F), 3511710);
+                     }
+                 }
+             }
+@@ -196,10 +195,10 @@
+         if (this.hoveredDex != 0) {
+             Optional<EnumSpecies> pokemonOpt = EnumSpecies.getFromDexUnsafe(this.hoveredDex);
+             if (pokemonOpt.isPresent()) {
+-                String displayText = String.format("No. %03d %s", this.hoveredDex, ((EnumSpecies)pokemonOpt.get()).name);
++                String displayText = String.format("No. %03d %s", this.hoveredDex, pokemonOpt.get().name);
+                 row = this.fontRenderer.getStringWidth(displayText) / 2;
+-                col = this.toInt((double)((float)(sideBuffer + (minX - row) + widthGap * this.hoveredCol) + 24.0F));
+-                dexNum = this.toInt((double)(heightBuffer + minY + heightGap * this.hoveredRow - 2));
++                col = this.toInt((float)(sideBuffer + (minX - row) + widthGap * this.hoveredCol) + 24.0F);
++                dexNum = this.toInt(heightBuffer + minY + heightGap * this.hoveredRow - 2);
+                 this.fontRenderer.drawString(displayText, col, dexNum, 9501938);
+             }
+         }
+@@ -211,7 +210,7 @@
+         if (this.hoveredDex != 0) {
+             Optional<EnumSpecies> pokemonOpt = EnumSpecies.getFromDexUnsafe(this.hoveredDex);
+             if (pokemonOpt.isPresent()) {
+-                GuiPokedexInfo pokedexInfo = new GuiPokedexInfo((EnumSpecies)pokemonOpt.get());
++                GuiPokedexInfo pokedexInfo = new GuiPokedexInfo(pokemonOpt.get());
+                 if (!this.searchText.getText().isEmpty()) {
+                     pokedexInfo.setPrevSearchText(this.searchText.getText());
+                 }

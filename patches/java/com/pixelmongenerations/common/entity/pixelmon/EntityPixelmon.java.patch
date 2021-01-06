@@ -1,0 +1,21 @@
+--- a/com/pixelmongenerations/common/entity/pixelmon/EntityPixelmon.java
++++ b/com/pixelmongenerations/common/entity/pixelmon/EntityPixelmon.java
+@@ -538,14 +538,12 @@
+     }
+ 
+     public <T extends Evolution> ArrayList<T> getEvolutions(Class<T> type) {
+-        ArrayList<T> evolutions = new ArrayList();
++        ArrayList<T> evolutions = new ArrayList<>();
+         Evolution[] var3 = this.baseStats.evolutions;
+-        int var4 = var3.length;
+ 
+-        for(int var5 = 0; var5 < var4; ++var5) {
+-            Evolution evo = var3[var5];
+-            if (evo != null && type.isInstance(evo)) {
+-                evolutions.add(evo);
++        for (Evolution evo : var3) {
++            if (type.isInstance(evo)) {
++                evolutions.add((T) evo);
+             }
+         }
+ 

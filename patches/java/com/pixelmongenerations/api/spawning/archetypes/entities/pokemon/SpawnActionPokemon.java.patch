@@ -1,0 +1,56 @@
+--- a/com/pixelmongenerations/api/spawning/archetypes/entities/pokemon/SpawnActionPokemon.java
++++ b/com/pixelmongenerations/api/spawning/archetypes/entities/pokemon/SpawnActionPokemon.java
+@@ -7,6 +7,7 @@
+ import com.pixelmongenerations.api.spawning.conditions.LocationType;
+ import com.pixelmongenerations.common.entity.pixelmon.EntityPixelmon;
+ import com.pixelmongenerations.common.entity.pixelmon.stats.links.NBTLink;
++import com.pixelmongenerations.common.item.ItemHeld;
+ import com.pixelmongenerations.common.item.heldItems.SpawningAffectingHeldItem;
+ import com.pixelmongenerations.common.spawning.PlayerTrackingSpawner;
+ import com.pixelmongenerations.core.config.PixelmonConfig;
+@@ -35,14 +36,11 @@
+     }
+ 
+     public EntityPixelmon doSpawn(AbstractSpawner spawner) {
+-        EntityPixelmon pokemon = (EntityPixelmon)this.getOrCreateEntity();
++        EntityPixelmon pokemon = this.getOrCreateEntity();
+         if (pokemon == null) {
+             return null;
+         } else {
+-            Iterator var3 = this.spawnLocation.types.iterator();
+-
+-            while(var3.hasNext()) {
+-                LocationType type = (LocationType)var3.next();
++            for (LocationType type : this.spawnLocation.types) {
+                 if (this.spawnInfo.locationTypes.contains(type)) {
+                     type.mutator.accept(this.spawnLocation);
+                 }
+@@ -59,23 +57,21 @@
+             pokemon.resetAI();
+             super.doSpawn(spawner);
+             if (spawner instanceof PlayerTrackingSpawner) {
+-                Stream var10000 = Stream.of(((PlayerStorage)PixelmonStorage.pokeBallManager.getPlayerStorage(((PlayerTrackingSpawner)spawner).getTrackedPlayer()).get()).partyPokemon).filter(Objects::nonNull).map(NBTLink::new).map(NBTLink::getHeldItem);
+-                SpawningAffectingHeldItem.class.getClass();
++                Stream<ItemHeld> var10000 = Stream.of(PixelmonStorage.pokeBallManager.getPlayerStorage(((PlayerTrackingSpawner)spawner).getTrackedPlayer()).get().partyPokemon).filter(Objects::nonNull).map(NBTLink::new).map(NBTLink::getHeldItem);
+                 var10000 = var10000.filter(SpawningAffectingHeldItem.class::isInstance);
+-                SpawningAffectingHeldItem.class.getClass();
+                 var10000.map(SpawningAffectingHeldItem.class::cast).findFirst().ifPresent((a) -> {
+                     a.modifySpawn(pokemon);
+                 });
+             }
+ 
+-            if (this.entity != null && spawner.spawned.contains(((EntityPixelmon)this.entity).getUniqueID()) && PixelmonConfig.doLegendaryEvent && (EnumSpecies.legendaries.contains(this.spec.name) || EnumSpecies.ultrabeasts.contains(this.spec.name))) {
+-                this.spawnLocation.location.world.getMinecraftServer().getPlayerList().sendMessage(new TextComponentTranslation("chat.type.announcement", new Object[]{TextFormatting.LIGHT_PURPLE + "Pixelmon" + TextFormatting.RESET, TextFormatting.GREEN + I18n.translateToLocalFormatted("spawn.legendarymessage", new Object[]{this.spec.name, this.spawnLocation.biome.biomeName})}));
++            if (this.entity != null && spawner.spawned.contains(this.entity.getUniqueID()) && PixelmonConfig.doLegendaryEvent && (EnumSpecies.legendaries.contains(this.spec.name) || EnumSpecies.ultrabeasts.contains(this.spec.name))) {
++                this.spawnLocation.location.world.getMinecraftServer().getPlayerList().sendMessage(new TextComponentTranslation("chat.type.announcement", TextFormatting.LIGHT_PURPLE + "Pixelmon" + TextFormatting.RESET, TextFormatting.GREEN + I18n.translateToLocalFormatted("spawn.legendarymessage", new Object[]{this.spec.name, this.spawnLocation.biome.biomeName})));
+                 MutableBlockPos pos = this.spawnLocation.location.pos;
+                 this.spawnLocation.location.world.getMinecraftServer().sendMessage(new TextComponentString(TextFormatting.LIGHT_PURPLE + "Spawned " + this.spec.name + " at: " + this.spawnLocation.location.world.getWorldInfo().getWorldName() + " x:" + pos.getX() + ", y:" + pos.getY() + ", z:" + pos.getZ()));
+-                ((EntityPixelmon)this.entity).legendaryTicks = 6000;
++                this.entity.legendaryTicks = 6000;
+             }
+ 
+-            return (EntityPixelmon)this.entity;
++            return this.entity;
+         }
+     }
+ }

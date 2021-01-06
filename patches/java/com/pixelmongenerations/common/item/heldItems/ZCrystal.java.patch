@@ -1,0 +1,11 @@
+--- a/com/pixelmongenerations/common/item/heldItems/ZCrystal.java
++++ b/com/pixelmongenerations/common/item/heldItems/ZCrystal.java
+@@ -84,7 +84,7 @@
+     }
+ 
+     public Attack getUsableAttack(Attack usedMove) {
+-        Optional var10000 = Optional.of(usedMove).map((a) -> {
++        Optional<AttackBase> var10000 = Optional.of(usedMove).map((a) -> {
+             return a.getAttackBase();
+         });
+         RegularAttackBase.class.getClass();
