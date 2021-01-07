@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.METAL);
 -        this.setTranslationKey("Trashcan");
-+        this.setUnlocalizedName("Trashcan");
++        this.setTranslationKey("Trashcan");
      }
  
      public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

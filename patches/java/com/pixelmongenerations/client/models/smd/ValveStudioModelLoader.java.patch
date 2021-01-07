@@ -5,7 +5,7 @@
  
      public boolean accepts(ResourceLocation modelLocation) {
 -        return modelLocation.getPath().endsWith(".pqc");
-+        return modelLocation.getResourcePath().endsWith(".pqc");
++        return modelLocation.getPath().endsWith(".pqc");
      }
  
      public IModel loadModel(ResourceLocation modelLocation, boolean overrideSmoothShading) {

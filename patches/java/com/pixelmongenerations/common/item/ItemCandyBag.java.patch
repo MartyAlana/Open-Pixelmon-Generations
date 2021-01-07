@@ -5,7 +5,7 @@
                          if (!boolAddedToInventory && stack.getItemDamage() == 0) {
                              player.dropItem(stack.getItem(), 2);
 -                            itemName = stack.getTranslationKey();
-+                            itemName = stack.getUnlocalizedName();
++                            itemName = stack.getTranslationKey();
                              ChatHandler.sendFormattedChat(player, TextFormatting.RED, "pixelmon.drops.fullinventory", I18n.translateToLocal(itemName + ".name"));
                          }
                      } else if (player.getRNG().nextFloat() <= 0.3F) {
@@ -14,7 +14,7 @@
                          if (!boolAddedToInventory && stack.getItemDamage() == 0) {
                              player.dropItem(stack.getItem(), 1);
 -                            itemName = stack.getTranslationKey();
-+                            itemName = stack.getUnlocalizedName();
++                            itemName = stack.getTranslationKey();
                              ChatHandler.sendFormattedChat(player, TextFormatting.RED, "pixelmon.drops.fullinventory", I18n.translateToLocal(itemName + ".name"));
                          }
                      } else {
@@ -23,7 +23,7 @@
                          if (!boolAddedToInventory && stack.getItemDamage() == 0) {
                              player.dropItem(stack.getItem(), 1);
 -                            itemName = stack.getTranslationKey();
-+                            itemName = stack.getUnlocalizedName();
++                            itemName = stack.getTranslationKey();
                              ChatHandler.sendFormattedChat(player, TextFormatting.RED, "pixelmon.drops.fullinventory", I18n.translateToLocal(itemName + ".name"));
                          }
                      }

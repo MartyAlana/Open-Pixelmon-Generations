@@ -5,7 +5,7 @@
  public class PixelmonLog extends BlockLog {
      public PixelmonLog(String name) {
 -        this.setTranslationKey(name);
-+        this.setUnlocalizedName(name);
++        this.setTranslationKey(name);
          this.setSoundType(SoundType.WOOD);
          this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, EnumAxis.Y));
          this.setCreativeTab(PixelmonCreativeTabs.buildingBlocks);

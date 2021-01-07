@@ -5,7 +5,7 @@
          this.setCreativeTab(CreativeTabs.REDSTONE);
          this.setMaxStackSize(16);
 -        this.setTranslationKey(itemName);
-+        this.setUnlocalizedName(itemName);
++        this.setTranslationKey(itemName);
          this.setRegistryName(itemName);
      }
  }

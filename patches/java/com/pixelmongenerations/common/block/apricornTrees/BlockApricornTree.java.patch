@@ -5,7 +5,7 @@
          this.setTickRandomly(true);
          this.setHardness(2.0F);
 -        this.setTranslationKey("apricorn tree");
-+        this.setUnlocalizedName("apricorn tree");
++        this.setTranslationKey("apricorn tree");
          this.setRegistryName("pixelmon:" + tree.name().toLowerCase() + "_apricorn_tree");
      }
  

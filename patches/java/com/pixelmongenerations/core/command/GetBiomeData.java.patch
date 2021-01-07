@@ -5,7 +5,7 @@
  
              try {
 -                strData = strData + biome.getRegistryName().getPath();
-+                strData = strData + biome.getRegistryName().getResourcePath();
++                strData = strData + biome.getRegistryName().getPath();
              } catch (Exception var14) {
                  strData = strData + "---";
              }
@@ -14,7 +14,7 @@
  
              try {
 -                strData = strData + biome.topBlock.getBlock().getTranslationKey();
-+                strData = strData + biome.topBlock.getBlock().getUnlocalizedName();
++                strData = strData + biome.topBlock.getBlock().getTranslationKey();
              } catch (Exception var9) {
                  strData = strData + "---";
              }

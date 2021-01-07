@@ -5,7 +5,7 @@
          super(Material.CLOTH);
          this.setSoundType(SoundType.CLOTH);
 -        this.setTranslationKey("pokedoll_" + name);
-+        this.setUnlocalizedName("pokedoll_" + name);
++        this.setTranslationKey("pokedoll_" + name);
          this.setHardness(1.0F);
          this.setCreativeTab(PixelmonCreativeTabs.pokedolls);
          this.name = name;

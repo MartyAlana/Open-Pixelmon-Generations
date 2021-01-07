@@ -5,7 +5,7 @@
          this.setCreativeTab(PixelmonCreativeTabs.natural);
          this.setTickRandomly(true);
 -        this.setTranslationKey(itemName);
-+        this.setUnlocalizedName(itemName);
++        this.setTranslationKey(itemName);
      }
  
      public boolean isOpaqueCube(IBlockState state) {

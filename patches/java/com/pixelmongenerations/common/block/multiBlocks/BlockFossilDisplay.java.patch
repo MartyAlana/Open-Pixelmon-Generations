@@ -5,7 +5,7 @@
          super(Material.ROCK, 1, 2.0D, 1);
          this.color = null;
 -        this.setTranslationKey("FossilDisplay");
-+        this.setUnlocalizedName("FossilDisplay");
++        this.setTranslationKey("FossilDisplay");
          this.setHardness(2.0F);
      }
  
@@ -13,7 +13,7 @@
          this();
          this.color = colorEnum;
 -        this.setTranslationKey(this.color + "FossilDisplay");
-+        this.setUnlocalizedName(this.color + "FossilDisplay");
++        this.setTranslationKey(this.color + "FossilDisplay");
      }
  
      public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {

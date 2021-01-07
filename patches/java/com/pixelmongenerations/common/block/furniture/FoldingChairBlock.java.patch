@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.WOOD);
 -        this.setTranslationKey(color + "_folding_chair");
-+        this.setUnlocalizedName(color + "_folding_chair");
++        this.setTranslationKey(color + "_folding_chair");
          this.color = color;
      }
  

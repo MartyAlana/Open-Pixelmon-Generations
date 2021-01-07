@@ -5,7 +5,7 @@
                      if (!boolAddedToInventory && stack.getItemDamage() == 0) {
                          player.dropItem(stack.getItem(), 1);
 -                        String itemName = stack.getTranslationKey();
-+                        String itemName = stack.getUnlocalizedName();
++                        String itemName = stack.getTranslationKey();
                          ChatHandler.sendFormattedChat(player, TextFormatting.RED, "pixelmon.drops.fullinventory", I18n.translateToLocal(itemName + ".name"));
                      }
                  }

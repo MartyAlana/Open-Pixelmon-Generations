@@ -5,7 +5,7 @@
      }
  
 -    public String getPath() {
-+    public String getResourcePath() {
++    public String getPath() {
          return "pixelmon:customicon/" + this.name;
      }
  

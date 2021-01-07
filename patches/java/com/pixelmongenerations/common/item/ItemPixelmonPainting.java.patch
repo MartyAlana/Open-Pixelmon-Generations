@@ -5,7 +5,7 @@
          super(itemName);
          this.setCreativeTab(PixelmonCreativeTabs.decoration);
 -        this.setTranslationKey("pixelmon_painting");
-+        this.setUnlocalizedName("pixelmon_painting");
++        this.setTranslationKey("pixelmon_painting");
      }
  
      public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {

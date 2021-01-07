@@ -5,7 +5,7 @@
          super(Material.ROCK);
          this.setHardness(2.5F);
 -        this.setTranslationKey("dark_crystal");
-+        this.setUnlocalizedName("dark_crystal");
++        this.setTranslationKey("dark_crystal");
          this.setCreativeTab(PixelmonCreativeTabs.shrines);
      }
  

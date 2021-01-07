@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.GROUND);
 -        this.setTranslationKey("Bolder");
-+        this.setUnlocalizedName("Bolder");
++        this.setTranslationKey("Bolder");
      }
  
      public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {

@@ -5,7 +5,7 @@
  
      public BlockBirdShrine(String name, EnumSpecies species) {
 -        this.setTranslationKey(name);
-+        this.setUnlocalizedName(name);
++        this.setTranslationKey(name);
          this.species = species;
          this.setDefaultState(this.getBlockState().getBaseState().withProperty(USED, EnumUsed.NO));
      }

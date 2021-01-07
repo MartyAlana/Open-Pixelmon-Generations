@@ -5,7 +5,7 @@
          this.setHardness(0.5F);
          this.setSoundType(SoundType.CLOTH);
 -        this.setTranslationKey(type + "Rug");
-+        this.setUnlocalizedName(type + "Rug");
++        this.setTranslationKey(type + "Rug");
      }
  
      public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {

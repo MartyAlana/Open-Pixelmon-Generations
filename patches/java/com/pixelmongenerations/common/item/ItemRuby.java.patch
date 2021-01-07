@@ -5,7 +5,7 @@
      }
  
 -    public String getTranslationKey(ItemStack stack) {
-+    public String getUnlocalizedName(ItemStack stack) {
++    public String getTranslationKey(ItemStack stack) {
          if (stack.getItemDamage() == 1) {
              return "item.ruby_uxie";
          } else if (stack.getItemDamage() == 2) {

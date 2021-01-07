@@ -5,7 +5,7 @@
      public void lootTableLoaded(LootTableLoadEvent event) {
          ResourceLocation poolName = event.getName();
 -        String injectTablePath = "inject/" + poolName.getNamespace() + "/" + poolName.getPath();
-+        String injectTablePath = "inject/" + poolName.getNamespace() + "/" + poolName.getResourcePath();
++        String injectTablePath = "inject/" + poolName.getNamespace() + "/" + poolName.getPath();
          if (LOOT_TABLES.contains(injectTablePath)) {
              LootTable injectTable = event.getLootTableManager().getLootTableFromLocation(new ResourceLocation("pixelmon", injectTablePath));
              LootPool pool = injectTable.getPool("inject");

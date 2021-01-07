@@ -5,7 +5,7 @@
          this.setBlockUnbreakable();
          this.setResistance(6000000.0F);
 -        this.setTranslationKey("timespace_altar");
-+        this.setUnlocalizedName("timespace_altar");
++        this.setTranslationKey("timespace_altar");
          this.setDefaultState(this.blockState.getBaseState());
          this.setCreativeTab(PixelmonCreativeTabs.decoration);
      }

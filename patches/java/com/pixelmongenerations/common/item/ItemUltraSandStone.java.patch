@@ -6,7 +6,7 @@
  
 -    public String getTranslationKey(ItemStack stack) {
 -        return super.getTranslationKey() + "_" + BlockUltraSandStone.EnumType.byMetadata(this.getDamage(stack)).getName();
-+    public String getUnlocalizedName(ItemStack stack) {
-+        return super.getUnlocalizedName() + "_" + BlockUltraSandStone.EnumType.byMetadata(this.getDamage(stack)).getName();
++    public String getTranslationKey(ItemStack stack) {
++        return super.getTranslationKey() + "_" + BlockUltraSandStone.EnumType.byMetadata(this.getDamage(stack)).getName();
      }
  }

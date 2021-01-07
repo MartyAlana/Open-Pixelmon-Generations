@@ -5,7 +5,7 @@
      public void render(boolean hasChanged) {
          boolean isPokeball = false;
 -        if (this.owner.resource.getPath().contains("pokeballs")) {
-+        if (this.owner.resource.getResourcePath().contains("pokeballs")) {
++        if (this.owner.resource.getPath().contains("pokeballs")) {
              isPokeball = true;
          }
  

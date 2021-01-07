@@ -5,7 +5,7 @@
          this.setMaxDamage(32);
          this.canRepair = false;
 -        this.setTranslationKey(itemName);
-+        this.setUnlocalizedName(itemName);
++        this.setTranslationKey(itemName);
          this.setRegistryName(itemName);
      }
  

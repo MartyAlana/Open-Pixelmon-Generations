@@ -49,10 +49,12 @@
          right.setAnchor(Vec2d.getPooled(0.0D, 0.0D));
 -        (new RMValue(0.0D, (a, b) -> {
 -            double diff = b - a;
+-            right.setPos(right.getPos().add(diff, 0.0D));
+-            left.setPos(left.getPos().sub(diff, 0.0D));
 +        new RMValue<>(0.0D, (a, b) -> {
 +            double diff = a - b;
-             right.setPos(right.getPos().add(diff, 0.0D));
-             left.setPos(left.getPos().sub(diff, 0.0D));
++            left.setPos(left.getPos().add(diff, 0.0D));
++            right.setPos(right.getPos().sub(diff, 0.0D));
              return Unit.INSTANCE;
 -        })).animate(256.0D, 80.0F, Easing.linear).completion(() -> {
 -            (new RMValue(0.0D, (a, b) -> {

@@ -5,7 +5,7 @@
          super(Material.WOOD, 2, 1.0D, 2);
          this.setHardness(0.5F);
 -        this.setTranslationKey("clothed_table");
-+        this.setUnlocalizedName("clothed_table");
++        this.setTranslationKey("clothed_table");
          this.setSoundType(SoundType.WOOD);
      }
  

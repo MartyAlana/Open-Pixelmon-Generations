@@ -5,7 +5,7 @@
      public BlockSoftSoil(String name) {
          super(Material.GROUND);
 -        this.setTranslationKey(name);
-+        this.setUnlocalizedName(name);
++        this.setTranslationKey(name);
          this.setSound(SoundType.GROUND);
          this.setCreativeTab(PixelmonCreativeTabs.buildingBlocks);
      }

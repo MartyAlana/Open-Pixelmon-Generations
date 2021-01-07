@@ -5,7 +5,7 @@
          this.setResistance(2000.0F);
          this.setSoundType(SoundType.METAL);
 -        this.setTranslationKey("anvil");
-+        this.setUnlocalizedName("anvil");
++        this.setTranslationKey("anvil");
      }
  
      public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {

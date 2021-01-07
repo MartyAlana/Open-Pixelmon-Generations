@@ -5,6 +5,6 @@
      public BlockBauxiteOre(Material par2Material) {
          super(par2Material);
 -        this.setTranslationKey("bauxiteOre");
-+        this.setUnlocalizedName("bauxiteOre");
++        this.setTranslationKey("bauxiteOre");
      }
  }

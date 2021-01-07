@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.WOOD);
 -        this.setTranslationKey("end_table" + (wood != EnumType.OAK ? "_" + wood.getName() : ""));
-+        this.setUnlocalizedName("end_table" + (wood != EnumType.OAK ? "_" + wood.getName() : ""));
++        this.setTranslationKey("end_table" + (wood != EnumType.OAK ? "_" + wood.getName() : ""));
      }
  
      public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

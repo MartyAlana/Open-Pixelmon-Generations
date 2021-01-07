@@ -5,7 +5,7 @@
          this.setMaxDamage(1000);
          this.setCreativeTab(CreativeTabs.COMBAT);
 -        this.setTranslationKey(itemName);
-+        this.setUnlocalizedName(itemName);
++        this.setTranslationKey(itemName);
          this.setRegistryName(itemName);
      }
  

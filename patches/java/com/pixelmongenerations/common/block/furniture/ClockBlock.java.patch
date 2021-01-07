@@ -5,7 +5,7 @@
          this.setHardness(0.5F);
          this.setSoundType(SoundType.METAL);
 -        this.setTranslationKey(color + "Clock");
-+        this.setUnlocalizedName(color + "Clock");
++        this.setTranslationKey(color + "Clock");
      }
  
      public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

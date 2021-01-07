@@ -5,10 +5,10 @@
          this.rockType = rockType;
          if (this.rockType == EnumEvolutionRock.MossyRock) {
 -            this.setTranslationKey("mossyrock");
-+            this.setUnlocalizedName("mossyrock");
++            this.setTranslationKey("mossyrock");
          } else {
 -            this.setTranslationKey("icyrock");
-+            this.setUnlocalizedName("icyrock");
++            this.setTranslationKey("icyrock");
          }
  
      }

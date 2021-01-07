@@ -5,6 +5,6 @@
          super(TileEntityPokeChest.class);
          this.TYPE = EnumPokeChestType.ULTRABALL;
 -        this.setTranslationKey("ultrachest");
-+        this.setUnlocalizedName("ultrachest");
++        this.setTranslationKey("ultrachest");
      }
  }

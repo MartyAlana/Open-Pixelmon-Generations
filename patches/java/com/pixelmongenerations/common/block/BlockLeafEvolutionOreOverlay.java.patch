@@ -5,7 +5,7 @@
          this.setSoundType(SoundType.GROUND);
          this.setCreativeTab((CreativeTabs)null);
 -        this.setTranslationKey(itemName);
-+        this.setUnlocalizedName(itemName);
++        this.setTranslationKey(itemName);
      }
  
      public boolean isOpaqueCube(IBlockState state) {

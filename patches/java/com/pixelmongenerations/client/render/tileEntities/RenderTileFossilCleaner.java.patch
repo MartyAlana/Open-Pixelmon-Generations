@@ -5,7 +5,7 @@
                      fossilModel = (BlockModelHolder)fossil.getFossil().getModel();
                  } else {
 -                    Pixelmon.LOGGER.warn("Unrecognised item type in Fossil cleaner: " + itemInside.getTranslationKey());
-+                    Pixelmon.LOGGER.warn("Unrecognised item type in Fossil cleaner: " + itemInside.getUnlocalizedName());
++                    Pixelmon.LOGGER.warn("Unrecognised item type in Fossil cleaner: " + itemInside.getTranslationKey());
                  }
  
                  if (fossilModel != null) {

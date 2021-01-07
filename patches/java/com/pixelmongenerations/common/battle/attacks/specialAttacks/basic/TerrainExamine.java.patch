@@ -5,7 +5,7 @@
                  } while(numBelow < 5);
  
 -                String blockName = block.getTranslationKey();
-+                String blockName = block.getUnlocalizedName();
++                String blockName = block.getTranslationKey();
                  if (blockMaterial == Material.WATER && biome instanceof BiomeSwamp) {
                      return TerrainExamine.TerrainType.Swamp;
                  } else if (blockMaterial != Material.GRASS && blockMaterial != Material.WOOD && blockMaterial != Material.LEAVES && blockMaterial != Material.PLANTS && blockMaterial != Material.VINE && blockMaterial != Material.CACTUS && blockMaterial != Material.GOURD) {

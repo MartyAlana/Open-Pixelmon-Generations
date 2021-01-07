@@ -5,7 +5,7 @@
  
      private void addShopItem(Item item, int buyPrice, int sellPrice) {
 -        BaseShopItem baseItem = new BaseShopItem(item.getTranslationKey(), new ItemStack(item, 1), buyPrice, sellPrice);
-+        BaseShopItem baseItem = new BaseShopItem(item.getUnlocalizedName(), new ItemStack(item, 1), buyPrice, sellPrice);
++        BaseShopItem baseItem = new BaseShopItem(item.getTranslationKey(), new ItemStack(item, 1), buyPrice, sellPrice);
          ShopItem shopItem = new ShopItem(baseItem, 1.0F, 1.0F, false);
          ShopItemWithVariation shopItemWithVariation = new ShopItemWithVariation(shopItem, 1.0F);
          this.items.add(shopItemWithVariation);

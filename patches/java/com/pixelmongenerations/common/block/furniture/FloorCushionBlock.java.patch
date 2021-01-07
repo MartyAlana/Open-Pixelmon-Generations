@@ -5,7 +5,7 @@
          this.setSoundType(SoundType.METAL);
          this.cushion = color;
 -        this.setTranslationKey(color + "_floorcushion");
-+        this.setUnlocalizedName(color + "_floorcushion");
++        this.setTranslationKey(color + "_floorcushion");
      }
  
      public boolean isOpaqueCube(IBlockState state) {

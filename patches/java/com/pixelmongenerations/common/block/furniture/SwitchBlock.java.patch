@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.METAL);
 -        this.setTranslationKey("Switch");
-+        this.setUnlocalizedName("Switch");
++        this.setTranslationKey("Switch");
      }
  
      public TileEntity createNewTileEntity(World worldIn, int meta) {

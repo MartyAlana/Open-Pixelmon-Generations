@@ -5,30 +5,30 @@
      }
  
 -    public String getTranslationKey(ItemStack stack) {
-+    public String getUnlocalizedName(ItemStack stack) {
++    public String getTranslationKey(ItemStack stack) {
          if (stack.getItemDamage() > 0) {
              if (stack.getItemDamage() == 1) {
 -                return super.getTranslationKey(stack) + "_head";
-+                return super.getUnlocalizedName(stack) + "_head";
++                return super.getTranslationKey(stack) + "_head";
              }
  
              if (stack.getItemDamage() == 2) {
 -                return super.getTranslationKey(stack) + "_body";
-+                return super.getUnlocalizedName(stack) + "_body";
++                return super.getTranslationKey(stack) + "_body";
              }
  
              if (stack.getItemDamage() == 3) {
 -                return super.getTranslationKey(stack) + "_leg";
-+                return super.getUnlocalizedName(stack) + "_leg";
++                return super.getTranslationKey(stack) + "_leg";
              }
  
              if (stack.getItemDamage() == 4) {
 -                return super.getTranslationKey(stack) + "_tail";
-+                return super.getUnlocalizedName(stack) + "_tail";
++                return super.getTranslationKey(stack) + "_tail";
              }
          }
  
 -        return super.getTranslationKey(stack);
-+        return super.getUnlocalizedName(stack);
++        return super.getTranslationKey(stack);
      }
  }

@@ -5,7 +5,7 @@
                  this.bindTexture(TEXTURES[tile.tree.ordinal()]);
              } catch (NullPointerException var13) {
 -                Pixelmon.LOGGER.error("Can't find texture: " + TEXTURES[tile.tree.ordinal()].getPath());
-+                Pixelmon.LOGGER.error("Can't find texture: " + TEXTURES[tile.tree.ordinal()].getResourcePath());
++                Pixelmon.LOGGER.error("Can't find texture: " + TEXTURES[tile.tree.ordinal()].getPath());
                  return;
              } catch (ArrayIndexOutOfBoundsException var14) {
                  Pixelmon.LOGGER.error("Bad apricorn tree ordinal: " + tile.tree.ordinal());
@@ -14,7 +14,7 @@
                      }
                  } catch (Exception var2) {
 -                    System.out.println("Could not load the model: " + this.path.getPath());
-+                    System.out.println("Could not load the model: " + this.path.getResourcePath());
++                    System.out.println("Could not load the model: " + this.path.getPath());
                      var2.printStackTrace();
                  }
              }

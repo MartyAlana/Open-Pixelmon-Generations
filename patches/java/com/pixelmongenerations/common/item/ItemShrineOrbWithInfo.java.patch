@@ -5,7 +5,7 @@
          this.setMaxStackSize(1);
          this.setMaxDamage(maxDurability);
 -        this.setTranslationKey(itemName);
-+        this.setUnlocalizedName(itemName);
++        this.setTranslationKey(itemName);
          this.setRegistryName(itemName);
      }
  
@@ -14,7 +14,7 @@
  
      public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 -        tooltip.add(I18n.format("gui.shopkeeper." + this.getTranslationKey(), new Object[0]));
-+        tooltip.add(I18n.format("gui.shopkeeper." + this.getUnlocalizedName(), new Object[0]));
++        tooltip.add(I18n.format("gui.shopkeeper." + this.getTranslationKey(), new Object[0]));
      }
  
      public EnumSpecies getSpecies() {

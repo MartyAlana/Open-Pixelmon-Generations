@@ -5,7 +5,7 @@
          this.seal = false;
          this.player = player;
 -        this.backgroundTexture = new Sprite(new ResourceLocation(GuiResources.prefix + "gui/mail/" + item.getTranslationKey().split("_")[1] + "mail.png"));
-+        this.backgroundTexture = new Sprite(new ResourceLocation(GuiResources.prefix + "gui/mail/" + item.getUnlocalizedName().split("_")[1] + "mail.png"));
++        this.backgroundTexture = new Sprite(new ResourceLocation(GuiResources.prefix + "gui/mail/" + item.getTranslationKey().split("_")[1] + "mail.png"));
          if (item.hasTagCompound()) {
              NBTTagCompound nbtdata = item.getTagCompound();
              this.editable = nbtdata.getBoolean("editable");

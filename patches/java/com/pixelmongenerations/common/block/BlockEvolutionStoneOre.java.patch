@@ -5,7 +5,7 @@
  
          this.setCreativeTab(PixelmonCreativeTabs.natural);
 -        this.setTranslationKey(itemName);
-+        this.setUnlocalizedName(itemName);
++        this.setTranslationKey(itemName);
      }
  
      public EnumBlockRenderType getRenderType(IBlockState state) {

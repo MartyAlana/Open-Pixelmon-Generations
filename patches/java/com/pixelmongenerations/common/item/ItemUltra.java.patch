@@ -6,7 +6,7 @@
  
 -    public String getTranslationKey(ItemStack stack) {
 -        return super.getTranslationKey() + "_" + EnumDyeColor.byMetadata(this.getDamage(stack));
-+    public String getUnlocalizedName(ItemStack stack) {
-+        return super.getUnlocalizedName() + "_" + EnumDyeColor.byMetadata(this.getDamage(stack));
++    public String getTranslationKey(ItemStack stack) {
++        return super.getTranslationKey() + "_" + EnumDyeColor.byMetadata(this.getDamage(stack));
      }
  }

@@ -5,6 +5,6 @@
          super(TileEntityPokeChest.class);
          this.TYPE = EnumPokeChestType.MASTERBALL;
 -        this.setTranslationKey("masterchest");
-+        this.setUnlocalizedName("masterchest");
++        this.setTranslationKey("masterchest");
      }
  }

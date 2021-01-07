@@ -5,7 +5,7 @@
          this.setHardness(2.0F);
          this.setSoundType(SoundType.METAL);
 -        this.setTranslationKey(color + "VendingMachine");
-+        this.setUnlocalizedName(color + "VendingMachine");
++        this.setTranslationKey(color + "VendingMachine");
          this.color = color;
      }
  

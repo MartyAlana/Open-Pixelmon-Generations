@@ -5,7 +5,7 @@
          super(Material.IRON, 1, 2.0D, 1);
          this.setHardness(1.0F);
 -        this.setTranslationKey("fossilmachine");
-+        this.setUnlocalizedName("fossilmachine");
++        this.setTranslationKey("fossilmachine");
      }
  
      public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {

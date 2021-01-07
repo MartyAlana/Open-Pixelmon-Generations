@@ -5,7 +5,7 @@
      private boolean canEasilyReach(EntityLivingBase par1EntityLiving) {
          this.targetSearchDelay = 10 + this.taskOwner.getRNG().nextInt(5);
 -        Path var2 = this.taskOwner.getNavigator().getPathToEntityLiving(par1EntityLiving);
-+        Path var2 = this.taskOwner.getNavigator().getResourcePathToEntityLiving(par1EntityLiving);
++        Path var2 = this.taskOwner.getNavigator().getPathToEntityLiving(par1EntityLiving);
          if (var2 == null) {
              return false;
          } else {

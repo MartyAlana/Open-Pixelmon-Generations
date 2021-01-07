@@ -5,7 +5,7 @@
              structure = StructureRegistry.getScatteredStructureFromBiome(random, world.getBiome(cc));
              if (structure == null) {
 -                sender.sendMessage(new TextComponentTranslation("pixelmon.command.struc.nostruc", new Object[]{world.getBiome(cc).getRegistryName().getPath()}));
-+                sender.sendMessage(new TextComponentTranslation("pixelmon.command.struc.nostruc", new Object[]{world.getBiome(cc).getRegistryName().getResourcePath()}));
++                sender.sendMessage(new TextComponentTranslation("pixelmon.command.struc.nostruc", new Object[]{world.getBiome(cc).getRegistryName().getPath()}));
                  return;
              }
          } else {

@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.METAL);
 -        this.setTranslationKey("GymSign");
-+        this.setUnlocalizedName("GymSign");
++        this.setTranslationKey("GymSign");
      }
  
      public TileEntity createNewTileEntity(World worldIn, int meta) {

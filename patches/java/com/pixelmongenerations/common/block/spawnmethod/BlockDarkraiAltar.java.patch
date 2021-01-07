@@ -5,7 +5,7 @@
  public class BlockDarkraiAltar extends BlockShrine {
      public BlockDarkraiAltar() {
 -        this.setTranslationKey("darkrai_altar");
-+        this.setUnlocalizedName("darkrai_altar");
++        this.setTranslationKey("darkrai_altar");
          this.setBlockUnbreakable();
      }
  

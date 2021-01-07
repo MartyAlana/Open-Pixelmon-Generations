@@ -5,6 +5,6 @@
          super(TileEntityPokeChest.class);
          this.TYPE = EnumPokeChestType.BEASTBALL;
 -        this.setTranslationKey("beastchest");
-+        this.setUnlocalizedName("beastchest");
++        this.setTranslationKey("beastchest");
      }
  }

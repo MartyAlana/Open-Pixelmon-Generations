@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.WOOD);
 -        this.setTranslationKey("picket_fence_normal");
-+        this.setUnlocalizedName("picket_fence_normal");
++        this.setTranslationKey("picket_fence_normal");
      }
  
      public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn) {

@@ -5,7 +5,7 @@
          super(Material.WOOD);
          this.setSoundType(SoundType.WOOD);
 -        this.setTranslationKey("bean_bag");
-+        this.setUnlocalizedName("bean_bag");
++        this.setTranslationKey("bean_bag");
      }
  
      public TileEntity createNewTileEntity(World worldIn, int meta) {

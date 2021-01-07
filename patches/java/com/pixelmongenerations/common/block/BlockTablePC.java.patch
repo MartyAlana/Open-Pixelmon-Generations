@@ -5,7 +5,7 @@
          super(Material.ROCK);
          this.setHardness(2.5F);
 -        this.setTranslationKey("tablepc");
-+        this.setUnlocalizedName("tablepc");
++        this.setTranslationKey("tablepc");
      }
  
      public boolean isOpaqueCube(IBlockState state) {

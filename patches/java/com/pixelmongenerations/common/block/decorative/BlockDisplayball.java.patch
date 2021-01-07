@@ -5,7 +5,7 @@
          super(Material.ROCK);
          this.setSoundType(SoundType.STONE);
 -        this.setTranslationKey("displayball_" + name);
-+        this.setUnlocalizedName("displayball_" + name);
++        this.setTranslationKey("displayball_" + name);
          this.setHardness(1.0F);
          this.setCreativeTab(PixelmonCreativeTabs.decoration);
          this.name = name;

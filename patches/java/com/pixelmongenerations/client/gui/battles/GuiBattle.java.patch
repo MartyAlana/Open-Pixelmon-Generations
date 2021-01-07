@@ -1,19 +1,6 @@
 --- a/com/pixelmongenerations/client/gui/battles/GuiBattle.java
 +++ b/com/pixelmongenerations/client/gui/battles/GuiBattle.java
-@@ -44,10 +44,8 @@
- import com.pixelmongenerations.core.proxy.ClientProxy;
- import com.pixelmongenerations.core.storage.ClientData;
- import java.io.IOException;
--import java.util.ArrayList;
--import java.util.Iterator;
--import java.util.LinkedList;
--import java.util.Queue;
-+import java.util.*;
-+
- import net.minecraft.client.Minecraft;
- import net.minecraft.client.entity.EntityPlayerSP;
- import net.minecraft.client.gui.GuiButton;
-@@ -61,14 +59,14 @@
+@@ -61,14 +61,14 @@
  import org.lwjgl.input.Keyboard;
  
  public class GuiBattle extends GuiChattableCamera {
@@ -22,17 +9,16 @@
 +    private final int guiWidth = 300;
 +    private final int guiHeight = 60;
      public ClientBattleManager bm;
--    ArrayList<BattleScreen> screenList = new ArrayList();
-+    ArrayList<BattleScreen> screenList = new ArrayList<>();
+     ArrayList<BattleScreen> screenList = new ArrayList();
      BattleScreen currentScreen = null;
      public OverlayBase pokemonOverlay = null;
      private GuiButton stopSpectateButton = null;
 -    private Queue<String> messageLog = new LinkedList();
-+    private final Queue<String> messageLog = new LinkedList<>();
++    private final Queue<String> messageLog = new LinkedList();
      private static final int NUM_MESSAGES = 4;
      private boolean isLevelScreenDrawn;
      boolean first = true;
-@@ -142,11 +140,8 @@
+@@ -142,10 +142,7 @@
      }
  
      private void selectScreen() {
@@ -40,49 +26,45 @@
 -
 -        while(var1.hasNext()) {
 -            BattleScreen bs = (BattleScreen)var1.next();
--            if (bs.isScreen()) {
 +        for (BattleScreen bs : this.screenList) {
-+            if (bs instanceof ChooseAttackScreen) {
+             if (bs.isScreen()) {
                  this.currentScreen = bs;
                  break;
-             }
-@@ -170,7 +165,7 @@
+@@ -170,7 +167,7 @@
          this.mc.renderEngine.bindTexture(GuiResources.battleGui3);
          GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
          int guiWidth = this.getGuiWidth();
 -        GuiHelper.drawImageQuad((double)(this.width / 2 - guiWidth / 2), (double)(this.height - this.guiHeight), (double)guiWidth, (float)this.guiHeight, 0.0D, 0.0D, 1.0D, 0.30416667461395264D, this.zLevel);
-+        GuiHelper.drawImageQuad(this.width / 2D - guiWidth / 2D, this.height - this.guiHeight, guiWidth, (float)this.guiHeight, 0.0D, 0.0D, 1.0D, 0.30416667461395264D, this.zLevel);
++        GuiHelper.drawImageQuad(this.width / 2 - guiWidth / 2, this.height - this.guiHeight, guiWidth, (float)this.guiHeight, 0.0D, 0.0D, 1.0D, 0.30416667461395264D, this.zLevel);
          String message;
          int messageHeight;
          if (this.bm.isSpectating) {
-@@ -187,7 +182,7 @@
+@@ -187,13 +184,13 @@
                  messageHeight = (this.guiHeight - 6) / 4;
  
                  for(Iterator var4 = this.messageLog.iterator(); var4.hasNext(); ++i) {
 -                    String message = (String)var4.next();
-+                    message = (String)var4.next();
++                    String message2 = (String)var4.next();
                      int color = 16777215;
                      if (i == 3) {
                          color = 16776960;
-@@ -202,7 +197,7 @@
+                     }
+ 
+-                    GuiHelper.drawCenteredLimitedString(message, (float)(this.width / 2), (float)(this.height - (i + 1) * messageHeight), 280, color);
++                    GuiHelper.drawCenteredLimitedString(message2, (float)(this.width / 2), (float)(this.height - (i + 1) * messageHeight), 280, color);
+                 }
+             }
+         } else if (this.bm.hasMoreMessages()) {
+@@ -202,7 +199,7 @@
              ++this.flashCount;
              if (this.flashCount > 30) {
                  this.mc.renderEngine.bindTexture(GuiResources.battleGui3);
 -                GuiHelper.drawImageQuad((double)(this.width / 2 + 130), (double)(this.height - 15), 10.0D, 6.0F, 0.9546874761581421D, 0.31041666865348816D, 0.981249988079071D, 0.33125001192092896D, this.zLevel);
-+                GuiHelper.drawImageQuad(this.width / 2 + 130, this.height - 15, 10.0D, 6.0F, 0.9546874761581421D, 0.31041666865348816D, 0.981249988079071D, 0.33125001192092896D, this.zLevel);
++                GuiHelper.drawImageQuad(this.width / 2D + 130, this.height - 15, 10.0D, 6.0F, 0.9546874761581421D, 0.31041666865348816D, 0.981249988079071D, 0.33125001192092896D, this.zLevel);
                  messageHeight = this.bm.afkActive ? 30 : 480;
                  if (this.flashCount > messageHeight) {
                      this.continueMessages();
-@@ -225,7 +220,7 @@
-             ellipses = ".";
-         } else if (this.flashCount < 120) {
-             ellipses = "..";
--        } else if (this.flashCount < 160) {
-+        } else {
-             ellipses = "...";
-         }
- 
-@@ -250,10 +245,10 @@
+@@ -250,10 +247,10 @@
          GlStateManager.disableTexture2D();
          buffer.begin(7, DefaultVertexFormats.POSITION_COLOR);
          int barWidth = width - 6;
@@ -97,7 +79,7 @@
          float Percent = health / (float)maxHealth;
          float CurWidth = Percent * (float)barWidth;
          float r;
-@@ -273,10 +268,10 @@
+@@ -273,10 +270,10 @@
              b = 0.2F;
          }
  
@@ -112,17 +94,17 @@
          tessellator.draw();
          GlStateManager.popMatrix();
          GlStateManager.enableTexture2D();
-@@ -293,16 +288,15 @@
+@@ -293,16 +290,15 @@
      }
  
      public void drawButton(BattleMode mode, int x, int y, int buttonWidth, int buttonHeight, String string, boolean isDisabled, int mouseX, int mouseY, int ind, boolean sparkle) {
 -        int guiHeight = this.getGuiHeight();
 -        int guiWidth = this.getGuiWidth();
-+        boolean b = mouseX > x && mouseX < x + buttonWidth && mouseY > y && mouseY < y + buttonHeight;
++        boolean isColliding = mouseX > x && mouseX < x + buttonWidth && mouseY > y && mouseY < y + buttonHeight;
          if (mode == BattleMode.MainMenu) {
 -            if (mouseX > x && mouseX < x + buttonWidth && mouseY > y && mouseY < y + buttonHeight) {
 -                GuiHelper.drawImageQuad((double)x, (double)y, (double)buttonWidth, (float)buttonHeight, 0.604687511920929D, 0.3291666805744171D, 0.7640625238418579D, 0.40833333134651184D, this.zLevel);
-+            if (b) {
++            if (isColliding) {
 +                GuiHelper.drawImageQuad(x, y, buttonWidth, (float)buttonHeight, 0.604687511920929D, 0.3291666805744171D, 0.7640625238418579D, 0.40833333134651184D, this.zLevel);
              }
          } else if (mode == BattleMode.ChooseAttack) {
@@ -130,12 +112,12 @@
 -            if (mouseX > x && mouseX < x + buttonWidth && mouseY > y && mouseY < y + buttonHeight) {
 -                GuiHelper.drawImageQuad((double)(x + 2), (double)(y + 2), (double)(buttonWidth - 5), (float)(buttonHeight - 4), 0.03593749925494194D, 0.3229166567325592D, 0.3125D, 0.40625D, this.zLevel);
 +            GuiHelper.drawImageQuad(x, y, buttonWidth, (float)buttonHeight, 0.3218750059604645D, 0.3166666626930237D, 0.614062488079071D, 0.4208333194255829D, this.zLevel);
-+            if (b) {
++            if (isColliding) {
 +                GuiHelper.drawImageQuad(x + 2, y + 2, buttonWidth - 5, (float)(buttonHeight - 4), 0.03593749925494194D, 0.3229166567325592D, 0.3125D, 0.40625D, this.zLevel);
                  this.mouseOverButton = ind;
                  PixelmonData poke = this.bm.getUserPokemonPacket();
                  PixelmonMovesetData[] var15 = poke.moveset;
-@@ -351,7 +345,7 @@
+@@ -351,7 +347,7 @@
      protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
          try {
              super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -144,7 +126,7 @@
          }
  
          if (this.bm.hasMoreMessages() && !this.isLevelScreenDrawn) {
-@@ -398,7 +392,7 @@
+@@ -398,7 +394,7 @@
          Weather weather;
          if ((this.bm.mode == BattleMode.MainMenu || this.bm.mode == BattleMode.ChooseAttack || this.bm.mode == BattleMode.ApplyToPokemon) && this.bm.getUserPokemon() != null && (bc = BattleRegistry.getBattle(this.bm.battleControllerIndex)) != null && (controller = bc.globalStatusController) != null && (weather = controller.getWeather()) != null) {
              this.mc.renderEngine.bindTexture(new ResourceLocation("pixelmon:textures/gui/weather/" + weather.type.name().toLowerCase() + ".png"));
@@ -153,15 +135,3 @@
          }
  
          this.selectScreen();
-@@ -477,10 +471,8 @@
- 
-     public void setTargetting(Attack attack, int opponentTarget, int userTarget) {
-         for(int i = 0; i < this.bm.targetted.length; ++i) {
--            for(int j = 0; j < this.bm.targetted[i].length; ++j) {
--                this.bm.targetted[i][j] = false;
-+            Arrays.fill(this.bm.targetted[i], false);
-             }
--        }
- 
-         TargetingInfo info = attack.getAttackBase().targetingInfo;
-         if (info.hitsAll) {

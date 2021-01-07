@@ -5,7 +5,7 @@
          this.setHardness(0.5F);
          this.setSoundType(SoundType.CLOTH);
 -        this.setTranslationKey(color + "CushionChair");
-+        this.setUnlocalizedName(color + "CushionChair");
++        this.setTranslationKey(color + "CushionChair");
      }
  
      public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

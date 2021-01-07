@@ -5,7 +5,7 @@
          this.setHardness(0.5F);
          this.setSoundType(SoundType.WOOD);
 -        this.setTranslationKey("Box");
-+        this.setUnlocalizedName("Box");
++        this.setTranslationKey("Box");
      }
  
      public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {

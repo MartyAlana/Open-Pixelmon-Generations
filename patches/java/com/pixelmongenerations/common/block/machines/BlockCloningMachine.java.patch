@@ -5,7 +5,7 @@
          super(Material.IRON, 5, 3.0D, 1);
          this.setHardness(1.0F);
 -        this.setTranslationKey("cloningMachine");
-+        this.setUnlocalizedName("cloningMachine");
++        this.setTranslationKey("cloningMachine");
      }
  
      public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {

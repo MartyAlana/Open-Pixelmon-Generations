@@ -5,20 +5,20 @@
                  fs22 = FileSystems.getFileSystem(fileURI);
                  if (fs22.isOpen()) {
 -                    return fs22.getPath(entryName);
-+                    return fs22.getResourcePath(entryName);
++                    return fs22.getPath(entryName);
                  }
              } catch (FileSystemNotFoundException var9) {
              }
  
              fs22 = FileSystems.newFileSystem(fileURI, Collections.emptyMap());
 -            return fs22.getPath(entryName);
-+            return fs22.getResourcePath(entryName);
++            return fs22.getPath(entryName);
          }
      }
  
      public static Path pathFromResourceLocation(ResourceLocation resourceLocation) throws URISyntaxException, IOException {
 -        URL resource = RCFileHelper.class.getResource(String.format("/assets/%s/%s", resourceLocation.getNamespace(), resourceLocation.getPath()));
-+        URL resource = RCFileHelper.class.getResource(String.format("/assets/%s/%s", resourceLocation.getNamespace(), resourceLocation.getResourcePath()));
++        URL resource = RCFileHelper.class.getResource(String.format("/assets/%s/%s", resourceLocation.getNamespace(), resourceLocation.getPath()));
          return resource != null ? resourceToPath(resource.toURI().toURL()) : null;
      }
  

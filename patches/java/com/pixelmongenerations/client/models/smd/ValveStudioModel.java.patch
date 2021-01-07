@@ -6,8 +6,8 @@
                      this.scale = 1.0F;
 -                    if (this.resource.getPath().startsWith("models/pokemon")) {
 -                        Pixelmon.LOGGER.error("Model " + resource.getPath() + " did not have a scale specified!");
-+                    if (this.resource.getResourcePath().startsWith("models/pokemon")) {
-+                        Pixelmon.LOGGER.error("Model " + resource.getResourcePath() + " did not have a scale specified!");
++                    if (this.resource.getPath().startsWith("models/pokemon")) {
++                        Pixelmon.LOGGER.error("Model " + resource.getPath() + " did not have a scale specified!");
                      }
                  }
  
@@ -16,7 +16,7 @@
  
      public ResourceLocation getResource(String fileName) {
 -        String urlAsString = this.resource.getPath();
-+        String urlAsString = this.resource.getResourcePath();
++        String urlAsString = this.resource.getPath();
          int lastIndex = urlAsString.lastIndexOf(47);
          String startString = urlAsString.substring(0, lastIndex);
          return new ResourceLocation("pixelmon", startString + "/" + fileName);

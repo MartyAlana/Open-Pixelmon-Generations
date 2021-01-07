@@ -5,7 +5,7 @@
              ArrayList matchingItems = new ArrayList();
              Item.REGISTRY.forEach((testItem) -> {
 -                if (testItem.getRegistryName().getPath().equalsIgnoreCase(this.itemID)) {
-+                if (testItem.getRegistryName().getResourcePath().equalsIgnoreCase(this.itemID)) {
++                if (testItem.getRegistryName().getPath().equalsIgnoreCase(this.itemID)) {
                      matchingItems.add(testItem);
                  }
  

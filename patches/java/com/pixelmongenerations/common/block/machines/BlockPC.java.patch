@@ -5,7 +5,7 @@
          super(Material.ROCK, 1, 2.0D, 1);
          this.setHardness(2.5F);
 -        this.setTranslationKey("pc");
-+        this.setUnlocalizedName("pc");
++        this.setTranslationKey("pc");
      }
  
      public int quantityDropped(Random random) {

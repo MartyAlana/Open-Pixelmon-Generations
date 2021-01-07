@@ -5,7 +5,7 @@
  public class BlockTaoTrioShrine extends BlockShrine {
      public BlockTaoTrioShrine() {
 -        this.setTranslationKey("tao_trio_shrine");
-+        this.setUnlocalizedName("tao_trio_shrine");
++        this.setTranslationKey("tao_trio_shrine");
          this.setBlockUnbreakable();
      }
  

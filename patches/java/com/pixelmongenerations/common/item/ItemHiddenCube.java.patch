@@ -5,7 +5,7 @@
      public ItemHiddenCube() {
          super(PixelmonBlocks.hiddenCube);
 -        this.setTranslationKey("hidden_cube");
-+        this.setUnlocalizedName("hidden_cube");
++        this.setTranslationKey("hidden_cube");
          this.setMaxStackSize(16);
          this.setCreativeTab(PixelmonCreativeTabs.utilityBlocks);
      }

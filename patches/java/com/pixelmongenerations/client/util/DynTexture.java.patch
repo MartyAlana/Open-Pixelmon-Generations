@@ -5,7 +5,7 @@
                  } else {
                      Pixelmon var10000;
 -                    if (FilenameUtils.getExtension(this.textureURL.getPath()).equalsIgnoreCase("png")) {
-+                    if (FilenameUtils.getExtension(this.textureURL.getResourcePath()).equalsIgnoreCase("png")) {
++                    if (FilenameUtils.getExtension(this.textureURL.getPath()).equalsIgnoreCase("png")) {
                          image = ImageIO.read(this.textureURL);
                          if (image == null) {
                              this.state = DynTexture.LoadState.Failed;

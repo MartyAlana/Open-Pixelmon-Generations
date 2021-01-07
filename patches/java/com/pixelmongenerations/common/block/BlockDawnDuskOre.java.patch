@@ -5,7 +5,7 @@
          this.setSoundType(SoundType.STONE);
          this.setTickRandomly(true);
 -        this.setTranslationKey("dawnduskore");
-+        this.setUnlocalizedName("dawnduskore");
++        this.setTranslationKey("dawnduskore");
          this.setCreativeTab(PixelmonCreativeTabs.natural);
      }
  

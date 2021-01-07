@@ -5,12 +5,12 @@
  
      public boolean resourceLocationExists(ResourceLocation resourceLocation) {
 -        return Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getPath()) != null;
-+        return Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getResourcePath()) != null;
++        return Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getPath()) != null;
      }
  
      public BufferedInputStream getStreamForResourceLocation(ResourceLocation resourceLocation) {
 -        return new BufferedInputStream(Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getPath()));
-+        return new BufferedInputStream(Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getResourcePath()));
++        return new BufferedInputStream(Pixelmon.class.getResourceAsStream("/assets/" + resourceLocation.getNamespace() + "/" + resourceLocation.getPath()));
      }
  
      public void fixModelDefs() {

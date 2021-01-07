@@ -5,7 +5,7 @@
              EnumBerry berry = var0[var2];
              if (berry.isImplemented) {
 -                berryBlocks.add((BlockBerryTree)(new BlockBerryTree(berry)).setTranslationKey("berrytree_" + berry.name().toLowerCase()));
-+                berryBlocks.add((BlockBerryTree)(new BlockBerryTree(berry)).setUnlocalizedName("berrytree_" + berry.name().toLowerCase()));
++                berryBlocks.add((BlockBerryTree)(new BlockBerryTree(berry)).setTranslationKey("berrytree_" + berry.name().toLowerCase()));
              }
          }
  

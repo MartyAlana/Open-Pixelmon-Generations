@@ -6,8 +6,8 @@
  
 -    public String getTranslationKey() {
 -        return super.getTranslationKey().substring(5);
-+    public String getUnlocalizedName() {
-+        return super.getUnlocalizedName().substring(5);
++    public String getTranslationKey() {
++        return super.getTranslationKey().substring(5);
      }
  
      public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {

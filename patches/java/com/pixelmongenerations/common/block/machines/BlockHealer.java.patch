@@ -5,7 +5,7 @@
          this.setHardness(3.5F);
          this.setSoundType(SoundType.STONE);
 -        this.setTranslationKey("healer");
-+        this.setUnlocalizedName("healer");
++        this.setTranslationKey("healer");
          this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.EAST));
      }
  

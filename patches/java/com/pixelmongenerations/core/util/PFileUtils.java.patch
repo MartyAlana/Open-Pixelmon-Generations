@@ -5,7 +5,7 @@
          } catch (IOException var7) {
              successful = false;
 -            System.out.println("Failed to download: " + url.getPath());
-+            System.out.println("Failed to download: " + url.getResourcePath());
++            System.out.println("Failed to download: " + url.getPath());
              var7.printStackTrace();
          }
  

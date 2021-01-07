@@ -5,7 +5,7 @@
      public BlockFancyPillar(Material mat) {
          super(mat);
 -        this.setTranslationKey("temple_pillar");
-+        this.setUnlocalizedName("temple_pillar");
++        this.setTranslationKey("temple_pillar");
      }
  
      public IBlockState getStateFromMeta(int meta) {

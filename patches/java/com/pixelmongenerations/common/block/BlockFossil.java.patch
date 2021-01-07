@@ -5,7 +5,7 @@
          this.setSoundType(SoundType.STONE);
          this.setCreativeTab(PixelmonCreativeTabs.natural);
 -        this.setTranslationKey("fossil");
-+        this.setUnlocalizedName("fossil");
++        this.setTranslationKey("fossil");
      }
  
      public EnumBlockRenderType getRenderType(IBlockState state) {

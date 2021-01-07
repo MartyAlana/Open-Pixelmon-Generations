@@ -5,7 +5,7 @@
              EntityPixelmon p = (EntityPixelmon)this.entity;
              if (p.blockOwner != null && this.shouldContinueExecuting()) {
 -                Path path = p.getNavigator().getPath();
-+                Path path = p.getNavigator().getResourcePath();
++                Path path = p.getNavigator().getPath();
                  int length = path.getCurrentPathLength();
  
                  for(int i = 0; i < length; ++i) {

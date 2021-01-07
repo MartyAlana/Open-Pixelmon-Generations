@@ -5,7 +5,7 @@
          this.setHardness(0.5F);
          this.setSoundType(SoundType.WOOD);
 -        this.setTranslationKey("Fridge");
-+        this.setUnlocalizedName("Fridge");
++        this.setTranslationKey("Fridge");
      }
  
      public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

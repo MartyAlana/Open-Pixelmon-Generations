@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.STONE);
 -        this.setTranslationKey("fossilcleaner");
-+        this.setUnlocalizedName("fossilcleaner");
++        this.setTranslationKey("fossilcleaner");
      }
  
      public Item getDroppedItem(World world, BlockPos pos) {

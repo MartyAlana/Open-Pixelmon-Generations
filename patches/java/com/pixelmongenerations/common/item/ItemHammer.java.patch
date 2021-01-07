@@ -5,7 +5,7 @@
      public ItemHammer(ToolMaterial material, String itemName) {
          super(2.0F, 1.0F, material, effectiveBlocks);
 -        this.setTranslationKey(itemName);
-+        this.setUnlocalizedName(itemName);
++        this.setTranslationKey(itemName);
          this.setRegistryName(itemName);
      }
  
@@ -14,7 +14,7 @@
      @SideOnly(Side.CLIENT)
      public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 -        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getTranslationKey());
-+        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getUnlocalizedName());
++        String info = I18n.translateToLocal("gui.shopkeeper.item." + this.getTranslationKey());
          if (!info.startsWith("gui.shopkeeper.")) {
              if (GuiScreen.isShiftKeyDown()) {
                  tooltip.add(info);

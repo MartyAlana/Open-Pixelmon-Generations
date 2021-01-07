@@ -5,7 +5,7 @@
      public ItemSpawnGrotto() {
          this.setCreativeTab(PixelmonCreativeTabs.tabPokeLoot);
 -        this.setTranslationKey("grotto_spawner");
-+        this.setUnlocalizedName("grotto_spawner");
++        this.setTranslationKey("grotto_spawner");
          this.setRegistryName("grotto_spawner");
          this.setMaxStackSize(1);
      }

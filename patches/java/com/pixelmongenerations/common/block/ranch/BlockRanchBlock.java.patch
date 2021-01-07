@@ -5,7 +5,7 @@
          this.setHardness(2.5F);
          this.setSoundType(SoundType.STONE);
 -        this.setTranslationKey("ranchblock");
-+        this.setUnlocalizedName("ranchblock");
++        this.setTranslationKey("ranchblock");
          this.setHarvestLevel("pickaxe", 1);
      }
  

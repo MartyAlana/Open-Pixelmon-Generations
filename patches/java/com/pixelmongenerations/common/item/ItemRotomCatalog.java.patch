@@ -5,7 +5,7 @@
          this.setMaxDamage(full);
          this.setDamage(new ItemStack(this), 0);
 -        this.setTranslationKey("rotom_catalog");
-+        this.setUnlocalizedName("rotom_catalog");
++        this.setTranslationKey("rotom_catalog");
          this.setRegistryName("rotom_catalog");
      }
  }

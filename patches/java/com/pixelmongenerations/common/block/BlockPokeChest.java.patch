@@ -5,7 +5,7 @@
          this.setResistance(6000000.0F);
          this.pokeChestTileEntityClass = tileEntityClass;
 -        this.setTranslationKey("pokechest");
-+        this.setUnlocalizedName("pokechest");
++        this.setTranslationKey("pokechest");
      }
  
      protected BlockStateContainer createBlockState() {
@@ -14,7 +14,7 @@
                          tile.setCustomDrops(itemStack);
                          tile.setOwner((UUID)null);
 -                        ChatHandler.sendChat(player, "pixelmon.blocks.chestset", I18n.translateToLocal(itemStack.getTranslationKey() + ".name"));
-+                        ChatHandler.sendChat(player, "pixelmon.blocks.chestset", I18n.translateToLocal(itemStack.getUnlocalizedName() + ".name"));
++                        ChatHandler.sendChat(player, "pixelmon.blocks.chestset", I18n.translateToLocal(itemStack.getTranslationKey() + ".name"));
                      }
                  }
  

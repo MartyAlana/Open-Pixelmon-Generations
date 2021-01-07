@@ -5,7 +5,7 @@
          this.setHardness(1.0F);
          this.setSoundType(SoundType.METAL);
 -        this.setTranslationKey("hdtv");
-+        this.setUnlocalizedName("hdtv");
++        this.setTranslationKey("hdtv");
      }
  
      protected Optional<TileEntity> getTileEntity(World var1, IBlockState var2) {

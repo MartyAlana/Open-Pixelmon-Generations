@@ -5,7 +5,7 @@
          this.setResistance(6000000.0F);
          this.setCreativeTab(PixelmonCreativeTabs.utilityBlocks);
 -        this.setTranslationKey("pixelmonCustomGrass");
-+        this.setUnlocalizedName("pixelmonCustomGrass");
++        this.setTranslationKey("pixelmonCustomGrass");
      }
  
      public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
