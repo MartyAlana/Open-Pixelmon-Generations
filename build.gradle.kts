@@ -1,4 +1,5 @@
-import org.apache.tools.ant.taskdefs.condition.Os
+import java.io.IOException
+import java.nio.file.Files
 import uk.jamierocks.propatcher.task.ApplyPatchesTask
 import uk.jamierocks.propatcher.task.MakePatchesTask
 import uk.jamierocks.propatcher.task.ResetSourcesTask
@@ -229,14 +230,18 @@ tasks.named<Jar>("jar") {
 
 // Hack to get resources to work
 tasks.named<JavaCompile>("compileJava") {
-	doLast {
-		for (child in File("src/main/resources").listFiles()) {
-			// Linux specific, sorry!
-			if (Os.isFamily(Os.FAMILY_UNIX) && !child.exists()) {
-				exec {
-					workingDir = destinationDir
-					commandLine("ln", "-s", child.toString())
+	doFirst {
+		val root = File("src/main/resources").toPath()
+
+		Files.list(root).forEach {
+			try {
+				val path = destinationDir.toPath().resolve(root.relativize(it))
+
+				if (!Files.exists(path)) {
+					Files.createSymbolicLink(path, rootDir.toPath().resolve(it))
 				}
+			} catch (exception: IOException) {
+				logger.log(LogLevel.ERROR, exception.message, exception)
 			}
 		}
 	}

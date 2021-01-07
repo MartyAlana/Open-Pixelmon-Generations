@@ -1,0 +1,41 @@
+--- a/com/pixelmongenerations/core/command/SetParty.java
++++ b/com/pixelmongenerations/core/command/SetParty.java
+@@ -30,9 +30,16 @@
+ 
+     public void execute(ICommandSender sender, String[] args) throws CommandException {
+         try {
+-            if (args.length >= 1 && args.length <= 2) {
++            if (args.length < 1 || args.length > 2) {
++                return;
++            }
++
+                 int level = Integer.parseInt(RegexPatterns.LETTERS.matcher(args[0]).replaceAll(""));
+-                if (level > 0 && level <= PixelmonServerConfig.maxLevel) {
++            if (level <= 0 || level > PixelmonServerConfig.maxLevel) {
++                this.sendMessage(sender, TextFormatting.RED, "pixelmon.command.general.cheater", new Object[0]);
++                return;
++            }
++
+                     EntityPlayerMP player = this.getPlayer(sender.getName());
+                     if (BattleRegistry.getBattle((EntityPlayer)player) != null) {
+                         this.sendMessage(sender, TextFormatting.RED, "pixelmon.command.general.inbattle", new Object[0]);
+@@ -46,19 +53,9 @@
+                         } else {
+                             storage.setAllToLevel(level);
+                         }
+-
+-                        return;
+                     } else {
+                         this.sendMessage(sender, TextFormatting.RED, "pixelmon.command.general.invalidplayer", new Object[0]);
+-                        return;
+                     }
+-                }
+-
+-                this.sendMessage(sender, TextFormatting.RED, "pixelmon.command.general.cheater", new Object[0]);
+-                return;
+-            }
+-
+-            return;
+         } catch (NumberFormatException var6) {
+             this.sendMessage(sender, TextFormatting.RED, "pixelmon.command.general.lvlerror", new Object[0]);
+         } catch (Exception var7) {

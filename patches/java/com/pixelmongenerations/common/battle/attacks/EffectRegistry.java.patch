@@ -1,0 +1,19 @@
+--- a/com/pixelmongenerations/common/battle/attacks/EffectRegistry.java
++++ b/com/pixelmongenerations/common/battle/attacks/EffectRegistry.java
+@@ -364,14 +364,14 @@
+ import java.lang.reflect.Constructor;
+ 
+ public class EffectRegistry {
+-    private static EffectMap effectMap;
++    private static final EffectMap effectMap;
+ 
+     public static EffectBase getEffect(String effectTypeString, Value[] values) {
+         EffectBase effect = null;
+ 
+         int var6;
+         try {
+-            Class<? extends EffectBase> effectClass = (Class)effectMap.get(effectTypeString.toLowerCase());
++            Class<? extends EffectBase> effectClass = effectMap.get(effectTypeString.toLowerCase());
+             if (effectClass != null) {
+                 Constructor[] var10 = effectClass.getConstructors();
+                 int var11 = var10.length;
